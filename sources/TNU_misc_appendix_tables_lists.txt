@@ -1,0 +1,771 @@
+More Names The East
+Arzanik
+Bakhtawar
+Banafsha
+Dhameer
+Drujaskan
+Ghazwan
+Gulrukh
+Ibtisem
+Ifran
+Intisara
+Jasvinder
+Kashif
+Najmudeen
+Noor
+Omri
+Razina
+Rupinder
+Shinogai
+Tawhida
+Wahifa
+
+More Names The North
+Adnan
+Aloyzha
+Baris
+Chedomir
+Despina
+Dragan
+Galena
+Ilarion
+Irini
+Keshmira
+Kostas
+Milan
+Mirsada
+Ozhbey
+Parishkeva
+Porfyrio
+Serafina
+Sunchana
+Urshka
+Vadim
+
+More Names The South
+Anwar
+Bilal
+Fawzi
+Fikriyyah
+Ghufran
+Hajarah
+Iqbal
+Izdihar
+Jathbiyyah
+Khalilah
+Khayrat
+Murtadah
+Nawrah
+Qasim
+Rizwanah
+Salwah
+Shamsuddin
+Tasnim
+Wasim
+Zulfiqar
+
+More Names The West
+Aysu
+Chari
+Ejrin
+Enis
+Fereshta
+Gholam
+Golnasrin
+Hanifa
+Hayati
+Kudret
+Mesut
+Nazli
+Pichak
+Rahil
+Rifat
+Sajjad
+Savash
+Sefettin
+Ulviya
+Vahit
+
+Personal Traits
+
+Affectionate.
+Aggressive.
+Altruistic.
+Amazed.
+Angry.
+Anxious.
+Articulate.
+Artist.
+Athletic.
+Beautiful.
+Bitter.
+Bookish.
+Braggart.
+Cheerful.
+Clumsy.
+Contrarian.
+Controlling.
+Daring.
+Drug-addled.
+Drunkard.
+Educated.
+Emotional.
+Enthusiastic.
+Ethical.
+Expressive.
+Fastidious.
+Feuding.
+Flirtatious.
+Foreign.
+Friendly.
+Gracious.
+Greasy.
+Greedy.
+Gregarious.
+Guilty.
+Gullible.
+Hard working.
+Heartbroken.
+Helpful.
+Hoarder.
+Hungry.
+Ill.
+Imaginative.
+Impatient.
+Indulgent.
+Insomniac.
+Jealous.
+Lawful.
+Layabout.
+Loquacious.
+Loud.
+Loyal.
+Lucky.
+Magical.
+Mischievous.
+Moody.
+Morbid.
+Musical.
+Mystical.
+Needy.
+Nihilist.
+Noble.
+Nurturing.
+Obedient.
+Off-putting.
+Organized.
+Orphan.
+Overconfident.
+Peacemaker.
+Practical.
+Proud.
+Punctual.
+Respectful.
+Restless.
+Romantic.
+Sarcastic.
+Scared.
+Secretive.
+Seeker.
+Self-destructive.
+Sensitive.
+Sensual.
+Spiteful.
+Stylish.
+Superstitious.
+Suspicious.
+Tattooed.
+Thief.
+Thrifty.
+Treacherous.
+Vengeful.
+Violent.
+Wanderlust.
+Well-travelled.
+Whimsical.
+Youthful.
+
+Professions
+
+Accountant.
+Acrobat.
+Actor.
+Alchemist.
+Animal seller.
+Animal trainer.
+Apiarist.
+Apothecary.
+Architect.
+Armourer.
+Artillerist.
+Artist.
+Astrologer.
+Author.
+Baker.
+Banker.
+Barber.
+Barkeep.
+Beggar.
+Blacksmith.
+Boat builder.
+Bodyguard.
+Bookbinder.
+Bounty hunter.
+Bow maker.
+Brewer.
+Builder.
+Butcher.
+Calligrapher.
+Candle maker.
+Captain.
+Caravan driver.
+Carpenter.
+Carpet maker.
+Cart maker.
+Cartographer.
+Carver.
+Cavalry.
+Cheese maker.
+Chef.
+Clerk.
+Clock maker.
+Cloth dyer.
+Clothier.
+Clown.
+Coach driver.
+Cobbler.
+Composer.
+Cook.
+Cooper.
+Coppersmith.
+Counterfeiter.
+Courier.
+Courtesan.
+Courtier.
+Custodian.
+Demagogue.
+Doctor.
+Engineer.
+Engraver.
+Explorer.
+Falconer.
+Farmer.
+Fence.
+Fisher.
+Fletcher.
+Flower seller.
+Food seller.
+Forester.
+Forger.
+Fortune teller.
+Fruit seller.
+Furniture maker.
+Furrier.
+Gambler.
+Gamekeeper.
+Gardener.
+General.
+Glass maker.
+Goldsmith.
+Governess.
+Grave digger.
+Groom.
+Guard.
+Guide.
+Haberdasher.
+Hatter.
+Healer.
+Herald.
+Horse trader.
+Hosteler.
+Hunter.
+Illustrator.
+Innkeeper.
+Jailer.
+Jester.
+Jeweller.
+Judge.
+Labourer.
+Laundress.
+Lawyer.
+Lead smith.
+Leather worker.
+Librarian.
+Linen maker.
+Locksmith.
+Maid.
+Marine.
+Mercenary.
+Merchant.
+Midwife.
+Miller.
+Miner.
+Minstrel.
+Moneylender.
+Musician.
+Navigator.
+Net maker.
+Noble.
+Nurse.
+Official.
+Outfitter.
+Page.
+Painter.
+Paper maker.
+Pawnbroker.
+Peasant.
+Peddler.
+Perfumer.
+Pharmacist.
+Photographer.
+Physician.
+Pilgrim.
+Pilot.
+Pimp.
+Pirate.
+Playwright.
+Plumber.
+Poacher.
+Police.
+Porter.
+Potter.
+Priest.
+Printer.
+Professor.
+Prospector.
+Prostitute.
+Purser.
+Ranger.
+Ratcatcher.
+Roofer.
+Rope maker.
+Runner.
+Saddler.
+Sail maker.
+Sailor.
+Scavenger.
+Scholar.
+Scout.
+Scribe.
+Sculptor.
+Servant.
+Server.
+Sharpener.
+Shepherd.
+Shipwright.
+Shopkeeper.
+Silk trader.
+Silversmith.
+Soap maker.
+Soldier.
+Spice trader.
+Squire.
+Stabler.
+Stevedore.
+Steward.
+Stonemason.
+Student.
+Tailor.
+Tattooist.
+Tax collector.
+Taxidermist.
+Teacher.
+Thief.
+Thug.
+Tile maker.
+Tinker.
+Trader.
+Trapper.
+Undertaker.
+Veterinarian.
+Vintner.
+Water seller.
+Weaponsmith.
+Weaver.
+Wheelwright.
+Wine seller.
+Woodcutter.
+
+Specific Items
+
+Accordion.
+Alcohol.
+Altar.
+Amulet.
+Anklet.
+Armlet.
+Arrow.
+Automaton.
+Axe.
+Ball.
+Barrel.
+Bastard sword.
+Bed.
+Bell.
+Belt.
+Bird cage.
+Blanket.
+Board game.
+Boat.
+Bolt of cloth.
+Bonnet.
+Book.
+Bookcase.
+Boots.
+Bottle.
+Bow.
+Bowl.
+Box.
+Bracelet.
+Brazier.
+Brush.
+Bureau.
+Bust sculpture.
+Calligraphy set.
+Candlestick.
+Cane.
+Canoe.
+Cape.
+Carving.
+Cask.
+Cauldron.
+Cello.
+Chair.
+Chamber pot.
+Chariot.
+Chess set.
+Chest.
+Cloak.
+Clock.
+Club.
+Coach.
+Codex.
+Coffin.
+Coins.
+Comb.
+Compass.
+Coronet.
+Cosmetics kit.
+Couch.
+Crib.
+Crossbow.
+Crown.
+Crystal ball.
+Cup.
+Dagger.
+Dart board.
+Desk.
+Diary.
+Dice.
+Divan.
+Doll.
+Door.
+Dress.
+Drinking horn.
+Dye.
+Earrings.
+False teeth.
+Fan.
+Feather.
+Flail.
+Flask.
+Flute.
+Framed painting.
+Gemstone.
+Girdle.
+Glass eye.
+Globe.
+Gloves.
+Goblet.
+Guitar.
+Hair stick.
+Halberd.
+Hand drum.
+Harmonica.
+Harp.
+Hat.
+Hearth.
+Heavy armour.
+Helmet.
+Horn.
+Hurdy gurdy.
+Idol.
+Incense.
+Jar.
+Jewellery.
+Journal.
+Keg.
+Key.
+Kick drum.
+Knife.
+Lantern.
+Leash.
+Letters.
+Light armour.
+Locket.
+Loom.
+Lute.
+Mace.
+Mandolin.
+Mask.
+Medal.
+Mirror.
+Musket.
+Necklace.
+Nose ring.
+Notebook.
+Organ.
+Oud.
+Pan.
+Pants.
+Parasol.
+Pendant.
+Perfume.
+Piano.
+Pillow book.
+Pipe.
+Pistol.
+Plate.
+Polished stone.
+Pot.
+Precious metal.
+Press.
+Quiver.
+Rapier.
+Rifle.
+Ring.
+Rug.
+Ruler.
+Sarcophagus.
+Saxophone.
+Sceptre.
+Scimitar.
+Scissors.
+Scroll.
+Set of tools.
+Sextant.
+Shaker.
+Shawl.
+Shield.
+Shirt.
+Shoes.
+Silverware.
+Sitar.
+Sketchbook.
+Slippers.
+Snare drum.
+Snuff box.
+Spear.
+Spectacles.
+Spindle.
+Spyglass.
+Staff.
+Stand-up bass.
+Statue.
+Suit of plate.
+Sword.
+Table.
+Tablecloth.
+Tambourine.
+Tapestry.
+Throne.
+Tiara.
+Torc.
+Toy.
+Tray.
+Trumpet.
+Tuba.
+Unframed painting.
+Vase.
+Veil.
+Violin.
+Wagon.
+Warhammer.
+Water pipe.
+Waterskin.
+Wind chimes.
+Wine.
+Wineskin.
+Worry beads.
+Writings of some kind.
+
+Detals
+
+Aesthetic
+
+Alien or uncanny.
+Austere.
+Beatific or idealized.
+Clean and pure.
+Chaotic or decadent.
+Imperial or stately.
+Orderly.
+Playful.
+Revolutionary.
+Savage or sinister.
+
+Artistic Style
+
+Abstract.
+Baroque.
+Classical.
+Comedic.
+Existential.
+Expressionist.
+Formal.
+Futuristic.
+Geometric.
+Heroic.
+Minimalist.
+Monstrous.
+Pastoral.
+Pornographic.
+Psychedelic.
+Realist.
+Romantic.
+Surreal.
+Symbolic.
+Tragic.
+
+Colour
+
+Amber.
+Black.
+Blue.
+Bronze or copper.
+Brown or beige.
+Crimson or scarlet.
+Gold.
+Green.
+Grey.
+Mauve or violet.
+Ochre.
+Olive or verdigris.
+Orange.
+Pink or magenta.
+Purple or lavender.
+Red or russet.
+Silver.
+Turquoise.
+White or off-white.
+Yellow.
+
+Complexity
+
+Complicated.
+Elaborate.
+Elegant.
+Ingenious.
+Ornate.
+Simple.
+
+Condition
+
+Aged.
+Battered.
+Broken.
+Covered.
+Dirty.
+Dusty.
+Elegant.
+Exquisite.
+Fine.
+Intact.
+Polished.
+Pristine.
+Refined.
+Scarred.
+Scuffed.
+Skillfully made.
+Stained.
+Striking.
+Weathered.
+Worn.
+
+Effects
+
+Cleaning agent.
+Colouring agent (dye, paint).
+Combustible or flammable.
+Corrosive.
+Flavouring.
+Hallucinogenic.
+Intoxicant.
+Irritant.
+Lubricant.
+Magical.
+Medicine.
+Nourishment.
+Poisonous.
+Scented.
+Stimulant.
+
+Emotion
+
+Anger.
+Desire.
+Envy.
+Fear.
+Gluttony.
+Greed.
+Hate.
+Jealousy.
+Loss.
+Love.
+Lust.
+Need.
+Nostalgia.
+Obsession.
+Pride.
+Resentment.
+Revenge.
+Reverence.
+Security.
+Worship.
+
+Enchantment
+
+Attracts attention.
+Bad luck curse.
+Enhancement.
+Induces transformation.
+Magical effect.
+Reveals information.
+Stirs emotions.
+Stores energy.
+
+Gemstone Type
+
+Agate or onyx.
+Amethyst or quartz.
+Aquamarine.
+Azurite.
+Beryl.
+Carnelian.
+Diamond.
+Emerald.
+Garnet.
+Jade.
+Jasper.
+Lapis lazuli.
+Malachite.
+Opal.
+Peridot olivine.
+Ruby.
+Sapphire.
+Serpentine.
+Topaz.
+Zircon.
+
+Owner
+
+Artist or performer.
+Crafter or proletariat.
+Criminal.
+Farmer or peasant.
+Merchant or trader.
+Noble.
+Nomad.
+Priest.
+Professional or scholar.
+Soldier or warrior.

@@ -6,6 +6,12 @@ This is a Python-based tool to generate random first-level characters for "old s
 
 This is still very much a work in progress. Currently the code runs once and returns printed output only.
 
+### How to Use
+
+1. Install Python.
+2. Run the `generator.py` file.
+3. Repeat step 2 to get new characters.
+
 ### Future Plans
 
 * Compatibility for additional game systems and house rules

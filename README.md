@@ -14,8 +14,14 @@ This is still very much a work in progress. Currently the code runs once and ret
 
 ### Future Plans
 
+* Clean up weapons/armor output
+* Calculate AC
+* Add character class extended features
+* Add skills
+* Add saves
+* Add random names, traits, and descriptions
 * Compatibility for additional game systems and house rules
-* functional web app version
+* Develop a functional web app version
 
 ### About the Code
 

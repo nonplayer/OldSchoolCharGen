@@ -8,14 +8,14 @@ This is still very much a work in progress. Currently the code runs once and ret
 
 ### How to Use
 
-1. Install Python.
+1. [Install Python](https://www.python.org/downloads/).
 2. Run the `generator.py` file.
 3. Repeat step 2 to get new characters.
 
 ### Future Plans
 
-* Clean up weapons/armor output
 * Calculate AC
+* add attacks and modifiers
 * Add character class extended features
 * Add skills
 * Add saves
@@ -31,4 +31,4 @@ I'm sure there are far better ways to do what I'm doing here, but I'm a noob to 
 
 ### Requirements and Compatibility
 
-This program is written using Python 3.6.3 on Windows 10, MacOS, and Linux Mint 18, using the PyCharm IDE. I have not tested much outside of those environment parameters.
+This program is written using Python 3.6.3 on Windows 10, MacOS, and Linux Mint 18, using the [PyCharm](https://www.jetbrains.com/pycharm/download/) IDE. I have not tested much outside of those environment parameters.

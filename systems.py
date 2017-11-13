@@ -11,17 +11,26 @@ systems ={
     'template': {
         'name': 'tmp',
         'fullName': 'Display Name',
-        'hasHPs': True,     # changes the calculations if the system has hit points
+        'hasHPs': True,     # BOOL: changes the calculations if the system has hit points
+        'acBase': 10,       # INT: AC base 9 or 10, usually
+        'acType': '',       # STR: 'ascend' or 'descend'
+        'saves': '',        # STR: 'one', 'three', 'five', or 'six' (such as TBH, 3E, B/X, and 5E, respectively)
     },
     'TNU': {
         'name': 'tnu',
         'fullName': 'The Nightmares Underneath',
         'hasHPs': False,
+        'acBase': 10,
+        'acType': 'ascend',
+        'saves': 'six',
     },
     'DD': {
         'name': 'dd',
         'fullName': 'Dark Dungeons',
         'hasHPs': True,
+        'acBase': 9,
+        'acType': 'descend',
+        'saves': 'five',
     },
 }
 

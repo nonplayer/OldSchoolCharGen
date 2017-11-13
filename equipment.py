@@ -17,11 +17,11 @@ wretched = {
         'ARMOUR: a magical cloak that allows you to sneak around like a thief and also protects you as if it were heavy armour, though it weighs nothing'],
     'gear3': ['a 2-person tent', '4 wooden stakes', '12 iron spikes',
               'a set of tools (for the profession of your choice)', 'a small hammer, two days of food',
-              'a plump wineskin', ch(['WEAPON: a dagger', 'ARMOUR: a shield']),
+              'a plump wineskin', ch(['WEAPON: a dagger', 'ARMOUR: a shield (AC+1)']),
               ch(['WEAPON: a club', 'WEAPON: 3 feet of iron chain, with broken manacles on one end'])],
     'gear4': ['a backpack', '6 torches', 'three days worth of food',
               ch(['WEAPON: a club', 'WEAPON: a one-handed melee weapon of your choice']),
-              ch(['ARMOUR: a leather jerkin (Light Armour, AC:13, Enc:1)', 'ARMOUR: a shield'])],
+              ch(['ARMOUR: a leather jerkin (Light Armour, AC:13, Enc:1)', 'ARMOUR: a shield (AC+1)'])],
     'gear5': ['WEAPON: an axe', 'WEAPON: a dagger', 'WEAPON: a spear', 'a military flag (yours or someone else\'s)',
               'a lantern (but no oil)',
               'a pouch of tobacco (but no pipe)', ch(
@@ -47,7 +47,7 @@ peasant = {
     'gear1': [
         '50 feet of silk rope', 'a grappling hook', 'a backpack',
         'the preserved hand of a murderer recently hanged',
-        ch([['WEAPON: an axe', 'ARMOUR: a shield'], ['WEAPON: any pole arm', 'one vial of holy water']])
+        ch([['WEAPON: an axe', 'ARMOUR: a shield (AC+1)'], ['WEAPON: any pole arm', 'one vial of holy water']])
     ],
     'gear2': ['WEAPON: a club', 'ARMOUR: a leather jerkin (Light Armour, AC:13, Enc:1)',
               '6 torches', 'a sack', 'a small bouquet of flowers', 'your master\'s dog'],
@@ -57,7 +57,7 @@ peasant = {
               'a handful of caltrops', '6 torches', 'a tinderbox', 'WEAPON: the close combat weapon of your choice'],
     'gear5': [
         'WEAPON: brass knuckles', 'WEAPON: a sling with 12 good rocks', '12 candles', 'a box of matches',
-        ch(['WEAPON: an axe', 'WEAPON: a musket with 12 bullets and a powder horn']), ch(['', 'ARMOUR: a shield'])
+        ch(['WEAPON: an axe', 'WEAPON: a musket with 12 bullets and a powder horn']), ch(['', 'ARMOUR: a shield (AC+1)'])
     ],
     'gear6': ['WEAPON: a dagger',
               '4 healing potions that, when drunk, will restore '
@@ -99,12 +99,12 @@ poor = {
               ch(['', 'WEAPON: a net']),
               ch(['', 'WEAPON: a sword']),
               ch(['', 'ARMOUR: a chainmail shirt (Light Armour, AC:13, Enc:1)']),
-              ch(['', 'ARMOUR: a shield']),
+              ch(['', 'ARMOUR: a shield (AC+1)']),
               ],
     'gear4': [
         'a backpack', ch(['WEAPON: a club', 'WEAPON: a dagger']), '2 weeks worth of rations',
         ch(['', 'an animal trap']), ch(['', 'a compass']), ch(['', 'ARMOUR: a leather jerkin (Light Armour, AC:13, Enc:1)']),
-        ch(['', 'a pack of marked cards']), ch(['', 'WEAPON: a pole arm']), ch(['', 'ARMOUR: a shield']),
+        ch(['', 'a pack of marked cards']), ch(['', 'WEAPON: a pole arm']), ch(['', 'ARMOUR: a shield (AC+1)']),
     ],
     'gear5': ['a bank note worth ' + str(random.randint(13, 15)) + ' cyphers', 'WEAPON: a dagger',
               'a random hireling', 'a shoulder bag', 'a set of tools (for the profession of your choice)',
@@ -175,7 +175,7 @@ lesser = {
               ch(['WEAPON: a well-crafted sword', 'ARMOUR: a heavy leather jerkin (Light Armour, AC:13, Enc:1)'])],
     'gear4': ['50 feet of silk rope', 'a backpack', 'WEAPON: a bastard sword', 'a book', 'a hand mirror',
               'a jar of beard oil',
-              'manacles', 'ARMOUR: a shield', 'WEAPON: a silver dagger', 'a week of rations'],
+              'manacles', 'ARMOUR: a shield (AC+1)', 'WEAPON: a silver dagger', 'a week of rations'],
     'gear5': [str(dice.roll(1,6)) + ' doses of poison', 'a bottle of expensive wine', 'WEAPON: a dagger',
               'WEAPON: a long bow with 24 arrows', 'a quiver', 'a make up kit',
               'a vial of perfume', 'a bad reputation'],
@@ -204,7 +204,7 @@ greater = {
               'a staff with a glowing globe on the top of it', 'a signet ring',
               'a bottle of ' + ch(['brandy', 'gin', 'rum']),
               'a terrible, pervasive ennui crushing your soul'],
-    'gear2': ['a mule', 'a cart', ch(['WEAPON: a flail', 'WEAPON: a warhammer']), 'ARMOUR: a shield', 'a pipe',
+    'gear2': ['a mule', 'a cart', ch(['WEAPON: a flail', 'WEAPON: a warhammer']), 'ARMOUR: a shield (AC+1)', 'a pipe',
               'a box of matches',
               'a bag of tobacco (or some other weed, your choice)', 'more regrets than you can count',
               'a dead man in your cart'],
@@ -252,7 +252,7 @@ royal = {
     'gear4': ['some bandages', 'a book', 'a bottle of wine', 'WEAPON: a dagger', 'a pouch of coins worth 15 cyphers',
               'a riding horse', 'riding horse gear', 'saddlebags', 'a signet ring', 'WEAPON: a sword',
               'a vial of perfume', 'a musical instrument of your choice'],
-    'gear5': ['a belt pouch with a bundle of wolfsbane in it', 'WEAPON: a mace', 'ARMOUR: a shield with heraldry on it',
+    'gear5': ['a belt pouch with a bundle of wolfsbane in it', 'WEAPON: a mace', 'ARMOUR: a shield (AC+1) with heraldry on it',
               'a warhorse',
               'warhorse gear (not barding)', 'a beautiful lock of hair tied in a ribbon'],
     'gear6': [str(dice.roll(1,6)) + ' doses of antitoxin', str(dice.roll(1,6)) + ' doses of drugs (your choice of type)',

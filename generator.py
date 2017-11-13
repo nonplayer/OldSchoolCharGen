@@ -83,10 +83,14 @@ def generate(gameSystem, flagPrint=False):
     myGear = list(equipment.get_gear(myProfS, myClass['label']))
     myWeapons = list(filter(lambda x: x.startswith('WEAPON: '), myGear))
     myArmour = list(filter(lambda x: x.startswith('ARMOUR: '), myGear))
+    myWeaponList = []
+    myArmourList = []
     for x in myWeapons:
         myGear.remove(x)
+        myWeaponList.append(str.title(x[8:]))
     for x in myArmour:
         myGear.remove(x)
+        myArmourList.append(str.title(x[8:]))
     # let's get those spells now:
     if 'caster' in mD['flags']:
         is_caster = True
@@ -116,11 +120,11 @@ def generate(gameSystem, flagPrint=False):
             print(key + ": " + str(value['val']) + ' (' + str(value['mod']) + ')')
         print("\nMy Weapons:")
         print("-----------")
-        for x in myWeapons:
+        for x in myWeaponList:
             print(x)
         print("\nMy Armour:")
         print("----------")
-        for x in myArmour:
+        for x in myArmourList:
             print(x)
         print("\nMy Gear:")
         print("--------")

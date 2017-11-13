@@ -107,7 +107,7 @@ def generate(gameSystem, flagPrint=False):
     # genData = [my_ProfS, my_ProfL, my_Lvl, my_Align, my_Stats]
     # for local testing, print to debug:
     if flagPrint:
-        print("\nCODE TEST: The flagPrint variable is True")
+        print("\nNOTICE: You are running in test mode, on-screen print is enabled")
         print("\nA new random character for " + str(sysPrefs['fullName']))
         print("-----------------------------------------------------")
         #print("Raw Data Print: ", genData)
@@ -141,4 +141,5 @@ def generate(gameSystem, flagPrint=False):
     return genData
 
 if __name__ == "__main__":
+    # if run as-is, flagPrint "True" will enable screen print of character
     generate('TNU', True)

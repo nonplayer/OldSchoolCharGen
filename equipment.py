@@ -19,8 +19,9 @@ wretched = {
               'a set of tools (for the profession of your choice)', 'a small hammer, two days of food',
               'a plump wineskin', ch(['WEAPON: a dagger', 'ARMOUR: a shield']),
               ch(['WEAPON: a club', 'WEAPON: 3 feet of iron chain, with broken manacles on one end'])],
-    'gear4': ['a backpack', '6 torches', 'three days worth of food', ch(
-        [['WEAPON: a club', 'ARMOUR: a leather jerkin (Light Armour)'], ['ARMOUR: a shield', 'WEAPON: a one-handed melee weapon of your choice']])],
+    'gear4': ['a backpack', '6 torches', 'three days worth of food',
+              ch(['WEAPON: a club', 'WEAPON: a one-handed melee weapon of your choice']),
+              ch(['ARMOUR: a leather jerkin (Light Armour)', 'ARMOUR: a shield'])],
     'gear5': ['WEAPON: an axe', 'WEAPON: a dagger', 'WEAPON: a spear', 'a military flag (yours or someone else\'s)',
               'a lantern (but no oil)',
               'a pouch of tobacco (but no pipe)', ch(
@@ -29,7 +30,7 @@ wretched = {
     'gear6': ['a lantern', '2 flasks of oil', 'a flying carpet'],
     'gear7': [str(dice.roll(1,6)) + ' doses of drugs (your choice what type)', 'WEAPON: a club',
               'a mask that lets you see ghosts, spirits, and invisible things'],
-    'assassin': ch(['WEAPON: a dagger', 'a vial of poison']),
+    'assassin': [ch(['WEAPON: a dagger', 'a vial of poison'])],
     'bard': ['a cheap, dog-eared, old spellbook, but you may not have more than a single weapon'],
     'champ_chaos': ['a slave collar that you have yet to remove',
                     'a cheap, dog-eared, old spellbook, but you may not have more than a single weapon'],
@@ -56,11 +57,7 @@ peasant = {
               'a handful of caltrops', '6 torches', 'a tinderbox', 'WEAPON: the close combat weapon of your choice'],
     'gear5': [
         'WEAPON: brass knuckles', 'WEAPON: a sling with 12 good rocks', '12 candles', 'a box of matches',
-        ch(
-            [
-                ['WEAPON: an axe', 'ARMOUR: a shield'], ['WEAPON: a musket with 12 bullets and a powder horn']
-            ]
-        )
+        ch(['WEAPON: an axe', 'WEAPON: a musket with 12 bullets and a powder horn']), ch(['', 'ARMOUR: a shield'])
     ],
     'gear6': ['WEAPON: a dagger',
               '4 healing potions that, when drunk, will restore ' + str(dice.roll(1,6) + 1) + 'points of lost Health or allow you to re-roll your Disposition'],
@@ -209,7 +206,7 @@ greater = {
               'a signet ring', 'WEAPON: a sword', 'a week of rations', 'a prominent scar'],
     'gear4': ['a backpack', '6 torches', 'a week of rations', ch(['WEAPON: a mace', 'WEAPON: a pole arm']),
               ch(
-                  ['ARMOUR: a steel breastplate and helmet (Heavy Armour)', ['a riding horse and riding gear']])],
+                  ['ARMOUR: a steel breastplate and helmet (Heavy Armour)', 'a riding horse and riding gear'])],
     'gear5': [str(dice.roll(1,6)) + ' books', 'WEAPON: ' + str(dice.roll(1,6)) + ' pistols', '24 bullets and a powder horn',
               'a \'magical\' amulet bought from a fortune teller', 'a make up kit', 'a shoulderbag', 'a wineskin',
               'a wooden case with a vial of ink, 12 pieces of paper, and 12 quills in it'],
@@ -322,9 +319,13 @@ def get_gear(prof, status):
     return gearList
 
 if __name__ == "__main__":
-    myList = get_gear('thief', 'royal')
+    prof = ch(['assassin', 'bard', 'champ_chaos', 'champ_evil', 'champ_good', 'champ_law', 'cultist', 'fighter', 'scholar', 'thief', 'wizard'])
+    status = ch(['wretched', 'peasant', 'poor', 'middle', 'lesser', 'greater', 'royal'])
+    myList = get_gear(prof, status)
     weapons = list(filter(lambda x: x.startswith('WEAPON: '), myList))
     armour = list(filter(lambda x: x.startswith('ARMOUR: '), myList))
+    print(prof)
+    print(status)
     for x in weapons:
         print(x)
         myList.remove(x)

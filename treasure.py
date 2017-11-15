@@ -273,7 +273,9 @@ def get_treasure(category, system='dd', quantity=1):
     return myTreasure
 
 if __name__ == "__main__":
-    myTreasure = get_treasure('u', 'dd', 12)
+    sys = 'dd'  # will convert to input later
+    table = input("Which sub-table are you rolling against? Valid input is single-letter A-V: ")
+    rolls = int(input("How many rolls against that table do you need to make? Enter a number 1 or greater: "))
+    myTreasure = get_treasure(table, sys, rolls)
     for item in myTreasure:
         print(item)
-

@@ -175,6 +175,21 @@ indiv = ['p', 'q', 'r', 's', 't', 'n', 'o', 'u', 'v']
 # only tables with magic chances:
 monly = ['n', 'o', 'u', 'v', 'c', 'b', 'e', 'd', 'i', 'f', 'a', 'g', 'm', 'h']
 
+
+'''
+SYSTEMS KEY:
+dd      = "Dark Dungeons"
+add1e   = "AD&D 1st Edition" 
+
+Only current system implemented is Dark Dungeons. 1E is on the far back burner,
+and since the Donjon already has a good one I may skip it entirely. Not sure if any
+other systems have this kind of random treasure generation, but I'm leaving the
+code in place just in case.
+
+Also, I kinda sorta REALLY want to incorporate rolls against the entire combined
+AD&D 2E Encyclopedia Magica... 
+'''
+
 systems = {
     'dd': dd_treasure,
 }
@@ -254,11 +269,11 @@ def get_treasure(category, system='dd', quantity=1):
         for x in range(0, quantity):
             checkVal = ri(1, 100)
             if checkVal <= checkSet['Mag']['chance']:
-                myTreasure.append(str('Magic Items: ' + checkSet['Mag']['val']))
+                myTreasure.append(str('Magic Items: ' + str(checkSet['Mag']['val'])))
     return myTreasure
 
 if __name__ == "__main__":
-    myTreasure = get_treasure('a', 'dd', 12)
+    myTreasure = get_treasure('u', 'dd', 12)
     for item in myTreasure:
         print(item)
 

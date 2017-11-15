@@ -83,10 +83,14 @@ def generate(gameSystem, flagPrint=False):
     myGear = list(equipment.get_gear(myProfS, myClass['label']))
     myWeapons = list(filter(lambda x: x.startswith('WEAPON: '), myGear))
     myArmour = list(filter(lambda x: x.startswith('ARMOUR: '), myGear))
+    myWeaponList = []
+    myArmourList = []
     for x in myWeapons:
         myGear.remove(x)
+        myWeaponList.append(str.title(x[8:]))
     for x in myArmour:
         myGear.remove(x)
+        myArmourList.append(str.title(x[8:]))
     # let's get those spells now:
     if 'caster' in mD['flags']:
         is_caster = True
@@ -103,7 +107,7 @@ def generate(gameSystem, flagPrint=False):
     # genData = [my_ProfS, my_ProfL, my_Lvl, my_Align, my_Stats]
     # for local testing, print to debug:
     if flagPrint:
-        print("\nCODE TEST: The flagPrint variable is True")
+        print("\nNOTICE: You are running in test mode, on-screen print is enabled")
         print("\nA new random character for " + str(sysPrefs['fullName']))
         print("-----------------------------------------------------")
         #print("Raw Data Print: ", genData)
@@ -116,11 +120,11 @@ def generate(gameSystem, flagPrint=False):
             print(key + ": " + str(value['val']) + ' (' + str(value['mod']) + ')')
         print("\nMy Weapons:")
         print("-----------")
-        for x in myWeapons:
+        for x in myWeaponList:
             print(x)
         print("\nMy Armour:")
         print("----------")
-        for x in myArmour:
+        for x in myArmourList:
             print(x)
         print("\nMy Gear:")
         print("--------")
@@ -137,4 +141,5 @@ def generate(gameSystem, flagPrint=False):
     return genData
 
 if __name__ == "__main__":
+    # if run as-is, flagPrint "True" will enable screen print of character
     generate('TNU', True)

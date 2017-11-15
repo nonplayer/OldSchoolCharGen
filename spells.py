@@ -107,7 +107,7 @@ spellsDict = {
     '51': 'Detect Illusion (level 1)',
     '52': 'Duplicate Images (level 3)',
     '53': 'Faerie Dust (level 3)',
-    '54': 'Fools’ Gold (level 2)',
+    '54': 'Fools\' Gold (level 2)',
     '55': 'Illusory Appearance (level 1)',
     '56': 'Illusory Being (level 5)',
     '57': 'Illusory Terrain (level 4)',

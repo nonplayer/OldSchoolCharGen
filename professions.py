@@ -44,6 +44,7 @@ prof_keys = {
     'skills': [],           # Unsure, placeholder as I figure out skills. Might go unused.
     'restrictions': [],     # Unsure, placeholder based on existing profession page details
     'special': [],          # Unsure, placeholder based on existing profession page details
+    'extragear': [],        # LIST: some professions have extra gear, put it here
 }
 '''
 
@@ -65,6 +66,7 @@ template = {
     'skills': ['Placeholder text for Class Skills'],
     'restrictions': ['Placeholder text for Class Restrictions'],
     'special': ['Placeholder text for Class Special Abilities'],
+    'extragear': [],  # DELETE if no extra gear
 }
 
 assassin = {

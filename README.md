@@ -4,7 +4,10 @@ This is a Python-based tool to generate random first-level characters for "old s
 
 ### Current State
 
-This is still very much a work in progress. Currently the code runs once and returns printed output only.
+This is still very much a work in progress. Currently the code runs once and returns printed output only. Right now, there are two main components I'm working on:
+
+* **Random Character Generator:** a one-click chargen for Old School games (currently only TNU)
+* **Random Monster Treasure Roller:** an app to wuickly roll on monster treasure tables (currently only Dark Dungeons)
 
 ### How to Use
 

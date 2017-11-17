@@ -118,6 +118,9 @@ def generate(gameSystem, flagPrint=False):
         print("-----------------")
         for key, value in dict.items(myStats):
             print(key + ": " + str(value['val']) + ' (' + str(value['mod']) + ')')
+        print("\nCombat Traits:")
+        print("--------------")
+        print("Melee: " + "  Ranged: " + "")
         print("\nMy Weapons:")
         print("-----------")
         for x in myWeaponList:

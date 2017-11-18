@@ -16,12 +16,16 @@ import professions
 import spells
 import systems
 
-def gen_stats(PAs, system='TNU'):
-    getSys = system
-    validSystems = ['TNU']
-    if getSys not in validSystems:
+supportedSystems = [
+    'TNU',
+]
+
+
+def gen_stats(primeAttrs, system='TNU'):
+    getSys = system.upper()
+    if getSys not in supportedSystems:
         getSys = 'TNU'
-    spread = dice.get_spread(getSys, PAs)
+    spread = dice.get_spread(getSys, primeAttrs)
     return spread
 
 
@@ -29,6 +33,8 @@ def gen_spells(pr, al, nu):
     my_spellsList = spells.get_spells(pr, al, nu)
     return my_spellsList
 
+
+'''
 def print_spells(prof, align, num):
     printList = list(gen_spells(prof, align, num))
     print("\nMy Character's List of Spells:")
@@ -36,6 +42,8 @@ def print_spells(prof, align, num):
     for each in printList:
         print(each)
     return
+'''
+
 
 def gen_social(status):
     social = {'title': '', 'mod': 0, 'label': ''}
@@ -55,9 +63,12 @@ def gen_social(status):
         social.update({'title': 'Scum', 'mod': -3, 'label': 'wretched'})
     return social
 
-def generate(gameSystem, flagPrint=False):
+
+def generate(flagPrint=False, gameSystem='tnu'):
     # first let's load those system prefs - for later expansion
-    sysPrefs = dict(systems.get_system_prefs(gameSystem))
+    if gameSystem not in supportedSystems:
+        gameSystem = 'TNU'
+    sysPrefs = dict(systems.get_system_prefs(gameSystem.upper()))
     # let's get that juicy character data!
     genData = []
     myData = dict(professions.get_profession())
@@ -118,6 +129,9 @@ def generate(gameSystem, flagPrint=False):
         print("-----------------")
         for key, value in dict.items(myStats):
             print(key + ": " + str(value['val']) + ' (' + str(value['mod']) + ')')
+        print("\nCombat Traits:")
+        print("--------------")
+        print("Melee: " + "  Ranged: " + "")
         print("\nMy Weapons:")
         print("-----------")
         for x in myWeaponList:
@@ -140,6 +154,7 @@ def generate(gameSystem, flagPrint=False):
                     print(i)
     return genData
 
+
 if __name__ == "__main__":
     # if run as-is, flagPrint "True" will enable screen print of character
-    generate('TNU', True)
+    generate(True)

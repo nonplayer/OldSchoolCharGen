@@ -65,7 +65,7 @@ def gen_social(status):
 
 
 def generate(flag_print=False, game_system='tnu'):
-    gen_data = {}
+    DATA = {}
     # first let's load those system prefs - for later expansion
     if game_system not in supported_systems:
         game_system = 'TNU'
@@ -74,15 +74,19 @@ def generate(flag_print=False, game_system='tnu'):
     md = dict(professions.get_profession())  # my data
     # my_flags = list(md['flags'])
     # now let's break it out:
-    my_shortname = md['profShort']
-    my_longname = md['profLong']
-    my_lvl = int(md['level'])
-    my_align = random.choice(md['alignAllowed'])
+    DATA['short'] = md['profShort']
+    DATA['long'] = md['profLong']
+    DATA['lvl'] = int(md['level'])
+    DATA['align'] = random.choice(md['alignAllowed'])
     my_pas = list(md['primAttr'])
     my_stats = gen_stats(my_pas, game_system)
-    my_social = int(dice.roll(3, 6))
-    my_class = dict(gen_social(my_social))
-    my_hd = md['hd']
+    for key, value in dict.items(my_stats):
+        DATA[key.lower() + '_val'] = str(value['val'])
+        DATA[key.lower() + '_mod'] = str(value['mod'])
+    DATA['hd'] = md['hd']
+    my_class = dict(gen_social(int(dice.roll(3, 6))))
+    DATA['soc_class'] = my_class['title']
+    DATA['soc_mod'] = str(my_class['mod'])
     if sys_prefs['hasHPs']:
         print("This System DOES have Hit Points!")
     if 'haspa' in md['flags']:
@@ -90,7 +94,7 @@ def generate(flag_print=False, game_system='tnu'):
     else:
         my_pa = 'None'
     # let's get that gear list:
-    my_gear = list(equipment.get_gear(my_shortname, my_class['label']))
+    my_gear = list(equipment.get_gear(DATA['short'], my_class['label']))
     my_weapons = list(filter(lambda x: x.startswith('WEAPON: '), my_gear))
     my_armour = list(filter(lambda x: x.startswith('ARMOUR: '), my_gear))
     my_weaponlist = []
@@ -101,6 +105,9 @@ def generate(flag_print=False, game_system='tnu'):
     for x in my_armour:
         my_gear.remove(x)
         my_armourlist.append(str.title(x[8:]))
+    DATA['weapons'] = my_weaponlist
+    DATA['armour'] = my_armourlist
+    DATA['gear'] = my_gear
     # let's get those spells now:
     my_mastr = 0
     my_spells = []
@@ -108,9 +115,10 @@ def generate(flag_print=False, game_system='tnu'):
         is_caster = True
         # my_caststat = md['casterStat']
         my_castmod = my_stats[md['casterStat']]['mod']
-        my_mastr = my_lvl + my_castmod
+        my_mastr = DATA['lvl'] + my_castmod
         if my_mastr > 0:
-            my_spells = list(gen_spells(my_shortname, my_align, my_mastr))
+            my_spells = list(gen_spells(DATA['short'], DATA['align'], my_mastr))
+            DATA['spells'] = my_spells
         else:
             my_spells = []
     else:
@@ -121,8 +129,8 @@ def generate(flag_print=False, game_system='tnu'):
         print("\nA new random character for " + str(sys_prefs['fullName']))
         print("-----------------------------------------------------")
         # print("Raw Data Print: ", gen_data)
-        print("Profession: " + my_longname + "; Level: " + str(my_lvl) + "; Alignment:", my_align.title())
-        print("Hit Die: d" + str(my_hd) + "; Psychic Armour: " + str(my_pa) + "; Social Status: " + my_class['title'] + "("+ str(my_class['mod']) + ")" )
+        print("Profession: " + DATA['long'] + "; Level: " + str(DATA['lvl']) + "; Alignment:", DATA['align'].title())
+        print("Hit Die: d" + str(DATA['hd']) + "; Psychic Armour: " + str(my_pa) + "; Social Status: " + my_class['title'] + "("+ str(my_class['mod']) + ")" )
         print("---------------")
         print("\nAttribute Scores:")
         print("-----------------")
@@ -147,11 +155,12 @@ def generate(flag_print=False, game_system='tnu'):
             print("\nSpells Known:")
             print("-------------")
             if my_mastr <= 0:
-                print("I have no spells because I am the worst", my_longname, "ever!")
+                print("I have no spells because I am the worst", DATA['long'], "ever!")
             else:
                 for i in my_spells:
                     print(i)
-    return gen_data
+    print('\n\nOUTPUT TEST: My "DATA": ', DATA)
+    return DATA
 
 
 # I'm planning to move the Print function here.

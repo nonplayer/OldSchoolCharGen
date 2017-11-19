@@ -65,12 +65,12 @@ def gen_social(status):
 
 
 def generate(flag_print=False, game_system='tnu'):
+    gen_data = {}
     # first let's load those system prefs - for later expansion
     if game_system not in supported_systems:
         game_system = 'TNU'
     sys_prefs = dict(systems.get_system_prefs(game_system.upper()))
     # let's get that juicy character data!
-    gen_data = []
     md = dict(professions.get_profession())  # my data
     # my_flags = list(md['flags'])
     # now let's break it out:
@@ -115,8 +115,6 @@ def generate(flag_print=False, game_system='tnu'):
             my_spells = []
     else:
         is_caster = False
-    # let's build the final dump of data:
-    # gen_data = []
     # for local testing, print to debug:
     if flag_print:
         print("\nNOTICE: You are running in test mode, on-screen print is enabled")
@@ -156,6 +154,11 @@ def generate(flag_print=False, game_system='tnu'):
     return gen_data
 
 
+# I'm planning to move the Print function here.
+def print_character():
+    generate(True)
+
+
 if __name__ == "__main__":
     # if run as-is, flagPrint "True" will enable screen print of character
-    generate(True)
+    print_character()

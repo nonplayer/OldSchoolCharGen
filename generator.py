@@ -16,22 +16,22 @@ import professions
 import spells
 import systems
 
-supportedSystems = [
+supported_systems = [
     'TNU',
 ]
 
 
-def gen_stats(primeAttrs, system='TNU'):
-    getSys = system.upper()
-    if getSys not in supportedSystems:
-        getSys = 'TNU'
-    spread = dice.get_spread(getSys, primeAttrs)
+def gen_stats(primes, system='TNU'):
+    system = system.upper()
+    if system not in supported_systems:
+        system = 'TNU'
+    spread = dice.get_spread(system, primes)
     return spread
 
 
-def gen_spells(pr, al, nu):
-    my_spellsList = spells.get_spells(pr, al, nu)
-    return my_spellsList
+def gen_spells(prof, align, num):
+    my_spells = spells.get_spells(prof, align, num)
+    return my_spells
 
 
 '''
@@ -64,95 +64,96 @@ def gen_social(status):
     return social
 
 
-def generate(flagPrint=False, gameSystem='tnu'):
+def generate(flag_print=False, game_system='tnu'):
     # first let's load those system prefs - for later expansion
-    if gameSystem not in supportedSystems:
-        gameSystem = 'TNU'
-    sysPrefs = dict(systems.get_system_prefs(gameSystem.upper()))
+    if game_system not in supported_systems:
+        game_system = 'TNU'
+    sys_prefs = dict(systems.get_system_prefs(game_system.upper()))
     # let's get that juicy character data!
-    genData = []
-    myData = dict(professions.get_profession())
-    mD = myData
-    myFlags = list(mD['flags'])
+    gen_data = []
+    md = dict(professions.get_profession())  # my data
+    # my_flags = list(md['flags'])
     # now let's break it out:
-    myProfS = mD['profShort']
-    myProfL = mD['profLong']
-    myLvl = int(mD['level'])
-    myAlign = random.choice(mD['alignAllowed'])
-    myPAs = list(mD['primAttr'])
-    myStats = gen_stats(myPAs, gameSystem)
-    mySocial = int(dice.roll(3, 6))
-    myClass = dict(gen_social(mySocial))
-    myHD = mD['hd']
-    if sysPrefs['hasHPs']:
+    my_shortname = md['profShort']
+    my_longname = md['profLong']
+    my_lvl = int(md['level'])
+    my_align = random.choice(md['alignAllowed'])
+    my_pas = list(md['primAttr'])
+    my_stats = gen_stats(my_pas, game_system)
+    my_social = int(dice.roll(3, 6))
+    my_class = dict(gen_social(my_social))
+    my_hd = md['hd']
+    if sys_prefs['hasHPs']:
         print("This System DOES have Hit Points!")
-    if 'haspa' in mD['flags']:
-        myPA = 'Yes'
+    if 'haspa' in md['flags']:
+        my_pa = 'Yes'
     else:
-        myPA = 'None'
+        my_pa = 'None'
     # let's get that gear list:
-    myGear = list(equipment.get_gear(myProfS, myClass['label']))
-    myWeapons = list(filter(lambda x: x.startswith('WEAPON: '), myGear))
-    myArmour = list(filter(lambda x: x.startswith('ARMOUR: '), myGear))
-    myWeaponList = []
-    myArmourList = []
-    for x in myWeapons:
-        myGear.remove(x)
-        myWeaponList.append(str.title(x[8:]))
-    for x in myArmour:
-        myGear.remove(x)
-        myArmourList.append(str.title(x[8:]))
+    my_gear = list(equipment.get_gear(my_shortname, my_class['label']))
+    my_weapons = list(filter(lambda x: x.startswith('WEAPON: '), my_gear))
+    my_armour = list(filter(lambda x: x.startswith('ARMOUR: '), my_gear))
+    my_weaponlist = []
+    my_armourlist = []
+    for x in my_weapons:
+        my_gear.remove(x)
+        my_weaponlist.append(str.title(x[8:]))
+    for x in my_armour:
+        my_gear.remove(x)
+        my_armourlist.append(str.title(x[8:]))
     # let's get those spells now:
-    if 'caster' in mD['flags']:
+    my_mastr = 0
+    my_spells = []
+    if 'caster' in md['flags']:
         is_caster = True
-        myCastStat = mD['casterStat']
-        myCastMod = myStats[mD['casterStat']]['mod']
-        myMastr = myLvl + myCastMod
-        if myMastr > 0:
-            mySpells = list(gen_spells(myProfS, myAlign, myMastr))
+        # my_caststat = md['casterStat']
+        my_castmod = my_stats[md['casterStat']]['mod']
+        my_mastr = my_lvl + my_castmod
+        if my_mastr > 0:
+            my_spells = list(gen_spells(my_shortname, my_align, my_mastr))
         else:
-            mySpells = []
+            my_spells = []
     else:
         is_caster = False
     # let's build the final dump of data:
-    # genData = [my_ProfS, my_ProfL, my_Lvl, my_Align, my_Stats]
+    # gen_data = []
     # for local testing, print to debug:
-    if flagPrint:
+    if flag_print:
         print("\nNOTICE: You are running in test mode, on-screen print is enabled")
-        print("\nA new random character for " + str(sysPrefs['fullName']))
+        print("\nA new random character for " + str(sys_prefs['fullName']))
         print("-----------------------------------------------------")
-        #print("Raw Data Print: ", genData)
-        print("Profession: " + myProfL + "; Level: " + str(myLvl) + "; Alignment:", myAlign.title())
-        print("Hit Die: d" + str(myHD) + "; Psychic Armour: " + str(myPA) + "; Social Status: " + myClass['title'] + "("+ str(myClass['mod']) + ")" )
+        # print("Raw Data Print: ", gen_data)
+        print("Profession: " + my_longname + "; Level: " + str(my_lvl) + "; Alignment:", my_align.title())
+        print("Hit Die: d" + str(my_hd) + "; Psychic Armour: " + str(my_pa) + "; Social Status: " + my_class['title'] + "("+ str(my_class['mod']) + ")" )
         print("---------------")
         print("\nAttribute Scores:")
         print("-----------------")
-        for key, value in dict.items(myStats):
+        for key, value in dict.items(my_stats):
             print(key + ": " + str(value['val']) + ' (' + str(value['mod']) + ')')
         print("\nCombat Traits:")
         print("--------------")
         print("Melee: " + "  Ranged: " + "")
         print("\nMy Weapons:")
         print("-----------")
-        for x in myWeaponList:
+        for x in my_weaponlist:
             print(x)
         print("\nMy Armour:")
         print("----------")
-        for x in myArmourList:
+        for x in my_armourlist:
             print(x)
         print("\nMy Gear:")
         print("--------")
-        for x in myGear:
+        for x in my_gear:
             print(x)
         if is_caster:
             print("\nSpells Known:")
             print("-------------")
-            if myMastr <= 0:
-               print("I have no spells because I am the worst", myProfL, "ever!")
+            if my_mastr <= 0:
+                print("I have no spells because I am the worst", my_longname, "ever!")
             else:
-                for i in mySpells:
+                for i in my_spells:
                     print(i)
-    return genData
+    return gen_data
 
 
 if __name__ == "__main__":

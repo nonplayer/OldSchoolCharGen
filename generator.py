@@ -17,7 +17,7 @@ import spells
 import systems
 
 supported_systems = [
-    'TNU',
+    'tnu',
 ]
 
 
@@ -61,14 +61,56 @@ def gen_social(status):
     return social
 
 
+def gen_ac(prefs, armour):
+    ac_base = int(prefs['acBase'])
+    ac_mod = 0
+    if prefs['name'] == 'tnu':
+        # no characters in TNU actually start with plate, thus its absence
+        if any('Heavy Armour' in x for x in armour):
+            ac_mod += 5
+        elif any('Light Armour' in x for x in armour):
+            ac_mod += 3
+    elif prefs['name'] in ['dd', 'basic']:
+        if any('Suit Armour' in x for x in armour):
+            ac_mod += 9
+        elif any('Plate Mail' in x for x in armour):
+            ac_mod += 6
+        elif any('Banded Mail' in x for x in armour):
+            ac_mod += 5
+        elif any('Chain Mail' in x for x in armour):
+            ac_mod += 4
+        elif any('Scale Mail' in x for x in armour):
+            ac_mod += 3
+        elif any('Leather Armour' in x for x in armour):
+            ac_mod += 2
+    if any('Tower Shield' in x for x in armour):
+        ac_mod += 2
+    elif any('Shield' in x for x in armour):
+        ac_mod += 1
+    if prefs['acType'] == 'descend':
+        ac_final = ac_base - ac_mod
+    else:
+        ac_final = ac_base + ac_mod
+    return ac_final
+
+
+def gen_melee():
+    return
+
+
+def gen_ranged():
+    return
+
+
 def generate(game_system='tnu'):
     DATA = {}
     # first let's load those system prefs - for later expansion
     if game_system not in supported_systems:
-        game_system = 'TNU'
-    sys_prefs = dict(systems.get_system_prefs(game_system.upper()))
+        game_system = 'tnu'
+    prefs = dict(systems.get_system_prefs(game_system.upper()))
+    DATA['system'] = prefs['fullName']
     # let's get that juicy character data!
-    md = dict(professions.get_profession())  # my data
+    md = dict(professions.get_profession(game_system))  # my data
     # my_flags = list(md['flags'])
     # now let's break it out:
     DATA['short'] = md['profShort']
@@ -76,7 +118,7 @@ def generate(game_system='tnu'):
     DATA['lvl'] = int(md['level'])
     DATA['align'] = random.choice(md['alignAllowed'])
     primes = list(md['primAttr'])
-    spread = list(sys_prefs['spread'])
+    spread = list(prefs['spread'])
     my_stats = dice.get_spread(spread, primes)
     DATA['stats'] = my_stats
     # former method, kept for short-term posterity
@@ -87,7 +129,7 @@ def generate(game_system='tnu'):
     my_class = dict(gen_social(int(dice.roll(3, 6))))
     DATA['soc_class'] = my_class['title']
     DATA['soc_mod'] = str(my_class['mod'])
-    if sys_prefs['hasHPs']:
+    if prefs['hasHPs']:
         print("This System DOES have Hit Points!")
     if 'haspa' in md['flags']:
         DATA['pa'] = 'Yes'
@@ -108,6 +150,13 @@ def generate(game_system='tnu'):
     DATA['weapons'] = my_weaponlist
     DATA['armour'] = my_armourlist
     DATA['gear'] = my_gear
+    # now to generate the character's armour class
+    DATA['ac'] = gen_ac(prefs, my_armourlist)
+    if prefs['type'] is ['dnd']:
+        if prefs['acType'] == 'descend':
+            DATA['ac'] -= my_stats['DEX']['mod']
+        else:
+            DATA['ac'] += my_stats['DEX']['mod']
     # let's get those spells now:
     DATA['num_spells'] = 0
     if 'caster' in md['flags']:
@@ -119,15 +168,14 @@ def generate(game_system='tnu'):
             DATA['spells'] = my_spells
     else:
         DATA['caster'] = False
-    # print('\n\nOUTPUT TEST: My "DATA": ', DATA)
+    #print('\n\nOUTPUT TEST: My "DATA": ', DATA)
     return DATA
 
 
 def print_character(system):
+    system = system.lower()
     DATA = generate(system)
-    # for local testing, print to debug:
-    print("\nNOTICE: You are running in test mode, on-screen print is enabled")
-    print("\nA new random character for " + str(DATA['long']))
+    print("\nA new random character for " + str(DATA['system']))
     print("-----------------------------------------------------")
     # print("Raw Data Print: ", gen_data)
     print("Profession: " + DATA['long'] + "; Level: " + str(DATA['lvl']) + "; Alignment:", DATA['align'].title())
@@ -139,7 +187,7 @@ def print_character(system):
         print(key + ": " + str(value['val']) + ' (' + str(value['mod']) + ')')
     print("\nCombat Traits:")
     print("--------------")
-    print("Melee: " + "  Ranged: " + "")
+    print("Melee: " + "  Ranged: " + "  AC: " + str(DATA['ac']))
     print("\nMy Weapons:")
     print("-----------")
     for x in list(DATA['weapons']):
@@ -164,4 +212,16 @@ def print_character(system):
 
 if __name__ == "__main__":
     # if run as-is, flagPrint "True" will enable screen print of character
-    print_character('tnu')
+    print("\nThis is a random 1st-level Character Generator for old school RPGs.")
+    print("NOTICE: Currently only 'tnu' is supported, but additional systems are being planned.")
+    print("Which system would you like to use? Enter the number or acronym below:\n")
+    print(" [1] The Nightmares Underneath (tnu)")
+    selection = str(input("\nYour Selection: "))
+    if selection != '1' and selection != 'tnu':
+        print("Selection invalid, defaulting to #1: The Nightmares Underneath.\n")
+        system = 'tnu'
+    elif selection == '1':
+        system = 'tnu'
+    else:
+        system = selection
+    print_character(system)

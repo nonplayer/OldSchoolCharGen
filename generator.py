@@ -32,7 +32,7 @@ def gen_spells(prof, align, num):
     return my_spells
 
 
-'''
+# a quick spell printer for testing the TNU spell generator
 def print_spells(prof, align, num):
     printList = list(gen_spells(prof, align, num))
     print("\nMy Character's List of Spells:")
@@ -40,7 +40,6 @@ def print_spells(prof, align, num):
     for each in printList:
         print(each)
     return
-'''
 
 
 def gen_social(status):
@@ -62,7 +61,7 @@ def gen_social(status):
     return social
 
 
-def generate(flag_print=False, game_system='tnu'):
+def generate(game_system='tnu'):
     DATA = {}
     # first let's load those system prefs - for later expansion
     if game_system not in supported_systems:
@@ -91,9 +90,9 @@ def generate(flag_print=False, game_system='tnu'):
     if sys_prefs['hasHPs']:
         print("This System DOES have Hit Points!")
     if 'haspa' in md['flags']:
-        my_pa = 'Yes'
+        DATA['pa'] = 'Yes'
     else:
-        my_pa = 'None'
+        DATA['pa'] = 'None'
     # let's get that gear list:
     my_gear = list(equipment.get_gear(DATA['short'], my_class['label']))
     my_weapons = list(filter(lambda x: x.startswith('WEAPON: '), my_gear))
@@ -110,64 +109,59 @@ def generate(flag_print=False, game_system='tnu'):
     DATA['armour'] = my_armourlist
     DATA['gear'] = my_gear
     # let's get those spells now:
-    my_mastr = 0
-    my_spells = []
+    DATA['num_spells'] = 0
     if 'caster' in md['flags']:
-        is_caster = True
+        DATA['caster'] = True
         my_castmod = my_stats[md['casterStat']]['mod']
-        my_mastr = DATA['lvl'] + my_castmod
-        if my_mastr > 0:
-            my_spells = list(gen_spells(DATA['short'], DATA['align'], my_mastr))
+        DATA['num_spells'] = DATA['lvl'] + my_castmod
+        if DATA['num_spells'] > 0:
+            my_spells = list(gen_spells(DATA['short'], DATA['align'], DATA['num_spells']))
             DATA['spells'] = my_spells
-        else:
-            my_spells = []
     else:
-        is_caster = False
-    # for local testing, print to debug:
-    if flag_print:
-        print("\nNOTICE: You are running in test mode, on-screen print is enabled")
-        print("\nA new random character for " + str(sys_prefs['fullName']))
-        print("-----------------------------------------------------")
-        # print("Raw Data Print: ", gen_data)
-        print("Profession: " + DATA['long'] + "; Level: " + str(DATA['lvl']) + "; Alignment:", DATA['align'].title())
-        print("Hit Die: d" + str(DATA['hd']) + "; Psychic Armour: " + str(my_pa) + "; Social Status: " + my_class['title'] + "("+ str(my_class['mod']) + ")" )
-        print("---------------")
-        print("\nAttribute Scores:")
-        print("-----------------")
-        for key, value in dict.items(DATA['stats']):
-            print(key + ": " + str(value['val']) + ' (' + str(value['mod']) + ')')
-        print("\nCombat Traits:")
-        print("--------------")
-        print("Melee: " + "  Ranged: " + "")
-        print("\nMy Weapons:")
-        print("-----------")
-        for x in DATA['weapons']:
-            print(x)
-        print("\nMy Armour:")
-        print("----------")
-        for x in DATA['armour']:
-            print(x)
-        print("\nMy Gear:")
-        print("--------")
-        for x in DATA['gear']:
-            print(x)
-        if is_caster:
-            print("\nSpells Known:")
-            print("-------------")
-            if my_mastr <= 0:
-                print("I have no spells because I am the worst", DATA['long'], "ever!")
-            else:
-                for i in my_spells:
-                    print(i)
-    print('\n\nOUTPUT TEST: My "DATA": ', DATA)
+        DATA['caster'] = False
+    # print('\n\nOUTPUT TEST: My "DATA": ', DATA)
     return DATA
 
 
-# I'm planning to move the Print function here.
-def print_character():
-    generate(True)
+def print_character(system):
+    DATA = generate(system)
+    # for local testing, print to debug:
+    print("\nNOTICE: You are running in test mode, on-screen print is enabled")
+    print("\nA new random character for " + str(DATA['long']))
+    print("-----------------------------------------------------")
+    # print("Raw Data Print: ", gen_data)
+    print("Profession: " + DATA['long'] + "; Level: " + str(DATA['lvl']) + "; Alignment:", DATA['align'].title())
+    print("Hit Die: d" + str(DATA['hd']) + "; Psychic Armour: " + str(DATA['pa']) + "; Social Status: " + DATA['soc_class'] + "("+ str(DATA['soc_mod']) + ")" )
+    print("---------------")
+    print("\nAttribute Scores:")
+    print("-----------------")
+    for key, value in dict.items(DATA['stats']):
+        print(key + ": " + str(value['val']) + ' (' + str(value['mod']) + ')')
+    print("\nCombat Traits:")
+    print("--------------")
+    print("Melee: " + "  Ranged: " + "")
+    print("\nMy Weapons:")
+    print("-----------")
+    for x in list(DATA['weapons']):
+        print(x)
+    print("\nMy Armour:")
+    print("----------")
+    for x in list(DATA['armour']):
+        print(x)
+    print("\nMy Gear:")
+    print("--------")
+    for x in list(DATA['gear']):
+        print(x)
+    if DATA['caster']:
+        print("\nSpells Known:")
+        print("-------------")
+        if DATA['num_spells'] <= 0:
+            print("I have no spells because I am the worst", DATA['long'], "ever!")
+        else:
+            for i in list(DATA['spells']):
+                print(i)
 
 
 if __name__ == "__main__":
     # if run as-is, flagPrint "True" will enable screen print of character
-    print_character()
+    print_character('tnu')

@@ -3,15 +3,23 @@ This file will be where I eventually expand the program to accommodate different
 Right now, I'm just focusing on The Nightmares Underneath.
 I'm sure there's got to be a better way to do this in a "pythonic" way, but I'm new, so this is my solution.
 
-TNU = The Nightmares Underground
-DD = Dark Dungeons (my first planned expansion, further down the road)
+Systems Represented:
+tnu = The Nightmares Underneath
+dd = Dark Dungeons (my first planned expansion, further down the road)
+dcc = Dungeon Crawl Classics
+
+Valid Types:
+dnd = this game follows most basic D&D expectations
+plt = this game derives from microlite platinum
+tnu = the nightmares underneath (it really is pretty unique here...)
+
 '''
 
 statArrays = {
     'dnd': ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'],
     'dcc': ['STR', 'AGI', 'STA', 'PER', 'INT', 'LUC'],
     'tnu': ['CHA', 'DEX', 'FER', 'HEA', 'INT', 'WIL'],
-    'par': ['ICQ', 'MEE', 'MAF', 'PST', 'PRW', 'PND', 'PBT', 'RUN'],
+    'pla': ['ICQ', 'MEE', 'MAF', 'PST', 'PRW', 'PND', 'PBT', 'RUN'],
 }
 
 saves = {
@@ -19,68 +27,66 @@ saves = {
     'three': ['Fortitude', 'Reflex', 'Willpower'],
     'five': ['Death Ray & Poison', 'Magic Wands', 'Paralysis & Petrification', 'Breath Weapon', 'Rod, Staff, & Spell'],
     'six': statArrays['dnd'],
-    'par': [],
+    'pla': [],
 }
 
 systems = {
-    'template': {
-        'name': 'tmp',
-        'fullName': 'Display Name',
-        'hasHPs': True,     # BOOL: changes the calculations if the system has hit points
-        'stats': 6,         # INT: how many stats in this system, usually 6
-        'spread': 'tnu',    # STR: what spread of stats this system uses
-        'acBase': 10,       # INT: AC base 9 or 10, usually
-        'acType': '',       # STR: 'ascend' or 'descend'
-        'saves': '',        # STR: 'one', 'three', 'five', or 'six' (such as TBH, 3E, B/X, and 5E, respectively)
+    'default': {
+        'name': 'def',                  # shortname for the system, used in some lists and dicts
+        'fullName': 'Default Display Name',
+        'type': 'dnd',                  # STR: basic system type, and associated assumptions
+        'hasHPs': True,                 # BOOL: changes the calculations if the system has hit points
+        'stats': 6,                     # INT: how many stats in this system, usually 6
+        'spread': statArrays['dnd'],    # STR: what spread of stats this system uses
+        'acBase': 10,                   # INT: AC base 9 or 10, usually
+        'acType': 'ascend',             # STR: 'ascend' or 'descend'
+        'saves': 'five',                # STR: 'one', 'three', 'five', or 'six' (as TBH, 3E, B/X, and 5E)
     },
     'dcc': {
         'name': 'dcc',
         'fullName': 'Dungeon Crawl Classics',
-        'hasHPs': True,
-        'stats': 6,
         'spread': statArrays['dcc'],
-        'acBase': 10,
-        'acType': 'ascend',
         'saves': 'three',
     },
     'dd': {
         'name': 'dd',
         'fullName': 'Dark Dungeons',
-        'hasHPs': True,
-        'stats': 6,
-        'spread': statArrays['dnd'],
         'acBase': 9,
         'acType': 'descend',
-        'saves': 'five',
     },
-    'par': {
-        'name': 'par',
-        'fullName': 'Pargraydeum Franstasy Gnoll-Praying Thing',
-        'hasHPs': True,
+    'pla': {
+        'name': 'pla',
+        'fullName': 'Microlite Platinum',
+        'type': 'pla',
         'stats': 8,
-        'spread': statArrays['par'],
-        'acBase': 0,
-        'acType': 'ascend',
-        'saves': 'par',
+        'spread': statArrays['pla'],
+        'acBase': 4,
+        'saves': 'pla',
+    },
+    'rbh': {
+        'name': 'rbh',
+        'fullName': 'Robot Hack',
+        'type': 'pla',
+        'stats': 8,
+        'spread': statArrays['pla'],
+        'acBase': 4,
+        'saves': 'pla',
     },
     'tnu': {
         'name': 'tnu',
         'fullName': 'The Nightmares Underneath',
+        'type': 'tnu',
         'hasHPs': False,
-        'stats': 6,
         'spread': statArrays['tnu'],
-        'acBase': 10,
-        'acType': 'ascend',
         'saves': None,
     },
 }
 
 
 def get_system_prefs(system='tnu'):
-    # until later expanded, use TNU only
-    if system != 'tnu':
-        system = 'tnu'
-    sysprefs = dict(systems[system.lower()])
+    sysprefs = dict(systems['default'])
+    specific = dict(systems[system.lower()])
+    sysprefs.update(specific)
     return sysprefs
 
 

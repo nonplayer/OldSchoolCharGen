@@ -16,9 +16,9 @@ statArrays = {
 
 saves = {
     'one': [],
-    'three': [],
-    'five': [],
-    'six': [],
+    'three': ['Fortitude', 'Reflex', 'Willpower'],
+    'five': ['Death Ray & Poison', 'Magic Wands', 'Paralysis & Petrification', 'Breath Weapon', 'Rod, Staff, & Spell'],
+    'six': statArrays['dnd'],
     'par': [],
 }
 
@@ -27,54 +27,66 @@ systems = {
         'name': 'tmp',
         'fullName': 'Display Name',
         'hasHPs': True,     # BOOL: changes the calculations if the system has hit points
-        'stats': 'tnu',
+        'stats': 6,         # INT: how many stats in this system, usually 6
+        'spread': 'tnu',    # STR: what spread of stats this system uses
         'acBase': 10,       # INT: AC base 9 or 10, usually
         'acType': '',       # STR: 'ascend' or 'descend'
         'saves': '',        # STR: 'one', 'three', 'five', or 'six' (such as TBH, 3E, B/X, and 5E, respectively)
     },
-    'DCC': {
+    'dcc': {
         'name': 'dcc',
         'fullName': 'Dungeon Crawl Classics',
         'hasHPs': True,
-        'stats': 'dnd',
-        'acBase': 9,
-        'acType': 'descend',
-        'saves': 'five',
+        'stats': 6,
+        'spread': statArrays['dcc'],
+        'acBase': 10,
+        'acType': 'ascend',
+        'saves': 'three',
     },
-    'DD': {
+    'dd': {
         'name': 'dd',
         'fullName': 'Dark Dungeons',
         'hasHPs': True,
-        'stats': 'dnd',
+        'stats': 6,
+        'spread': statArrays['dnd'],
         'acBase': 9,
         'acType': 'descend',
         'saves': 'five',
     },
-    'PAR': {
+    'par': {
         'name': 'par',
         'fullName': 'Pargraydeum Franstasy Gnoll-Praying Thing',
         'hasHPs': True,
-        'stats': 'par',
+        'stats': 8,
+        'spread': statArrays['par'],
         'acBase': 0,
         'acType': 'ascend',
         'saves': 'par',
     },
-    'TNU': {
+    'tnu': {
         'name': 'tnu',
         'fullName': 'The Nightmares Underneath',
         'hasHPs': False,
-        'stats': 'tnu',
+        'stats': 6,
+        'spread': statArrays['tnu'],
         'acBase': 10,
         'acType': 'ascend',
-        'saves': 'six',
+        'saves': None,
     },
 }
 
 
-def get_system_prefs(sysName='TNU'):
-    sysData = dict(systems[sysName.upper()])
-    return sysData
+def get_system_prefs(system='tnu'):
+    # until later expanded, use TNU only
+    if system != 'tnu':
+        system = 'tnu'
+    sysprefs = dict(systems[system.lower()])
+    return sysprefs
 
 
 if __name__ == "__main__":
-    print(get_system_prefs('tnu'))
+    my_data = get_system_prefs('tnu')
+    print(my_data)
+    print(my_data['spread'])
+    for i in list(my_data['spread']):
+        print(i)

@@ -21,12 +21,10 @@ supported_systems = [
 ]
 
 
-def gen_stats(primes, system='TNU'):
+def gen_stats(spread, primes):
     system = system.upper()
-    if system not in supported_systems:
-        system = 'TNU'
-    spread = dice.get_spread(system, primes)
-    return spread
+    stats = dice.get_spread(spread, primes)
+    return stats
 
 
 def gen_spells(prof, align, num):
@@ -78,11 +76,14 @@ def generate(flag_print=False, game_system='tnu'):
     DATA['long'] = md['profLong']
     DATA['lvl'] = int(md['level'])
     DATA['align'] = random.choice(md['alignAllowed'])
-    my_pas = list(md['primAttr'])
-    my_stats = gen_stats(my_pas, game_system)
-    for key, value in dict.items(my_stats):
-        DATA[key.lower() + '_val'] = str(value['val'])
-        DATA[key.lower() + '_mod'] = str(value['mod'])
+    primes = list(md['primAttr'])
+    spread = list(sys_prefs['spread'])
+    my_stats = dice.get_spread(spread, primes)
+    DATA['stats'] = my_stats
+    # former method, kept for short-term posterity
+    #for key, value in dict.items(my_stats):
+    #    DATA[key.lower() + '_val'] = str(value['val'])
+    #    DATA[key.lower() + '_mod'] = str(value['mod'])
     DATA['hd'] = md['hd']
     my_class = dict(gen_social(int(dice.roll(3, 6))))
     DATA['soc_class'] = my_class['title']
@@ -113,7 +114,6 @@ def generate(flag_print=False, game_system='tnu'):
     my_spells = []
     if 'caster' in md['flags']:
         is_caster = True
-        # my_caststat = md['casterStat']
         my_castmod = my_stats[md['casterStat']]['mod']
         my_mastr = DATA['lvl'] + my_castmod
         if my_mastr > 0:
@@ -134,22 +134,22 @@ def generate(flag_print=False, game_system='tnu'):
         print("---------------")
         print("\nAttribute Scores:")
         print("-----------------")
-        for key, value in dict.items(my_stats):
+        for key, value in dict.items(DATA['stats']):
             print(key + ": " + str(value['val']) + ' (' + str(value['mod']) + ')')
         print("\nCombat Traits:")
         print("--------------")
         print("Melee: " + "  Ranged: " + "")
         print("\nMy Weapons:")
         print("-----------")
-        for x in my_weaponlist:
+        for x in DATA['weapons']:
             print(x)
         print("\nMy Armour:")
         print("----------")
-        for x in my_armourlist:
+        for x in DATA['armour']:
             print(x)
         print("\nMy Gear:")
         print("--------")
-        for x in my_gear:
+        for x in DATA['gear']:
             print(x)
         if is_caster:
             print("\nSpells Known:")

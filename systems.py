@@ -4,9 +4,11 @@ Right now, I'm just focusing on The Nightmares Underneath.
 I'm sure there's got to be a better way to do this in a "pythonic" way, but I'm new, so this is my solution.
 
 Systems Represented:
-tnu = The Nightmares Underneath
+bnt = Blood & Treasure
 dd = Dark Dungeons (my first planned expansion, further down the road)
 dcc = Dungeon Crawl Classics
+tnu = The Nightmares Underneath
+plt = Microlite Platinum
 
 Valid Types:
 dnd = this game follows most basic D&D expectations
@@ -42,6 +44,10 @@ systems = {
         'acType': 'ascend',             # STR: 'ascend' or 'descend'
         'saves': 'five',                # STR: 'one', 'three', 'five', or 'six' (as TBH, 3E, B/X, and 5E)
     },
+    'bnt' : {
+        'name': 'bnt',
+        'fullName': 'Blood & Treasure',
+    }
     'dcc': {
         'name': 'dcc',
         'fullName': 'Dungeon Crawl Classics',

@@ -49,216 +49,207 @@ prof_keys = {
 '''
 
 import random
-from random import choice as ch
 
-template = {
-    'profShort': '',
-    'profLong': '',
-    'flags': ['', ''],
-    'level': 1,
-    'hd': 0,
-    'primAttr': ['', ''],
-    'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],  # DO NOT FORGET TO CHANGE
-    'attacksAs': 'none',
-    'spellChooseAs': '',
-    'spellsPerLvl': 0,
-    'casterStat': 'XYZ',
-    'skills': ['Placeholder text for Class Skills'],
-    'restrictions': ['Placeholder text for Class Restrictions'],
-    'special': ['Placeholder text for Class Special Abilities'],
-    'extragear': [],  # DELETE if no extra gear
+tnu_profs = {
+    'template' : {
+        'profShort': '',
+        'profLong': '',
+        'flags': ['', ''],
+        'level': 1,
+        'hd': 0,
+        'primAttr': ['', ''],
+        'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],  # DO NOT FORGET TO CHANGE
+        'attacksAs': 'none',
+        'spellChooseAs': '',
+        'spellsPerLvl': 0,
+        'casterStat': 'XYZ',
+        'skills': ['Placeholder text for Class Skills'],
+        'restrictions': ['Placeholder text for Class Restrictions'],
+        'special': ['Placeholder text for Class Special Abilities'],
+        'extragear': [],  # DELETE if no extra gear
+    },
+    'assassin' : {
+        'profShort': 'assassin',
+        'profLong': 'Assassin',
+        'flags': ['base', 'human'],
+        'level': 1,
+        'hd': 8,
+        'primAttr': ['DEX', 'FER'],
+        'alignAllowed': ['chaos', 'evil', 'law', 'neutral'],
+        'attacksAs': 'best',
+        'spellChooseAs': None,
+        'spellsPerLvl': 0,
+        'casterStat': None,
+        'skills': ['Placeholder text for Class Skills'],
+        'restrictions': ['Placeholder text for Class Restrictions'],
+        'special': ['Placeholder text for Class Special Abilities'],
+    },
+    'bard' : {
+        'profShort': 'bard',
+        'profLong': 'Bard',
+        'flags': ['base', 'human', 'caster'],
+        'level': 1,
+        'hd': 6,
+        'primAttr': ['CHA', 'HEA'],
+        'alignAllowed': ['chaos', 'good', 'law', 'neutral'],
+        'attacksAs': 'none',
+        'spellChooseAs': 'bard',
+        'spellsPerLvl': 1,
+        'casterStat': 'CHA',
+        'skills': ['Placeholder text for Class Skills'],
+        'restrictions': ['Placeholder text for Class Restrictions'],
+        'special': ['Placeholder text for Class Special Abilities'],
+    },
+    'champ_chaos' : {
+        'profShort': 'champ_chaos',
+        'profLong': 'Champion of Chaos',
+        'flags': ['base', 'human', 'caster', 'xtragear'],
+        'level': 1,
+        'hd': 8,
+        'primAttr': ['HEA', 'INT'],
+        'alignAllowed': ['chaos'],
+        'attacksAs': 'best',
+        'spellChooseAs': 'champ_chaos',
+        'spellsPerLvl': 2,
+        'casterStat': 'INT',
+        'skills': ['Placeholder text for Class Skills'],
+        'restrictions': ['Placeholder text for Class Restrictions'],
+        'special': ['Placeholder text for Class Special Abilities'],
+        'extragear': ['RANDOM_d6 doses of hallucinogenic cactus'],
+    },
+    'champ_evil' : {
+        'profShort': 'champ_evil',
+        'profLong': 'Champion of Evil',
+        'flags': ['base', 'human', 'xtragear'],
+        'level': 1,
+        'hd': 8,
+        'primAttr': ['HEA', 'FER'],
+        'alignAllowed': ['evil'],
+        'attacksAs': 'best',
+        'spellChooseAs': None,
+        'spellsPerLvl': 0,
+        'casterStat': None,
+        'skills': ['Placeholder text for Class Skills'],
+        'restrictions': ['Placeholder text for Class Restrictions'],
+        'special': ['Placeholder text for Class Special Abilities'],
+        'extragear': ['WEAPON: an additional close combat weapon from your special list'],
+    },
+    'champ_good' : {
+        'profShort': 'champ_good',
+        'profLong': 'Champion of Good',
+        'flags': ['base', 'human', 'xtragear'],
+        'level': 1,
+        'hd': 8,
+        'primAttr': ['HEA', 'CHA'],
+        'alignAllowed': ['good'],
+        'attacksAs': 'best',
+        'spellChooseAs': None,
+        'spellsPerLvl': 0,
+        'casterStat': None,
+        'skills': ['Placeholder text for Class Skills'],
+        'restrictions': ['Placeholder text for Class Restrictions'],
+        'special': ['Placeholder text for Class Special Abilities'],
+        'extragear': ['RANDOM_d6 doses of antitoxin', 'RANDOM_d6 uses of bandages'],
+    },
+    'champ_law' : {
+        'profShort': 'champ_law',
+        'profLong': 'Champion of Law',
+        'flags': ['base', 'human', 'xtragear'],
+        'level': 1,
+        'hd': 8,
+        'primAttr': ['HEA', 'WIL'],
+        'alignAllowed': ['law'],
+        'attacksAs': 'best',
+        'spellChooseAs': None,
+        'spellsPerLvl': 0,
+        'casterStat': None,
+        'skills': ['Placeholder text for Class Skills'],
+        'restrictions': ['Placeholder text for Class Restrictions'],
+        'special': ['Placeholder text for Class Special Abilities'],
+        'extragear': ['a written copy of The Law'],
+    },
+    'cultist' : {
+        'profShort': 'cultist',
+        'profLong': 'Cultist',
+        'flags': ['base', 'human', 'caster'],
+        'level': 1,
+        'hd': 6,
+        'primAttr': ['HEA', 'WIL'],
+        'alignAllowed': ['chaos', 'evil', 'good', 'neutral'],
+        'attacksAs': 'best',
+        'spellChooseAs': 'cultist',
+        'spellsPerLvl': 2,
+        'casterStat': 'WIL',
+        'skills': ['Religious Practices,' 'Cult Doctrine', 'Your Chosen Specialty'],
+        'restrictions': ['Placeholder text for Class Restrictions'],
+        'special': ['Placeholder text for Class Special Abilities'],
+    },
+    'fighter' : {
+        'profShort': 'fighter',
+        'profLong': 'Fighter',
+        'flags': ['base', 'human'],
+        'level': 1,
+        'hd': 8,
+        'primAttr': ['FER', 'HEA'],
+        'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],
+        'attacksAs': 'best',
+        'spellChooseAs': None,
+        'spellsPerLvl': 0,
+        'casterStat': None,
+        'skills': ['Placeholder text for Class Skills'],
+        'restrictions': ['Placeholder text for Class Restrictions'],
+        'special': ['Placeholder text for Class Special Abilities'],
+    },
+    'scholar' : {
+        'profShort': 'scholar',
+        'profLong': 'Scholar',
+        'flags': ['base', 'human', 'caster', 'haspa'],
+        'level': 1,
+        'hd': 4,
+        'primAttr': ['CHA', 'INT'],
+        'alignAllowed': ['evil', 'good', 'law', 'neutral'],
+        'attacksAs': 'none',
+        'spellChooseAs': 'scholar',
+        'spellsPerLvl': 1,
+        'casterStat': 'INT',
+        'skills': ['Placeholder text for Class Skills'],
+        'restrictions': ['Placeholder text for Class Restrictions'],
+        'special': ['Placeholder text for Class Special Abilities'],
+    },
+    'thief' : {
+        'profShort': 'thief',
+        'profLong': 'Thief',
+        'flags': ['base', 'human'],
+        'level': 1,
+        'hd': 6,
+        'primAttr': ['DEX'],
+        'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],
+        'attacksAs': 'none',
+        'spellChooseAs': None,
+        'spellsPerLvl': 0,
+        'casterStat': None,
+        'skills': ['Placeholder text for Class Skills'],
+        'restrictions': ['Placeholder text for Class Restrictions'],
+        'special': ['Placeholder text for Class Special Abilities'],
+    },
+    'wizard' : {
+        'profShort': 'wizard',
+        'profLong': 'Wizard',
+        'flags': ['base', 'human', 'caster', 'haspa'],
+        'level': 1,
+        'hd': 4,
+        'primAttr': ['INT', 'WIL'],
+        'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],
+        'attacksAs': 'none',
+        'spellChooseAs': '',
+        'spellsPerLvl': 2,
+        'casterStat': 'INT',
+        'skills': ['Placeholder text for Class Skills'],
+        'restrictions': ['Placeholder text for Class Restrictions'],
+        'special': ['Placeholder text for Class Special Abilities'],
+    },
 }
 
-assassin = {
-    'profShort': 'assassin',
-    'profLong': 'Assassin',
-    'flags': ['base', 'human'],
-    'level': 1,
-    'hd': 8,
-    'primAttr': ['DEX', 'FER'],
-    'alignAllowed': ['chaos', 'evil', 'law', 'neutral'],
-    'attacksAs': 'best',
-    'spellChooseAs': None,
-    'spellsPerLvl': 0,
-    'casterStat': None,
-    'skills': ['Placeholder text for Class Skills'],
-    'restrictions': ['Placeholder text for Class Restrictions'],
-    'special': ['Placeholder text for Class Special Abilities'],
-}
-
-bard = {
-    'profShort': 'bard',
-    'profLong': 'Bard',
-    'flags': ['base', 'human', 'caster'],
-    'level': 1,
-    'hd': 6,
-    'primAttr': ['CHA', 'HEA'],
-    'alignAllowed': ['chaos', 'good', 'law', 'neutral'],
-    'attacksAs': 'none',
-    'spellChooseAs': 'bard',
-    'spellsPerLvl': 1,
-    'casterStat': 'CHA',
-    'skills': ['Placeholder text for Class Skills'],
-    'restrictions': ['Placeholder text for Class Restrictions'],
-    'special': ['Placeholder text for Class Special Abilities'],
-}
-
-champ_chaos = {
-    'profShort': 'champ_chaos',
-    'profLong': 'Champion of Chaos',
-    'flags': ['base', 'human', 'caster', 'xtragear'],
-    'level': 1,
-    'hd': 8,
-    'primAttr': ['HEA', 'INT'],
-    'alignAllowed': ['chaos'],
-    'attacksAs': 'best',
-    'spellChooseAs': 'champ_chaos',
-    'spellsPerLvl': 2,
-    'casterStat': 'INT',
-    'skills': ['Placeholder text for Class Skills'],
-    'restrictions': ['Placeholder text for Class Restrictions'],
-    'special': ['Placeholder text for Class Special Abilities'],
-    'extragear': ['RANDOM_d6 doses of hallucinogenic cactus'],
-}
-
-champ_evil = {
-    'profShort': 'champ_evil',
-    'profLong': 'Champion of Evil',
-    'flags': ['base', 'human', 'xtragear'],
-    'level': 1,
-    'hd': 8,
-    'primAttr': ['HEA', 'FER'],
-    'alignAllowed': ['evil'],
-    'attacksAs': 'best',
-    'spellChooseAs': None,
-    'spellsPerLvl': 0,
-    'casterStat': None,
-    'skills': ['Placeholder text for Class Skills'],
-    'restrictions': ['Placeholder text for Class Restrictions'],
-    'special': ['Placeholder text for Class Special Abilities'],
-    'extragear': ['WEAPON: an additional close combat weapon from your special list'],
-}
-
-champ_good = {
-    'profShort': 'champ_good',
-    'profLong': 'Champion of Good',
-    'flags': ['base', 'human', 'xtragear'],
-    'level': 1,
-    'hd': 8,
-    'primAttr': ['HEA', 'CHA'],
-    'alignAllowed': ['good'],
-    'attacksAs': 'best',
-    'spellChooseAs': None,
-    'spellsPerLvl': 0,
-    'casterStat': None,
-    'skills': ['Placeholder text for Class Skills'],
-    'restrictions': ['Placeholder text for Class Restrictions'],
-    'special': ['Placeholder text for Class Special Abilities'],
-    'extragear': ['RANDOM_d6 doses of antitoxin', 'RANDOM_d6 uses of bandages'],
-}
-
-champ_law = {
-    'profShort': 'champ_law',
-    'profLong': 'Champion of Law',
-    'flags': ['base', 'human', 'xtragear'],
-    'level': 1,
-    'hd': 8,
-    'primAttr': ['HEA', 'WIL'],
-    'alignAllowed': ['law'],
-    'attacksAs': 'best',
-    'spellChooseAs': None,
-    'spellsPerLvl': 0,
-    'casterStat': None,
-    'skills': ['Placeholder text for Class Skills'],
-    'restrictions': ['Placeholder text for Class Restrictions'],
-    'special': ['Placeholder text for Class Special Abilities'],
-    'extragear': ['a written copy of The Law'],
-}
-
-cultist = {
-    'profShort': 'cultist',
-    'profLong': 'Cultist',
-    'flags': ['base', 'human', 'caster'],
-    'level': 1,
-    'hd': 6,
-    'primAttr': ['HEA', 'WIL'],
-    'alignAllowed': ['chaos', 'evil', 'good', 'neutral'],
-    'attacksAs': 'best',
-    'spellChooseAs': 'cultist',
-    'spellsPerLvl': 2,
-    'casterStat': 'WIL',
-    'skills': ['Religious Practices,' 'Cult Doctrine', 'Your Chosen Specialty'],
-    'restrictions': ['Placeholder text for Class Restrictions'],
-    'special': ['Placeholder text for Class Special Abilities'],
-}
-
-fighter = {
-    'profShort': 'fighter',
-    'profLong': 'Fighter',
-    'flags': ['base', 'human'],
-    'level': 1,
-    'hd': 8,
-    'primAttr': ['FER', 'HEA'],
-    'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],
-    'attacksAs': 'best',
-    'spellChooseAs': None,
-    'spellsPerLvl': 0,
-    'casterStat': None,
-    'skills': ['Placeholder text for Class Skills'],
-    'restrictions': ['Placeholder text for Class Restrictions'],
-    'special': ['Placeholder text for Class Special Abilities'],
-}
-
-scholar = {
-    'profShort': 'scholar',
-    'profLong': 'Scholar',
-    'flags': ['base', 'human', 'caster', 'haspa'],
-    'level': 1,
-    'hd': 4,
-    'primAttr': ['CHA', 'INT'],
-    'alignAllowed': ['evil', 'good', 'law', 'neutral'],
-    'attacksAs': 'none',
-    'spellChooseAs': 'scholar',
-    'spellsPerLvl': 1,
-    'casterStat': 'INT',
-    'skills': ['Placeholder text for Class Skills'],
-    'restrictions': ['Placeholder text for Class Restrictions'],
-    'special': ['Placeholder text for Class Special Abilities'],
-}
-
-thief = {
-    'profShort': 'thief',
-    'profLong': 'Thief',
-    'flags': ['base', 'human'],
-    'level': 1,
-    'hd': 6,
-    'primAttr': ['DEX'],
-    'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],
-    'attacksAs': 'none',
-    'spellChooseAs': None,
-    'spellsPerLvl': 0,
-    'casterStat': None,
-    'skills': ['Placeholder text for Class Skills'],
-    'restrictions': ['Placeholder text for Class Restrictions'],
-    'special': ['Placeholder text for Class Special Abilities'],
-}
-
-wizard = {
-    'profShort': 'wizard',
-    'profLong': 'Wizard',
-    'flags': ['base', 'human', 'caster', 'haspa'],
-    'level': 1,
-    'hd': 4,
-    'primAttr': ['INT', 'WIL'],
-    'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],
-    'attacksAs': 'none',
-    'spellChooseAs': '',
-    'spellsPerLvl': 2,
-    'casterStat': 'INT',
-    'skills': ['Placeholder text for Class Skills'],
-    'restrictions': ['Placeholder text for Class Restrictions'],
-    'special': ['Placeholder text for Class Special Abilities'],
-}
 
 '''
 fey_knight = {}
@@ -267,9 +258,54 @@ berserker = {}
 disciple = {}
 '''
 
-base_profs = [
-    assassin, bard, champ_chaos, champ_evil, champ_good, champ_law, cultist, fighter, scholar, thief, wizard
+
+dd_profs = {
+    'template': {
+        'one': "thing one",
+    },
+    'cleric': {
+        'one': "thing one",
+    },
+    'fighter': {
+        'one': "thing one",
+    },
+    'magic-user': {
+        'one': "thing one",
+    },
+    'thief': {
+        'one': "thing one",
+    },
+    'elf': {
+        'one': "thing one",
+    },
+    'dwarf': {
+        'one': "thing one",
+    },
+    'halfling': {
+        'one': "thing one",
+    },
+}
+
+
+base_profs_tnu = [
+    'assassin', 'bard', 'champ_chaos', 'champ_evil', 'champ_good', 'champ_law', 'cultist', 'fighter', 'scholar', 'thief', 'wizard'
 ]
+
+
+proflists = {
+    'dd': {
+        'choices': ['cleric', 'fighter', 'magic-user', 'thief', 'elf', 'dwarf', 'halfling'],
+        'dict': dd_profs,
+    },
+    'tnu': {
+        'choices': ['assassin', 'bard', 'champ_chaos', 'champ_evil', 'champ_good', 'champ_law', 'cultist', 'fighter', 'scholar', 'thief', 'wizard'],
+        'dict': tnu_profs,
+    },
+    'template': {
+        'choices': [],
+        'dict': '',
+    },
+}
 
 '''
 racial_profs = [fey_knight, halfling]
@@ -281,15 +317,20 @@ FOR NOW, this will only return the base classes. Once I add the extended classes
 modify this to allow passing a selector.
 '''
 
-def get_profession():
-    profession = random.choice(base_profs)
-    return profession
+
+def get_profession(system):
+    my_list = proflists[system]['choices']
+    my_dict = proflists[system]['dict']
+    prof_data = my_dict[random.choice(my_list)]
+    return prof_data
+
 
 '''
 for key, value in dict.items(get_profession()):
     print(key, ":", value)
 '''
 
+
 if __name__ == "__main__":
-    for key, value in dict.items((get_profession())):
+    for key, value in dict.items((get_profession('tnu'))):
         print(key, ":", value)

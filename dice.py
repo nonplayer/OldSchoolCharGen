@@ -1,4 +1,7 @@
+import professions
 import random
+import systems
+
 
 def roll(num=1, size=6):
     die_num = num
@@ -6,11 +9,13 @@ def roll(num=1, size=6):
     total = 0
     for count in range(die_num):
         total += random.randint(1, die_size)
-    return(total)
+    return total
+
 
 def stats():
-    spread = sorted([roll(3, 6), roll(3, 6), roll(3, 6), roll(3, 6), roll(3, 6), roll(3, 6)])  # maybe add?: , reverse=True
-    return(spread)
+    rolls = sorted([roll(3, 6), roll(3, 6), roll(3, 6), roll(3, 6), roll(3, 6), roll(3, 6)])  # maybe add?: , reverse=True
+    return rolls
+
 
 def get_mod(stat):
     num = int(stat)
@@ -31,36 +36,47 @@ def get_mod(stat):
         mod = -3
     return mod
 
-def get_spread(system, PAs=''):
-    final = {
-        'CHA': {'val' : 0,'mod' : 0,},
-        'DEX': {'val' : 0,'mod' : 0,},
-        'FER': {'val' : 0,'mod' : 0,},
-        'HEA': {'val' : 0,'mod' : 0,},
-        'INT': {'val' : 0,'mod' : 0,},
-        'WIL': {'val' : 0,'mod' : 0,},
-    }
-    primes = list(PAs)
+
+def get_spread(spread, primes):
+    primes = list(primes)
+    spread = list(spread)
+    # create the base dictionary:
+    final = {}
+    for i in spread:
+        final.update({i: {'val': 0, 'mod': 0}})
     random.shuffle(primes)
-    baseSpread = ['CHA', 'DEX', 'FER', 'HEA', 'INT', 'WIL', ]
-    random.shuffle(baseSpread)
+    random.shuffle(spread)
+    # separate the prime attributes from the mix first:
     for i in primes:
-            baseSpread.remove(i)
-    mySpread = stats()
+            spread.remove(i)
+    my_stats = stats()
     for i in primes:
-        num = int(mySpread.pop())
+        num = int(my_stats.pop())
         final[i]['val'] = num
         final[i]['mod'] = get_mod(num)
-    for i in baseSpread:
-        num = int(mySpread.pop())
+    for i in spread:
+        num = int(my_stats.pop())
         final[i]['val'] = num
         final[i]['mod'] = get_mod(num)
     return final
 
 
+'''
+>>> testd = {}
+>>> testlist = ['a', 'b', 'c']
+>>> for i in testlist:
+...     testd.update({i: {'val': 1, 'mod': 2}})
+'''
+
+
 def main():
-    for key, value in dict.items(get_spread('TNU',)):
+    md = dict(professions.get_profession())
+    sys_prefs = dict(systems.get_system_prefs('tnu'))
+    primes = list(md['primAttr'])
+    spread = list(sys_prefs['spread'])
+    for key, value in dict.items(get_spread(spread, primes)):
         print(key, ":", value)
+
 
 if __name__ == "__main__":
     main()

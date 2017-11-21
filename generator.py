@@ -11,7 +11,7 @@ Don't forget half-stats for TNU
 import random
 
 import dice
-import equipment
+import equipment_tnu
 import professions
 import spells
 import systems
@@ -136,7 +136,7 @@ def generate(game_system='tnu'):
     else:
         DATA['pa'] = 'None'
     # let's get that gear list:
-    my_gear = list(equipment.get_gear(DATA['short'], my_class['label']))
+    my_gear = list(equipment_tnu.get_gear(DATA[ 'short' ] , my_class[ 'label' ]))
     my_weapons = list(filter(lambda x: x.startswith('WEAPON: '), my_gear))
     my_armour = list(filter(lambda x: x.startswith('ARMOUR: '), my_gear))
     my_weaponlist = []

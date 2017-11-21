@@ -11,14 +11,15 @@ Don't forget half-stats for TNU
 import random
 
 import dice
-import equipment_dnd
+import equipment_osr
 import equipment_tnu
 import professions
-import spells
+import spells_osr
+import spells_tnu
 import systems
 
 supported_systems = [
-    'tnu',
+    'tnu', 'dd',
 ]
 
 
@@ -27,8 +28,12 @@ def gen_stats(spread, primes):
     return stats
 
 
-def gen_spells(prof, align, num):
-    my_spells = spells.get_spells(prof, align, num)
+def gen_spells(gamesystem, prof, align, num):
+    my_spells = []
+    if gamesystem == 'tnu':
+        my_spells = spells_tnu.get_spells(prof, align, num)
+    elif gamesystem in ['bnt', 'dd', 'pla']:
+        my_spells = spells_osr.get_spells(gamesystem, prof, num)
     return my_spells
 
 
@@ -149,8 +154,6 @@ def generate(game_system='tnu'):
     my_class = dict(gen_social(int(dice.roll(3, 6))))
     DATA['soc_class'] = my_class['title']
     DATA['soc_mod'] = str(my_class['mod'])
-    if prefs['hasHPs']:
-        print("This System DOES have Hit Points!")
     if 'haspa' in md['flags']:
         DATA['pa'] = 'Yes'
     else:
@@ -158,12 +161,16 @@ def generate(game_system='tnu'):
     # let's get that gear list:
     if prefs['type'] == 'tnu':
         my_gear = list(equipment_tnu.get_gear(DATA['short'], my_class['label']))
-    elif prefs['type'] == 'dnd':
-        my_gear = list(equipment_dnd.get_gear(DATA['short'], prefs, stats_avg))
+    elif prefs['type'] in ['dnd']:
+        my_gear = list(equipment_osr.get_gear(DATA['short'], prefs, stats_avg))
+    elif prefs['type'] == 'pla':
+        my_gear = []
     else:
         my_gear = []
-    # Microlite Platinum coming down the road:
-    # elif prefs['type'] == 'pla':
+    if md['extragear']:
+        for i in list(md['extragear']):
+            my_gear.append(i)
+    # pull out the weapons and armour into their own lists
     my_weapons = list(filter(lambda x: x.startswith('WEAPON: '), my_gear))
     my_armour = list(filter(lambda x: x.startswith('ARMOUR: '), my_gear))
     my_weaponlist = []
@@ -174,9 +181,9 @@ def generate(game_system='tnu'):
     for x in my_armour:
         my_gear.remove(x)
         my_armourlist.append(str.title(x[8:]))
-    DATA['weapons'] = my_weaponlist
-    DATA['armour'] = my_armourlist
-    DATA['gear'] = my_gear
+    DATA['weapons'] = sorted(my_weaponlist)
+    DATA['armour'] = sorted(my_armourlist)
+    DATA['gear'] = sorted(my_gear)
     # now to generate the character's armour class
     DATA['ac'] = gen_ac(prefs, my_armourlist)
     if prefs['type'] is ['dnd']:
@@ -189,9 +196,13 @@ def generate(game_system='tnu'):
     if 'caster' in md['flags']:
         DATA['caster'] = True
         my_castmod = statsD[md['casterStat']]['mod']
-        DATA['num_spells'] = DATA['lvl'] + my_castmod
+        DATA['num_spells'] = DATA['lvl'] * md['spellsPerLvl'] + my_castmod
         if DATA['num_spells'] > 0:
-            my_spells = list(gen_spells(DATA['short'], DATA['align'], DATA['num_spells']))
+            my_spells = list(gen_spells(prefs['name'], md['spellChooseAs'], DATA['align'], DATA['num_spells']))
+            if md['extraspells']:
+                for i in list(md['extraspells']):
+                    my_spells.append(i)
+            sorted(my_spells)
             DATA['spells'] = my_spells
     else:
         DATA['caster'] = False
@@ -235,20 +246,22 @@ def print_character(system_name):
         else:
             for i in list(DATA['spells']):
                 print(i)
+    print("")
 
 
 if __name__ == "__main__":
-    # if run as-is, flagPrint "True" will enable screen print of character
-    print("\nThis is a random 1st-level Character Generator for old school RPGs.")
-    print("NOTICE: Currently only 'tnu' is supported, but additional systems are being planned.")
-    print("Which system would you like to use? Enter the number or acronym below:\n")
-    print(" [1] The Nightmares Underneath (tnu)")
-    selection = str(input("\nYour Selection: "))
-    if selection != '1' and selection != 'tnu':
-        print("Selection invalid, defaulting to #1: The Nightmares Underneath.\n")
-        system = 'tnu'
-    elif selection == '1':
-        system = 'tnu'
-    else:
-        system = selection
-    print_character(system)
+    ## if run as-is, flagPrint "True" will enable screen print of character
+    #print("\nThis is a random 1st-level Character Generator for old school RPGs.")
+    #print("NOTICE: Currently only 'tnu' is supported, but additional systems are being planned.")
+    #print("Which system would you like to use? Enter the number or acronym below:\n")
+    #print(" [1] The Nightmares Underneath (tnu)")
+    #selection = str(input("\nYour Selection: "))
+    #if selection != '1' and selection != 'tnu':
+    #    print("Selection invalid, defaulting to #1: The Nightmares Underneath.\n")
+    #    system = 'tnu'
+    #elif selection == '1':
+    #    system = 'tnu'
+    #else:
+    #    system = selection
+    #print_character(system)
+    print_character('dd')

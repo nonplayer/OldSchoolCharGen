@@ -44,10 +44,10 @@ systems = {
         'acType': 'ascend',             # STR: 'ascend' or 'descend'
         'saves': 'five',                # STR: 'one', 'three', 'five', or 'six' (as TBH, 3E, B/X, and 5E)
     },
-    'bnt' : {
+    'bnt': {
         'name': 'bnt',
         'fullName': 'Blood & Treasure',
-    }
+    },
     'dcc': {
         'name': 'dcc',
         'fullName': 'Dungeon Crawl Classics',

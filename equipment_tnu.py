@@ -4,10 +4,6 @@ from random import choice as ch
 import dice
 
 '''
-All weapons are marked with WEAPON: at the beginning
-All armours are marked with ARMOUR: at the beginning
-I'm considering doing the same for MAGIC: but haven't added it yet
-these tags will be used to pull them from the gear dump and separate into their own categories
 '''
 
 wretched = {
@@ -298,6 +294,7 @@ gearSets = {
     'royal': royal,
 }
 
+
 def gear_tier(roll):
     if roll == 18:
         tier = 'gear7'
@@ -315,6 +312,7 @@ def gear_tier(roll):
         tier = 'gear1'
     return tier
 
+
 def get_gear(prof, status):
     index = dice.roll(3, 6)
     tier = gear_tier(index)
@@ -325,10 +323,12 @@ def get_gear(prof, status):
             gearList.append(each)
     return gearList
 
+
 '''
 # how to remove empty items from a list
 newtestlist = list(filter(None, testlist))
 '''
+
 
 if __name__ == "__main__":
     prof = ch(['assassin', 'bard', 'champ_chaos', 'champ_evil', 'champ_good', 'champ_law', 'cultist', 'fighter', 'scholar', 'thief', 'wizard'])

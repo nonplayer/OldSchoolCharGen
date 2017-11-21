@@ -261,28 +261,52 @@ disciple = {}
 
 dd_profs = {
     'template': {
-        'one': "thing one",
+        'short': 'cleric',      # STR: class name for references
+        'long': 'Cleric',       # STR: class name for display
+        'wps': 2,               # INT: How many starting Weapon Proficiencies
+        'weapons': 'all',       # STR: Category of weapons allowed as choices
     },
     'cleric': {
-        'one': "thing one",
+        'short': 'cleric',
+        'long': 'Cleric',
+        'wps': 2,
+        'weapons': 'cleric',
     },
     'fighter': {
-        'one': "thing one",
+        'short': 'fighter',
+        'long': 'Fighter',
+        'wps': 4,
+        'weapons': 'all',
     },
-    'magic-user': {
-        'one': "thing one",
+    'mu': {
+        'short': 'mu',
+        'long': 'Magic-User',
+        'wps': 2,
+        'weapons': 'mu',
     },
     'thief': {
-        'one': "thing one",
+        'short': 'thief',
+        'long': 'Thief',
+        'wps': 2,
+        'weapons': 'thief',
     },
     'elf': {
-        'one': "thing one",
+        'short': 'elf',
+        'long': 'Elf',
+        'wps': 2,
+        'weapons': 'all',
     },
     'dwarf': {
-        'one': "thing one",
+        'short': 'dwarf',
+        'long': 'Dwarf',
+        'wps': 4,
+        'weapons': 'all',
     },
     'halfling': {
-        'one': "thing one",
+        'short': 'halfling',
+        'long': 'Halfling',
+        'wps': 2,
+        'weapons': 'half',
     },
 }
 

@@ -13,11 +13,6 @@ caster          = designates the class as starting with magic
 subclass        = has special subclass stuff, like with demihumans
 xtragear        = has extra gear
 haspa           = class has psychic armor
-'''
-
-'''
-NOTE: Disciples and Berserkers are on the far out planning stages for now.
-
 
 alignments options:
 'chaos', 'evil', 'good', 'law', 'neutral'
@@ -28,56 +23,38 @@ mid     = mid-tier attack bonuses
 worst   = worst bonuses in the game
 none    = absolutely no level-based bonuses! to combat!
 NOTE!: at least in base, TNU characters all use either best or none
-
-prof_keys = {
-    'profShort': '',        # STRING: short name for frequent use in this code
-    'profLong': '',         # STRING: capital name for display
-    'flags': [],            # LIST of flags for different effects
-    'level': 1,             # INT: right now it defaults to 1, used for # of spells mastered
-    'hd': 0,                # INT: hit dice for calculations
-    'primAttr': [],         # LIST of one or two stats for high roll assignment, all caps like DEX, PER, etc
-    'alignAllowed': [],     # LIST of allowed alignments for random choice
-    'attacksAs': '',        # STRING: what category fo combat bonuses
-    'spellChooseAs': '',    # STRING: if caster, what prof it chooses as, usually = profShort
-    'spellsPerLvl': 1,      # INT: if caster, how many spell choices per level
-    'casterStat': 'XYZ',    # STRING: stat used for spells, if a caster
-    'skills': [],           # Unsure, placeholder as I figure out skills. Might go unused.
-    'restrictions': [],     # Unsure, placeholder based on existing profession page details
-    'special': [],          # Unsure, placeholder based on existing profession page details
-    'extragear': [],        # LIST: some professions have extra gear, put it here
-}
 '''
 
 import random
 
 tnu_profs = {
     'default': {
-        'profShort': 'default',
-        'profLong': 'Default Class Name',
-        'flags': [],
-        'level': 1,
-        'hd': 8,
-        'primAttr': [],
-        'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],
-        'attacksAs': 'none',
-        'spellChooseAs': '',
-        'spellsPerLvl': 0,
-        'casterStat': '',
-        'skills': ['Placeholder text for Class Skills'],
-        'restrictions': ['Placeholder text for Class Restrictions'],
-        'special': ['Placeholder text for Class Special Abilities'],
-        'extragear': [],
+        'short': 'default',                         # STR: short name for frequent use in this code
+        'long': 'Default Class Name',               # STR: Display Name
+        'flags': [],                                    # LIST of flags for different effects
+        'level': 1,                                     # INT: right now only used for # of spells mastered
+        'hd': 8,                                        # INT: hit dice for calculations
+        'primAttr': [],                                 # LIST of one or two stats for high stat roll assignments
+        'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],    # LIST of allowed alignments for random choice
+        'attacksAs': 'none',                            # STRING: what category fo combat bonuses
+        'spellChooseAs': '',                            # STRING: if caster, usually = short
+        'spellsPerLvl': 0,                              # INT: if caster, how many spell choices per level
+        'casterStat': '',                               # STRING: stat used for spells, if a caster
+        'skills': ['Placeholder for Skills'],           # Unsure, placeholder as I figure out skills. Might go unused.
+        'restrictions': ['Placeholder for Restrictions'],   # Unsure, placeholder
+        'special': ['Placeholder for Special Abilities'],   # Unsure, placeholder
+        'extragear': [],                                # LIST: some professions have extra gear, put it here
     },
     'assassin' : {
-        'profShort': 'assassin',
-        'profLong': 'Assassin',
+        'short': 'assassin',
+        'long': 'Assassin',
         'primAttr': ['DEX', 'FER'],
         'alignAllowed': ['chaos', 'evil', 'law', 'neutral'],
         'attacksAs': 'best',
     },
     'bard' : {
-        'profShort': 'bard',
-        'profLong': 'Bard',
+        'short': 'bard',
+        'long': 'Bard',
         'flags': ['base', 'human', 'caster'],
         'hd': 6,
         'primAttr': ['CHA', 'HEA'],
@@ -87,8 +64,8 @@ tnu_profs = {
         'casterStat': 'CHA',
     },
     'champ_chaos' : {
-        'profShort': 'champ_chaos',
-        'profLong': 'Champion of Chaos',
+        'short': 'champ_chaos',
+        'long': 'Champion of Chaos',
         'flags': ['base', 'human', 'caster', 'xtragear'],
         'primAttr': ['HEA', 'INT'],
         'alignAllowed': ['chaos'],
@@ -99,8 +76,8 @@ tnu_profs = {
         'extragear': ['RANDOM_d6 doses of hallucinogenic cactus'],
     },
     'champ_evil' : {
-        'profShort': 'champ_evil',
-        'profLong': 'Champion of Evil',
+        'short': 'champ_evil',
+        'long': 'Champion of Evil',
         'flags': ['base', 'human', 'xtragear'],
         'primAttr': ['HEA', 'FER'],
         'alignAllowed': ['evil'],
@@ -108,8 +85,8 @@ tnu_profs = {
         'extragear': ['WEAPON: an additional close combat weapon from your special list'],
     },
     'champ_good' : {
-        'profShort': 'champ_good',
-        'profLong': 'Champion of Good',
+        'short': 'champ_good',
+        'long': 'Champion of Good',
         'flags': ['base', 'human', 'xtragear'],
         'primAttr': ['HEA', 'CHA'],
         'alignAllowed': ['good'],
@@ -117,8 +94,8 @@ tnu_profs = {
         'extragear': ['RANDOM_d6 doses of antitoxin', 'RANDOM_d6 uses of bandages'],
     },
     'champ_law' : {
-        'profShort': 'champ_law',
-        'profLong': 'Champion of Law',
+        'short': 'champ_law',
+        'long': 'Champion of Law',
         'flags': ['base', 'human', 'xtragear'],
         'primAttr': ['HEA', 'WIL'],
         'alignAllowed': ['law'],
@@ -126,8 +103,8 @@ tnu_profs = {
         'extragear': ['a written copy of The Law'],
     },
     'cultist' : {
-        'profShort': 'cultist',
-        'profLong': 'Cultist',
+        'short': 'cultist',
+        'long': 'Cultist',
         'flags': ['base', 'human', 'caster'],
         'hd': 6,
         'primAttr': ['HEA', 'WIL'],
@@ -138,14 +115,14 @@ tnu_profs = {
         'casterStat': 'WIL',
     },
     'fighter' : {
-        'profShort': 'fighter',
-        'profLong': 'Fighter',
+        'short': 'fighter',
+        'long': 'Fighter',
         'primAttr': ['FER', 'HEA'],
         'attacksAs': 'best',
     },
     'scholar' : {
-        'profShort': 'scholar',
-        'profLong': 'Scholar',
+        'short': 'scholar',
+        'long': 'Scholar',
         'flags': ['base', 'human', 'caster', 'haspa'],
         'hd': 4,
         'primAttr': ['CHA', 'INT'],
@@ -155,15 +132,15 @@ tnu_profs = {
         'casterStat': 'INT',
     },
     'thief' : {
-        'profShort': 'thief',
-        'profLong': 'Thief',
+        'short': 'thief',
+        'long': 'Thief',
         'hd': 6,
         'primAttr': ['DEX'],
         'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],
     },
     'wizard' : {
-        'profShort': 'wizard',
-        'profLong': 'Wizard',
+        'short': 'wizard',
+        'long': 'Wizard',
         'flags': ['base', 'human', 'caster', 'haspa'],
         'hd': 4,
         'primAttr': ['INT', 'WIL'],
@@ -184,47 +161,112 @@ disciple = {}
 
 dd_profs = {
     'default': {
-        'short': '',        # STR: class name for references
-        'long': '',         # STR: class name for display
-        'wps': 2,           # INT: How many starting Weapon Proficiencies
-        'weapons': 'all',   # STR: Category of weapons allowed as choices
-        'armour': 'all',    # STR: Category of armours allowed as choices
+        'short': 'default',                             # STR: class name for references
+        'long': 'Default Class name',                   # STR: class name for display
+        'flags': ['base', 'human'],                     # LIST of flags for different effects
+        'level': 1,                                     # INT: right now only used for # of spells mastered
+        'nextXP': '2000',                               # STR: amount of XP needed for next level
+        'hd': 6,                                        # INT: The Hit Die of the class
+        'primAttr': [],                                 # LIST of one or two stats for high stat roll assignments
+        'alignAllowed': ['chaos', 'law', 'neutral'],    # LIST of allowed alignments for random choice
+        'attacksAs': 'mid',                             # STRING: what category of combat bonuses
+        'wps': 2,                                       # INT: How many starting Weapon Proficiencies
+        'weapons': 'all',                               # STR: Category of weapons allowed as choices
+        'armour': 'all',                                # STR: Category of armours allowed as choices
+        'spellChooseAs': '',                            # STRING: if caster, usually = short
+        'spellsPerLvl': 0,                              # INT: if caster, how many spell choices per level
+        'casterStat': '',                               # STRING: stat used for spells, if a caster
+        'saves': [12, 13, 14, 15, 16],                  # LIST of 5 integers, in order
+        'skills': ['Placeholder for Skills'],           # Unsure, placeholder as I figure out skills. Might go unused.
+        'restrictions': ['Placeholder for Restrictions'],   # Unsure, placeholder
+        'special': ['Placeholder for Special Abilities'],   # Unsure, placeholder
+        'extragear': [],                                # LIST: some professions have extra gear, put it here
     },
     'cleric': {
         'short': 'cleric',
         'long': 'Cleric',
+        'flags': ['base', 'human', 'caster'],
+        'nextXP': '1500',
+        'primAttr': ['WIS'],
         'weapons': 'cleric',
-    },
-    'fighter': {
-        'short': 'fighter',
-        'long': 'Fighter',
+        'spellChooseAs': 'cleric',
+        'spellsPerLvl': 0,
+        'casterStat': 'WIS',
+        'saves': [11, 12, 14, 16, 15],
+        'extragear': ['a Holy Symbol'],
+},
+    'dwarf': {
+        'short': 'dwarf',
+        'long': 'Dwarf',
+        'flags': ['base', 'demi'],
+        'nextXP': '2200',
+        'hd': 8,
+        'primAttr': ['CON', 'STR'],
+        'attacksAs': 'best',
         'wps': 4,
-    },
-    'mu': {
-        'short': 'mu',
-        'long': 'Magic-User',
-        'weapons': 'mu',
-        'armour': 'mu',
-    },
-    'thief': {
-        'short': 'thief',
-        'long': 'Thief',
-        'weapons': 'thief',
-        'armour': 'thief',
+        'saves': [8, 9, 10, 13, 12],
     },
     'elf': {
         'short': 'elf',
         'long': 'Elf',
+        'flags': ['base', 'demi', 'caster'],
+        'nextXP': '4000',
+        'primAttr': ['STR', 'INT'],
+        'spellChooseAs': 'mu',
+        'spellsPerLvl': 0,
+        'casterStat': 'INT',
+        'saves': [12, 13, 13, 15, 15],
+        'extragear': ['a Spellbook'],
     },
-    'dwarf': {
-        'short': 'dwarf',
-        'long': 'Dwarf',
+    'fighter': {
+        'short': 'fighter',
+        'long': 'Fighter',
+        'hd': 8,
+        'primAttr': ['STR'],
+        'attacksAs': 'best',
         'wps': 4,
     },
     'halfling': {
         'short': 'halfling',
         'long': 'Halfling',
+        'flags': ['base', 'demi'],
+        'primAttr': ['DEX', 'CON'],
         'weapons': 'half',
+        'saves': [8, 9, 10, 13, 12],
+    },
+    'mu': {
+        'short': 'mu',
+        'long': 'Magic-User',
+        'flags': ['base', 'human', 'caster'],
+        'nextXP': '2500',
+        'hd': 4,
+        'primAttr': ['INT'],
+        'attacksAs': 'worst',
+        'weapons': 'mu',
+        'armour': 'mu',
+        'spellChooseAs': 'mu',
+        'spellsPerLvl': 0,
+        'casterStat': 'INT',
+        'saves': [13, 14, 13, 16, 15],
+        'extragear': ['a Spellbook'],
+    },
+    'mystic': {
+        'short': 'mystic',
+        'long': 'Mystic ',
+        'primAttr': ['WIS', 'DEX'],
+        'weapons': 'thief',
+        'armour': 'thief',
+    },
+    'thief': {
+        'short': 'thief',
+        'long': 'Thief',
+        'nextXP': '1200',
+        'hd': 4,
+        'primAttr': ['DEX'],
+        'weapons': 'thief',
+        'armour': 'thief',
+        'saves': [13, 14, 13, 16, 15],
+        'extragear': ['a Set of Thieves\' Tools'],
     },
 }
 
@@ -236,7 +278,7 @@ base_profs_tnu = [
 
 proflists = {
     'dd': {
-        'choices': ['cleric', 'fighter', 'magic-user', 'thief', 'elf', 'dwarf', 'halfling'],
+        'choices': ['cleric', 'fighter', 'magic-user', 'thief', 'elf', 'dwarf', 'halfling', 'mystic'],
         'dict': dd_profs,
     },
     'tnu': {
@@ -285,5 +327,5 @@ for key, value in dict.items(get_profession()):
 
 
 if __name__ == "__main__":
-    for key, value in dict.items((get_profession('tnu'))):
+    for key, value in dict.items((get_profession('dd'))):
         print(key, ":", value)

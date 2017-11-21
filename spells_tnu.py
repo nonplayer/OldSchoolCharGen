@@ -1,6 +1,3 @@
-import random
-from random import choice as ch
-
 '''
 # TO call this function, it needs:
 # prof shortname as a STRING
@@ -9,8 +6,11 @@ from random import choice as ch
 
 # EXAMPLE:
 get_spells('scholar', 'good', 3)
-
 '''
+
+import random
+from random import choice as ch
+
 
 # build the roll range lists for the schools
 ALL = list(range(1, 101))
@@ -198,6 +198,7 @@ dict of only level 1 and "varies" spells, for later use if I need them:
     '100': 'Vulnerability (level varies)',
 '''
 
+
 # let's generate some spells!
 def get_spells(prof, align, count):
     mySpells = []
@@ -209,6 +210,7 @@ def get_spells(prof, align, count):
         newSpell = spellsDict[str(roll)]
         mySpells.append(newSpell)
     return sorted(mySpells)
+
 
 def spells_by_prof(prof, align, count):
     spellRolls = []
@@ -232,6 +234,7 @@ def spells_by_prof(prof, align, count):
 def main():
     for each in get_spells('champ_chaos', 'evil', 1):
         print(each)
+
 
 if __name__ == "__main__":
     main()

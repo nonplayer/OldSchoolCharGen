@@ -11,8 +11,6 @@ human/demi      = are they human or demihuman
 (optional)
 caster          = designates the class as starting with magic
 subclass        = has special subclass stuff, like with demihumans
-xtragear        = has extra gear
-xtraspells      = has bonus spells
 haspa           = class has psychic armor
 
 alignments options:
@@ -30,21 +28,22 @@ import random
 
 tnu_profs = {
     'default': {
-        'short': 'default',                         # STR: short name for frequent use in this code
-        'long': 'Default Class Name',               # STR: Display Name
-        'flags': [],                                    # LIST of flags for different effects
-        'level': 1,                                     # INT: right now only used for # of spells mastered
-        'hd': 8,                                        # INT: hit dice for calculations
-        'primAttr': [],                                 # LIST of one or two stats for high stat roll assignments
+        'short': 'default',                     # STR: short name for frequent use in this code
+        'long': 'Default Class Name',           # STR: Display Name
+        'flags': [],                            # LIST of flags for different effects
+        'level': 1,                             # INT: right now only used for # of spells mastered
+        'hd': 8,                                # INT: hit dice for calculations
+        'primAttr': [],                         # LIST of one or two stats for high stat roll assignments
         'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],    # LIST of allowed alignments for random choice
-        'attacksAs': 'none',                            # STRING: what category fo combat bonuses
-        'spellChooseAs': '',                            # STRING: if caster, usually = short
-        'spellsPerLvl': 0,                              # INT: if caster, how many spell choices per level
-        'casterStat': '',                               # STRING: stat used for spells, if a caster
-        'skills': ['Placeholder for Skills'],           # Unsure, placeholder as I figure out skills. Might go unused.
+        'attacksAs': 'none',                    # STRING: what category fo combat bonuses
+        'spellChooseAs': '',                    # STRING: if caster, usually = short
+        'spellsPerLvl': 0,                      # INT: if caster, how many spell choices per level
+        'casterStat': '',                       # STRING: stat used for spells, if a caster
+        'skills': ['Placeholder for Skills'],   # Unsure, placeholder as I figure out skills. Might go unused.
         'restrictions': ['Placeholder for Restrictions'],   # Unsure, placeholder
         'special': ['Placeholder for Special Abilities'],   # Unsure, placeholder
-        'extragear': [],                                # LIST: some professions have extra gear, put it here
+        'extragear': False,                     # either False or LIST: some professions have extra gear, put it here
+        'extraspells': False,                   # either False or some magicians get free spells plus their choices
     },
     'assassin' : {
         'short': 'assassin',
@@ -67,7 +66,7 @@ tnu_profs = {
     'champ_chaos' : {
         'short': 'champ_chaos',
         'long': 'Champion of Chaos',
-        'flags': ['base', 'human', 'caster', 'xtragear'],
+        'flags': ['base', 'human', 'caster'],
         'primAttr': ['HEA', 'INT'],
         'alignAllowed': ['chaos'],
         'attacksAs': 'best',
@@ -79,7 +78,7 @@ tnu_profs = {
     'champ_evil' : {
         'short': 'champ_evil',
         'long': 'Champion of Evil',
-        'flags': ['base', 'human', 'xtragear'],
+        'flags': ['base', 'human'],
         'primAttr': ['HEA', 'FER'],
         'alignAllowed': ['evil'],
         'attacksAs': 'best',
@@ -88,7 +87,7 @@ tnu_profs = {
     'champ_good' : {
         'short': 'champ_good',
         'long': 'Champion of Good',
-        'flags': ['base', 'human', 'xtragear'],
+        'flags': ['base', 'human'],
         'primAttr': ['HEA', 'CHA'],
         'alignAllowed': ['good'],
         'attacksAs': 'best',
@@ -97,7 +96,7 @@ tnu_profs = {
     'champ_law' : {
         'short': 'champ_law',
         'long': 'Champion of Law',
-        'flags': ['base', 'human', 'xtragear'],
+        'flags': ['base', 'human'],
         'primAttr': ['HEA', 'WIL'],
         'alignAllowed': ['law'],
         'attacksAs': 'best',
@@ -162,37 +161,37 @@ disciple = {}
 
 dd_profs = {
     'default': {
-        'short': 'default',                             # STR: class name for references
-        'long': 'Default Class name',                   # STR: class name for display
-        'flags': ['base', 'human'],                     # LIST of flags for different effects
-        'level': 1,                                     # INT: right now only used for # of spells mastered
-        'nextXP': '2000',                               # STR: amount of XP needed for next level
-        'hd': 6,                                        # INT: The Hit Die of the class
-        'primAttr': [],                                 # LIST of one or two stats for high stat roll assignments
+        'short': 'default',                     # STR: class name for references
+        'long': 'Default Class name',           # STR: class name for display
+        'flags': ['base', 'human'],             # LIST of flags for different effects
+        'level': 1,                             # INT: right now only used for # of spells mastered
+        'nextXP': '2000',                       # STR: amount of XP needed for next level
+        'hd': 6,                                # INT: The Hit Die of the class
+        'primAttr': [],                         # LIST of one or two stats for high stat roll assignments
         'alignAllowed': ['chaos', 'law', 'neutral'],    # LIST of allowed alignments for random choice
-        'attacksAs': 'mid',                             # STRING: what category of combat bonuses
-        'wps': 2,                                       # INT: How many starting Weapon Proficiencies
-        'weapons': 'all',                               # STR: Category of weapons allowed as choices
-        'armour': 'all',                                # STR: Category of armours allowed as choices
-        'spellChooseAs': '',                            # STRING: if caster, usually = short
-        'spellsPerLvl': 0,                              # INT: if caster, how many spell choices per level
-        'casterStat': '',                               # STRING: stat used for spells, if a caster
-        'saves': [12, 13, 14, 15, 16],                  # LIST of 5 integers, in order
-        'skills': ['Placeholder for Skills'],           # Unsure, placeholder as I figure out skills. Might go unused.
+        'attacksAs': 'mid',                     # STRING: what category of combat bonuses
+        'wps': 2,                               # INT: How many starting Weapon Proficiencies
+        'weapons': 'all',                       # STR: Category of weapons allowed as choices
+        'armour': 'all',                        # STR: Category of armours allowed as choices
+        'spellChooseAs': '',                    # STRING: if caster, usually = short
+        'spellsPerLvl': 0,                      # INT: if caster, how many spell choices per level
+        'casterStat': '',                       # STRING: stat used for spells, if a caster
+        'saves': [12, 13, 14, 15, 16],          # LIST of 5 integers, in order
+        'skills': ['Placeholder for Skills'],   # Unsure, placeholder as I figure out skills. Might go unused.
         'restrictions': ['Placeholder for Restrictions'],   # Unsure, placeholder
         'special': ['Placeholder for Special Abilities'],   # Unsure, placeholder
-        'extragear': [],                                # LIST: some professions have extra gear, put it here
-        'extraspells': [],                              # LIST: some magicians get free spells plus their choices
+        'extragear': False,                     # either False or LIST: some professions have extra gear, put it here
+        'extraspells': False,                   # either False or some magicians get free spells plus their choices
     },
     'cleric': {
         'short': 'cleric',
         'long': 'Cleric',
-        'flags': ['base', 'human', 'caster', 'xtragear'],
+        'flags': ['base', 'human', 'caster'],
         'nextXP': '1500',
         'primAttr': ['WIS'],
         'weapons': 'cleric',
         'spellChooseAs': 'cleric',
-        'spellsPerLvl': 0,
+        'spellsPerLvl': 2,
         'casterStat': 'WIS',
         'saves': [11, 12, 14, 16, 15],
         'extragear': ['a Holy Symbol'],
@@ -211,14 +210,15 @@ dd_profs = {
     'elf': {
         'short': 'elf',
         'long': 'Elf',
-        'flags': ['base', 'demi', 'caster', 'xtragear'],
+        'flags': ['base', 'demi', 'caster'],
         'nextXP': '4000',
         'primAttr': ['STR', 'INT'],
         'spellChooseAs': 'mu',
-        'spellsPerLvl': 0,
+        'spellsPerLvl': 2,
         'casterStat': 'INT',
         'saves': [12, 13, 13, 15, 15],
         'extragear': ['a Spellbook'],
+        'extraspells': ['Read Magic'],
     },
     'fighter': {
         'short': 'fighter',
@@ -239,7 +239,7 @@ dd_profs = {
     'mu': {
         'short': 'mu',
         'long': 'Magic-User',
-        'flags': ['base', 'human', 'caster', 'xtragear', 'xtraspells'],
+        'flags': ['base', 'human', 'caster'],
         'nextXP': '2500',
         'hd': 4,
         'primAttr': ['INT'],
@@ -247,7 +247,7 @@ dd_profs = {
         'weapons': 'mu',
         'armour': 'mu',
         'spellChooseAs': 'mu',
-        'spellsPerLvl': 0,
+        'spellsPerLvl': 2,
         'casterStat': 'INT',
         'saves': [13, 14, 13, 16, 15],
         'extragear': ['a Spellbook'],
@@ -263,7 +263,7 @@ dd_profs = {
     'thief': {
         'short': 'thief',
         'long': 'Thief',
-        'flags': ['base', 'human', 'xtragear'],
+        'flags': ['base', 'human'],
         'nextXP': '1200',
         'hd': 4,
         'primAttr': ['DEX'],
@@ -296,13 +296,10 @@ proflists = {
 }
 
 '''
-racial_profs = [fey_knight, halfling]
-optional_profs = [berserker, disciple]
-'''
+TO ADD:
 
-'''
-FOR NOW, this will only return the base classes. Once I add the extended classes, I'll
-modify this to allow passing a selector.
+tnu racial_profs = [fey_knight, halfling]
+tnu optional_profs = [berserker, disciple]
 '''
 
 

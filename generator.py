@@ -2,7 +2,7 @@
 this will be the generator class, called by the base program
 
 NOTES TO SELF:
-If Demi (or Optional?), use profShort instead of status, plus subref 3d6 to reference random gear
+If Demi (or Optional?), use short instead of status, plus subref 3d6 to reference random gear
 Else If Human (or Core?), generate social status 3d6 and subref 3d6 again for use with equipment randomization.
 
 Don't forget half-stats for TNU
@@ -131,8 +131,8 @@ def generate(game_system='tnu'):
     md = dict(professions.get_profession(game_system))  # my data
     # my_flags = list(md['flags'])
     # now let's break it out:
-    DATA['short'] = md['profShort']
-    DATA['long'] = md['profLong']
+    DATA['short'] = md['short']
+    DATA['long'] = md['long']
     DATA['lvl'] = int(md['level'])
     DATA['align'] = random.choice(md['alignAllowed'])
     primes = list(md['primAttr'])

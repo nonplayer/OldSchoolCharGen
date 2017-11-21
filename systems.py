@@ -37,12 +37,13 @@ systems = {
         'name': 'def',                  # shortname for the system, used in some lists and dicts
         'fullName': 'Default Display Name',
         'type': 'dnd',                  # STR: basic system type, and associated assumptions
-        'hasHPs': True,                 # BOOL: changes the calculations if the system has hit points
+        'hasHPs': True,                 # BOO: changes the calculations if the system has hit points
         'stats': 6,                     # INT: how many stats in this system, usually 6
         'spread': statArrays['dnd'],    # STR: what spread of stats this system uses
         'acBase': 10,                   # INT: AC base 9 or 10, usually
         'acType': 'ascend',             # STR: 'ascend' or 'descend'
         'saves': 'five',                # STR: 'one', 'three', 'five', or 'six' (as TBH, 3E, B/X, and 5E)
+        'hasWPs': False,                # BOO: notes if this system uses specific WPs a la Dark Dungeons
     },
     'bnt': {
         'name': 'bnt',
@@ -59,6 +60,7 @@ systems = {
         'fullName': 'Dark Dungeons',
         'acBase': 9,
         'acType': 'descend',
+        'hasWPs': True,
     },
     'pla': {
         'name': 'pla',

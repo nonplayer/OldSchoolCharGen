@@ -11,6 +11,7 @@ Don't forget half-stats for TNU
 import random
 
 import dice
+import equipment_dnd
 import equipment_tnu
 import professions
 import spells
@@ -22,7 +23,6 @@ supported_systems = [
 
 
 def gen_stats(spread, primes):
-    system = system.upper()
     stats = dice.get_spread(spread, primes)
     return stats
 
@@ -83,10 +83,28 @@ def gen_ac(prefs, armour):
             ac_mod += 3
         elif any('Leather Armour' in x for x in armour):
             ac_mod += 2
-    if any('Tower Shield' in x for x in armour):
-        ac_mod += 2
-    elif any('Shield' in x for x in armour):
-        ac_mod += 1
+    elif prefs['name'] in ['bnt']:
+        if any('Plate Armour' in x for x in armour):
+            ac_mod += 8
+        elif any('Plate Mail' in x for x in armour):
+            ac_mod += 7
+        elif any('Banded Mail' in x for x in armour) or any('Splint Mail' in x for x in armour):
+            ac_mod += 6
+        elif any('Chain Mail' in x for x in armour) or any('Breastplate' in x for x in armour):
+            ac_mod += 5
+        elif any('Scale Mail' in x for x in armour) or any('Chainmail Shirt' in x for x in armour):
+            ac_mod += 4
+        elif any('Ring Mail' in x for x in armour) or any('Studded Leather' in x for x in armour):
+            ac_mod += 3
+        elif any('Leather Armour' in x for x in armour):
+            ac_mod += 2
+        elif any('Padded Armour' in x for x in armour):
+            ac_mod += 1
+    if prefs['name'] not in ['pla']:
+        if any('Tower Shield' in x for x in armour):
+            ac_mod += 2
+        elif any('Shield' in x for x in armour):
+            ac_mod += 1
     if prefs['acType'] == 'descend':
         ac_final = ac_base - ac_mod
     else:
@@ -119,12 +137,14 @@ def generate(game_system='tnu'):
     DATA['align'] = random.choice(md['alignAllowed'])
     primes = list(md['primAttr'])
     spread = list(prefs['spread'])
-    my_stats = dice.get_spread(spread, primes)
-    DATA['stats'] = my_stats
-    # former method, kept for short-term posterity
-    #for key, value in dict.items(my_stats):
-    #    DATA[key.lower() + '_val'] = str(value['val'])
-    #    DATA[key.lower() + '_mod'] = str(value['mod'])
+    statsD = dice.get_spread(spread, primes)
+    DATA['stats'] = statsD
+    # get stats average, for reasons:
+    statsL = []
+    for key, value in dict.items(statsD):
+        statsL.append(int(value['val']))
+    stats_avg = int(round(sum(statsL) / len(statsL)))
+    # get more basic stuff:
     DATA['hd'] = md['hd']
     my_class = dict(gen_social(int(dice.roll(3, 6))))
     DATA['soc_class'] = my_class['title']
@@ -136,7 +156,14 @@ def generate(game_system='tnu'):
     else:
         DATA['pa'] = 'None'
     # let's get that gear list:
-    my_gear = list(equipment_tnu.get_gear(DATA[ 'short' ] , my_class[ 'label' ]))
+    if prefs['type'] == 'tnu':
+        my_gear = list(equipment_tnu.get_gear(DATA['short'], my_class['label']))
+    elif prefs['type'] == 'dnd':
+        my_gear = list(equipment_dnd.get_gear(DATA['short'], prefs, stats_avg))
+    else:
+        my_gear = []
+    # Microlite Platinum coming down the road:
+    # elif prefs['type'] == 'pla':
     my_weapons = list(filter(lambda x: x.startswith('WEAPON: '), my_gear))
     my_armour = list(filter(lambda x: x.startswith('ARMOUR: '), my_gear))
     my_weaponlist = []
@@ -154,14 +181,14 @@ def generate(game_system='tnu'):
     DATA['ac'] = gen_ac(prefs, my_armourlist)
     if prefs['type'] is ['dnd']:
         if prefs['acType'] == 'descend':
-            DATA['ac'] -= my_stats['DEX']['mod']
+            DATA['ac'] -= statsD['DEX']['mod']
         else:
-            DATA['ac'] += my_stats['DEX']['mod']
+            DATA['ac'] += statsD['DEX']['mod']
     # let's get those spells now:
     DATA['num_spells'] = 0
     if 'caster' in md['flags']:
         DATA['caster'] = True
-        my_castmod = my_stats[md['casterStat']]['mod']
+        my_castmod = statsD[md['casterStat']]['mod']
         DATA['num_spells'] = DATA['lvl'] + my_castmod
         if DATA['num_spells'] > 0:
             my_spells = list(gen_spells(DATA['short'], DATA['align'], DATA['num_spells']))
@@ -172,9 +199,9 @@ def generate(game_system='tnu'):
     return DATA
 
 
-def print_character(system):
-    system = system.lower()
-    DATA = generate(system)
+def print_character(system_name):
+    system_name = system_name.lower()
+    DATA = generate(system_name)
     print("\nA new random character for " + str(DATA['system']))
     print("-----------------------------------------------------")
     # print("Raw Data Print: ", gen_data)

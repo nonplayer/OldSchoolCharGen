@@ -1,6 +1,29 @@
 # About this Project
 
-This is a Python-based tool to generate random first-level characters for "old school" D&D-like tabletop role-playing games. While I'd like to eventually extend it to allow different game systems and customizations, currently it is focused entirely on creating characters for [The Nightmares Underneath, by Johnstone Metzger](http://www.drivethrurpg.com/product/195355/The-Nightmares-Underneath).
+This is a Python-based tool to generate random first-level characters for "old school" D&D-like tabletop role-playing games.
+
+## Systems Compatibility
+
+Currently this tool can only create characters for [The Nightmares Underneath, by Johnstone Metzger](http://www.drivethrurpg.com/product/195355/The-Nightmares-Underneath). However, I've already begun laying the groundwork for extended compatibility with a number of other games. Top of my list for expansion are:
+
+* [Dark Dungeons](http://www.drivethrurpg.com/product/177410/Dark-Dungeons)
+* [Blood & Treasure 1st Edition](http://www.drivethrurpg.com/product/124972/Blood--Treasure-Complete) (I just don't like the 2nd Edition changes at all)
+* [Microlite Platinum](https://archive.4plebs.org/dl/tg/image/1406/96/1406960963325.pdf)
+* And further out...
+	- Beyond the Wall
+	- The Black Hack
+	- Kaigaku
+	
+I know, everyone has their favorite systems, but these specifically are mine, and thus what I'm developing for. My hope is that I add more systems and automate more of the decisions, adding in more systems will be eventually be as simple as adding a new set of system prefs and hitting go.
+
+### Equipment Lists
+
+For The Nightmares Underneath, I'm of course using that game's *amazing* built-in random gear generator, which is based upon rolls that determine a character's Social Class. The results are pretty wonderful, and just looking at a character's stats and list of starting gear can inspire instant story. The gear lists from that system have been recreated here with about 99% faithful translation (a *very* small handful of choices had to be tweaked for simplicity of coding at my new skill level).
+
+For the others, I'm using my own ground-up home-brew system, pulling from a glommed-together list of gear from a variety of OSR games. Instead of using starting character money rolls, I'm basing the lists off of the average of the character's initial six stats - the better their stat rolls, the fewer gear options they start with. The result is a rough "starting balance of survivability" wherein characters with higher stats have higher mechanical chances of excelling, while those with lower stats have more potential gear-based options for survival.
+
+For the sake of simplicity, with *most* of the D&D-like games I'm planning to use the same weapon and gear lists and options. This will result in characters not 100% accurate to their game variant's core gear lists, but still "acceptably playable" in adventures using that game's engine.
+
 
 ## How to Use
 

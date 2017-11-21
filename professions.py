@@ -12,6 +12,7 @@ human/demi      = are they human or demihuman
 caster          = designates the class as starting with magic
 subclass        = has special subclass stuff, like with demihumans
 xtragear        = has extra gear
+xtraspells      = has bonus spells
 haspa           = class has psychic armor
 
 alignments options:
@@ -181,11 +182,12 @@ dd_profs = {
         'restrictions': ['Placeholder for Restrictions'],   # Unsure, placeholder
         'special': ['Placeholder for Special Abilities'],   # Unsure, placeholder
         'extragear': [],                                # LIST: some professions have extra gear, put it here
+        'extraspells': [],                              # LIST: some magicians get free spells plus their choices
     },
     'cleric': {
         'short': 'cleric',
         'long': 'Cleric',
-        'flags': ['base', 'human', 'caster'],
+        'flags': ['base', 'human', 'caster', 'xtragear'],
         'nextXP': '1500',
         'primAttr': ['WIS'],
         'weapons': 'cleric',
@@ -209,7 +211,7 @@ dd_profs = {
     'elf': {
         'short': 'elf',
         'long': 'Elf',
-        'flags': ['base', 'demi', 'caster'],
+        'flags': ['base', 'demi', 'caster', 'xtragear'],
         'nextXP': '4000',
         'primAttr': ['STR', 'INT'],
         'spellChooseAs': 'mu',
@@ -237,7 +239,7 @@ dd_profs = {
     'mu': {
         'short': 'mu',
         'long': 'Magic-User',
-        'flags': ['base', 'human', 'caster'],
+        'flags': ['base', 'human', 'caster', 'xtragear', 'xtraspells'],
         'nextXP': '2500',
         'hd': 4,
         'primAttr': ['INT'],
@@ -249,6 +251,7 @@ dd_profs = {
         'casterStat': 'INT',
         'saves': [13, 14, 13, 16, 15],
         'extragear': ['a Spellbook'],
+        'extraspells': ['Read Magic'],
     },
     'mystic': {
         'short': 'mystic',
@@ -260,6 +263,7 @@ dd_profs = {
     'thief': {
         'short': 'thief',
         'long': 'Thief',
+        'flags': ['base', 'human', 'xtragear'],
         'nextXP': '1200',
         'hd': 4,
         'primAttr': ['DEX'],
@@ -278,7 +282,7 @@ base_profs_tnu = [
 
 proflists = {
     'dd': {
-        'choices': ['cleric', 'fighter', 'magic-user', 'thief', 'elf', 'dwarf', 'halfling', 'mystic'],
+        'choices': ['cleric', 'fighter', 'mu', 'thief', 'elf', 'dwarf', 'halfling', 'mystic'],
         'dict': dd_profs,
     },
     'tnu': {

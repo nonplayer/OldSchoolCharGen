@@ -6,7 +6,6 @@ I'm sure there's got to be a better way to do this in a "pythonic" way, but I'm 
 Systems Represented:
 bnt = Blood & Treasure
 dd = Dark Dungeons (my first planned expansion, further down the road)
-dcc = Dungeon Crawl Classics
 tnu = The Nightmares Underneath
 plt = Microlite Platinum
 
@@ -19,7 +18,6 @@ tnu = the nightmares underneath (it really is pretty unique here...)
 
 statArrays = {
     'dnd': ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'],
-    'dcc': ['STR', 'AGI', 'STA', 'PER', 'INT', 'LUC'],
     'tnu': ['CHA', 'DEX', 'FER', 'HEA', 'INT', 'WIL'],
     'pla': ['ICQ', 'MEE', 'MAF', 'PST', 'PRW', 'PND', 'PBT', 'RUN'],
 }
@@ -50,12 +48,6 @@ systems = {
         'name': 'bnt',
         'fullName': 'Blood & Treasure',
         'maxLvl': 20,
-        'saves': saves['three'],
-    },
-    'dcc': {
-        'name': 'dcc',
-        'fullName': 'Dungeon Crawl Classics',
-        'spread': statArrays['dcc'],
         'saves': saves['three'],
     },
     'dd': {

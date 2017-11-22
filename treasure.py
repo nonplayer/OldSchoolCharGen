@@ -1,4 +1,4 @@
-'''
+"""
 Treasure Tables Data for random treasure generator.
 This generator DOES NOT generate everything. Instead, it simply checks all of the percentages
 on the initial treasure table. I always loved rolling up everything else, but hated checking
@@ -10,7 +10,7 @@ worth 1d20 x 1d10 x 1d10 GP and XP at the end of a dungeon run.
 
 Currently based on Dark Dungeons, compatible with BECMI.
 
-'''
+"""
 
 import random
 from random import choice as ch

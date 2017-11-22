@@ -21,7 +21,7 @@ spells_bnt = {
         'Foretelling', 'Grease', 'Hideous Laughter', 'Hypnotism', 'Identify', 'Magic Aura', 'Magic Mouth',
         'Obscure Object', 'Phantasmal Force', 'Remove Fear', 'Sleep', 'Summon Monster I', 'Undetectable Alignment',
         'Unseen Servant', 'Ventriloquism',
-    ]
+    ],
     'cleric': [
         'Bane', 'Bless', 'Bless Water ', 'Cause Fear', 'Command', 'Comprehend Languages', 'Cure Light Wounds',
         'Curse Water ', 'Deathwatch', 'Detect Evil', 'Detect Undead', 'Divine Favor', 'Doom', 'Endure Elements',

@@ -1,4 +1,4 @@
-'''
+"""
 This file will be where I eventually expand the program to accommodate different games.
 Right now, I'm just focusing on The Nightmares Underneath.
 I'm sure there's got to be a better way to do this in a "pythonic" way, but I'm new, so this is my solution.
@@ -15,7 +15,7 @@ dnd = this game follows most basic D&D expectations
 plt = this game derives from microlite platinum
 tnu = the nightmares underneath (it really is pretty unique here...)
 
-'''
+"""
 
 statArrays = {
     'dnd': ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'],

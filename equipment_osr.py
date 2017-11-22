@@ -1,4 +1,4 @@
-'''
+"""
 DnD Variant Gear Generator
 
 This is my own custom gear generator built on the premise of tying starting gear choices not to
@@ -9,7 +9,7 @@ All weapons are marked with WEAPON: at the beginning
 All armours are marked with ARMOUR: at the beginning
 I'm considering doing the same for MAGIC: but haven't added it yet
 these tags will be used to pull them from the gear dump and separate into their own categories
-'''
+"""
 
 
 import random

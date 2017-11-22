@@ -1,4 +1,4 @@
-'''
+"""
 this will be the generator class, called by the base program
 
 NOTES TO SELF:
@@ -6,7 +6,7 @@ If Demi (or Optional?), use short instead of status, plus subref 3d6 to referenc
 Else If Human (or Core?), generate social status 3d6 and subref 3d6 again for use with equipment randomization.
 
 Don't forget half-stats for TNU
-'''
+"""
 
 import random
 
@@ -39,10 +39,10 @@ def gen_spells(gamesystem, prof, align, num):
 
 # a quick spell printer for testing the TNU spell generator
 def print_spells(prof, align, num):
-    printList = list(gen_spells(prof, align, num))
+    print_list = list(gen_spells(prof, align, num))
     print("\nMy Character's List of Spells:")
     print("------------------------------")
-    for each in printList:
+    for each in print_list:
         print(each)
     return
 

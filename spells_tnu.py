@@ -1,4 +1,4 @@
-'''
+"""
 # TO call this function, it needs:
 # prof shortname as a STRING
 # alignment as a STRING
@@ -6,7 +6,7 @@
 
 # EXAMPLE:
 get_spells('scholar', 'good', 3)
-'''
+"""
 
 import random
 from random import choice as ch

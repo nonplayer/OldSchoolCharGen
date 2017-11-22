@@ -16,13 +16,31 @@ Currently this tool can only create characters for [The Nightmares Underneath, b
 	
 I know, everyone has their favorite systems, but these specifically are mine, and thus what I'm developing for. My hope is that I add more systems and automate more of the decisions, adding in more systems will be eventually be as simple as adding a new set of system prefs and hitting go.
 
+### Mechanics Notes
+
+Since the dawn of my gaming career as a wee lad, there are three things I've always *hated* as both a player and a GM:
+
+1. Level Maximums for non-humans
+2. Attribute minimums for classes
+3. ...I forgot the third one because I am drinking currently but I know it's important and I'll get back here when I remember.
+
+As such, I'm not guaranteeing compatibility with systems that enforce these things. Even with Dark Dungeons and Blood & Treasure, I've chosen to allow characters that don't 100% meet class stat minimums.
+
+This also means that should I ever decide to let this app create characters of higher levels, I won't be adapting this to account for systems which limit the advancement of the non-human classes.
+
 ### Equipment Lists
 
 For The Nightmares Underneath, I'm of course using that game's *amazing* built-in random gear generator, which is based upon rolls that determine a character's Social Class. The results are pretty wonderful, and just looking at a character's stats and list of starting gear can inspire instant story. The gear lists from that system have been recreated here with about 99% faithful translation (a *very* small handful of choices had to be tweaked for simplicity of coding at my new skill level).
 
 For the others, I'm using my own ground-up home-brew system, pulling from a glommed-together list of gear from a variety of OSR games. Instead of using starting character money rolls, I'm basing the lists off of the average of the character's initial six stats - the better their stat rolls, the fewer gear options they start with. The result is a rough "starting balance of survivability" wherein characters with higher stats have higher mechanical chances of excelling, while those with lower stats have more potential gear-based options for survival.
 
-For the sake of simplicity, with *most* of the D&D-like games I'm planning to use the same weapon and gear lists and options. This will result in characters not 100% accurate to their game variant's core gear lists, but still "acceptably playable" in adventures using that game's engine.
+For the sake of simplicity, with *most* of the other D&D-like games I'm planning to use the same weapon and gear lists and options. This will result in characters not 100% accurate to their game variant's core gear lists, but still "acceptably playable" in adventures using that game's engine.
+
+### Spell Lists
+
+First off, note that in OSR games I always automatically give all "arcane" type casters the Red Magic spell *in addition to* other spell choices. Frankly I think that making it a slot-requiring spell at all is complete bullshit, but to satisfy basic system conventions I still add it in as a free spell, just in case.
+
+Clerics and other divine-type casters have their *initial* spell lists prepared so you can just jump into the dungeon and start playing. FOr all other casters, initial spell lists represent the spells in your caster's initial spellbook.
 
 
 ## How to Use

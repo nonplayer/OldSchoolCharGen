@@ -114,7 +114,7 @@ bnt_profs = {
         'cantrips': False,                      # either False or INT: num of cantrips at first level
         'casterStat': '',                       # STRING: stat used for spells, if a caster
         'saves': [15, 13, 15],                  # LIST of 3 integers, in order
-        'skills': ['Placeholder for Skills'],   # Unsure, placeholder as I figure out skills. Might go unused.
+        'skills': ['Placeholder for Skills'],   # LIST of skills for the class
         'restrictions': ['Placeholder for Restrictions'],   # Unsure, placeholder
         'special': ['Placeholder for Special Abilities'],   # Unsure, placeholder
         'extragear': False,                     # either False or LIST: some professions have extra gear, put it here

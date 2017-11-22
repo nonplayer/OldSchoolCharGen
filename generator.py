@@ -264,4 +264,4 @@ if __name__ == "__main__":
     #else:
     #    system = selection
     #print_character(system)
-    print_character('dd')
+    print_character('tnu')

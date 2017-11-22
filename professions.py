@@ -7,7 +7,6 @@ checks are made against that list "if word in list, then do sub-function" etc
 (required)
 base/advanced   = designates what source material the class is from
 human/demi      = are they human or demihuman (for "race as class" games
-races           = need to generate a separate race
 
 (optional)
 caster          = designates the class as starting with magic
@@ -100,7 +99,7 @@ bnt_profs = {
     'default': {
         'short': 'default',                     # STR: class name for references
         'long': 'Default Class name',           # STR: class name for display
-        'flags': ['base', 'races'],             # LIST of flags for different effects
+        'flags': ['base'],                      # LIST of flags for different effects
         'level': 1,                             # INT: right now only used for # of spells mastered
         'nextXP': '2000',                       # STR: amount of XP needed for next level
         'hd': 6,                                # INT: The Hit Die of the class
@@ -123,7 +122,7 @@ bnt_profs = {
     'assassin': {
         'short': 'assassin',
         'long': 'Assassin',
-        'flags': ['advanced', 'races'],
+        'flags': ['advanced'],
         'nextXP': '1500',
         'primAttr': ['DEX', 'INT'],
         'alignAllowed': ['chaos', 'evil', 'law', 'neutral'],
@@ -135,7 +134,7 @@ bnt_profs = {
     'barbarian': {
         'short': 'barbarian',
         'long': 'Barbarian',
-        'flags': ['advanced', 'races'],
+        'flags': ['advanced'],
         'hd': 10,
         'primAttr': ['STR', 'CON'],
         'alignAllowed': ['chaos', 'evil', 'good', 'neutral'],
@@ -149,7 +148,7 @@ bnt_profs = {
     'bard': {
         'short': 'bard',
         'long': 'Bard',
-        'flags': ['advanced', 'races'],
+        'flags': ['advanced'],
         'nextXP': '1500',
         'primAttr': ['CHA', 'INT'],
         'attacksAs': 'mid',
@@ -181,7 +180,7 @@ bnt_profs = {
     'duelist': {
         'short': 'duelist',
         'long': 'Duelist',
-        'flags': ['advanced', 'races'],
+        'flags': ['advanced'],
         'hd': 8,
         'primAttr': ['DEX', 'INT'],
         'attacksAs': 'best',
@@ -217,7 +216,7 @@ bnt_profs = {
     'paladin': {
         'short': 'paladin',
         'long': 'Paladin',
-        'flags': ['advanced', 'races'],
+        'flags': ['advanced'],
         'nextXP': '2500',
         'hd': 8,
         'primAttr': ['STR', 'WIS', 'CHA'],
@@ -229,7 +228,7 @@ bnt_profs = {
     'ranger': {
         'short': 'ranger',
         'long': 'Ranger',
-        'flags': ['advanced', 'races'],
+        'flags': ['advanced'],
         'nextXP': '2500',
         'hd': 8,
         'primAttr': ['STR', 'WIS'],
@@ -242,7 +241,7 @@ bnt_profs = {
     'sorc': {
         'short': 'sorcerer',
         'long': 'Sorcerer',
-        'flags': ['advanced', 'races'],
+        'flags': ['advanced'],
         'nextXP': '2500',
         'hd': 4,
         'primAttr': ['CHA'],
@@ -381,16 +380,7 @@ dd_profs = {
     },
 }
 
-'''
-I removed Mystics for now, mainly because I hate them and can't be bothered:
-    'mystic': {
-        'short': 'mystic',
-        'long': 'Mystic ',
-        'primAttr': ['WIS', 'DEX'],
-        'weapons': 'rog',
-        'armour': 'rog',
-'''
-
+pla_profs = {}
 
 tnu_profs = {
     'default': {
@@ -418,6 +408,14 @@ tnu_profs = {
         'primAttr': ['DEX', 'FER'],
         'alignAllowed': ['chaos', 'evil', 'law', 'neutral'],
         'attacksAs': 'best',
+        'special': [
+            'Add your level to your attack rolls.',
+            'When you take someone by surprise or attack them from behind, you automatically hit and '
+            'inflict your damage twice, as if you had made two successful attacks.',
+            'You may add your Dexterity modifier to surprise rolls you make, instead of your '
+            'Intelligence modifier, if it is higher.',
+            'Your Armour rating is equal to 10 + your level, as long as you wear no armour.',
+        ],
     },
     'bard': {
         'short': 'bard',
@@ -429,6 +427,17 @@ tnu_profs = {
         'spellChooseAs': 'bard',
         'spellsPerLvl': 1,
         'casterStat': 'CHA',
+        'special': [
+            'As a complicated combat action, you may give your Disposition away to your allies. For each '
+            'point of Disposition you lose, one other character who can see, hear, or touch you gains 2 '
+            'points of Disposition. However much Disposition you choose to lose, up to your total current '
+            'score, you may distribute amongst other characters as you see fit.',
+            'When you re-roll your Disposition, any allies who also re-roll their Disposition get advantage. '
+            'You may decide who is an ally and who is not at any time.',
+            'You are a Spellcaster. When you cast a spell that you have mastered, roll against your Charisma '
+            'score instead of your Intelligence in order to control it (when casting a spell from a formula '
+            'you have not mastered, roll against Intelligence as normal).',
+        ],
     },
     'champ_chaos': {
         'short': 'champ_chaos',
@@ -441,6 +450,14 @@ tnu_profs = {
         'spellsPerLvl': 2,
         'casterStat': 'INT',
         'extragear': ['RANDOM_d6 doses of hallucinogenic cactus'],
+        'special': [
+            'Add your level to your attack rolls.',
+            'During a rest, you can give anyone else who shares your alignment advantage when they '
+            're-roll their Disposition or Psychic Armour.',
+            'You always know when magic in your presence requires or targets your alignment.',
+            'You always know when someone in your presence shares your alignment.',
+            'You are a Spellcaster. You are unable to cast, master, or memorize spells from the school of Law.',
+        ],
     },
     'champ_evil': {
         'short': 'champ_evil',
@@ -450,6 +467,18 @@ tnu_profs = {
         'alignAllowed': ['evil'],
         'attacksAs': 'best',
         'extragear': ['WEAPON: an additional close combat weapon from your special list'],
+        'special': [
+            'Add your level to your attack rolls.',
+            'During a rest, you can give anyone else who shares your alignment advantage when they '
+            're-roll their Disposition or Psychic Armour.',
+            'You always know when magic in your presence requires or targets your alignment.',
+            'You always know when someone in your presence shares your alignment.',
+            'Choose one type of weapon from the following list for each level you have: axes, bows and arrows, '
+            'clubs and maces, daggers and knives, firearms, garrotes, picks and hammers, pole arms and spears, '
+            'swords, and thrown weapons (other categories do not include thrown weapons of the same type). '
+            'When you attack with a weapon of your chosen type, you inflict your damage twice, as if you had '
+            'made two successful attacks.',
+        ],
     },
     'champ_good': {
         'short': 'champ_good',
@@ -459,6 +488,17 @@ tnu_profs = {
         'alignAllowed': ['good'],
         'attacksAs': 'best',
         'extragear': ['RANDOM_d6 doses of antitoxin', 'RANDOM_d6 uses of bandages'],
+        'special': [
+            'Add your level to your attack rolls.',
+            'During a rest, you can give anyone else who shares your alignment advantage when they '
+            're-roll their Disposition or Psychic Armour.',
+            'You always know when magic in your presence requires or targets your alignment.',
+            'You always know when someone in your presence shares your alignment.',
+            'As a complicated combat action, you may give your Disposition away to your allies. '
+            'For each point of Disposition you lose, one other character who can see, hear, or touch you '
+            'gains 2 points of Disposition. However much Disposition you choose to lose, up to your total '
+            'current score, you may distribute amongst other characters as you see fit.',
+        ],
     },
     'champ_law': {
         'short': 'champ_law',
@@ -468,6 +508,16 @@ tnu_profs = {
         'alignAllowed': ['law'],
         'attacksAs': 'best',
         'extragear': ['a written copy of The Law'],
+        'special': [
+            'Add your level to your attack rolls.',
+            'During a rest, you can give anyone else who shares your alignment advantage when they '
+            're-roll their Disposition or Psychic Armour.',
+            'You always know when magic in your presence requires or targets your alignment.',
+            'You always know when someone in your presence shares your alignment.',
+            'You have a spiritual enemy, that you may banish from your presence as a simple action. '
+            'Choose one of the following: beasts, dwellers in the deep, faeries, golems, '
+            'or the undead (See p. 73 TNU).',
+        ],
     },
     'cultist': {
         'short': 'cultist',
@@ -480,12 +530,27 @@ tnu_profs = {
         'spellChooseAs': 'cultist',
         'spellsPerLvl': 2,
         'casterStat': 'WIL',
+        'special': [
+            'You are a Spellcaster.',
+            'Add your level to your attack rolls (unless you are using a restricted weapon or '
+            'wearing restricted armour).',
+            'You have a spiritual enemy, that you may banish from your presence as a simple action. '
+            'Choose one of the following: beasts, dwellers in the deep, faeries, golems, humans, '
+            'or the undead (See p. 73 TNU).',
+        ],
     },
     'fighter': {
         'short': 'fighter',
         'long': 'Fighter',
         'primAttr': ['FER', 'HEA'],
         'attacksAs': 'best',
+        'special': [
+            'Add your level to your attack rolls.',
+            'Armour does not count as encumbering items to you, as long as you are wearing it (but shields do).',
+            'When you attack an enemy, if your attack roll is a miss, you still inflict your damage as normal, '
+            'and if your attack roll is good enough to hit, you inflict your damage twice, as if you had made '
+            'two successful attacks.',
+        ],
     },
     'scholar': {
         'short': 'scholar',
@@ -497,6 +562,21 @@ tnu_profs = {
         'spellChooseAs': 'scholar',
         'spellsPerLvl': 1,
         'casterStat': 'INT',
+        'special': [
+            'You are a Spellcaster.',
+            'During a short or long rest, you may heal another person, restoring 1d4 points to one of their '
+            'attributes that has been temporarily reduced. You may not treat the same person again until they '
+            'are harmed again, but you may treat a total number of people each day equal to your level (if you '
+            'spend an hour on each).',
+            'You always find hidden things when you spend a turn searching a dungeon of your level or lower, '
+            'and you always roll against your full Dexterity score when you search a higher-level dungeon '
+            '(instead of half your Dexterity).',
+            'You can use any magic item and gain its full benefits, regardless of alignment, profession, '
+            'or other restrictions.',
+            'You have Psychic Armour. Roll a number of Hit Dice (d4s) equal to your level and add them together '
+            'to determine your Psychic Armour score, just as you do for Disposition. You are not required to '
+            're-roll this score when you take a rest, but you may, if you like.',
+        ],
     },
     'thief': {
         'short': 'thief',
@@ -504,6 +584,15 @@ tnu_profs = {
         'hd': 6,
         'primAttr': ['DEX'],
         'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],
+        'special': [
+            'When you search an area in haste, if the dungeon level is equal to your level or lower, '
+            'you must roll equal to or lower than your Dexterity score on a d20 to find hidden things. '
+            'If the dungeon level is higher than your own, you must roll equal to or lower than half your '
+            'Dexterity score, rounded down, on a d20 to find hidden things.',
+            'You always find hidden things when you spend a turn searching a dungeon of your level or lower, '
+            'and you always roll against your full Dexterity score when you search a higher-level dungeon '
+            '(instead of half your Dexterity).',
+        ],
     },
     'wizard': {
         'short': 'wizard',
@@ -514,6 +603,19 @@ tnu_profs = {
         'spellChooseAs': 'wizard',
         'spellsPerLvl': 2,
         'casterStat': 'INT',
+        'special': [
+            'You are a Spellcaster.',
+            'When you cast a spell and fail to control it, you may choose to ignore your failed roll and lose '
+            '1d4 points of Willpower instead. If this does not reduce your Willpower to zero, you retain control '
+            'over your spell.',
+            'When you cast a spell, whether you retain control or not, you may roll to keep it in your memory, '
+            'instead of forgetting it. To remember a spell of your level or lower, you must roll equal to or '
+            'lower than your Willpower score on a d20. To remember a spell of a level higher than your character, '
+            'you must roll equal to or lower than half your Willpower score, rounded down, on a d20.',
+            'You have Psychic Armour. Roll a number of Hit Dice (d4s) equal to your level and add them together to '
+            'determine your Psychic Armour score, just as you do for Disposition. You are not required to '
+            're-roll this score when you take a rest, but you may, if you like.',
+        ],
     },
 }
 

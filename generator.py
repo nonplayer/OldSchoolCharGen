@@ -75,19 +75,6 @@ def gen_ac(prefs, armour):
             ac_mod += 5
         elif any('Light Armour' in x for x in armour):
             ac_mod += 3
-    #elif prefs['name'] in ['dd', 'basic']:
-    #    if any('Suit Armour' in x for x in armour):
-    #        ac_mod += 9
-    #    elif any('Plate Mail' in x for x in armour):
-    #        ac_mod += 6
-    #    elif any('Banded Mail' in x for x in armour):
-    #        ac_mod += 5
-    #    elif any('Chain Mail' in x for x in armour):
-    #        ac_mod += 4
-    #    elif any('Scale Mail' in x for x in armour):
-    #        ac_mod += 3
-    #    elif any('Leather Armour' in x for x in armour):
-    #        ac_mod += 2
     elif prefs['name'] in ['bnt', 'dd']:
         if any('Plate Armour' in x for x in armour):
             ac_mod += 8

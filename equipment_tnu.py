@@ -3,8 +3,6 @@ from random import choice as ch
 
 import dice
 
-'''
-'''
 
 wretched = {
     'gear1': [

@@ -44,10 +44,12 @@ systems = {
         'acType': 'ascend',             # STR: 'ascend' or 'descend'
         'saves': 'five',                # STR: 'one', 'three', 'five', or 'six' (as TBH, 3E, B/X, and 5E)
         'hasWPs': False,                # BOO: notes if this system uses specific WPs a la Dark Dungeons
+        'maxLvl': 10,                   # INT: maximum XP level in the game
     },
     'bnt': {
         'name': 'bnt',
         'fullName': 'Blood & Treasure',
+        'maxLvl': 20,
     },
     'dcc': {
         'name': 'dcc',
@@ -61,6 +63,7 @@ systems = {
         'acBase': 9,
         'acType': 'descend',
         'hasWPs': True,
+        'maxLvl': 36,
     },
     'pla': {
         'name': 'pla',
@@ -70,6 +73,7 @@ systems = {
         'spread': statArrays['pla'],
         'acBase': 4,
         'saves': 'pla',
+        'maxLvl': 15,
     },
     'rbh': {
         'name': 'rbh',
@@ -79,6 +83,7 @@ systems = {
         'spread': statArrays['pla'],
         'acBase': 4,
         'saves': 'pla',
+        'maxLvl': 15,
     },
     'tnu': {
         'name': 'tnu',

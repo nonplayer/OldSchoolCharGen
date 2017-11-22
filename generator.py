@@ -93,9 +93,9 @@ def gen_ac(prefs, armour):
         elif any('Padded Armour' in x for x in armour):
             ac_mod += 1
     if prefs['name'] not in ['pla']:
-        if any('Tower Shield' in x for x in armour):
+        if any('a Tower Shield' in x for x in armour):
             ac_mod += 2
-        elif any('Shield' in x for x in armour):
+        elif any('a Shield' in x for x in armour):
             ac_mod += 1
     if prefs['acType'] == 'descend':
         ac_final = ac_base - ac_mod

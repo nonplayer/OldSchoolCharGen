@@ -15,7 +15,6 @@ these tags will be used to pull them from the gear dump and separate into their 
 import random
 from random import choice as ch
 
-import dice
 from dice import roll as die
 
 
@@ -58,12 +57,10 @@ weapons_war = [
     'WEAPON: Blowgun (Large) w/ 5 Darts (R, special)',
     'WEAPON: Blowgun (Small) w/ 5 Darts (R, special)',
     'WEAPON: Bola (R, 1d2 special)',
-    'WEAPON: Bow, Long w/ 20 Arrows (R, 1d6)',
-    'WEAPON: Bow, Short w/ 20 Arrows (R, 1d6)',
+    ch(['WEAPON: Bow, Long w/ 20 Arrows (R, 1d6)', 'WEAPON: Bow, Short w/ 20 Arrows (R, 1d6)']),
     'WEAPON: Cestus (1H, 1d3)',
     'WEAPON: Club (1H, 1d4)',
-    'WEAPON: Crossbow, Heavy w/ 30 Bolts (R, 2d4)',
-    'WEAPON: Crossbow, Light w/ 30 Bolts (R, 1d6)',
+    ch(['WEAPON: Crossbow, Heavy w/ 30 Bolts (R, 2d4)', 'WEAPON: Crossbow, Light w/ 30 Bolts (R, 1d6)']),
     'WEAPON: Dagger (1H, 1d4)',
     'WEAPON: Halberd (2H, 1d10)',
     'WEAPON: Hammer, Throwing (R, 1d4)',
@@ -74,10 +71,8 @@ weapons_war = [
     'WEAPON: Net (1H, special)',
     'WEAPON: Pike (2H, 1d10)',
     'WEAPON: Poleaxe (2H, 1d10)',
-    'WEAPON: Shield, Horned (1H, 1d2)',
-    'WEAPON: Shield, Knife (1H, 1d4+1)',
-    'WEAPON: Shield, Sword (1H, 1d4+2)',
-    'WEAPON: Shield, Tusked (1H, 1d4+1)',
+    ch(['WEAPON: Shield, Horned (1H, 1d2)', 'WEAPON: Shield, Knife (1H, 1d4+1)',
+        'WEAPON: Shield, Sword (1H, 1d4+2)', 'WEAPON: Shield, Tusked (1H, 1d4+1)']),
     'WEAPON: Sling w/ 30 Pellets (R, 1d4)',
     'WEAPON: Spear (1H, 1d6)',
     'WEAPON: Staff (2H, 1d6)',
@@ -96,8 +91,7 @@ weapons_rog = [
     'WEAPON: Bola (R, 1d2 special)',
     'WEAPON: Bow, Short w/ 20 Arrows (R, 1d6)',
     'WEAPON: Club (1H, 1d4)',
-    'WEAPON: Crossbow, Heavy w/ 30 Bolts (R, 2d4)',
-    'WEAPON: Crossbow, Light w/ 30 Bolts (R, 1d6)',
+    ch(['WEAPON: Crossbow, Heavy w/ 30 Bolts (R, 2d4)', 'WEAPON: Crossbow, Light w/ 30 Bolts (R, 1d6)']),
     'WEAPON: Dagger (1H, 1d4)',
     'WEAPON: Javelin (1H, 1d6)',
     'WEAPON: Mace (1H, 1d6)',
@@ -145,10 +139,8 @@ weapons_hlf = [
     'WEAPON: Hammer, War (R, 1d6)',
     'WEAPON: Mace (1H, 1d6)',
     'WEAPON: Net (1H, special)',
-    'WEAPON: Shield, Horned (1H, 1d2)',
-    'WEAPON: Shield, Knife (1H, 1d4+1)',
-    'WEAPON: Shield, Sword (1H, 1d4+2)',
-    'WEAPON: Shield, Tusked (1H, 1d4+1)',
+    ch(['WEAPON: Shield, Horned (1H, 1d2)', 'WEAPON: Shield, Knife (1H, 1d4+1)',
+        'WEAPON: Shield, Sword (1H, 1d4+2)', 'WEAPON: Shield, Tusked (1H, 1d4+1)']),
     'WEAPON: Sling w/ 30 Pellets (R, 1d4)',
     'WEAPON: Spear (1H, 1d6)',
     'WEAPON: Staff (2H, 1d6)',
@@ -157,17 +149,19 @@ weapons_hlf = [
 ]
 
 miscellany = [
-    'Crippling apathy', 'Twitchy eyes', 'a Certain "je ne sais quoi"', 'a love of horrible puns',
+    'crippling apathy', 'twitchy eyes', 'a Certain "je ne sais quoi"', 'a love of horrible puns',
     'a feeling of general loathing for everyone around you', 'a case of the wiggles', 'wanderlust in your heart',
     'an independent streak', 'the first love letter anyone every wrote you', 'a sack full of bandit ears',
     'a regrettable haircut', 'chronic silent but deadly gas', 'curious pocket lint', 'inappropriate laughing',
     'a first edition manuscript of "Winter\'s Sullen Cry"', 'all of your nail clippings, ever',
     'an irritable tabby cat', 'a map to an island that doesn\'t exist', 'a pure white badger pelt',
-    'pornographic goblin trading cards', 'a single strip of slightly used sandpaper', 'a petrified dragon egg',
-    'a lock of hair from your mother or father', 'a fake beard', 'rusted nipple clamps', "two weird puppets",
-    str(die(2, 3)) + ' commemorative plates', 'a bottle of freshly-harvested llama milk',
-    'a free drink coupon for the Inn, but it expires soon...', 'a tendency to insert yourself into conversations',
-    'unsettling memories from last night', 'a strong distrust for the government', 'an unsettlingly sexy facial scar',
+    'a set of pornographic goblin trading cards', 'a single strip of slightly used sandpaper',
+    'a petrified dragon egg', 'a lock of hair from your mother or father', 'a fake beard',
+    'rusted nipple clamps', "two weird puppets", str(die(2, 3)) + ' commemorative plates',
+    'a bottle of freshly-harvested llama milk', 'a free drink coupon for the Inn, but it expires soon...',
+    'a tendency to insert yourself into conversations', 'unsettling memories from last night',
+    'a strong distrust for the government', 'an unsettlingly sexy facial scar',
+    'a free spirit that cannot be shackled by despair',
 ]
 
 
@@ -188,15 +182,15 @@ basic_gear = {
         'basics': ['a half-eaten turkey leg from the festival you just left'],
         'advanced': ['the bloody tooth of someone - or something - recently deprived of its favorite tooth'],
         'money': [str(die(1, 6)) + ' copper coins'],
-        'misc': [],
+        'misc': [str(ch(list(miscellany)))],
     },
     'weaksauce': {
         'weapons': {
-            'clr': [],
-            'hlf': [],
-            'mag': [],
-            'rog': [],
-            'war': [],
+            'clr': [str(ch(list(weapons_clr)))],
+            'hlf': list(random.sample(weapons_hlf, 2)),
+            'mag': [str(ch(list(weapons_mag)))],
+            'rog': [str(ch(list(weapons_rog)))],
+            'war': list(random.sample(weapons_war, 2)),
         },
         'armour': {
             'mag': [],
@@ -205,61 +199,67 @@ basic_gear = {
         },
         'basics': list(random.sample(basics, 5)),
         'advanced': list(random.sample(advanced, 4)),
-        'misc': [],
+        'misc': [str(ch(list(miscellany)))],
         'money': [str(die(3, 6)) + ' silver coins'],
     },
     'common': {
         'weapons': {
-            'clr': [],
-            'hlf': [],
-            'mag': [],
-            'rog': [],
-            'war': [],
+            'clr': list(random.sample(weapons_clr, 3)),
+            'hlf': list(random.sample(weapons_hlf, 4)),
+            'mag': list(random.sample(weapons_mag, 2)),
+            'rog': list(random.sample(weapons_rog, 3)),
+            'war': list(random.sample(weapons_war, 4)),
         },
         'armour': {
             'mag': [],
             'rog': [ch(['ARMOUR: Studded Leather (AC+3)', 'ARMOUR: Leather Armour (AC+2)'])],
-            'war': [ch(['ARMOUR: Splint Mail (AC+6)', 'ARMOUR: Chain Mail (AC+5)', 'ARMOUR: Scale Mail (AC+4)'])],
+            'war': [
+                ch(['ARMOUR: Splint Mail (AC+6)', 'ARMOUR: Chain Mail (AC+5)', 'ARMOUR: Scale Mail (AC+4)']),
+                ch(['', 'ARMOUR: a Shield (AC+1)'])
+            ],
         },
         'basics': list(random.sample(basics, 10)),
         'advanced': list(random.sample(advanced, 8)),
-        'misc': [],
+        'misc': [str(ch(list(miscellany)))],
         'money': [str(die(3, 6)) + ' gold coins'],
     },
     'decent': {
         'weapons': {
-            'clr': [],
-            'hlf': [],
-            'mag': [],
-            'rog': [],
-            'war': [],
+            'clr': list(random.sample(weapons_clr, 4)),
+            'hlf': list(random.sample(weapons_hlf, 5)),
+            'mag': list(random.sample(weapons_mag, 3)),
+            'rog': list(random.sample(weapons_rog, 4)),
+            'war': list(random.sample(weapons_war, 5)),
         },
         'armour': {
             'mag': [],
             'rog': ['ARMOUR: Studded Leather, finely crafted and oiled (AC+3)'],
-            'war': [ch(['ARMOUR: Plate Armour (AC+8)', 'ARMOUR: Plate Mail (AC+7)', 'ARMOUR: Splint Mail (AC+6)'])],
+            'war': [
+                ch(['ARMOUR: Plate Armour (AC+8)', 'ARMOUR: Plate Mail (AC+7)', 'ARMOUR: Splint Mail (AC+6)']),
+                ch(['', 'ARMOUR: a Shield (AC+1)', 'ARMOUR: a Tower Shield (AC+2)'])
+            ],
         },
         'basics': list(random.sample(basics, 16)),
         'advanced': list(random.sample(advanced, 12)),
-        'misc': [],
+        'misc': [str(ch(list(miscellany)))],
         'money': [str(die(10, 6)) + ' gold coins'],
     },
     'holyfuckingshit': {
         'weapons': {
-            'clr': [],
-            'hlf': [],
-            'mag': [],
-            'rog': [],
-            'war': [],
+            'clr': ['Two 100% Randomly Rolled Magical Weapons, class-appropriate, which vanish upon your death.'],
+            'hlf': ['Two 100% Randomly Rolled Magical Weapons, class-appropriate, which vanish upon your death.'],
+            'mag': ['Two 100% Randomly Rolled Magical Weapons, class-appropriate, which vanish upon your death.'],
+            'rog': ['Two 100% Randomly Rolled Magical Weapons, class-appropriate, which vanish upon your death.'],
+            'war': ['Four 100% Randomly Rolled Magical Weapons, class-appropriate, which vanish upon your death.'],
         },
         'armour': {
             'mag': [],
             'rog': ['ARMOUR: Studded Leather (AC+3)'],
             'war': [ch(['ARMOUR: Plate Armour (AC+8)', 'ARMOUR: Plate Mail (AC+7)'])],
         },
-        'basics': '',
-        'advanced': [str(die(3, 4)) + ' 100% Randomly Rolled Magical Items, the Sky is the Limit'],
-        'misc': [],
+        'basics': list(random.sample(basics, 16)),
+        'advanced': list(random.sample(advanced, 16)),
+        'misc': [str(ch(list(miscellany))), 'Four 100% Randomly Rolled Magical Trinkets, which vanish upon your death'],
         'money': [str(die(10, 6)) + ' gold coins'],
     },
 }
@@ -291,14 +291,17 @@ def get_gearlist(game):
 def get_gear(data, sysname, avg):
     tier = get_tier(avg)
     base_list = get_gearlist(sysname)
-    weapons = list(base_list[tier]['weapons'][data['weapons']])
-    armour = list(base_list[tier]['armour'][data['armour']])
-    basics = list(base_list[tier]['basics'])
-    advanced = list(base_list[tier]['advanced'])
-    money = list(base_list[tier]['money'])
-    gearList = weapons + armour + basics + advanced + money
-    gearList = list(filter(None, gearList))
-    return sorted(gearList)
+    wep_list = list(base_list[tier]['weapons'][data['weapons']])
+    arm_list = list(base_list[tier]['armour'][data['armour']])
+    bas_list = list(base_list[tier]['basics'])
+    adv_list = list(base_list[tier]['advanced'])
+    msc_list = list(base_list[tier]['misc'])
+    mny_list = list(base_list[tier]['money'])
+    # just some free stuff for everyone
+    bonus = ['Satchel']
+    my_gearlist = wep_list + arm_list + bas_list + adv_list + msc_list + mny_list + bonus
+    my_gearlist = list(filter(None, my_gearlist))
+    return sorted(my_gearlist)
 
 
 if __name__ == "__main__":

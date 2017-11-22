@@ -232,7 +232,7 @@ dd_profs = {
         'nextXP': '1500',
         'primAttr': ['WIS'],
         'weapons': 'clr',
-        'spellChooseAs': 'clr',
+        'spellChooseAs': 'cleric',
         'spellsPerLvl': 2,
         'casterStat': 'WIS',
         'saves': [11, 12, 14, 16, 15],

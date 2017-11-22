@@ -22,6 +22,51 @@ statArrays = {
     'pla': ['ICQ', 'MEE', 'MAF', 'PST', 'PRW', 'PND', 'PBT', 'RUN'],
 }
 
+statMods = {
+    'bnt': {
+        'STR': 'Melee Attack rolls, Damage with Melee and Thrown',
+        'INT': 'Known Languages, Mage Spells per day',
+        'WIS': 'Will Saves, Cleric Spells per day',
+        'DEX': 'Ranged Attacks, AC, Reflex Saves',
+        'CON': 'Hit Point rolls, Fortitude Saves',
+        'CHA': 'Leadership, Reaction rolls, Bard/Sorc Spells per day'
+    },
+    'dd': {
+        'STR': 'Melee Attack rolls, Damage with Melee and Thrown',
+        'INT': '',
+        'WIS': 'Saves vs Spells',
+        'DEX': 'Ranged Attacks, AC, Initiative',
+        'CON': 'Hit Point rolls',
+        'CHA': 'Leadership, Reaction rolls'
+    },
+    'tnu': {
+        'CHA': 'Social rolls',
+        'DEX': 'Evasion, Initiative, Ranged Attacks, Special Maneuvers',
+        'FER': 'Melee Attack and Damage rolls, Open Doors/Chests, Saves vs Confinement',
+        'HEA': 'Recovery Rolls, Saves vs Disease and Poison',
+        'INT': 'Surprise, Spells Memorized, Saves vs Falsehood',
+        'WIL': 'Spells Mastered, Abjure Spirits, Saves vs Mental Effects'
+    },
+    'pla': {
+        'ICQ': 'Mental Skills',
+        'MEE': 'Mind Saves',
+        'MAF': 'Social Skills, Invoke Trust or Intimidate',
+        'PST': 'Damage with Melee, Thrown, and Bow Weapons',
+        'PRW': 'Physical Skills; Combat Rolls other than Initiative/Saves/Damage',
+        'PND': 'Body Saves',
+        'PBT': 'Social Skills, Invoke Charm or Impress',
+        'MOV': 'Initiative, Running Speed = stat * .68 mph'
+    },
+}
+
+'''
+I'm sure the above two could be merged, but I added the second dict late in the game,
+after already writing code that used the statArrays lists to generate character spreads.
+Converting that code to use a dict would be more of a pain in the ass than I feel like
+dealing with currently.
+'''
+
+
 saves = {
     'one': ['Saving Throw'],
     'three': ['Fortitude', 'Reflex', 'Willpower'],
@@ -29,6 +74,7 @@ saves = {
     'six': statArrays['dnd'],
     'pla': [],
 }
+
 
 systems = {
     'default': {

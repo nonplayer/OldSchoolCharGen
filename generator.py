@@ -28,6 +28,12 @@ def gen_stats(spread, primes):
     return stats
 
 
+def gen_saves(names, values):
+    saves = dict(zip(names, values))
+    print(saves)
+    return saves
+
+
 def gen_spells(gamesystem, prof, align, num):
     my_spells = []
     if gamesystem == 'tnu':
@@ -145,6 +151,10 @@ def generate(game_system='tnu'):
         DATA['pa'] = 'Yes'
     else:
         DATA['pa'] = 'None'
+    if prefs['saves']:
+        DATA['saves'] = gen_saves(prefs['saves'], md['saves'])
+    else:
+        DATA['saves'] = False
     # let's get that gear list:
     if prefs['type'] == 'tnu':
         my_gear = list(equipment_tnu.get_gear(DATA['short'], my_class['label']))
@@ -210,6 +220,11 @@ def print_character(system_name):
     print("-----------------")
     for key, value in dict.items(DATA['stats']):
         print(key + ": " + str(value['val']) + ' (' + str(value['mod']) + ')')
+    if DATA['saves']:
+        print("\nSaving Throws:")
+        print("--------------")
+        for key, value in dict.items(DATA['saves']):
+            print(key + ": " + str(value))
     print("\nCombat Traits:")
     print("--------------")
     print("Melee: " + "  Ranged: " + "  AC: " + str(DATA['ac']))

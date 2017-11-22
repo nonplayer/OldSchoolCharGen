@@ -25,7 +25,7 @@ statArrays = {
 }
 
 saves = {
-    'one': [],
+    'one': ['Saving Throw'],
     'three': ['Fortitude', 'Reflex', 'Willpower'],
     'five': ['Death Ray & Poison', 'Magic Wands', 'Paralysis & Petrification', 'Breath Weapon', 'Rod, Staff, & Spell'],
     'six': statArrays['dnd'],
@@ -42,7 +42,7 @@ systems = {
         'spread': statArrays['dnd'],    # STR: what spread of stats this system uses
         'acBase': 10,                   # INT: AC base 9 or 10, usually
         'acType': 'ascend',             # STR: 'ascend' or 'descend'
-        'saves': 'five',                # STR: 'one', 'three', 'five', or 'six' (as TBH, 3E, B/X, and 5E)
+        'saves': False,                 # Pulls STR from Saves dict, above
         'hasWPs': False,                # BOO: notes if this system uses specific WPs a la Dark Dungeons
         'maxLvl': 10,                   # INT: maximum XP level in the game
     },
@@ -50,12 +50,13 @@ systems = {
         'name': 'bnt',
         'fullName': 'Blood & Treasure',
         'maxLvl': 20,
+        'saves': saves['three'],
     },
     'dcc': {
         'name': 'dcc',
         'fullName': 'Dungeon Crawl Classics',
         'spread': statArrays['dcc'],
-        'saves': 'three',
+        'saves': saves['three'],
     },
     'dd': {
         'name': 'dd',
@@ -64,6 +65,7 @@ systems = {
         'acType': 'descend',
         'hasWPs': True,
         'maxLvl': 36,
+        'saves': saves['five'],
     },
     'pla': {
         'name': 'pla',
@@ -72,7 +74,7 @@ systems = {
         'stats': 8,
         'spread': statArrays['pla'],
         'acBase': 4,
-        'saves': 'pla',
+        'saves': saves['pla'],
         'maxLvl': 15,
     },
     'rbh': {
@@ -82,7 +84,7 @@ systems = {
         'stats': 8,
         'spread': statArrays['pla'],
         'acBase': 4,
-        'saves': 'pla',
+        'saves': saves['pla'],
         'maxLvl': 15,
     },
     'tnu': {
@@ -91,7 +93,6 @@ systems = {
         'type': 'tnu',
         'hasHPs': False,
         'spread': statArrays['tnu'],
-        'saves': None,
     },
 }
 
@@ -104,7 +105,7 @@ def get_system_prefs(system='tnu'):
 
 
 if __name__ == "__main__":
-    my_data = get_system_prefs('tnu')
+    my_data = get_system_prefs('dd')
     print(my_data)
     print(my_data['spread'])
     for i in list(my_data['spread']):

@@ -41,6 +41,61 @@ war = selects as warrior
 import random
 # import systems
 
+skills = {
+    'bnt': [
+        'Balance (DEX)',
+        'Bend bars (STR)',
+        'Break down doors (STR)',
+        'Climb sheer surfaces (STR)',
+        'Decipher codes (INT)',
+        'Escape bonds (DEX)',
+        'Find secret doors (INT)',
+        'Find traps (INT)',
+        'Hide in shadows (DEX)',
+        'Jump (STR)',
+        'Listen at doors (WIS)',
+        'Move silently (DEX)',
+        'Open locks (DEX)',
+        'Pick pockets (DEX)',
+        'Remove traps (DEX)',
+        'Riding (DEX)',
+        'Survival (WIS)',
+        'Swimming (STR)',
+        'Tracking (WIS)',
+        'Trickery (CHA)'
+    ],
+    'dd': [
+        'Arcane Lore (Int)',
+        'Balance (Dex)',
+        'Bluff (Cha)',
+        'Cooking (Wis)',
+        'Craft (Choice of Medium) (Dex)',
+        'Diplomacy (Cha)',
+        'Disguise (Cha)',
+        'Engineering (Int)',
+        'Escape Artist (Dex)',
+        'Etiquette (Choice of Culture) (Cha)',
+        'First Aid (Wis)',
+        'Gambling (Cha)',
+        'Geography (Int)',
+        'History (Int)',
+        'Intimidation (Str or Cha)',
+        'Jumping (Str)',
+        'Language (Choice) (Special)',
+        'Laws (Choice of Culture) (Int)',
+        'Lip Reading (Wis)',
+        'Magical Engineering (Int)',
+        'Nature Lore (Int)',
+        'Navigating (Wis)',
+        'Performance (Choice of Medium) (Cha)',
+        'Religious Lore (Int)',
+        'Riding (Choose Animal) (Dex)',
+        'Sense Motive (Wis)',
+        'Swimming (Str)',
+        'Tracking (Wis)'
+    ]
+}
+
 bnt_profs = {
     'default': {
         'short': 'default',                     # STR: class name for references
@@ -74,6 +129,8 @@ bnt_profs = {
         'alignAllowed': ['chaos', 'evil', 'law', 'neutral'],
         'weapons': 'rog',
         'armour': 'rog',
+        'skills': ['Climb sheer surfaces (STR)', 'Decipher codes (INT)', 'Escape bonds (DEX)',
+                   'Hide in shadows (DEX)', 'Listen at doors (WIS)', 'Move silently (DEX)', 'Trickery (CHA)'],
     },
     'barbarian': {
         'short': 'barbarian',
@@ -86,6 +143,8 @@ bnt_profs = {
         'weapons': 'war',
         'armour': 'war',
         'saves': [13, 13, 15],
+        'skills': ['Bend bars (STR)', 'Break down doors (STR)', 'Climb sheer surfaces (STR)', 'Jump (STR)',
+                   'Survival (WIS)', 'Swimming (STR)'],
     },
     'bard': {
         'short': 'bard',
@@ -101,6 +160,7 @@ bnt_profs = {
         'casterStat': 'CHA',
         'saves': [15, 13, 13],
         'extragear': ['a musical instrument of choice'],
+        'skills': ['Decipher codes (INT)', 'Listen at doors (WIS)', 'Pick pockets (DEX)', 'Trickery (CHA)'],
     },
     'cleric': {
         'short': 'cleric',
@@ -116,6 +176,7 @@ bnt_profs = {
         'casterStat': 'WIS',
         'saves': [13, 15, 13],
         'extragear': ['a Holy Symbol of your Faith'],
+        'skills': ['Decipher codes (INT)', 'Riding (DEX)'],
     },
     'duelist': {
         'short': 'duelist',
@@ -125,6 +186,7 @@ bnt_profs = {
         'primAttr': ['DEX', 'INT'],
         'attacksAs': 'best',
         'armour': 'rog',
+        'skills': ['Balance (DEX)', 'Jump (STR)'],
     },
     'fighter': {
         'short': 'fighter',
@@ -132,6 +194,7 @@ bnt_profs = {
         'hd': 8,
         'primAttr': ['STR'],
         'attacksAs': 'best',
+        'skills': ['Bend bars (STR)', 'Break down doors (STR)', 'Riding (DEX)'],
     },
     'mu': {
         'short': 'magic-user',
@@ -149,6 +212,7 @@ bnt_profs = {
         'saves': [15, 15, 13],
         'extragear': ['a Spell Book'],
         'extraspells': ['Read Magic'],
+        'skills': ['Decipher codes (INT)', 'Find secret doors (INT)'],
     },
     'paladin': {
         'short': 'paladin',
@@ -160,6 +224,7 @@ bnt_profs = {
         'alignAllowed': ['good', 'law'],
         'attacksAs': 'mid-hi',
         'saves': [12, 14, 12],
+        'skills': ['Riding (DEX)'],
     },
     'ranger': {
         'short': 'ranger',
@@ -171,6 +236,8 @@ bnt_profs = {
         'alignAllowed': ['good', 'law', 'neutral'],
         'attacksAs': 'mid-hi',
         'saves': [13, 13, 15],
+        'skills': ['Climb sheer surfaces (STR)', 'Hide in shadows (DEX)', 'Move silently (DEX)',
+                   'Survival (WIS)', 'Swimming (STR)', 'Tracking (WIS)'],
     },
     'sorc': {
         'short': 'sorcerer',
@@ -188,6 +255,7 @@ bnt_profs = {
         'casterStat': 'CHA',
         'saves': [15, 15, 13],
         'extraspells': ['Read Magic'],
+        'skills': ['Trickery (CHA)'],
     },
     'thief': {
         'short': 'thief',
@@ -197,6 +265,10 @@ bnt_profs = {
         'weapons': 'rog',
         'armour': 'rog',
         'extragear': ['Thieves\' Tools'],
+        'skills': ['Climb sheer surfaces (STR)', 'Decipher codes (INT)', 'Escape bonds (DEX)',
+                   'Find secret doors (INT)', 'Find traps (INT)', 'Hide in shadows (DEX)',
+                   'Listen at doors (WIS)', 'Move silently (DEX)', 'Open locks (DEX)',
+                   'Pick pockets (DEX)', 'Remove traps (DEX)'],
     },
 }
 
@@ -219,7 +291,7 @@ dd_profs = {
         'casterStat': '',                       # STRING: stat used for spells, if a caster
         'cantrips': False,                      # either False or INT: num of cantrips at first level
         'saves': [12, 13, 14, 15, 16],          # LIST of 5 integers, in order
-        'skills': ['Placeholder for Skills'],   # Unsure, placeholder as I figure out skills. Might go unused.
+        'skills': list(random.sample(skills['dd'], 4)),     # LIST of skills chosen from the core book
         'restrictions': ['Placeholder for Restrictions'],   # Unsure, placeholder
         'special': ['Placeholder for Special Abilities'],   # Unsure, placeholder
         'extragear': False,                     # either False or LIST: some professions have extra gear, put it here

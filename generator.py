@@ -75,31 +75,31 @@ def gen_ac(prefs, armour):
             ac_mod += 5
         elif any('Light Armour' in x for x in armour):
             ac_mod += 3
-    elif prefs['name'] in ['dd', 'basic']:
-        if any('Suit Armour' in x for x in armour):
-            ac_mod += 9
-        elif any('Plate Mail' in x for x in armour):
-            ac_mod += 6
-        elif any('Banded Mail' in x for x in armour):
-            ac_mod += 5
-        elif any('Chain Mail' in x for x in armour):
-            ac_mod += 4
-        elif any('Scale Mail' in x for x in armour):
-            ac_mod += 3
-        elif any('Leather Armour' in x for x in armour):
-            ac_mod += 2
-    elif prefs['name'] in ['bnt']:
+    #elif prefs['name'] in ['dd', 'basic']:
+    #    if any('Suit Armour' in x for x in armour):
+    #        ac_mod += 9
+    #    elif any('Plate Mail' in x for x in armour):
+    #        ac_mod += 6
+    #    elif any('Banded Mail' in x for x in armour):
+    #        ac_mod += 5
+    #    elif any('Chain Mail' in x for x in armour):
+    #        ac_mod += 4
+    #    elif any('Scale Mail' in x for x in armour):
+    #        ac_mod += 3
+    #    elif any('Leather Armour' in x for x in armour):
+    #        ac_mod += 2
+    elif prefs['name'] in ['bnt', 'dd']:
         if any('Plate Armour' in x for x in armour):
             ac_mod += 8
         elif any('Plate Mail' in x for x in armour):
             ac_mod += 7
-        elif any('Banded Mail' in x for x in armour) or any('Splint Mail' in x for x in armour):
+        elif any('Splint Mail' in x for x in armour):
             ac_mod += 6
-        elif any('Chain Mail' in x for x in armour) or any('Breastplate' in x for x in armour):
+        elif any('Chain Mail' in x for x in armour):
             ac_mod += 5
-        elif any('Scale Mail' in x for x in armour) or any('Chainmail Shirt' in x for x in armour):
+        elif any('Scale Mail' in x for x in armour):
             ac_mod += 4
-        elif any('Ring Mail' in x for x in armour) or any('Studded Leather' in x for x in armour):
+        elif any('Studded Leather' in x for x in armour):
             ac_mod += 3
         elif any('Leather Armour' in x for x in armour):
             ac_mod += 2
@@ -162,7 +162,7 @@ def generate(game_system='tnu'):
     if prefs['type'] == 'tnu':
         my_gear = list(equipment_tnu.get_gear(DATA['short'], my_class['label']))
     elif prefs['type'] in ['dnd']:
-        my_gear = list(equipment_osr.get_gear(DATA['short'], prefs, stats_avg))
+        my_gear = list(equipment_osr.get_gear(md, prefs['name'], stats_avg))
     elif prefs['type'] == 'pla':
         my_gear = []
     else:
@@ -264,4 +264,4 @@ if __name__ == "__main__":
     #else:
     #    system = selection
     #print_character(system)
-    print_character('tnu')
+    print_character('dd')

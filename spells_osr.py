@@ -74,7 +74,7 @@ cantrips_bnt = {
 
 spells_pla = {
     'wiz': [],
-    'cle': [],
+    'clr': [],
     'wit': [],
     'war': [],
     'min': [],

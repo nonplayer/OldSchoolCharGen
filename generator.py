@@ -30,7 +30,6 @@ def gen_stats(spread, primes):
 
 def gen_saves(names, values):
     saves = dict(zip(names, values))
-    print(saves)
     return saves
 
 
@@ -129,6 +128,7 @@ def generate(game_system='tnu'):
     spread = list(prefs['spread'])
     stats_d = dice.get_spread(spread, primes)
     DATA['stats'] = stats_d
+    DATA['traits'] = list(md['special'])
     #
     # get stats average, for reasons:
     #
@@ -136,6 +136,14 @@ def generate(game_system='tnu'):
     for key, value in dict.items(stats_d):
         stats_l.append(int(value['val']))
     stats_avg = int(round(sum(stats_l) / len(stats_l)))
+    #
+    # get character race, if applicable:
+    #
+
+    if prefs['races']:
+        my_race = random.choice(list(prefs['races']))
+        DATA['race'] = prefs['races'][my_race]['label']
+        DATA['traits'] = DATA['traits'] + prefs['races'][my_race]['traits']
     #
     # get more basic stuff:
     #
@@ -244,6 +252,10 @@ def print_character(system_name):
     print("\nCombat Traits:")
     print("--------------")
     print("Melee: " + "  Ranged: " + "  AC: " + str(DATA['ac']))
+    print("\nTraits and Abilities:")
+    print("--------------------")
+    for x in list(DATA['traits']):
+        print(x)
     print("\nMy Weapons:")
     print("-----------")
     for x in list(DATA['weapons']):
@@ -281,4 +293,4 @@ if __name__ == "__main__":
     # else:
     #     system = selection
     # print_character(system)
-    print_character('bnt')
+    print_character('tnu')

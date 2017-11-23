@@ -131,6 +131,8 @@ def generate(game_system='tnu'):
     DATA['traits'] = list(md['special'])
     DATA['personal'] = md['personal']
     DATA['background'] = md['background']
+    DATA['age'] = md['age']
+    DATA['looks'] = md['looks']
     #
     # get stats average, for reasons:
     #
@@ -233,9 +235,11 @@ def print_character(system_name):
     print("\nA new random character for " + str(DATA['system']))
     print("-----------------------------------------------------")
     # print("Raw Data Print: ", gen_data)
-    print("Profession: " + DATA['long'] + "; Level: " + str(DATA['lvl']) + "; Alignment:", DATA['align'].title())
-    print("Trait: " + DATA['personal'] + "; Background: " + DATA['background'] + "; Social Status: " + DATA['soc_class'] + "(" + str(DATA['soc_mod']) + ")")
-    print("Hit Die: d" + str(DATA['hd']) + "; Psychic Armour: " + str(DATA['pa']))
+    print("Profession: " + DATA['long'] + ";  Level: " + str(DATA['lvl']) + ";  Alignment: " +
+          DATA['align'].title() + ";  Age: " + DATA['age'] + ";  Looks: " + DATA['looks'])
+    print("Trait: " + DATA['personal'] + ";  Background: " + DATA['background'] +
+          ";  Social Status: " + DATA['soc_class'] + " (" + str(DATA['soc_mod']) + ")")
+    print("Hit Die: d" + str(DATA['hd']) + ";  Psychic Armour: " + str(DATA['pa']))
     print("---------------")
     print("\nAttribute Scores:")
     print("-----------------")

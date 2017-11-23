@@ -61,6 +61,15 @@ skills = {
     ]
 }
 
+ages = [
+    'Early Teens', 'Late Teens', 'Young Adult', 'Adult', 'Middle-Aged', 'Elder', 'Ancient',
+]
+
+looks = [
+    'Drab', 'Threadbare', 'Fancy', 'Filthy', 'Disguised', 'Common',
+    'Skivvies', 'Antiquated', 'Anachronistic', 'Slovenly',
+]
+
 personals = [
     'Accusative', 'Active', 'Adventurous', 'Affable', 'Affectionate', 'Aggressive', 'Agreeable',
     'Aimless', 'Aloof', 'Altruistic', 'Amazed', 'Analytical', 'Angry', 'Animated', 'Annoying',
@@ -172,6 +181,8 @@ baseline = {
     'extragear': False,                     # either False or LIST: some professions have extra gear, put it here
     'personal': random.choice(personals),
     'background': random.choice(backgrounds),
+    'age': random.choice(ages),
+    'looks': random.choice(looks),
 }
 
 bnt_profs = {

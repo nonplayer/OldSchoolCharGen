@@ -79,76 +79,76 @@ dnd_races = {
     'bnt': {
         'human': {
             'label': "Human",
-            'traits': ['Humans are medium creatures with a base speed of 30 feet.',
-                       'Humans enjoy a 10% bonus to all earned experience.',
-                       'Humans receive a +1 bonus to all saving throws.',
-                       'All humans speak Common and can learn any other language.'],
+            'traits': ['(Racial) Medium size with a base speed of 30 feet.',
+                       '(Racial) 10% bonus to all earned experience.',
+                       '(Racial) +1 bonus to all saving throws.',
+                       '(Racial) Speak Common and can learn any other language.'],
         },
         'dwarf': {
             'label': "Dwarf",
             'traits': [
-                'Dwarves are medium creatures with a base speed of 20.',
-                'Dwarves can see in the dark up to 60 feet via black and white "darkvision".',
-                'Dwarves receive a +3 bonus on Fortitude saving throws vs poison.',
-                'Dwarves receive a +3 bonus on Will saves against magic (Dwarf spellcasters lose this bonus).',
-                'Dwarves have a knack for noticing unusual stonework and intuiting depth.',
-                'Dwarves speak Common and Dwarven. They might also speak Gnome, Goblin, '
+                '(Racial) Medium size with a base speed of 20.',
+                '(Racial) See in the dark up to 60 feet via black and white "darkvision".',
+                '(Racial) +3 bonus on Fortitude saving throws vs poison.',
+                '(Racial) +3 bonus on Will saves against magic (Dwarf spellcasters lose this bonus).',
+                '(Racial) knack for noticing unusual stonework and intuiting depth.',
+                '(Racial) Speak Common and Dwarven. They might also speak Gnome, Goblin, '
                 'Kobold, Orc, Ogre, Hill Giant and Earth Elemental.',
-                'Dwarves gain +1 attack vs goblins, hobgoblins and orcs.',
-                'Dwarves gain +4 AC vs large humanoids like giants.'
+                '(Racial) +1 attack vs goblins, hobgoblins and orcs.',
+                '(Racial) +4 AC vs large humanoids like giants.'
             ],
         },
         'elf': {
             'label': "Elf",
             'traits': [
-                'Elves are medium creatures with a base speed of 30 feet.',
-                'Elves have darkvision to a range of 60 feet.',
-                'Elves have a chance to find secret doors by passing within 5 feet.',
-                'Elves receive a +1 bonus to hit with long and short bows, and long and short swords.',
-                'Elves have 90% magic resistance to sleep spells and enchantment spells.',
-                'Elves are immune to a ghoul\'s paralysis touch.',
-                'Elves speak Common and Elven. They might also speak Gnoll, Gnome, Goblin, Orc, Sylvan and Dragon.'
+                '(Racial) Medium size with a base speed of 30 feet.',
+                '(Racial) Darkvision to a range of 60 feet.',
+                '(Racial) Chance to find secret doors by passing within 5 feet.',
+                '(Racial)  +1 bonus to hit with long and short bows, and long and short swords.',
+                '(Racial) 90% magic resistance to sleep spells and enchantment spells.',
+                '(Racial) Immunity to ghoul paralysis.',
+                '(Racial) Speak Common and Elven. They might also speak Gnoll, Gnome, Goblin, Orc, Sylvan and Dragon.'
             ],
         },
         'gnome': {
             'label': "Gnome",
             'traits': [
-                'Gnomes are small creatures with a base speed of 20 feet.',
-                'Gnomes have darkvision to a range of 60 feet.',
-                'Gnomes have a knack for listening at doors.',
-                'Gnomes with CHA of 10 or higher can cast the following spells, each once per day: '
+                '(Racial) Small size with a base speed of 20 feet.',
+                '(Racial) Darkvision to a range of 60 feet.',
+                '(Racial) Knack for listening at doors.',
+                '(Racial) If CHA is 10 or higher can cast the following spells, 1x/day each: '
                 'Audible glamer, dancing lights and prestidigitation.',
-                'Gnomes receive a +2 bonus on Will saving throws against illusions.',
-                'Gnomes speak Common and Gnome. They might also speak Dwarf, Elf, Goblin, '
+                '(Racial) +2 bonus on Will saving throws against illusions.',
+                '(Racial) Speak Common and Gnome. They might also speak Dwarf, Elf, Goblin, '
                 'Hill Giant, Orc, Sylvan and the language of burrowing mammals.'
             ],
         },
         'halfelf': {
             'label': "Half-Elf",
             'traits': [
-                'Half-elves are medium creatures with a base speed of 30 feet.',
-                'Half-elves have darkvision to a range of 60 feet.',
-                'Half-elves have 30% magic resistance to sleep and enchantment spells.',
-                'Half-elves have a knack for trickery.',
-                'Half-elves speak Common and Elven and can learn virtually any other language.'
+                '(Racial) Medium size with a base speed of 30 feet.',
+                '(Racial) Darkvision to a range of 60 feet.',
+                '(Racial) 30% magic resistance to sleep and enchantment spells.',
+                '(Racial) Knack for trickery.',
+                '(Racial) Speak Common and Elven and can learn virtually any other language.'
             ],
         },
         'halforc': {
             'label': "Half-Orc",
             'traits': [
-                'Half-orcs are medium creatures with a base speed of 30 feet.',
-                'Half-orcs have darkvision to 60 feet.',
-                'Half-orcs speak Common and Orc. They might also speak Gnoll, Goblin, Hill Giant, Ogre or Dragon.'
+                '(Racial) Medium size with a base speed of 30 feet.',
+                '(Racial) Darkvision to 60 feet.',
+                '(Racial) Speak Common and Orc. They might also speak Gnoll, Goblin, Hill Giant, Ogre or Dragon.'
             ],
         },
         'halfling': {
             'label': "Halfling",
             'traits': [
-                'Halflings are small creatures with a base speed of 20 feet.',
-                'Halflings have darkvision to a range of 30 feet.',
-                'Halflings enjoy a +1 bonus when attacking with slings and thrown weapons.',
-                'Halflings have a knack for hiding, moving silently and getting into trouble.',
-                'Halflings speak Common and Halfling. They might also speak '
+                '(Racial) Small size with a base speed of 20 feet.',
+                '(Racial) Darkvision to a range of 30 feet.',
+                '(Racial) +1 bonus when attacking with slings and thrown weapons.',
+                '(Racial) Knack for hiding, moving silently and getting into trouble.',
+                '(Racial) Speak Common and Halfling. They might also speak '
                 'Dwarven, Elven, Gnome, Goblin, Kobold or Orc.'
             ],
         },

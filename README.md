@@ -72,10 +72,6 @@ This is still very much a work in progress. Currently the code runs once and ret
 ### Future Plans
 
 * add attacks and modifiers
-* Add character class extended features
-* Add skills
-* Add saves
-* Add random names, traits, and descriptions
 * Compatibility for additional game systems and house rules
     * Bonus Goal: Support for *Microlite Platinum* and it's awesome sci-fi derivative *"Robot Hack"*
 * Develop a functional web app version

@@ -38,6 +38,7 @@ war = selects as warrior
 """
 
 import random
+from random import choice as ch
 # import systems
 
 skills = {
@@ -168,8 +169,8 @@ baseline = {
     'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],    # LIST of allowed alignments for random choice
     'attacksAs': 'mid',                     # STRING: what category of combat bonuses
     'skills': False,                        # LIST of skills for the class
-    'restrictions': ['Placeholder for Restrictions'],   # Unsure, placeholder
-    'special': ['Placeholder for Special Abilities'],   # Unsure, placeholder
+    'restrictions': ['Placeholder for Restrictions'],               # Unsure, placeholder
+    'special': ['Placeholder for Special Abilities'],               # Unsure, placeholder
     'wps': False,                           # INT: How many starting Weapon Proficiencies
     'weapons': 'war',                       # STR: Category of weapons allowed as choices
     'armour': 'war',                        # STR: Category of armours allowed as choices
@@ -180,6 +181,7 @@ baseline = {
     'extraspells': False,                   # either False or some magicians get free spells plus their choices
     'saves': False,                         # FALSE or else a LIST of integers, in order
     'extragear': False,                     # either False or LIST: some professions have extra gear, put it here
+    # a bunch of fun random character traits follow:
     'personal': random.choice(personals),
     'background': random.choice(backgrounds),
     'age': random.choice(ages),
@@ -202,6 +204,11 @@ bnt_profs = {
         'armour': 'rog',
         'skills': ['Climb sheer surfaces (STR)', 'Decipher codes (INT)', 'Escape bonds (DEX)',
                    'Hide in shadows (DEX)', 'Listen at doors (WIS)', 'Move silently (DEX)', 'Trickery (CHA)'],
+        'special': [
+            '(Class) Trained in Poison use',
+            '(Class) Advantage on Poison Saves.',
+            '(Class) Backstab (x2 damage; can be ranged if less than 30 ft.)',
+        ],
     },
     'barbarian': {
         'short': 'barbarian',
@@ -216,11 +223,16 @@ bnt_profs = {
         'saves': [13, 13, 15],
         'skills': ['Bend bars (STR)', 'Break down doors (STR)', 'Climb sheer surfaces (STR)', 'Jump (STR)',
                    'Survival (WIS)', 'Swimming (STR)'],
+        'special': [
+            '(Class) Land Speed base is +10 ft over racial.',
+            '(Class) Rage 1x/Day (2 attacks, -2 AC, +2 Save vs Mind/Holds, lasts up to 6 rounds, fatigued after)',
+            '(Class) Sixth Sense (no additional effects from surprise, flanking, attacks, or invisible attacks)',
+        ],
     },
     'bard': {
         'short': 'bard',
         'long': 'Bard',
-        'flags': ['advanced'],
+        'flags': ['advanced', 'caster'],
         'nextXP': '1500',
         'primAttr': ['CHA', 'INT'],
         'attacksAs': 'mid',
@@ -232,10 +244,16 @@ bnt_profs = {
         'saves': [15, 13, 13],
         'extragear': ['a musical instrument of choice'],
         'skills': ['Decipher codes (INT)', 'Listen at doors (WIS)', 'Pick pockets (DEX)', 'Trickery (CHA)'],
+        'special': [
+            '(Class) Spellcaster (Bard List, must prepare, can learn)',
+            '(Class) Bard Knowledge (Will save, learns about local notables, legendary items or noteworthy places).',
+            '(Class) Bard Music 1x/day (Fascination Effect)',
+        ],
     },
     'cleric': {
         'short': 'cleric',
         'long': 'Cleric',
+        'flags': ['caster'],
         'nextXP': '2000',
         'primAttr': ['WIS'],
         'alignAllowed': ['chaos', 'evil', 'good', 'law'],
@@ -248,6 +266,10 @@ bnt_profs = {
         'saves': [13, 15, 13],
         'extragear': ['a Holy Symbol of your Faith'],
         'skills': ['Decipher codes (INT)', 'Riding (DEX)'],
+        'special': [
+            '(Class) Spellcaster (Cleric List, must prepare, must pray)',
+            '(Class) Turn/Rebuke Undead (based on alignment)',
+        ],
     },
     'duelist': {
         'short': 'duelist',
@@ -258,6 +280,12 @@ bnt_profs = {
         'attacksAs': 'best',
         'armour': 'rog',
         'skills': ['Balance (DEX)', 'Jump (STR)'],
+        'special': [
+            '(Class) Specialist Weapon, One of Choice (2x damage on all attacks, tactical advantage)',
+            '(Class) Add INT mod to AC if using one-handed melee weapon.',
+            '(Class) Fight Defensively: +4 AC instead of usual +2',
+            '(Class) +2 to Initiative Rolls',
+        ],
     },
     'fighter': {
         'short': 'fighter',
@@ -266,10 +294,15 @@ bnt_profs = {
         'primAttr': ['STR'],
         'attacksAs': 'best',
         'skills': ['Bend bars (STR)', 'Break down doors (STR)', 'Riding (DEX)'],
+        'special': [
+            '(Class) Steadfast Defense Action: Give self +2 to savea and AC, deflect missiles, '
+            'immunity to being moved/prone, but cannot move.',
+        ],
     },
     'mu': {
         'short': 'magic-user',
         'long': 'Magic-User',
+        'flags': ['caster'],
         'nextXP': '2500',
         'hd': 4,
         'primAttr': ['INT'],
@@ -284,6 +317,9 @@ bnt_profs = {
         'extragear': ['a Spell Book'],
         'extraspells': ['Read Magic'],
         'skills': ['Decipher codes (INT)', 'Find secret doors (INT)'],
+        'special': [
+            '(Class) Spellcaster (Mage list, must prepare, can learn new)',
+        ],
     },
     'paladin': {
         'short': 'paladin',
@@ -296,6 +332,10 @@ bnt_profs = {
         'attacksAs': 'mid-hi',
         'saves': [12, 14, 12],
         'skills': ['Riding (DEX)'],
+        'special': [
+            '(Class) Cast "Detect Evil" at will.',
+            '(Class) Smite Evil/Chaos 3x/day (2x damage, or 3x if target is a chaotic outsider)',
+        ],
     },
     'ranger': {
         'short': 'ranger',
@@ -309,11 +349,21 @@ bnt_profs = {
         'saves': [13, 13, 15],
         'skills': ['Climb sheer surfaces (STR)', 'Hide in shadows (DEX)', 'Move silently (DEX)',
                    'Survival (WIS)', 'Swimming (STR)', 'Tracking (WIS)'],
+        'special': [
+            '(Class) Sworn Foe: 2x Damage, +3 to Track Against ' + ch([
+                'Animals', 'dragons', 'elementals', 'fey', 'giants', 'oozes', 'outsiders', 'plants',
+                'undead', 'goblins', 'magical beasts', 'aberrations', 'monstrous humanoids',
+                ch([
+                    'bulettes', 'rust monsters', 'beholders', 'dinosaurs',
+                    'dragons', 'unicorns', 'constructs', 'tarrasques',
+                ]),
+            ]),
+        ],
     },
     'sorc': {
         'short': 'sorcerer',
         'long': 'Sorcerer',
-        'flags': ['advanced'],
+        'flags': ['advanced', 'caster'],
         'nextXP': '2500',
         'hd': 4,
         'primAttr': ['CHA'],
@@ -327,6 +377,9 @@ bnt_profs = {
         'saves': [15, 15, 13],
         'extraspells': ['Read Magic'],
         'skills': ['Trickery (CHA)'],
+        'special': [
+            '(Class) Spellcaster (Mage list, no preparation, cannot learn new).',
+        ],
     },
     'thief': {
         'short': 'thief',
@@ -340,6 +393,9 @@ bnt_profs = {
                    'Find secret doors (INT)', 'Find traps (INT)', 'Hide in shadows (DEX)',
                    'Listen at doors (WIS)', 'Move silently (DEX)', 'Open locks (DEX)',
                    'Pick pockets (DEX)', 'Remove traps (DEX)'],
+        'special': [
+            '(Class) Backstab (x2 damage; can be ranged if less than 30 ft.)',
+        ],
     },
 }
 
@@ -363,6 +419,13 @@ dd_profs = {
         'casterStat': 'WIS',
         'saves': [11, 12, 14, 16, 15],
         'extragear': ['a Holy Symbol'],
+        'special': [
+            '(Class) ',
+            '(Class) ',
+            '(Class) ',
+            '(Class) ',
+            '(Class) ',
+        ],
     },
     'dwarf': {
         'short': 'dwarf',
@@ -375,6 +438,13 @@ dd_profs = {
         'attacksAs': 'best',
         'wps': 4,
         'saves': [8, 9, 10, 13, 12],
+        'special': [
+            '(Class) ',
+            '(Class) ',
+            '(Class) ',
+            '(Class) ',
+            '(Class) ',
+        ],
     },
     'elf': {
         'short': 'elf',
@@ -389,6 +459,13 @@ dd_profs = {
         'saves': [12, 13, 13, 15, 15],
         'extragear': ['a Spellbook'],
         'extraspells': ['Read Magic'],
+        'special': [
+            '(Class) ',
+            '(Class) ',
+            '(Class) ',
+            '(Class) ',
+            '(Class) ',
+        ],
     },
     'fighter': {
         'short': 'fighter',
@@ -397,6 +474,13 @@ dd_profs = {
         'primAttr': ['STR'],
         'attacksAs': 'best',
         'wps': 4,
+        'special': [
+            '(Class) ',
+            '(Class) ',
+            '(Class) ',
+            '(Class) ',
+            '(Class) ',
+        ],
     },
     'halfling': {
         'short': 'halfling',
@@ -406,6 +490,13 @@ dd_profs = {
         'primAttr': ['DEX', 'CON'],
         'weapons': 'hlf',
         'saves': [8, 9, 10, 13, 12],
+        'special': [
+            '(Class) ',
+            '(Class) ',
+            '(Class) ',
+            '(Class) ',
+            '(Class) ',
+        ],
     },
     'mu': {
         'short': 'mu',
@@ -423,6 +514,13 @@ dd_profs = {
         'saves': [13, 14, 13, 16, 15],
         'extragear': ['a Spellbook'],
         'extraspells': ['Read Magic'],
+        'special': [
+            '(Class) ',
+            '(Class) ',
+            '(Class) ',
+            '(Class) ',
+            '(Class) ',
+        ],
     },
     'thief': {
         'short': 'thief',
@@ -435,6 +533,13 @@ dd_profs = {
         'armour': 'rog',
         'saves': [13, 14, 13, 16, 15],
         'extragear': ['a Set of Thieves\' Tools'],
+        'special': [
+            '(Class) ',
+            '(Class) ',
+            '(Class) ',
+            '(Class) ',
+            '(Class) ',
+        ],
     },
 }
 

@@ -42,82 +42,100 @@ import random
 
 skills = {
     'bnt': [
-        'Balance (DEX)',
-        'Bend bars (STR)',
-        'Break down doors (STR)',
-        'Climb sheer surfaces (STR)',
-        'Decipher codes (INT)',
-        'Escape bonds (DEX)',
-        'Find secret doors (INT)',
-        'Find traps (INT)',
-        'Hide in shadows (DEX)',
-        'Jump (STR)',
-        'Listen at doors (WIS)',
-        'Move silently (DEX)',
-        'Open locks (DEX)',
-        'Pick pockets (DEX)',
-        'Remove traps (DEX)',
-        'Riding (DEX)',
-        'Survival (WIS)',
-        'Swimming (STR)',
-        'Tracking (WIS)',
-        'Trickery (CHA)'
+        'Balance (DEX)', 'Bend bars (STR)', 'Break down doors (STR)', 'Climb sheer surfaces (STR)',
+        'Decipher codes (INT)', 'Escape bonds (DEX)', 'Find secret doors (INT)', 'Find traps (INT)',
+        'Hide in shadows (DEX)', 'Jump (STR)', 'Listen at doors (WIS)', 'Move silently (DEX)',
+        'Open locks (DEX)', 'Pick pockets (DEX)', 'Remove traps (DEX)', 'Riding (DEX)', 'Survival (WIS)',
+        'Swimming (STR)', 'Tracking (WIS)', 'Trickery (CHA)'
     ],
     'dd': [
-        'Arcane Lore (Int)',
-        'Balance (Dex)',
-        'Bluff (Cha)',
-        'Cooking (Wis)',
-        'Craft (Choice of Medium) (Dex)',
-        'Diplomacy (Cha)',
-        'Disguise (Cha)',
-        'Engineering (Int)',
-        'Escape Artist (Dex)',
-        'Etiquette (Choice of Culture) (Cha)',
-        'First Aid (Wis)',
-        'Gambling (Cha)',
-        'Geography (Int)',
-        'History (Int)',
-        'Intimidation (Str or Cha)',
-        'Jumping (Str)',
-        'Language (Choice) (Special)',
-        'Laws (Choice of Culture) (Int)',
-        'Lip Reading (Wis)',
-        'Magical Engineering (Int)',
-        'Nature Lore (Int)',
-        'Navigating (Wis)',
-        'Performance (Choice of Medium) (Cha)',
-        'Religious Lore (Int)',
-        'Riding (Choose Animal) (Dex)',
-        'Sense Motive (Wis)',
-        'Swimming (Str)',
-        'Tracking (Wis)'
+        'Arcane Lore (Int)', 'Balance (Dex)', 'Bluff (Cha)', 'Cooking (Wis)',
+        'Craft (Choice of Medium) (Dex)', 'Diplomacy (Cha)', 'Disguise (Cha)',
+        'Engineering (Int)', 'Escape Artist (Dex)', 'Etiquette (Choice of Culture) (Cha)',
+        'First Aid (Wis)', 'Gambling (Cha)', 'Geography (Int)', 'History (Int)',
+        'Intimidation (Str or Cha)', 'Jumping (Str)', 'Language (Choice) (Special)',
+        'Laws (Choice of Culture) (Int)', 'Lip Reading (Wis)', 'Magical Engineering (Int)',
+        'Nature Lore (Int)', 'Navigating (Wis)', 'Performance (Choice of Medium) (Cha)',
+        'Religious Lore (Int)', 'Riding (Choose Animal) (Dex)', 'Sense Motive (Wis)',
+        'Swimming (Str)', 'Tracking (Wis)'
     ]
+}
+
+personals = [
+    'Affectionate', 'Aggressive', 'Altruistic', 'Amazed', 'Angry', 'Anxious', 'Articulate',
+    'Artist', 'Athletic', 'Beautiful', 'Bitter', 'Bookish', 'Braggart', 'Cheerful', 'Clumsy',
+    'Contrarian', 'Controlling', 'Daring', 'Drug-addled', 'Drunkard', 'Educated', 'Emotional',
+    'Enthusiastic', 'Ethical', 'Expressive', 'Fastidious', 'Feuding', 'Flirtatious', 'Foreign',
+    'Friendly', 'Gracious', 'Greasy', 'Greedy', 'Gregarious', 'Guilty', 'Gullible', 'Hard working',
+    'Heartbroken', 'Helpful', 'Hoarder', 'Hungry', 'Ill', 'Imaginative', 'Impatient', 'Indulgent',
+    'Insomniac', 'Jealous', 'Lawful', 'Layabout', 'Loquacious', 'Loud', 'Loyal', 'Lucky', 'Magical',
+    'Mischievous', 'Moody', 'Morbid', 'Musical', 'Mystical', 'Needy', 'Nihilist', 'Noble', 'Nurturing',
+    'Obedient', 'Off-putting', 'Organized', 'Orphan', 'Overconfident', 'Peacemaker', 'Practical', 'Proud',
+    'Punctual', 'Respectful', 'Restless', 'Romantic', 'Sarcastic', 'Scared', 'Secretive', 'Seeker',
+    'Self-destructive', 'Sensitive', 'Sensual', 'Spiteful', 'Stylish', 'Superstitious', 'Suspicious',
+    'Tattooed', 'Thief', 'Thrifty', 'Treacherous', 'Vengeful', 'Violent', 'Wanderlust', 'Well-travelled',
+    'Whimsical', 'Youthful',
+]
+
+backgrounds = [
+    'Accountant', 'Acrobat', 'Actor', 'Alchemist', 'Animal seller', 'Animal trainer', 'Apiarist',
+    'Apothecary', 'Architect', 'Armourer', 'Artillerist', 'Artist', 'Astrologer', 'Author', 'Baker',
+    'Banker', 'Barber', 'Barkeep', 'Beggar', 'Blacksmith', 'Boat builder', 'Bodyguard', 'Bookbinder',
+    'Bounty hunter', 'Bow maker', 'Brewer', 'Builder', 'Butcher', 'Calligrapher', 'Candle maker',
+    'Captain', 'Caravan driver', 'Carpenter', 'Carpet maker', 'Cart maker', 'Cartographer', 'Carver',
+    'Cavalry', 'Cheese maker', 'Chef', 'Clerk', 'Clock maker', 'Cloth dyer', 'Clothier', 'Clown',
+    'Coach driver', 'Cobbler', 'Composer', 'Cook', 'Cooper', 'Coppersmith', 'Counterfeiter', 'Courier',
+    'Courtesan', 'Courtier', 'Custodian', 'Demagogue', 'Doctor', 'Engineer', 'Engraver', 'Explorer',
+    'Falconer', 'Farmer', 'Fence', 'Fisher', 'Fletcher', 'Flower seller', 'Food seller', 'Forester',
+    'Forger', 'Fortune teller', 'Fruit seller', 'Furniture maker', 'Furrier', 'Gambler', 'Gamekeeper',
+    'Gardener', 'General', 'Glass maker', 'Goldsmith', 'Governess', 'Grave digger', 'Groom', 'Guard',
+    'Guide', 'Haberdasher', 'Hatter', 'Healer', 'Herald', 'Horse trader', 'Hosteler', 'Hunter',
+    'Illustrator', 'Innkeeper', 'Jailer', 'Jester', 'Jeweller', 'Judge', 'Labourer', 'Laundress',
+    'Lawyer', 'Lead smith', 'Leather worker', 'Librarian', 'Linen maker', 'Locksmith', 'Maid', 'Marine',
+    'Mercenary', 'Merchant', 'Midwife', 'Miller', 'Miner', 'Minstrel', 'Moneylender', 'Musician',
+    'Navigator', 'Net maker', 'Noble', 'Nurse', 'Official', 'Outfitter', 'Page', 'Painter', 'Paper maker',
+    'Pawnbroker', 'Peasant', 'Peddler', 'Perfumer', 'Pharmacist', 'Photographer', 'Physician', 'Pilgrim',
+    'Pilot', 'Pimp', 'Pirate', 'Playwright', 'Plumber', 'Poacher', 'Police', 'Porter', 'Potter', 'Priest',
+    'Printer', 'Professor', 'Prospector', 'Prostitute', 'Purser', 'Ranger', 'Ratcatcher', 'Roofer',
+    'Rope maker', 'Runner', 'Saddler', 'Sail maker', 'Sailor', 'Scavenger', 'Scholar', 'Scout', 'Scribe',
+    'Sculptor', 'Servant', 'Server', 'Sharpener', 'Shepherd', 'Shipwright', 'Shopkeeper', 'Silk trader',
+    'Silversmith', 'Soap maker', 'Soldier', 'Spice trader', 'Squire', 'Stabler', 'Stevedore', 'Steward',
+    'Stonemason', 'Student', 'Tailor', 'Tattooist', 'Tax collector', 'Taxidermist', 'Teacher', 'Thief',
+    'Thug', 'Tile maker', 'Tinker', 'Trader', 'Trapper', 'Undertaker', 'Veterinarian', 'Vintner',
+    'Water seller', 'Weaponsmith', 'Weaver', 'Wheelwright', 'Wine seller', 'Woodcutter'
+]
+
+baseline = {
+    'short': 'default',                     # STR: class name for references
+    'long': 'Default Class name',           # STR: class name for display
+    'level': 1,                             # INT: right now only used for # of spells mastered
+    'hd': 6,                                # INT: The Hit Die of the class
+    'primAttr': [],                         # LIST of one or two stats for high stat roll assignments
+    'flags': ['base', 'human'],             # LIST of flags for different effects
+    'nextXP': '2000',                       # STR: amount of XP needed for next level
+    'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],    # LIST of allowed alignments for random choice
+    'attacksAs': 'mid',                     # STRING: what category of combat bonuses
+    'skills': False,                        # LIST of skills for the class
+    'restrictions': ['Placeholder for Restrictions'],   # Unsure, placeholder
+    'special': ['Placeholder for Special Abilities'],   # Unsure, placeholder
+    'wps': False,                           # INT: How many starting Weapon Proficiencies
+    'weapons': 'war',                       # STR: Category of weapons allowed as choices
+    'armour': 'war',                        # STR: Category of armours allowed as choices
+    'spellChooseAs': '',                    # STRING: if caster, usually = short
+    'spellsPerLvl': 0,                      # INT: if caster, how many spell choices per level
+    'cantrips': False,                      # either False or INT: num of cantrips at first level
+    'casterStat': '',                       # STRING: stat used for spells, if a caster
+    'extraspells': False,                   # either False or some magicians get free spells plus their choices
+    'saves': False,                         # FALSE or else a LIST of integers, in order
+    'extragear': False,                     # either False or LIST: some professions have extra gear, put it here
+    'personal': random.choice(personals),
+    'background': random.choice(backgrounds),
 }
 
 bnt_profs = {
     'default': {
-        'short': 'default',                     # STR: class name for references
-        'long': 'Default Class name',           # STR: class name for display
-        'flags': ['base'],                      # LIST of flags for different effects
-        'level': 1,                             # INT: right now only used for # of spells mastered
-        'nextXP': '2000',                       # STR: amount of XP needed for next level
-        'hd': 6,                                # INT: The Hit Die of the class
-        'primAttr': [],                         # LIST of one or two stats for high stat roll assignments
-        'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],    # LIST of allowed alignments for random choice
-        'attacksAs': 'mid',                     # STRING: what category of combat bonuses
-        'weapons': 'war',                       # STR: Category of weapons allowed as choices
-        'armour': 'war',                        # STR: Category of armours allowed as choices
-        'spellChooseAs': '',                    # STRING: if caster, usually = short
-        'spellsPerLvl': 0,                      # INT: if caster, how many spell choices per level
-        'cantrips': False,                      # either False or INT: num of cantrips at first level
-        'casterStat': '',                       # STRING: stat used for spells, if a caster
-        'saves': [15, 13, 15],                  # LIST of 3 integers, in order
-        'skills': ['Placeholder for Skills'],   # LIST of skills for the class
-        'restrictions': ['Placeholder for Restrictions'],   # Unsure, placeholder
-        'special': ['Placeholder for Special Abilities'],   # Unsure, placeholder
-        'extragear': False,                     # either False or LIST: some professions have extra gear, put it here
-        'extraspells': False,                   # either False or some magicians get free spells plus their choices
+        'flags': ['base'],
+        'saves': [15, 13, 15],
     },
     'assassin': {
         'short': 'assassin',
@@ -273,28 +291,10 @@ bnt_profs = {
 
 dd_profs = {
     'default': {
-        'short': 'default',                     # STR: class name for references
-        'long': 'Default Class name',           # STR: class name for display
-        'flags': ['base', 'human'],             # LIST of flags for different effects
-        'level': 1,                             # INT: right now only used for # of spells mastered
-        'nextXP': '2000',                       # STR: amount of XP needed for next level
-        'hd': 6,                                # INT: The Hit Die of the class
-        'primAttr': [],                         # LIST of one or two stats for high stat roll assignments
-        'alignAllowed': ['chaos', 'law', 'neutral'],    # LIST of allowed alignments for random choice
-        'attacksAs': 'mid',                     # STRING: what category of combat bonuses
-        'wps': 2,                               # INT: How many starting Weapon Proficiencies
-        'weapons': 'war',                       # STR: Category of weapons allowed as choices
-        'armour': 'war',                        # STR: Category of armours allowed as choices
-        'spellChooseAs': '',                    # STRING: if caster, usually = short
-        'spellsPerLvl': 0,                      # INT: if caster, how many spell choices per level
-        'casterStat': '',                       # STRING: stat used for spells, if a caster
-        'cantrips': False,                      # either False or INT: num of cantrips at first level
-        'saves': [12, 13, 14, 15, 16],          # LIST of 5 integers, in order
-        'skills': list(random.sample(skills['dd'], 4)),     # LIST of skills chosen from the core book
-        'restrictions': ['Placeholder for Restrictions'],   # Unsure, placeholder
-        'special': ['Placeholder for Special Abilities'],   # Unsure, placeholder
-        'extragear': False,                     # either False or LIST: some professions have extra gear, put it here
-        'extraspells': False,                   # either False or some magicians get free spells plus their choices
+        'alignAllowed': ['chaos', 'law', 'neutral'],
+        'wps': 2,
+        'saves': [12, 13, 14, 15, 16],
+        'skills': list(random.sample(skills['dd'], 4)),
     },
     'cleric': {
         'short': 'cleric',
@@ -384,23 +384,9 @@ pla_profs = {}
 
 tnu_profs = {
     'default': {
-        'short': 'default',                     # STR: short name for frequent use in this code
-        'long': 'Default Class Name',           # STR: Display Name
-        'flags': [],                            # LIST of flags for different effects
-        'level': 1,                             # INT: right now only used for # of spells mastered
-        'hd': 8,                                # INT: hit dice for calculations
-        'primAttr': [],                         # LIST of one or two stats for high stat roll assignments
-        'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],    # LIST of allowed alignments for random choice
-        'attacksAs': 'none',                    # STRING: what category fo combat bonuses
-        'spellChooseAs': '',                    # STRING: if caster, usually = short
-        'spellsPerLvl': 0,                      # INT: if caster, how many spell choices per level
-        'casterStat': '',                       # STRING: stat used for spells, if a caster
-        'cantrips': False,                      # either False or INT: num of cantrips at first level
-        'skills': ['Placeholder for Skills'],   # Unsure, placeholder as I figure out skills. Might go unused.
-        'restrictions': ['Placeholder for Restrictions'],   # Unsure, placeholder
-        'special': ['Placeholder for Special Abilities'],   # Unsure, placeholder
-        'extragear': False,                     # either False or LIST: some professions have extra gear, put it here
-        'extraspells': False,                   # either False or some magicians get free spells plus their choices
+        'hd': 8,
+        'attacksAs': 'none',
+        'skills': ['See Background for Inspiration'],
     },
     'assassin': {
         'short': 'assassin',
@@ -673,7 +659,9 @@ proflists = {
 def get_profession(system='tnu'):
     my_list = proflists[system]['choices']
     my_dict = proflists[system]['dict']
-    prof_data = my_dict['default']
+    prof_data = baseline
+    syst_defs = my_dict['default']
+    prof_data.update(syst_defs)
     prof_spec = my_dict[random.choice(my_list)]
     prof_data.update(prof_spec)
     return prof_data

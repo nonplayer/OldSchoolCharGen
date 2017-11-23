@@ -159,6 +159,7 @@ backgrounds = [
 baseline = {
     'short': 'default',                     # STR: class name for references
     'long': 'Default Class name',           # STR: class name for display
+    'race': False,                          # FALSE or STR for default race
     'level': 1,                             # INT: right now only used for # of spells mastered
     'hd': 6,                                # INT: The Hit Die of the class
     'primAttr': [],                         # LIST of one or two stats for high stat roll assignments
@@ -344,6 +345,7 @@ bnt_profs = {
 
 dd_profs = {
     'default': {
+        'race': 'Human',
         'alignAllowed': ['chaos', 'law', 'neutral'],
         'wps': 2,
         'saves': [12, 13, 14, 15, 16],
@@ -365,6 +367,7 @@ dd_profs = {
     'dwarf': {
         'short': 'dwarf',
         'long': 'Dwarf',
+        'race': 'Dwarf',
         'flags': ['base', 'demi'],
         'nextXP': '2200',
         'hd': 8,
@@ -376,6 +379,7 @@ dd_profs = {
     'elf': {
         'short': 'elf',
         'long': 'Elf',
+        'race': 'Elf',
         'flags': ['base', 'demi', 'caster'],
         'nextXP': '4000',
         'primAttr': ['STR', 'INT'],
@@ -397,6 +401,7 @@ dd_profs = {
     'halfling': {
         'short': 'halfling',
         'long': 'Halfling',
+        'race': 'Halfling',
         'flags': ['base', 'demi'],
         'primAttr': ['DEX', 'CON'],
         'weapons': 'hlf',

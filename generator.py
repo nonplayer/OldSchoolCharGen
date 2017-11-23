@@ -148,6 +148,10 @@ def generate(game_system='tnu'):
         my_race = random.choice(list(prefs['races']))
         DATA['race'] = prefs['races'][my_race]['label']
         DATA['traits'] = DATA['traits'] + prefs['races'][my_race]['traits']
+    elif md['race']:
+        DATA['race'] = md['race']
+    else:
+        DATA['race'] = 'Human'
     #
     # get more basic stuff:
     #
@@ -235,8 +239,8 @@ def print_character(system_name):
     print("\nA new random character for " + str(DATA['system']))
     print("-----------------------------------------------------")
     # print("Raw Data Print: ", gen_data)
-    print("Profession: " + DATA['long'] + ";  Level: " + str(DATA['lvl']) + ";  Alignment: " +
-          DATA['align'].title() + ";  Age: " + DATA['age'] + ";  Looks: " + DATA['looks'])
+    print("Profession: " + DATA['long'] + ";  Level: " + str(DATA['lvl']) + ";  Race: " + DATA['race'])
+    print("Alignment: " + DATA['align'].title() + ";  Age: " + DATA['age'] + ";  Looks: " + DATA['looks'])
     print("Trait: " + DATA['personal'] + ";  Background: " + DATA['background'] +
           ";  Social Status: " + DATA['soc_class'] + " (" + str(DATA['soc_mod']) + ")")
     print("Hit Die: d" + str(DATA['hd']) + ";  Psychic Armour: " + str(DATA['pa']))
@@ -299,4 +303,4 @@ if __name__ == "__main__":
     # else:
     #     system = selection
     # print_character(system)
-    print_character('tnu')
+    print_character('dd')

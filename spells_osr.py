@@ -1,5 +1,5 @@
 import random
-from random import choice as ch
+# from random import choice as ch
 
 
 spells_dd = {
@@ -71,7 +71,6 @@ cantrips_bnt = {
 }
 
 
-
 spells_pla = {
     'wiz': [],
     'clr': [],
@@ -94,9 +93,9 @@ def get_cantrips():
 
 # let's generate some spells!
 def get_spells(gamesystem, prof, count):
-    myChoices = systems_match[gamesystem][prof]
-    mySpells = list(set(random.sample(list(myChoices), count)))
-    return sorted(mySpells)
+    my_choices = systems_match[gamesystem][prof]
+    my_spells = list(set(random.sample(list(my_choices), count)))
+    return sorted(my_spells)
 
 
 # test it out

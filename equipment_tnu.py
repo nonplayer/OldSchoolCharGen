@@ -20,9 +20,11 @@ wretched = {
               ch(['ARMOUR: a leather jerkin (Light Armour, AC:13, Enc:1)', 'ARMOUR: a shield (AC+1)'])],
     'gear5': ['WEAPON: an axe', 'WEAPON: a dagger', 'WEAPON: a spear', 'a military flag (yours or someone else\'s)',
               'a lantern (but no oil)',
-              'a pouch of tobacco (but no pipe)', ch(
-            ['a stolen purse with ' + str(random.randint(13, 16)) + ' silver coins (worth 1c each)',
-             '2 bottles of your choice of alcoholic beverage'])],
+              'a pouch of tobacco (but no pipe)',
+              ch([
+                  'a stolen purse with ' + str(random.randint(13, 16)) + ' silver coins (worth 1c each)',
+                  '2 bottles of your choice of alcoholic beverage'
+              ])],
     'gear6': ['a lantern', '2 flasks of oil', 'a flying carpet'],
     'gear7': [str(dice.roll(1, 6)) + ' doses of drugs (your choice what type)', 'WEAPON: a club',
               'a mask that lets you see ghosts, spirits, and invisible things'],
@@ -101,9 +103,12 @@ poor = {
               ],
     'gear4': [
         'a backpack', ch(['WEAPON: a club', 'WEAPON: a dagger']), '2 weeks worth of rations',
-        ch(['', 'an animal trap']), ch(['', 'a compass']),
+        ch(['', 'an animal trap']),
+        ch(['', 'a compass']),
         ch(['', 'ARMOUR: a leather jerkin (Light Armour, AC:13, Enc:1)']),
-        ch(['', 'a pack of marked cards']), ch(['', 'WEAPON: a pole arm']), ch(['', 'ARMOUR: a shield (AC+1)']),
+        ch(['', 'a pack of marked cards']),
+        ch(['', 'WEAPON: a pole arm']),
+        ch(['', 'ARMOUR: a shield (AC+1)']),
     ],
     'gear5': ['a bank note worth ' + str(random.randint(13, 15)) + ' cyphers', 'WEAPON: a dagger',
               'a random hireling', 'a shoulder bag', 'a set of tools (for the profession of your choice)',
@@ -324,12 +329,12 @@ def gear_tier(roll):
 def get_gear(prof, status):
     index = dice.roll(3, 6)
     tier = gear_tier(index)
-    gearList = list(filter(None, gearSets[status][tier]))
+    gear_list = list(filter(None, gearSets[status][tier]))
     if prof in gearSets[status]:
-        bonusGear = list(gearSets[status][prof])
-        for each in bonusGear:
-            gearList.append(each)
-    return gearList
+        bonus_gear = list(gearSets[status][prof])
+        for each in bonus_gear:
+            gear_list.append(each)
+    return gear_list
 
 
 '''
@@ -339,19 +344,13 @@ newtestlist = list(filter(None, testlist))
 
 
 if __name__ == "__main__":
-    prof = ch(['assassin', 'bard', 'champ_chaos', 'champ_evil', 'champ_good', 'champ_law',
-               'cultist', 'fighter', 'scholar', 'thief', 'wizard'])
-    status = ch(['wretched', 'peasant', 'poor', 'middle', 'lesser', 'greater', 'royal'])
-    myList = get_gear(prof, status)
-    weapons = list(filter(lambda x: x.startswith('WEAPON: '), myList))
-    armour = list(filter(lambda x: x.startswith('ARMOUR: '), myList))
-    print(prof)
-    print(status)
-    for x in weapons:
-        print(x)
-        myList.remove(x)
-    for x in armour:
-        print(x)
-        myList.remove(x)
-    for x in myList:
+    testprof = ch([
+        'assassin', 'bard', 'champ_chaos', 'champ_evil', 'champ_good',
+        'champ_law', 'cultist', 'fighter', 'scholar', 'thief', 'wizard'
+    ])
+    teststatus = ch([
+        'wretched', 'peasant', 'poor', 'middle', 'lesser', 'greater', 'royal'
+    ])
+    my_list = get_gear(testprof, teststatus)
+    for x in my_list:
         print(x)

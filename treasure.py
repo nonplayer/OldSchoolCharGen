@@ -12,8 +12,6 @@ Currently based on Dark Dungeons, compatible with BECMI.
 
 """
 
-import random
-from random import choice as ch
 from random import randint as ri
 
 import dice
@@ -194,88 +192,90 @@ systems = {
     'dd': dd_treasure,
 }
 
+
 # needs alpha category, game system, and number of rolls against the table
 def get_treasure(category, system='dd', quantity=1):
-    lootSet = systems[system]
-    checkSet = lootSet[category]
+    loot_set = systems[system]
+    check_set = loot_set[category]
     # let's go down the line now...
-    myTreasure = []
-    if 'CP' in checkSet:
-        myCPs = 0
+    my_treasure = []
+    if 'CP' in check_set:
+        my_cps = 0
         for x in range(0, quantity):
-            checkVal = ri(1, 100)
-            if checkVal <= checkSet['CP']['chance']:
-                myCPs += checkSet['CP']['val']
-        if myCPs > 0:
-            myTreasure.append('Copper Pieces: ' + str(myCPs))
-    if 'SP' in checkSet:
-        mySPs = 0
+            check_val = ri(1, 100)
+            if check_val <= check_set['CP']['chance']:
+                my_cps += check_set['CP']['val']
+        if my_cps > 0:
+            my_treasure.append('Copper Pieces: ' + str(my_cps))
+    if 'SP' in check_set:
+        my_sps = 0
         for x in range(0, quantity):
-            checkVal = ri(1, 100)
-            if checkVal <= checkSet['SP']['chance']:
-                mySPs += checkSet['SP']['val']
-        if mySPs > 0:
-            myTreasure.append('Silver Pieces: ' + str(mySPs))
-    if 'EP' in checkSet:
-        myEPs = 0
+            check_val = ri(1, 100)
+            if check_val <= check_set['SP']['chance']:
+                my_sps += check_set['SP']['val']
+        if my_sps > 0:
+            my_treasure.append('Silver Pieces: ' + str(my_sps))
+    if 'EP' in check_set:
+        my_eps = 0
         for x in range(0, quantity):
-            checkVal = ri(1, 100)
-            if checkVal <= checkSet['EP']['chance']:
-                myEPs += checkSet['EP']['val']
-        if myEPs > 0:
-            myTreasure.append('Electrum Pieces: ' + str(myEPs))
-    if 'GP' in checkSet:
-        myGPs = 0
+            check_val = ri(1, 100)
+            if check_val <= check_set['EP']['chance']:
+                my_eps += check_set['EP']['val']
+        if my_eps > 0:
+            my_treasure.append('Electrum Pieces: ' + str(my_eps))
+    if 'GP' in check_set:
+        my_gps = 0
         for x in range(0, quantity):
-            checkVal = ri(1, 100)
-            if checkVal <= checkSet['GP']['chance']:
-                myGPs += checkSet['GP']['val']
-        if myGPs > 0:
-            myTreasure.append('Gold Pieces: ' + str(myGPs))
-    if 'PP' in checkSet:
-        myPPs = 0
+            check_val = ri(1, 100)
+            if check_val <= check_set['GP']['chance']:
+                my_gps += check_set['GP']['val']
+        if my_gps > 0:
+            my_treasure.append('Gold Pieces: ' + str(my_gps))
+    if 'PP' in check_set:
+        my_pps = 0
         for x in range(0, quantity):
-            checkVal = ri(1, 100)
-            if checkVal <= checkSet['PP']['chance']:
-                myPPs += checkSet['PP']['val']
-        if myPPs > 0:
-            myTreasure.append('Platinum Pieces: ' + str(myPPs))
-    if 'Gems' in checkSet:
-        myGems = 0
+            check_val = ri(1, 100)
+            if check_val <= check_set['PP']['chance']:
+                my_pps += check_set['PP']['val']
+        if my_pps > 0:
+            my_treasure.append('Platinum Pieces: ' + str(my_pps))
+    if 'Gems' in check_set:
+        my_gems = 0
         for x in range(0, quantity):
-            checkVal = ri(1, 100)
-            if checkVal <= checkSet['Gems']['chance']:
-                myGems += checkSet['Gems']['val']
-        if myGems > 0:
-            myTreasure.append('Gems: ' + str(myGems))
-    if 'Jewl' in checkSet:
-        myJewls = 0
+            check_val = ri(1, 100)
+            if check_val <= check_set['Gems']['chance']:
+                my_gems += check_set['Gems']['val']
+        if my_gems > 0:
+            my_treasure.append('Gems: ' + str(my_gems))
+    if 'Jewl' in check_set:
+        my_jewls = 0
         for x in range(0, quantity):
-            checkVal = ri(1, 100)
-            if checkVal <= checkSet['Jewl']['chance']:
-                myJewls += checkSet['Jewl']['val']
-        if myJewls > 0:
-            myTreasure.append('Pieces of Jewellery: ' + str(myJewls))
-    if 'Spec' in checkSet:
-        mySpecs = 0
+            check_val = ri(1, 100)
+            if check_val <= check_set['Jewl']['chance']:
+                my_jewls += check_set['Jewl']['val']
+        if my_jewls > 0:
+            my_treasure.append('Pieces of Jewellery: ' + str(my_jewls))
+    if 'Spec' in check_set:
+        my_specs = 0
         for x in range(0, quantity):
-            checkVal = ri(1, 100)
-            if checkVal <= checkSet['Spec']['chance']:
-                mySpecs += checkSet['Spec']['val']
-        if mySpecs > 0:
-            myTreasure.append('Platinum Pieces: ' + str(mySpecs))
-    if 'Mag' in checkSet:
-        myMags = []
+            check_val = ri(1, 100)
+            if check_val <= check_set['Spec']['chance']:
+                my_specs += check_set['Spec']['val']
+        if my_specs > 0:
+            my_treasure.append('Platinum Pieces: ' + str(my_specs))
+    if 'Mag' in check_set:
+        # my_mags = []
         for x in range(0, quantity):
-            checkVal = ri(1, 100)
-            if checkVal <= checkSet['Mag']['chance']:
-                myTreasure.append(str('Magic Items: ' + str(checkSet['Mag']['val'])))
-    return myTreasure
+            check_val = ri(1, 100)
+            if check_val <= check_set['Mag']['chance']:
+                my_treasure.append(str('Magic Items: ' + str(check_set['Mag']['val'])))
+    return my_treasure
+
 
 if __name__ == "__main__":
     sys = 'dd'  # will convert to input later
     table = input("Which sub-table are you rolling against? Valid input is single-letter A-V: ")
     rolls = int(input("How many rolls against that table do you need to make? Enter a number 1 or greater: "))
-    myTreasure = get_treasure(table, sys, rolls)
-    for item in myTreasure:
+    treasure = get_treasure(table, sys, rolls)
+    for item in treasure:
         print(item)

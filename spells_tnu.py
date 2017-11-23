@@ -9,7 +9,7 @@ get_spells('scholar', 'good', 3)
 """
 
 import random
-from random import choice as ch
+# from random import choice as ch
 
 
 # build the roll range lists for the schools
@@ -26,29 +26,29 @@ SUM = list(range(81, 91))
 TRA = list(range(91, 101))
 
 # valid spell rolls based on profession
-spellValids = {
-    'bard' : {
-        'commons' : ALL,
-        'alts' : DIV + ENC + HEA + ILL,  # special alternate list of choices
+spell_valids = {
+    'bard': {
+        'commons': ALL,
+        'alts': DIV + ENC + HEA + ILL,  # special alternate list of choices
     },
-    'champ_chaos' : {
-        'commons' : list(range(1, 61)) + list(range(71, 101)),
-        'alts' : list(range(1, 61)) + list(range(71, 101)),  # can't use law
+    'champ_chaos': {
+        'commons': list(range(1, 61)) + list(range(71, 101)),
+        'alts': list(range(1, 61)) + list(range(71, 101)),  # can't use law
     },
-    'cultist' : {
-        'commons' : ALL,
-        'alts' : ALL,
+    'cultist': {
+        'commons': ALL,
+        'alts': ALL,
     },
-    'scholar' : {
-        'commons' : ALL,  # only prof with alignment-based choices
-        'alts' : ALL,
-        'evil' : BAT,
-        'good' : HEA,
-        'law' : LAW,
+    'scholar': {
+        'commons': ALL,  # only prof with alignment-based choices
+        'alts': ALL,
+        'evil': BAT,
+        'good': HEA,
+        'law': LAW,
     },
-    'wizard' : {
-        'commons' : ALL,
-        'alts' : ALL,
+    'wizard': {
+        'commons': ALL,
+        'alts': ALL,
     },
 }
 
@@ -201,33 +201,29 @@ dict of only level 1 and "varies" spells, for later use if I need them:
 
 # let's generate some spells!
 def get_spells(prof, align, count):
-    mySpells = []
-    myRolls = spells_by_prof(prof, align, count)
-    while set(myRolls).issubset(QUI):
+    my_spells = []
+    my_rolls = spells_by_prof(prof, align, count)
+    while set(my_rolls).issubset(QUI):
         '''complete reroll if all four spells end up being from Quintessence school:'''
-        myRolls = spells_by_prof(prof, align, count)
-    for roll in myRolls:
-        newSpell = spellsDict[str(roll)]
-        mySpells.append(newSpell)
-    return sorted(mySpells)
+        my_rolls = spells_by_prof(prof, align, count)
+    for roll in my_rolls:
+        new_spell = spellsDict[str(roll)]
+        my_spells.append(new_spell)
+    return sorted(my_spells)
 
 
 def spells_by_prof(prof, align, count):
-    spellRolls = []
-    #testCount = 0
-    while len(spellRolls) < count:
-        selectionA = spellValids[prof]['commons']
-        if align in spellValids[prof]:
+    spell_rolls = []
+    while len(spell_rolls) < count:
+        selection_a = spell_valids[prof]['commons']
+        if align in spell_valids[prof]:
             '''some profs have alignment-based options:'''
-            selectionB = spellValids[prof][align]
+            selection_b = spell_valids[prof][align]
         else:
-            selectionB = spellValids[prof]['alts']
+            selection_b = spell_valids[prof]['alts']
         '''get the spell roll from either commons or special alternatives:'''
-        spellRolls = list(set(random.sample(list(selectionA + selectionB), count)))
-        #testCount += 1
-        #print("This ran", testCount, "times")
-    #print(len(spellRolls))
-    return spellRolls
+        spell_rolls = list(set(random.sample(list(selection_a + selection_b), count)))
+    return spell_rolls
 
 
 # test it out

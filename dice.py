@@ -13,13 +13,16 @@ def roll(num=1, size=6):
 
 
 def stats():
-    rolls = sorted([roll(3, 6), roll(3, 6), roll(3, 6), roll(3, 6), roll(3, 6), roll(3, 6)])  # maybe add?: , reverse=True
+    rolls = sorted([
+        roll(3, 6), roll(3, 6), roll(3, 6), roll(3, 6), roll(3, 6), roll(3, 6)
+    ])
+    # maybe add reverse=True ?
     return rolls
 
 
 def get_mod(stat):
     num = int(stat)
-    mod = 0
+    # mod = 0
     if num >= 18:
         mod = 3
     elif num >= 16:

@@ -166,6 +166,8 @@ systems = {
         'spread': statArrays['dnd'],    # STR: what spread of stats this system uses
         'acBase': 10,                   # INT: AC base 9 or 10, usually
         'acType': 'ascend',             # STR: 'ascend' or 'descend'
+        'meleeMod': 'STR',              # STR: stat used to calc melee attack modifier
+        'rangeMod': 'DEX',             # STR: stat used to calc ranged attack modifier
         'saves': False,                 # Pulls STR from Saves dict, above
         'hasWPs': False,                # BOO: notes if this system uses specific WPs a la Dark Dungeons
         'maxLvl': 10,                   # INT: maximum XP level in the game
@@ -194,6 +196,8 @@ systems = {
         'stats': 8,
         'spread': statArrays['pla'],
         'acBase': 4,
+        'meleeMod': 'PRW',
+        'rangeMod': 'PRW',
         'saves': saves['pla'],
         'maxLvl': 15,
     },
@@ -204,6 +208,8 @@ systems = {
         'stats': 8,
         'spread': statArrays['pla'],
         'acBase': 4,
+        'meleeMod': 'PRW',
+        'rangeMod': 'PRW',
         'saves': saves['pla'],
         'maxLvl': 15,
     },
@@ -213,6 +219,7 @@ systems = {
         'type': 'tnu',
         'hasHPs': False,
         'spread': statArrays['tnu'],
+        'meleeMod': 'FER',
     },
 }
 

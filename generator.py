@@ -99,14 +99,6 @@ def gen_ac(prefs, armour):
     return ac_final
 
 
-def gen_melee():
-    return
-
-
-def gen_ranged():
-    return
-
-
 def generate(game_system='tnu'):
     DATA = {}
     #
@@ -143,7 +135,6 @@ def generate(game_system='tnu'):
     #
     # get character race, if applicable:
     #
-
     if prefs['races']:
         my_race = random.choice(list(prefs['races']))
         DATA['race'] = prefs['races'][my_race]['label']
@@ -168,12 +159,34 @@ def generate(game_system='tnu'):
     else:
         DATA['saves'] = False
     #
-    # nxt come the skills, if any:
+    # next come the skills, if any:
     #
     if md['skills']:
         DATA['skills'] = list(sorted(md['skills']))
     else:
         DATA['skills'] = False
+    #
+    # time for the combat data. Right now it's just level 1 hacking,
+    # but I might update if I ever get around to multi-level generation
+    # (but admittedly this is unlikely)
+    #
+    if game_system in ['dd']:
+        combat_mod = 1
+    elif md['attacksAs'] in ['best', 'mid-hi']:
+        combat_mod = 1
+    else:
+        combat_mod = 0
+    DATA['melee'] = DATA['stats'][str(prefs['meleeMod'])]['mod'] + combat_mod
+    DATA['range'] = DATA['stats'][str(prefs['rangeMod'])]['mod'] + combat_mod
+    # and make them look pretty:
+    if DATA['melee'] > 0:
+        DATA['melee'] = str("+" + str(DATA['melee']))
+    else:
+        DATA['melee'] = str(DATA['melee'])
+    if DATA['range'] > 0:
+        DATA['range'] = str("+" + str(DATA['range']))
+    else:
+        DATA['range'] = str(DATA['range'])
     #
     # let's get that gear list:
     #
@@ -259,9 +272,9 @@ def print_character(system_name):
         print("-------")
         for x in list(DATA['skills']):
             print(x)
-    print("\nCombat Traits:")
-    print("--------------")
-    print("Melee: " + "  Ranged: " + "  AC: " + str(DATA['ac']))
+    print("\nCombat Mods and Traits:")
+    print("-----------------------")
+    print("Melee: " + str(DATA['melee']) + ";  Ranged: " + str(DATA['range']) + ";  AC: " + str(DATA['ac']))
     print("\nTraits and Abilities:")
     print("--------------------")
     for x in list(DATA['traits']):
@@ -303,4 +316,4 @@ if __name__ == "__main__":
     # else:
     #     system = selection
     # print_character(system)
-    print_character('dd')
+    print_character('bnt')

@@ -129,6 +129,8 @@ def generate(game_system='tnu'):
     stats_d = dice.get_spread(spread, primes)
     DATA['stats'] = stats_d
     DATA['traits'] = list(md['special'])
+    DATA['personal'] = md['personal']
+    DATA['background'] = md['background']
     #
     # get stats average, for reasons:
     #
@@ -232,8 +234,8 @@ def print_character(system_name):
     print("-----------------------------------------------------")
     # print("Raw Data Print: ", gen_data)
     print("Profession: " + DATA['long'] + "; Level: " + str(DATA['lvl']) + "; Alignment:", DATA['align'].title())
-    print("Hit Die: d" + str(DATA['hd']) + "; Psychic Armour: " + str(DATA['pa'])
-          + "; Social Status: " + DATA['soc_class'] + "(" + str(DATA['soc_mod']) + ")")
+    print("Trait: " + DATA['personal'] + "; Background: " + DATA['background'] + "; Social Status: " + DATA['soc_class'] + "(" + str(DATA['soc_mod']) + ")")
+    print("Hit Die: d" + str(DATA['hd']) + "; Psychic Armour: " + str(DATA['pa']))
     print("---------------")
     print("\nAttribute Scores:")
     print("-----------------")

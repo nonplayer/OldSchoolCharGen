@@ -74,15 +74,23 @@ saves = {
     'pla': ['Mind', 'Body', 'Reflex', 'Horror Factor (HF)'],
 }
 
+langs = [
+    'Celestial (Law)', 'Dragon', 'Druidic', 'Dwarf', 'Elemental, Air', 'Elemental, Earth',
+    'Elemental, Fire', 'Elemental, Water', 'Elf', 'Giant', 'Gnoll ', 'Gnome', 'Goblin',
+    'Grimlock', 'Halfling', 'Infernal (Chaos)', 'Kobold', 'Manticore', 'Medusa', 'Naga',
+    'Ogre', 'Ophidian', 'Orc', 'Sylvan',
+]
 
 dnd_races = {
     'bnt': {
         'human': {
             'label': "Human",
-            'traits': ['(Racial) Medium size with a base speed of 30 feet.',
-                       '(Racial) 10% bonus to all earned experience.',
-                       '(Racial) +1 bonus to all saving throws.',
-                       '(Racial) Speak Common and can learn any other language.'],
+            'traits': [
+                '(Racial) Medium size with a base speed of 30 feet.',
+                '(Racial) 10% bonus to all earned experience.',
+                '(Racial) +1 bonus to all saving throws.',
+                ],
+            'langs': [],
         },
         'dwarf': {
             'label': "Dwarf",
@@ -92,11 +100,10 @@ dnd_races = {
                 '(Racial) +3 bonus on Fortitude saving throws vs poison.',
                 '(Racial) +3 bonus on Will saves against magic (Dwarf spellcasters lose this bonus).',
                 '(Racial) knack for noticing unusual stonework and intuiting depth.',
-                '(Racial) Speak Common and Dwarven. They might also speak Gnome, Goblin, '
-                'Kobold, Orc, Ogre, Hill Giant and Earth Elemental.',
                 '(Racial) +1 attack vs goblins, hobgoblins and orcs.',
                 '(Racial) +4 AC vs large humanoids like giants.'
             ],
+            'langs': ['Dwarven'],
         },
         'elf': {
             'label': "Elf",
@@ -107,8 +114,8 @@ dnd_races = {
                 '(Racial)  +1 bonus to hit with long and short bows, and long and short swords.',
                 '(Racial) 90% magic resistance to sleep spells and enchantment spells.',
                 '(Racial) Immunity to ghoul paralysis.',
-                '(Racial) Speak Common and Elven. They might also speak Gnoll, Gnome, Goblin, Orc, Sylvan and Dragon.'
             ],
+            'langs': ['Elven'],
         },
         'gnome': {
             'label': "Gnome",
@@ -119,9 +126,8 @@ dnd_races = {
                 '(Racial) If CHA is 10 or higher can cast the following spells, 1x/day each: '
                 'Audible glamer, dancing lights and prestidigitation.',
                 '(Racial) +2 bonus on Will saving throws against illusions.',
-                '(Racial) Speak Common and Gnome. They might also speak Dwarf, Elf, Goblin, '
-                'Hill Giant, Orc, Sylvan and the language of burrowing mammals.'
             ],
+            'langs': ['Gnome'],
         },
         'halfelf': {
             'label': "Half-Elf",
@@ -130,16 +136,16 @@ dnd_races = {
                 '(Racial) Darkvision to a range of 60 feet.',
                 '(Racial) 30% magic resistance to sleep and enchantment spells.',
                 '(Racial) Knack for trickery.',
-                '(Racial) Speak Common and Elven and can learn virtually any other language.'
             ],
+            'langs': ['Elven'],
         },
         'halforc': {
             'label': "Half-Orc",
             'traits': [
                 '(Racial) Medium size with a base speed of 30 feet.',
                 '(Racial) Darkvision to 60 feet.',
-                '(Racial) Speak Common and Orc. They might also speak Gnoll, Goblin, Hill Giant, Ogre or Dragon.'
             ],
+            'langs': ['Orc'],
         },
         'halfling': {
             'label': "Halfling",
@@ -148,9 +154,8 @@ dnd_races = {
                 '(Racial) Darkvision to a range of 30 feet.',
                 '(Racial) +1 bonus when attacking with slings and thrown weapons.',
                 '(Racial) Knack for hiding, moving silently and getting into trouble.',
-                '(Racial) Speak Common and Halfling. They might also speak '
-                'Dwarven, Elven, Gnome, Goblin, Kobold or Orc.'
             ],
+            'langs': ['Halfling'],
         },
     },
 }
@@ -172,6 +177,7 @@ systems = {
         'hasWPs': False,                # BOO: notes if this system uses specific WPs a la Dark Dungeons
         'maxLvl': 10,                   # INT: maximum XP level in the game
         'races': False,
+        'langs': ['Common'],
     },
     'bnt': {
         'name': 'bnt',

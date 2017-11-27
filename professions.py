@@ -181,6 +181,7 @@ baseline = {
     'extraspells': False,                   # either False or some magicians get free spells plus their choices
     'saves': False,                         # FALSE or else a LIST of integers, in order
     'extragear': False,                     # either False or LIST: some professions have extra gear, put it here
+    'extralangs': [],                       # LIST if any bonus languages come with the class
     # a bunch of fun random character traits follow:
     'personal': random.choice(personals),
     'background': random.choice(backgrounds),
@@ -396,6 +397,7 @@ bnt_profs = {
         'special': [
             '(Class) Backstab (x2 damage; can be ranged if less than 30 ft.)',
         ],
+        'extralangs': ['Thieves\' Cant'],
     },
 }
 
@@ -527,6 +529,7 @@ dd_profs = {
             '(Class) Thiefskill: Pick Pockets: 20',
             '(Class) Thiefskill: Hear Noise: 30',
         ],
+        'extralangs': ['Thieves\' Cant'],
     },
 }
 

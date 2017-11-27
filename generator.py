@@ -135,10 +135,12 @@ def generate(game_system='tnu'):
     #
     # get character race, if applicable:
     #
+    DATA['languages'] = prefs['langs']
     if prefs['races']:
         my_race = random.choice(list(prefs['races']))
         DATA['race'] = prefs['races'][my_race]['label']
         DATA['traits'] = DATA['traits'] + prefs['races'][my_race]['traits']
+        DATA['languages'] = DATA['languages'] + prefs['races'][my_race]['langs']
     elif md['race']:
         DATA['race'] = md['race']
     else:
@@ -267,6 +269,10 @@ def print_character(system_name):
         print("--------------")
         for key, value in dict.items(DATA['saves']):
             print(key + ": " + str(value))
+    print("\nLanguages:")
+    print("----------")
+    for x in list(DATA['languages']):
+        print(x)
     if DATA['skills']:
         print("\nSkills:")
         print("-------")

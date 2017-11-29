@@ -316,7 +316,7 @@ bnt_profs = {
         'casterStat': 'INT',
         'saves': [15, 15, 13],
         'extragear': ['a Spell Book'],
-        'extraspells': ['Read Magic'],
+        'extraspells': ['Cantrip: Read Magic'],
         'skills': ['Decipher codes (INT)', 'Find secret doors (INT)'],
         'special': [
             '(Class) Spellcaster (Mage list, must prepare, can learn new)',
@@ -376,7 +376,6 @@ bnt_profs = {
         'cantrips': 5,
         'casterStat': 'CHA',
         'saves': [15, 15, 13],
-        'extraspells': ['Read Magic'],
         'skills': ['Trickery (CHA)'],
         'special': [
             '(Class) Spellcaster (Mage list, no preparation, cannot learn new).',

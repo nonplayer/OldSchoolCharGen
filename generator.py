@@ -232,17 +232,20 @@ def generate(game_system='tnu'):
     # let's get those spells now:
     #
     DATA['num_spells'] = 0
+    DATA['spells'] = []
     if 'caster' in md['flags']:
         DATA['caster'] = True
         my_castmod = stats_d[md['casterStat']]['mod']
         DATA['num_spells'] = DATA['lvl'] * md['spellsPerLvl'] + my_castmod
+        if md['cantrips']:
+            DATA['spells'] = list(spells_osr.get_cantrips(prefs['name'], md['spellChooseAs'], md['cantrips']))
         if DATA['num_spells'] > 0:
             my_spells = list(gen_spells(prefs['name'], md['spellChooseAs'], DATA['align'], DATA['num_spells']))
             if md['extraspells']:
                 for i in list(md['extraspells']):
                     my_spells.append(i)
             sorted(my_spells)
-            DATA['spells'] = my_spells
+            DATA['spells'] = my_spells + DATA['spells']
     else:
         DATA['caster'] = False
     return DATA

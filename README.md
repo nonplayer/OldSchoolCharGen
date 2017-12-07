@@ -4,17 +4,21 @@ This is a Python-based tool to generate random first-level characters for "old s
 
 ## Systems Compatibility
 
-Currently this tool can only create characters for [The Nightmares Underneath, by Johnstone Metzger](http://www.drivethrurpg.com/product/195355/The-Nightmares-Underneath). However, I've already begun laying the groundwork for extended compatibility with a number of other games. Top of my list for expansion are:
+Currently this tool can create characters for the following three old school games:
 
+* [The Nightmares Underneath, by Johnstone Metzger](http://www.drivethrurpg.com/product/195355/The-Nightmares-Underneath). 
 * [Dark Dungeons](http://www.drivethrurpg.com/product/177410/Dark-Dungeons)
-* [Blood & Treasure 1st Edition](http://www.drivethrurpg.com/product/124972/Blood--Treasure-Complete) (I just don't like the 2nd Edition changes at all)
+* [Blood & Treasure 1st Edition](http://www.drivethrurpg.com/product/124972/Blood--Treasure-Complete)
+
+Additionally, I've already begun laying the groundwork for extended compatibility with a number of other games, including:
+
 * [Microlite Platinum](https://archive.4plebs.org/dl/tg/image/1406/96/1406960963325.pdf)
 * And further out...
 	- Beyond the Wall
 	- The Black Hack
 	- Kaigaku
 	
-I know, everyone has their favorite systems, but these specifically are mine, and thus what I'm developing for. My hope is that I add more systems and automate more of the decisions, adding in more systems will be eventually be as simple as adding a new set of system prefs and hitting go.
+My hope is that as I add more systems and automate more of the decisions, adding in further systems compatibility will eventually be as simple as adding a new set of system prefs and hitting go.
 
 ### Mechanics Notes
 
@@ -22,9 +26,9 @@ Since the dawn of my gaming career as a wee lad, there are three things I've alw
 
 1. Level Maximums for non-humans
 2. Attribute minimums for classes
-3. ...I forgot the third one because I am drinking currently but I know it's important and I'll get back here when I remember.
+3. Attack Roll Matrices
 
-As such, I'm not guaranteeing compatibility with systems that enforce these things. Even with Dark Dungeons and Blood & Treasure, I've chosen to allow characters that don't 100% meet class stat minimums.
+As such, I'm not guaranteeing compatibility with systems that enforce these things. Even with Dark Dungeons and Blood & Treasure, I've chosen to allow characters that don't 100% meet class stat minimums. And any future system that I import will be brought over converted to a simple adjusted Base Attack Roll Modifier display.
 
 This also means that should I ever decide to let this app create characters of higher levels, I won't be adapting this to account for systems which limit the advancement of the non-human classes.
 

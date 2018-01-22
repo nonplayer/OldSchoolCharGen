@@ -9,6 +9,7 @@ Don't forget half-stats for TNU
 """
 
 import random
+import argparse
 
 import dice
 import equipment_osr
@@ -17,6 +18,10 @@ import professions
 import spells_osr
 import spells_tnu
 import systems
+
+parser = argparse.ArgumentParser(description='Get Game System')
+parser.add_argument('-g', '--game_system', type=str, required=True, help='The abbreviated Game System')
+args = parser.parse_args()
 
 supported_systems = [
     'tnu', 'dd', 'bnt'
@@ -312,17 +317,12 @@ def print_character(system_name):
 
 
 if __name__ == "__main__":
-    # print("\nThis is a random 1st-level Character Generator for old school RPGs.")
-    # print("NOTICE: Currently only 'tnu' is supported, but additional systems are being planned.")
-    # print("Which system would you like to use? Enter the number or acronym below:\n")
-    # print(" [1] The Nightmares Underneath (tnu)")
-    # selection = str(input("\nYour Selection: "))
-    # if selection != '1' and selection != 'tnu':
-    #     print("Selection invalid, defaulting to #1: The Nightmares Underneath.\n")
-    #     system = 'tnu'
-    # elif selection == '1':
-    #     system = 'tnu'
-    # else:
-    #     system = selection
-    # print_character(system)
-    print_character('bnt')
+    game_sys = args.game_system
+    while game_sys not in supported_systems:
+        print("\nGame System choice is missing or invalid. Please enter one of the following systems:\n")
+        print("bnt = Blood & Treasure (1st Edition)")
+        print("dd  = Dark Dungeons")
+        print("tnu = The Nightmares Underneath")
+        print()
+        game_sys = input("Enter the system acronym from above: ")
+    print_character(game_sys)

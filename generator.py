@@ -21,6 +21,7 @@ import systems
 
 parser = argparse.ArgumentParser(description='Get Game System')
 parser.add_argument('-g', '--game_system', type=str, required=True, help='The abbreviated Game System (bnt, dd, tnu)')
+parser.add_argument('-H', '--hammercrawl', action='store_true', help='Enable HAMMERCRAWL! extended features (currently disabled)')
 args = parser.parse_args()
 
 supported_systems = [
@@ -318,11 +319,13 @@ def print_character(system_name):
 
 if __name__ == "__main__":
     game_sys = args.game_system
+    if args.hammercrawl:
+        print("HAMMERCRAWL TIME!!!!! Okay this currently does nothing, but stay tuned for more...")
     while game_sys not in supported_systems:
         print("\nGame System choice is missing or invalid. Please enter one of the following systems:\n")
         print("bnt = Blood & Treasure (1st Edition)")
         print("dd  = Dark Dungeons")
         print("tnu = The Nightmares Underneath")
         print()
-        game_sys = input("Enter the system acronym from above: ")
+        game_sys = input("Enter the system abbreviation from above: ")
     print_character(game_sys)

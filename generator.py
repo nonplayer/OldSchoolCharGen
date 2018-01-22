@@ -20,7 +20,7 @@ import spells_tnu
 import systems
 
 parser = argparse.ArgumentParser(description='Get Game System')
-parser.add_argument('-g', '--game_system', type=str, required=True, help='The abbreviated Game System')
+parser.add_argument('-g', '--game_system', type=str, required=True, help='The abbreviated Game System (bnt, dd, tnu)')
 args = parser.parse_args()
 
 supported_systems = [
@@ -262,21 +262,21 @@ def print_character(system_name):
     print("\nA new random character for " + str(DATA['system']))
     print("-----------------------------------------------------")
     # print("Raw Data Print: ", gen_data)
-    print("Profession: " + DATA['long'] + ";  Level: " + str(DATA['lvl']) + ";  Race: " + DATA['race'])
-    print("Alignment: " + DATA['align'].title() + ";  Age: " + DATA['age'] + ";  Looks: " + DATA['looks'])
-    print("Trait: " + DATA['personal'] + ";  Background: " + DATA['background'] +
-          ";  Social Status: " + DATA['soc_class'] + " (" + str(DATA['soc_mod']) + ")")
-    print("Hit Die: d" + str(DATA['hd']) + ";  Psychic Armour: " + str(DATA['pa']))
+    print("Profession: %s;  Level: %s;  Race: %s" % (DATA['long'], str(DATA['lvl']), DATA['race']))
+    print("Alignment: %s;  Age: %s;  Looks: %s" % (DATA['align'].title(), DATA['age'], DATA['looks']))
+    print("Trait: %s;  Background: %s;  Social Status: %s (%s)" %
+          (DATA['personal'], DATA['background'], DATA['soc_class'], str(DATA['soc_mod'])))
+    print("Hit Die: d%s;  Psychic Armour: %s" % (str(DATA['hd']), str(DATA['pa'])))
     print("---------------")
     print("\nAttribute Scores:")
     print("-----------------")
     for key, value in dict.items(DATA['stats']):
-        print(key + ": " + str(value['val']) + ' (' + str(value['mod']) + ')')
+        print("%s: %s (%s)" % (key, str(value['val']), str(value['mod'])))
     if DATA['saves']:
         print("\nSaving Throws:")
         print("--------------")
         for key, value in dict.items(DATA['saves']):
-            print(key + ": " + str(value))
+            print("%s: %s" % (key, str(value)))
     print("\nLanguages:")
     print("----------")
     for x in list(DATA['languages']):
@@ -288,7 +288,7 @@ def print_character(system_name):
             print(x)
     print("\nCombat Mods and Traits:")
     print("-----------------------")
-    print("Melee: " + str(DATA['melee']) + ";  Ranged: " + str(DATA['range']) + ";  AC: " + str(DATA['ac']))
+    print("Melee: %s;  Ranged: %s;  AC: %s" % (str(DATA['melee']), str(DATA['range']), str(DATA['ac'])))
     print("\nTraits and Abilities:")
     print("--------------------")
     for x in list(DATA['traits']):
@@ -309,7 +309,7 @@ def print_character(system_name):
         print("\nSpells Known:")
         print("-------------")
         if DATA['num_spells'] <= 0:
-            print("I have no spells because I am the worst", DATA['long'], "ever!")
+            print("I have no spells because I am the worst %s ever!" % DATA['long'])
         else:
             for i in list(DATA['spells']):
                 print(i)

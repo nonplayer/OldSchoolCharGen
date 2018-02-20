@@ -96,9 +96,9 @@ def gen_ac(prefs, armour):
         elif any('Padded Armour' in x for x in armour):
             ac_mod += 1
     if prefs['name'] not in ['pla']:
-        if any('a Tower Shield' in x for x in armour):
+        if any('A Tower Shield' in x for x in armour):
             ac_mod += 2
-        elif any('a Shield' in x for x in armour):
+        elif any('A Shield' in x for x in armour):
             ac_mod += 1
     if prefs['acType'] == 'descend':
         ac_final = ac_base - ac_mod
@@ -108,31 +108,32 @@ def gen_ac(prefs, armour):
 
 
 def generate(game_system='tnu'):
-    DATA = {}
+    ch_data = {}
     #
     # first let's load those system prefs, to accommodate multiple game variants
     #
     if game_system not in supported_systems:
         game_system = 'tnu'
     prefs = dict(systems.get_system_prefs(game_system.upper()))
-    DATA['system'] = prefs['fullName']
+    ch_data['system'] = prefs['fullName']
     #
     # let's get that juicy character data and break it out!
     #
     md = dict(professions.get_profession(game_system))  # my data
-    DATA['short'] = md['short']
-    DATA['long'] = md['long']
-    DATA['lvl'] = int(md['level'])
-    DATA['align'] = random.choice(md['alignAllowed'])
+    ch_data['short'] = md['short']
+    ch_data['long'] = md['long']
+    ch_data['lvl'] = int(md['level'])
+    ch_data['align'] = random.choice(md['alignAllowed'])
     primes = list(md['primAttr'])
     spread = list(prefs['spread'])
     stats_d = dice.get_spread(spread, primes)
-    DATA['stats'] = stats_d
-    DATA['traits'] = list(md['special'])
-    DATA['personal'] = md['personal']
-    DATA['background'] = md['background']
-    DATA['age'] = md['age']
-    DATA['looks'] = md['looks']
+    ch_data['stats'] = stats_d
+    ch_data['affects'] = dict(prefs['affects'])
+    ch_data['traits'] = list(md['special'])
+    ch_data['personal'] = md['personal']
+    ch_data['background'] = md['background']
+    ch_data['age'] = md['age']
+    ch_data['looks'] = md['looks']
     #
     # get stats average, for reasons:
     #
@@ -143,38 +144,38 @@ def generate(game_system='tnu'):
     #
     # get character race, if applicable:
     #
-    DATA['languages'] = prefs['langs']
+    ch_data['languages'] = prefs['langs']
     if prefs['races']:
         my_race = random.choice(list(prefs['races']))
-        DATA['race'] = prefs['races'][my_race]['label']
-        DATA['traits'] = DATA['traits'] + prefs['races'][my_race]['traits']
-        DATA['languages'] = DATA['languages'] + prefs['races'][my_race]['langs']
+        ch_data['race'] = prefs['races'][my_race]['label']
+        ch_data['traits'] = ch_data['traits'] + prefs['races'][my_race]['traits']
+        ch_data['languages'] = ch_data['languages'] + prefs['races'][my_race]['langs']
     elif md['race']:
-        DATA['race'] = md['race']
+        ch_data['race'] = md['race']
     else:
-        DATA['race'] = 'Human'
+        ch_data['race'] = 'Human'
     #
     # get more basic stuff:
     #
-    DATA['hd'] = md['hd']
+    ch_data['hd'] = md['hd']
     my_class = dict(gen_social(int(dice.roll(3, 6))))
-    DATA['soc_class'] = my_class['title']
-    DATA['soc_mod'] = str(my_class['mod'])
+    ch_data['soc_class'] = my_class['title']
+    ch_data['soc_mod'] = str(my_class['mod'])
     if 'haspa' in md['flags']:
-        DATA['pa'] = 'Yes'
+        ch_data['pa'] = 'Yes'
     else:
-        DATA['pa'] = 'None'
+        ch_data['pa'] = 'None'
     if prefs['saves']:
-        DATA['saves'] = gen_saves(prefs['saves'], md['saves'])
+        ch_data['saves'] = gen_saves(prefs['saves'], md['saves'])
     else:
-        DATA['saves'] = False
+        ch_data['saves'] = False
     #
     # next come the skills, if any:
     #
     if md['skills']:
-        DATA['skills'] = list(sorted(md['skills']))
+        ch_data['skills'] = list(sorted(md['skills']))
     else:
-        DATA['skills'] = False
+        ch_data['skills'] = False
     #
     # time for the combat data. Right now it's just level 1 hacking,
     # but I might update if I ever get around to multi-level generation
@@ -186,22 +187,22 @@ def generate(game_system='tnu'):
         combat_mod = 1
     else:
         combat_mod = 0
-    DATA['melee'] = DATA['stats'][str(prefs['meleeMod'])]['mod'] + combat_mod
-    DATA['range'] = DATA['stats'][str(prefs['rangeMod'])]['mod'] + combat_mod
+    ch_data['melee'] = ch_data['stats'][str(prefs['meleeMod'])]['mod'] + combat_mod
+    ch_data['range'] = ch_data['stats'][str(prefs['rangeMod'])]['mod'] + combat_mod
     # and make them look pretty:
-    if DATA['melee'] > 0:
-        DATA['melee'] = str("+" + str(DATA['melee']))
+    if ch_data['melee'] > 0:
+        ch_data['melee'] = str("+" + str(ch_data['melee']))
     else:
-        DATA['melee'] = str(DATA['melee'])
-    if DATA['range'] > 0:
-        DATA['range'] = str("+" + str(DATA['range']))
+        ch_data['melee'] = str(ch_data['melee'])
+    if ch_data['range'] > 0:
+        ch_data['range'] = str("+" + str(ch_data['range']))
     else:
-        DATA['range'] = str(DATA['range'])
+        ch_data['range'] = str(ch_data['range'])
     #
     # let's get that gear list:
     #
     if prefs['type'] == 'tnu':
-        my_gear = list(equipment_tnu.get_gear(DATA['short'], my_class['label']))
+        my_gear = list(equipment_tnu.get_gear(ch_data['short'], my_class['label']))
     elif prefs['type'] in ['dnd']:
         my_gear = list(equipment_osr.get_gear(md, prefs['name'], stats_avg))
     elif prefs['type'] == 'pla':
@@ -224,97 +225,97 @@ def generate(game_system='tnu'):
     for a in my_armour:
         my_gear.remove(a)
         my_armourlist.append(str.title(a[8:]))
-    DATA['weapons'] = sorted(my_weaponlist)
-    DATA['armour'] = sorted(my_armourlist)
-    DATA['gear'] = sorted(my_gear)
+    ch_data['weapons'] = sorted(my_weaponlist)
+    ch_data['armour'] = sorted(my_armourlist)
+    ch_data['gear'] = sorted(my_gear)
     #
     # now to generate the character's armour class
     #
-    DATA['ac'] = gen_ac(prefs, my_armourlist)
+    ch_data['ac'] = gen_ac(prefs, my_armourlist)
     if prefs['type'] is ['dnd']:
         if prefs['acType'] == 'descend':
-            DATA['ac'] -= stats_d['DEX']['mod']
+            ch_data['ac'] -= stats_d['DEX']['mod']
         else:
-            DATA['ac'] += stats_d['DEX']['mod']
+            ch_data['ac'] += stats_d['DEX']['mod']
     #
     # let's get those spells now:
     #
-    DATA['num_spells'] = 0
-    DATA['spells'] = []
+    ch_data['num_spells'] = 0
+    ch_data['spells'] = []
     if 'caster' in md['flags']:
-        DATA['caster'] = True
+        ch_data['caster'] = True
         my_castmod = stats_d[md['casterStat']]['mod']
-        DATA['num_spells'] = DATA['lvl'] * md['spellsPerLvl'] + my_castmod
+        ch_data['num_spells'] = ch_data['lvl'] * md['spellsPerLvl'] + my_castmod
         if md['cantrips']:
-            DATA['spells'] = list(spells_osr.get_cantrips(prefs['name'], md['spellChooseAs'], md['cantrips']))
-        if DATA['num_spells'] > 0:
-            my_spells = list(gen_spells(prefs['name'], md['spellChooseAs'], DATA['align'], DATA['num_spells']))
+            ch_data['spells'] = list(spells_osr.get_cantrips(prefs['name'], md['spellChooseAs'], md['cantrips']))
+        if ch_data['num_spells'] > 0:
+            my_spells = list(gen_spells(prefs['name'], md['spellChooseAs'], ch_data['align'], ch_data['num_spells']))
             if md['extraspells']:
                 for i in list(md['extraspells']):
                     my_spells.append(i)
             sorted(my_spells)
-            DATA['spells'] = my_spells + DATA['spells']
+            ch_data['spells'] = my_spells + ch_data['spells']
     else:
-        DATA['caster'] = False
-    return DATA
+        ch_data['caster'] = False
+    return ch_data
 
 
 def print_character(system_name):
     system_name = system_name.lower()
-    DATA = generate(system_name)
-    print("\nA new random character for " + str(DATA['system']))
+    ch_data = generate(system_name)
+    print("\nA new random character for " + str(ch_data['system']))
     print("-----------------------------------------------------")
     # print("Raw Data Print: ", gen_data)
-    print("Profession: %s;  Level: %s;  Race: %s" % (DATA['long'], str(DATA['lvl']), DATA['race']))
-    print("Alignment: %s;  Age: %s;  Looks: %s" % (DATA['align'].title(), DATA['age'], DATA['looks']))
+    print("Profession: %s;  Level: %s;  Race: %s" % (ch_data['long'], str(ch_data['lvl']), ch_data['race']))
+    print("Alignment: %s;  Age: %s;  Looks: %s" % (ch_data['align'].title(), ch_data['age'], ch_data['looks']))
     print("Trait: %s;  Background: %s;  Social Status: %s (%s)" %
-          (DATA['personal'], DATA['background'], DATA['soc_class'], str(DATA['soc_mod'])))
-    print("Hit Die: d%s;  Psychic Armour: %s" % (str(DATA['hd']), str(DATA['pa'])))
+          (ch_data['personal'], ch_data['background'], ch_data['soc_class'], str(ch_data['soc_mod'])))
+    print("Hit Die: d%s;  Psychic Armour: %s" % (str(ch_data['hd']), str(ch_data['pa'])))
     print("---------------")
     print("\nAttribute Scores:")
     print("-----------------")
-    for key, value in dict.items(DATA['stats']):
-        print("%s: %s (%s)" % (key, str(value['val']), str(value['mod'])))
-    if DATA['saves']:
+    for key, value in dict.items(ch_data['stats']):
+        print("%s: %s (%s): Affects %s" % (key, str(value['val']), str(value['mod']), str(ch_data['affects'][key])))
+    if ch_data['saves']:
         print("\nSaving Throws:")
         print("--------------")
-        for key, value in dict.items(DATA['saves']):
+        for key, value in dict.items(ch_data['saves']):
             print("%s: %s" % (key, str(value)))
     print("\nLanguages:")
     print("----------")
-    for x in list(DATA['languages']):
+    for x in list(ch_data['languages']):
         print(x)
-    if DATA['skills']:
+    if ch_data['skills']:
         print("\nSkills:")
         print("-------")
-        for x in list(DATA['skills']):
+        for x in list(ch_data['skills']):
             print(x)
     print("\nCombat Mods and Traits:")
     print("-----------------------")
-    print("Melee: %s;  Ranged: %s;  AC: %s" % (str(DATA['melee']), str(DATA['range']), str(DATA['ac'])))
+    print("Melee: %s;  Ranged: %s;  AC: %s" % (str(ch_data['melee']), str(ch_data['range']), str(ch_data['ac'])))
     print("\nTraits and Abilities:")
     print("--------------------")
-    for x in list(DATA['traits']):
+    for x in list(ch_data['traits']):
         print(x)
     print("\nMy Weapons:")
     print("-----------")
-    for x in list(DATA['weapons']):
+    for x in list(ch_data['weapons']):
         print(x)
     print("\nMy Armour:")
     print("----------")
-    for x in list(DATA['armour']):
+    for x in list(ch_data['armour']):
         print(x)
     print("\nMy Gear:")
     print("--------")
-    for x in list(DATA['gear']):
+    for x in list(ch_data['gear']):
         print(x)
-    if DATA['caster']:
+    if ch_data['caster']:
         print("\nSpells Known:")
         print("-------------")
-        if DATA['num_spells'] <= 0:
-            print("I have no spells because I am the worst %s ever!" % DATA['long'])
+        if ch_data['num_spells'] <= 0:
+            print("I have no spells because I am the worst %s ever!" % ch_data['long'])
         else:
-            for i in list(DATA['spells']):
+            for i in list(ch_data['spells']):
                 print(i)
     print("")
 

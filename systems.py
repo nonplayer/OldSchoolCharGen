@@ -21,7 +21,7 @@ statArrays = {
     'pla': ['ICQ', 'MEE', 'MAF', 'PST', 'PRW', 'PND', 'PBT', 'RUN'],
 }
 
-statMods = {
+statAffects = {
     'bnt': {
         'STR': 'Melee Attack rolls, Damage with Melee and Thrown',
         'INT': 'Known Languages, Mage Spells per day',
@@ -30,7 +30,7 @@ statMods = {
         'CON': 'Hit Point rolls, Fortitude Saves',
         'CHA': 'Leadership, Reaction rolls, Bard/Sorc Spells per day'
     },
-    'dd': {
+    'dnd': {
         'STR': 'Melee Attack rolls, Damage with Melee and Thrown',
         'INT': '',
         'WIS': 'Saves vs Spells',
@@ -168,11 +168,12 @@ systems = {
         'type': 'dnd',                  # STR: basic system type, and associated assumptions
         'hasHPs': True,                 # BOO: changes the calculations if the system has hit points
         'stats': 6,                     # INT: how many stats in this system, usually 6
-        'spread': statArrays['dnd'],    # STR: what spread of stats this system uses
+        'spread': statArrays['dnd'],    # DICT: what spread of stats this system uses
+        'affects': statAffects['dnd'],  # DICT: reference of what each stat in the system affects during play
         'acBase': 10,                   # INT: AC base 9 or 10, usually
         'acType': 'ascend',             # STR: 'ascend' or 'descend'
         'meleeMod': 'STR',              # STR: stat used to calc melee attack modifier
-        'rangeMod': 'DEX',             # STR: stat used to calc ranged attack modifier
+        'rangeMod': 'DEX',              # STR: stat used to calc ranged attack modifier
         'saves': False,                 # Pulls STR from Saves dict, above
         'hasWPs': False,                # BOO: notes if this system uses specific WPs a la Dark Dungeons
         'maxLvl': 10,                   # INT: maximum XP level in the game
@@ -182,6 +183,7 @@ systems = {
     'bnt': {
         'name': 'bnt',
         'fullName': 'Blood & Treasure',
+        'affects': statAffects['bnt'],
         'maxLvl': 20,
         'saves': saves['three'],
         'races': dict(dnd_races['bnt']),
@@ -201,6 +203,7 @@ systems = {
         'type': 'pla',
         'stats': 8,
         'spread': statArrays['pla'],
+        'affects': statAffects['pla'],
         'acBase': 4,
         'meleeMod': 'PRW',
         'rangeMod': 'PRW',
@@ -213,6 +216,7 @@ systems = {
         'type': 'pla',
         'stats': 8,
         'spread': statArrays['pla'],
+        'affects': statAffects['pla'],
         'acBase': 4,
         'meleeMod': 'PRW',
         'rangeMod': 'PRW',
@@ -225,6 +229,7 @@ systems = {
         'type': 'tnu',
         'hasHPs': False,
         'spread': statArrays['tnu'],
+        'affects': statAffects['tnu'],
         'meleeMod': 'FER',
     },
 }

@@ -39,7 +39,8 @@ war = selects as warrior
 
 import random
 from random import choice as ch
-# import systems
+import dice
+from dice import roll as die
 
 skills = {
     'bnt': [
@@ -600,7 +601,7 @@ tnu_profs = {
         'spellChooseAs': 'champ_chaos',
         'spellsPerLvl': 2,
         'casterStat': 'INT',
-        'extragear': ['RANDOM_d6 doses of hallucinogenic cactus'],
+        'extragear': [str(die(1, 6)) + ' doses of hallucinogenic cactus'],
         'special': [
             'Add your level to your attack rolls.',
             'During a rest, you can give anyone else who shares your alignment advantage when they '
@@ -646,7 +647,7 @@ tnu_profs = {
             'You can\'t be of neutral alignment.',
             'You must display your alignment prominently, or else you cannot use any of your special abilities.',
         ],
-        'extragear': ['RANDOM_d6 doses of antitoxin', 'RANDOM_d6 uses of bandages'],
+        'extragear': [str(die(1, 6)) + ' doses of antitoxin', str(die(1, 6)) + ' uses of bandages'],
         'special': [
             'Add your level to your attack rolls.',
             'During a rest, you can give anyone else who shares your alignment advantage when they '

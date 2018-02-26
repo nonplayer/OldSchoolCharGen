@@ -1,4 +1,3 @@
-import professions
 import random
 import systems
 
@@ -73,6 +72,7 @@ def get_spread(spread, primes):
 
 
 def main():
+    import professions
     md = dict(professions.get_profession())
     sys_prefs = dict(systems.get_system_prefs('tnu'))
     primes = list(md['primAttr'])

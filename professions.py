@@ -546,6 +546,11 @@ tnu_profs = {
         'primAttr': ['DEX', 'FER'],
         'alignAllowed': ['chaos', 'evil', 'law', 'neutral'],
         'attacksAs': 'best',
+        'restrictions': [
+            'You can\'t be of good alignment',
+            'You can\'t hide or be stealthy in a suit of plate or when you are encumbered.',
+            'You get no attack bonus while wearing a suit of plate.',
+        ],
         'special': [
             'Add your level to your attack rolls.',
             'When you take someone by surprise or attack them from behind, you automatically hit and '
@@ -562,6 +567,10 @@ tnu_profs = {
         'hd': 6,
         'primAttr': ['CHA', 'HEA'],
         'alignAllowed': ['chaos', 'good', 'law', 'neutral'],
+        'restrictions': [
+            'You can\'t be of evil alignment.',
+            'You can\'t cast spells when you use a shield or wear a suit of plate.',
+        ],
         'spellChooseAs': 'bard',
         'spellsPerLvl': 1,
         'casterStat': 'CHA',
@@ -584,6 +593,10 @@ tnu_profs = {
         'primAttr': ['HEA', 'INT'],
         'alignAllowed': ['chaos'],
         'attacksAs': 'best',
+        'restrictions': [
+            'You can\'t be of neutral alignment.',
+            'You must display your alignment prominently, or else you cannot use any of your special abilities.',
+        ],
         'spellChooseAs': 'champ_chaos',
         'spellsPerLvl': 2,
         'casterStat': 'INT',
@@ -604,6 +617,10 @@ tnu_profs = {
         'primAttr': ['HEA', 'FER'],
         'alignAllowed': ['evil'],
         'attacksAs': 'best',
+        'restrictions': [
+            'You can\'t be of neutral alignment.',
+            'You must display your alignment prominently, or else you cannot use any of your special abilities.',
+        ],
         'extragear': ['WEAPON: an additional close combat weapon from your special list'],
         'special': [
             'Add your level to your attack rolls.',
@@ -625,6 +642,10 @@ tnu_profs = {
         'primAttr': ['HEA', 'CHA'],
         'alignAllowed': ['good'],
         'attacksAs': 'best',
+        'restrictions': [
+            'You can\'t be of neutral alignment.',
+            'You must display your alignment prominently, or else you cannot use any of your special abilities.',
+        ],
         'extragear': ['RANDOM_d6 doses of antitoxin', 'RANDOM_d6 uses of bandages'],
         'special': [
             'Add your level to your attack rolls.',
@@ -645,6 +666,10 @@ tnu_profs = {
         'primAttr': ['HEA', 'WIL'],
         'alignAllowed': ['law'],
         'attacksAs': 'best',
+        'restrictions': [
+            'You can\'t be of neutral alignment.',
+            'You must display your alignment prominently, or else you cannot use any of your special abilities.',
+        ],
         'extragear': ['a written copy of The Law'],
         'special': [
             'Add your level to your attack rolls.',
@@ -665,6 +690,17 @@ tnu_profs = {
         'primAttr': ['HEA', 'WIL'],
         'alignAllowed': ['chaos', 'evil', 'good', 'neutral'],
         'attacksAs': 'best',
+        'restrictions': [
+            'You can\'t be of lawful alignment.',
+            'You may fight with your bare hands, throw things at people, use shields, and wear light armour, '
+            'plus choose two: blades, blunt weapons, firearms, garrotes, heavy armour, or missile weapons. The ones '
+            'you do not choose are restricted by your cult precepts or you are not skilled at using them. While '
+            'using restricted weapons or armour, you get no attack bonus, you may not banish your spiritual enemies, '
+            'and you may not cast spells.',
+            'You must surrender half your income to your cult, in order to gain experience points from recovering '
+            'it. You may send this money as a tithe to your superiors, or spend it on establishing a shrine or '
+            'temple of your own.',
+        ],
         'spellChooseAs': 'cultist',
         'spellsPerLvl': 2,
         'casterStat': 'WIL',
@@ -682,6 +718,10 @@ tnu_profs = {
         'long': 'Fighter',
         'primAttr': ['FER', 'HEA'],
         'attacksAs': 'best',
+        'restrictions': [
+            'As a member of the most insolent of professions, the fighter has no restrictions. Anyone can fight - '
+            'even cowards, when the brave have all been slaughtered.',
+        ],
         'special': [
             'Add your level to your attack rolls.',
             'Armour does not count as encumbering items to you, as long as you are wearing it (but shields do).',
@@ -697,6 +737,13 @@ tnu_profs = {
         'hd': 4,
         'primAttr': ['CHA', 'INT'],
         'alignAllowed': ['evil', 'good', 'law', 'neutral'],
+        'restrictions': [
+            'You can\'t be of chaotic alignment.',
+            'You get no damage bonus for wielding a non-magical two-handed weapon.',
+            'You may not fight while wearing a non-magical suit of plate.',
+            'You must roll to search like any other character while encumbered or '
+            'wearing a non-magical suit of plate.',
+        ],
         'spellChooseAs': 'scholar',
         'spellsPerLvl': 1,
         'casterStat': 'INT',
@@ -722,6 +769,10 @@ tnu_profs = {
         'hd': 6,
         'primAttr': ['DEX'],
         'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],
+        'restrictions': [
+            'You can\'t hide or be stealthy in a suit of plate or when you are encumbered.',
+            'You must roll to search like any other character when you wear a suit of plate.',
+        ],
         'special': [
             'When you search an area in haste, if the dungeon level is equal to your level or lower, '
             'you must roll equal to or lower than your Dexterity score on a d20 to find hidden things. '
@@ -738,6 +789,12 @@ tnu_profs = {
         'flags': ['base', 'human', 'caster', 'haspa'],
         'hd': 4,
         'primAttr': ['INT', 'WIL'],
+        'restrictions': [
+            'You can\'t fight while wearing a suit of plate.',
+            'You do not receive a damage bonus for wielding a two-handed weapon.',
+            'You must roll to cast spells like any other character when you are encumbered, wearing a '
+            'suit of plate, or using a shield.',
+        ],
         'spellChooseAs': 'wizard',
         'spellsPerLvl': 2,
         'casterStat': 'INT',

@@ -276,7 +276,7 @@ class Character(object):
         if self.profession['skills']:
             self.skills = list(sorted(self.profession['skills']))
         else:
-            self.skills = False
+            self.skills = []
 
 
 def generate(game_system='tnu'):

@@ -31,25 +31,6 @@ supported_systems = [
 ]
 
 
-def gen_stats(spread, primes):
-    stats = dice.get_spread(spread, primes)
-    return stats
-
-
-def gen_saves(names, values):
-    saves = dict(zip(names, values))
-    return saves
-
-
-def gen_spells(gamesystem, prof, align, num):
-    my_spells = []
-    if gamesystem == 'tnu':
-        my_spells = spells_tnu.get_spells(prof, align, num)
-    elif gamesystem in ['bnt', 'dd', 'pla']:
-        my_spells = spells_osr.get_spells(gamesystem, prof, num)
-    return my_spells
-
-
 def gen_social(status):
     social = {'title': '', 'mod': 0, 'label': ''}
     if status == 18:
@@ -143,7 +124,7 @@ class Character(object):
         self.soc_class = my_class['title']
         self.soc_mod = str(my_class['mod'])
         if self.prefs['saves']:
-            self.saves = gen_saves(self.prefs['saves'], self.profession['saves'])
+            self.saves = dict(zip(self.prefs['saves'], self.profession['saves']))
         else:
             self.saves = {}
 
@@ -205,8 +186,11 @@ class Character(object):
                     spells_osr.get_cantrips(self.prefs['name'], self.profession['spellChooseAs'],
                                             self.profession['cantrips']))
             if self.num_spells > 0:
-                my_spells = list(
-                    gen_spells(self.prefs['name'], self.profession['spellChooseAs'], self.align, self.num_spells))
+                my_spells = []
+                if self.prefs['name'] == 'tnu':
+                    my_spells = spells_tnu.get_spells(self.profession['spellChooseAs'], self.align, self.num_spells)
+                elif self.prefs['name'] in ['bnt', 'dd', 'pla']:
+                    my_spells = spells_osr.get_spells(self.prefs['name'], self.profession['spellChooseAs'], self.num_spells)
                 if self.profession['extraspells']:
                     for i in list(self.profession['extraspells']):
                         my_spells.append(i)

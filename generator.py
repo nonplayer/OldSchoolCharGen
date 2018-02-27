@@ -107,8 +107,12 @@ def gen_ac(prefs, armour):
     return ac_final
 
 
+class Character(dict):
+    pass
+
+
 def generate(game_system='tnu'):
-    character = {}
+    character = Character()
     #
     # first let's load those system prefs, to accommodate multiple game variants
     #

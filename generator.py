@@ -129,6 +129,7 @@ def generate(game_system='tnu'):
     stats_d = dice.get_spread(spread, primes)
     ch_data['stats'] = stats_d
     ch_data['affects'] = dict(prefs['affects'])
+    ch_data['restrictions'] = list(md['restrictions'])
     ch_data['traits'] = list(md['special'])
     ch_data['personal'] = md['personal']
     ch_data['background'] = md['background']
@@ -293,6 +294,10 @@ def print_character(system_name):
     print("\nCombat Mods and Traits:")
     print("-----------------------")
     print("Melee: %s;  Ranged: %s;  AC: %s" % (str(ch_data['melee']), str(ch_data['range']), str(ch_data['ac'])))
+    print("\nRestrictions:")
+    print("--------------------")
+    for x in list(ch_data['restrictions']):
+        print(x)
     print("\nTraits and Abilities:")
     print("--------------------")
     for x in list(ch_data['traits']):

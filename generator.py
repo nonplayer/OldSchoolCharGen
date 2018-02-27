@@ -124,6 +124,7 @@ class Character(object):
         spread = list(self.prefs['spread'])
         stats = dice.get_spread(spread, primes)
         self.stats = stats
+
         #
         # get stats average, for reasons:
         #
@@ -132,18 +133,9 @@ class Character(object):
         for key, value in dict.items(stats):
             stat_values.append(int(value['val']))
         stats_avg = int(round(sum(stat_values) / len(stat_values)))
-        #
-        # get character race, if applicable:
-        #
-        if self.prefs['races']:
-            my_race = random.choice(list(self.prefs['races']))
-            self.race = self.prefs['races'][my_race]['label']
-            self.traits = self.traits + self.prefs['races'][my_race]['traits']
-            self.languages = self.languages + self.prefs['races'][my_race]['langs']
-        elif self.profession['race']:
-            self.race = self.profession['race']
-        else:
-            self.race = 'Human'
+
+        self.init_race_if_applicable()
+
         #
         # get more basic stuff:
         #
@@ -153,29 +145,10 @@ class Character(object):
         if self.prefs['saves']:
             self.saves = gen_saves(self.prefs['saves'], self.profession['saves'])
         else:
-            self.saves = False
-        #
-        # time for the combat data. Right now it's just level 1 hacking,
-        # but I might update if I ever get around to multi-level generation
-        # (but admittedly this is unlikely)
-        #
-        if game_system in ['dd']:
-            combat_mod = 1
-        elif self.profession['attacksAs'] in ['best', 'mid-hi']:
-            combat_mod = 1
-        else:
-            combat_mod = 0
-        self.melee = self.stats[str(self.prefs['meleeMod'])]['mod'] + combat_mod
-        self.range = self.stats[str(self.prefs['rangeMod'])]['mod'] + combat_mod
-        # and make them look pretty:
-        if self.melee > 0:
-            self.melee = str("+" + str(self.melee))
-        else:
-            self.melee = str(self.melee)
-        if self.range > 0:
-            self.range = str("+" + str(self.range))
-        else:
-            self.range = str(self.range)
+            self.saves = {}
+
+        self.init_combat(game_system)
+
         #
         # let's get that gear list:
         #
@@ -215,6 +188,9 @@ class Character(object):
                 self.ac -= stats['DEX']['mod']
             else:
                 self.ac += stats['DEX']['mod']
+        self.init_magic()
+
+    def init_magic(self):
         #
         # let's get those spells now:
         #
@@ -222,11 +198,12 @@ class Character(object):
         self.spells = []
         if 'caster' in self.profession['flags']:
             self.caster = True
-            my_castmod = stats[self.profession['casterStat']]['mod']
+            my_castmod = self.stats[self.profession['casterStat']]['mod']
             self.num_spells = self.lvl * self.profession['spellsPerLvl'] + my_castmod
             if self.profession['cantrips']:
                 self.spells = list(
-                    spells_osr.get_cantrips(self.prefs['name'], self.profession['spellChooseAs'], self.profession['cantrips']))
+                    spells_osr.get_cantrips(self.prefs['name'], self.profession['spellChooseAs'],
+                                            self.profession['cantrips']))
             if self.num_spells > 0:
                 my_spells = list(
                     gen_spells(self.prefs['name'], self.profession['spellChooseAs'], self.align, self.num_spells))
@@ -237,6 +214,40 @@ class Character(object):
                 self.spells = my_spells + self.spells
         else:
             self.caster = False
+
+    def init_combat(self, game_system):
+        # time for the combat data. Right now it's just level 1 hacking,
+        # but I might update if I ever get around to multi-level generation
+        # (but admittedly this is unlikely)
+        #
+        if game_system in ['dd']:
+            combat_mod = 1
+        elif self.profession['attacksAs'] in ['best', 'mid-hi']:
+            combat_mod = 1
+        else:
+            combat_mod = 0
+        self.melee = self.stats[str(self.prefs['meleeMod'])]['mod'] + combat_mod
+        self.range = self.stats[str(self.prefs['rangeMod'])]['mod'] + combat_mod
+        # and make them look pretty:
+        if self.melee > 0:
+            self.melee = str("+" + str(self.melee))
+        else:
+            self.melee = str(self.melee)
+        if self.range > 0:
+            self.range = str("+" + str(self.range))
+        else:
+            self.range = str(self.range)
+
+    def init_race_if_applicable(self):
+        if self.prefs['races']:
+            my_race = random.choice(list(self.prefs['races']))
+            self.race = self.prefs['races'][my_race]['label']
+            self.traits = self.traits + self.prefs['races'][my_race]['traits']
+            self.languages = self.languages + self.prefs['races'][my_race]['langs']
+        elif self.profession['race']:
+            self.race = self.profession['race']
+        else:
+            self.race = 'Human'
 
     def load_prefs_data(self):
         self.system = self.prefs['fullName']

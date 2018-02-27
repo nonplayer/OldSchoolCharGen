@@ -24,6 +24,8 @@ parser.add_argument('-g', '--game_system', type=str, required=True, choices=['bn
                     help='The abbreviated Game System (bnt, dd, tnu)')
 parser.add_argument('-H', '--hammercrawl', action='store_true',
                     help='Enable HAMMERCRAWL! extended features (currently disabled)')
+parser.add_argument('-n', '--number_of_characters', type=int, action='store', default=1,
+                    help='How many character to generate.')
 args = parser.parse_args()
 
 supported_systems = [
@@ -347,4 +349,5 @@ if __name__ == "__main__":
         print("tnu = The Nightmares Underneath")
         print()
         game_sys = input("Enter the system abbreviation from above: ")
-    print_character(game_sys)
+    for i in range(args.number_of_characters):
+        print_character(game_sys)

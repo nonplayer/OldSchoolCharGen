@@ -112,8 +112,6 @@ def generate(game_system='tnu'):
     #
     # first let's load those system prefs, to accommodate multiple game variants
     #
-    if game_system not in supported_systems:
-        game_system = 'tnu'
     prefs = dict(systems.get_system_prefs(game_system.upper()))
     character['system'] = prefs['fullName']
     #
@@ -121,21 +119,23 @@ def generate(game_system='tnu'):
     #
     profession = dict(professions.get_profession(game_system))
 
-    put_profession_into_character(character, profession)
+    modify_character_with_profession_data(character, profession)
 
     primes = list(profession['primAttr'])
     spread = list(prefs['spread'])
-    stats_d = dice.get_spread(spread, primes)
-    character['stats'] = stats_d
+    stats = dice.get_spread(spread, primes)
+    character['stats'] = stats
     character['affects'] = dict(prefs['affects'])
 
     #
     # get stats average, for reasons:
     #
-    stats_l = []
-    for key, value in dict.items(stats_d):
-        stats_l.append(int(value['val']))
-    stats_avg = int(round(sum(stats_l) / len(stats_l)))
+
+    # TODO: turn this into a list comp: sum([...]) / len(stats)
+    stat_values = []
+    for key, value in dict.items(stats):
+        stat_values.append(int(value['val']))
+    stats_avg = int(round(sum(stat_values) / len(stat_values)))
     #
     # get character race, if applicable:
     #
@@ -229,9 +229,9 @@ def generate(game_system='tnu'):
     character['ac'] = gen_ac(prefs, my_armourlist)
     if prefs['type'] is ['dnd']:
         if prefs['acType'] == 'descend':
-            character['ac'] -= stats_d['DEX']['mod']
+            character['ac'] -= stats['DEX']['mod']
         else:
-            character['ac'] += stats_d['DEX']['mod']
+            character['ac'] += stats['DEX']['mod']
     #
     # let's get those spells now:
     #
@@ -239,7 +239,7 @@ def generate(game_system='tnu'):
     character['spells'] = []
     if 'caster' in profession['flags']:
         character['caster'] = True
-        my_castmod = stats_d[profession['casterStat']]['mod']
+        my_castmod = stats[profession['casterStat']]['mod']
         character['num_spells'] = character['lvl'] * profession['spellsPerLvl'] + my_castmod
         if profession['cantrips']:
             character['spells'] = list(spells_osr.get_cantrips(prefs['name'], profession['spellChooseAs'], profession['cantrips']))
@@ -255,7 +255,7 @@ def generate(game_system='tnu'):
     return character
 
 
-def put_profession_into_character(character, profession):
+def modify_character_with_profession_data(character, profession):
     character['short'] = profession['short']
     character['long'] = profession['long']
     character['lvl'] = int(profession['level'])

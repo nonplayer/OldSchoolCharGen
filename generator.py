@@ -108,7 +108,17 @@ def gen_ac(prefs, armour):
 
 
 class Character(dict):
-    pass
+    def modify_character_with_profession_data(character, profession):
+        character['short'] = profession['short']
+        character['long'] = profession['long']
+        character['lvl'] = int(profession['level'])
+        character['align'] = random.choice(profession['alignAllowed'])
+        character['restrictions'] = list(profession['restrictions'])
+        character['traits'] = list(profession['special'])
+        character['personal'] = profession['personal']
+        character['background'] = profession['background']
+        character['age'] = profession['age']
+        character['looks'] = profession['looks']
 
 
 def generate(game_system='tnu'):
@@ -123,7 +133,7 @@ def generate(game_system='tnu'):
     #
     profession = dict(professions.get_profession(game_system))
 
-    modify_character_with_profession_data(character, profession)
+    character.modify_character_with_profession_data(profession)
 
     primes = list(profession['primAttr'])
     spread = list(prefs['spread'])
@@ -257,19 +267,6 @@ def generate(game_system='tnu'):
     else:
         character['caster'] = False
     return character
-
-
-def modify_character_with_profession_data(character, profession):
-    character['short'] = profession['short']
-    character['long'] = profession['long']
-    character['lvl'] = int(profession['level'])
-    character['align'] = random.choice(profession['alignAllowed'])
-    character['restrictions'] = list(profession['restrictions'])
-    character['traits'] = list(profession['special'])
-    character['personal'] = profession['personal']
-    character['background'] = profession['background']
-    character['age'] = profession['age']
-    character['looks'] = profession['looks']
 
 
 def print_character(system_name):

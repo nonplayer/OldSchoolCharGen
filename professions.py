@@ -415,6 +415,7 @@ dd_profs = {
         'flags': ['base', 'human', 'caster'],
         'nextXP': '1500',
         'primAttr': ['WIS'],
+        'restrictions': ['Clerics may wear any armour or shield, but may only use blunt weapons.'],
         'weapons': 'clr',
         'spellChooseAs': 'cleric',
         'spellsPerLvl': 1,
@@ -435,6 +436,8 @@ dd_profs = {
         'hd': 8,
         'primAttr': ['CON', 'STR'],
         'attacksAs': 'best',
+        'restrictions': ['Dwarves can wear any armour or shield, and can use any small or medium weapon. '
+                         'They cannot use large weapons due to their stature.'],
         'wps': 4,
         'saves': [8, 9, 10, 13, 12],
         'special': [
@@ -449,6 +452,7 @@ dd_profs = {
         'flags': ['base', 'demi', 'caster'],
         'nextXP': '4000',
         'primAttr': ['STR', 'INT'],
+        'restrictions': ['Elves can wear any armour or shield, and can use any weapon.'],
         'spellChooseAs': 'mu',
         'spellsPerLvl': 2,
         'casterStat': 'INT',
@@ -468,6 +472,7 @@ dd_profs = {
         'hd': 8,
         'primAttr': ['STR'],
         'attacksAs': 'best',
+        'restrictions': ['Fighters can wear any armour or shield, and can use any weapon.'],
         'wps': 4,
         'special': [
             '(Class) Can use All Weapons and Armour without restriction',
@@ -479,6 +484,8 @@ dd_profs = {
         'race': 'Halfling',
         'flags': ['base', 'demi'],
         'primAttr': ['DEX', 'CON'],
+        'restrictions': ['Halflings can wear any armour or shield, and can use any small weapon. They cannot use '
+                         'medium or large weapons due to their small stature.'],
         'weapons': 'hlf',
         'saves': [8, 9, 10, 13, 12],
         'special': [
@@ -495,6 +502,9 @@ dd_profs = {
         'hd': 4,
         'primAttr': ['INT'],
         'attacksAs': 'worst',
+        'restrictions': ['Magic-users may not wear armour or use shields and may not use most weapons. '
+                         'The only weapons they may use are daggers, staves, slings, whips, pistols, '
+                         'nets and blowguns.'],
         'weapons': 'mag',
         'armour': 'mag',
         'spellChooseAs': 'mu',
@@ -514,6 +524,9 @@ dd_profs = {
         'nextXP': '1200',
         'hd': 4,
         'primAttr': ['DEX'],
+        'restrictions': ['Thieves may use any one-handed weapon, and may use leather armour. Since they must '
+                         'travel lightly in order to use their abilities they may not use two-handed weapons '
+                         'or shields. Thieves may use any missile weapon.'],
         'weapons': 'rog',
         'armour': 'rog',
         'saves': [13, 14, 13, 16, 15],

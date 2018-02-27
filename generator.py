@@ -24,30 +24,13 @@ parser.add_argument('-g', '--game_system', type=str, required=True, choices=['bn
                     help='The abbreviated Game System (bnt, dd, tnu)')
 parser.add_argument('-H', '--hammercrawl', action='store_true',
                     help='Enable HAMMERCRAWL! extended features (currently disabled)')
+parser.add_argument('-n', '--number_of_characters', type=int, action='store', default=1,
+                    help='How many character to generate.')
 args = parser.parse_args()
 
 supported_systems = [
     'tnu', 'dd', 'bnt'
 ]
-
-
-def gen_stats(spread, primes):
-    stats = dice.get_spread(spread, primes)
-    return stats
-
-
-def gen_saves(names, values):
-    saves = dict(zip(names, values))
-    return saves
-
-
-def gen_spells(gamesystem, prof, align, num):
-    my_spells = []
-    if gamesystem == 'tnu':
-        my_spells = spells_tnu.get_spells(prof, align, num)
-    elif gamesystem in ['bnt', 'dd', 'pla']:
-        my_spells = spells_osr.get_spells(gamesystem, prof, num)
-    return my_spells
 
 
 def gen_social(status):
@@ -107,220 +90,250 @@ def gen_ac(prefs, armour):
     return ac_final
 
 
+class Character(object):
+    def __init__(self, game_system, prefs):
+        self.prefs = prefs
+        self.profession = dict(professions.get_profession(game_system))
+
+        super(Character, self).__init__()
+
+        self.load_prefs_data()
+
+        #
+        # let's get that juicy character data and break it out!
+        #
+        self.load_profession_data()
+        primes = list(self.profession['primAttr'])
+        spread = list(self.prefs['spread'])
+        stats = dice.get_spread(spread, primes)
+        self.stats = stats
+
+        #
+        # get stats average, for reasons:
+        #
+        # TODO: turn this into a list comp: sum([...]) / len(stats)
+        stat_values = []
+        for key, value in dict.items(stats):
+            stat_values.append(int(value['val']))
+        stats_avg = int(round(sum(stat_values) / len(stat_values)))
+
+        self.init_race_if_applicable()
+
+        #
+        # get more basic stuff:
+        #
+        my_class = dict(gen_social(int(dice.roll(3, 6))))
+        self.soc_class = my_class['title']
+        self.soc_mod = str(my_class['mod'])
+        if self.prefs['saves']:
+            self.saves = dict(zip(self.prefs['saves'], self.profession['saves']))
+        else:
+            self.saves = {}
+
+        self.init_combat(game_system)
+
+        #
+        # let's get that gear list:
+        #
+        if self.prefs['type'] == 'tnu':
+            my_gear = list(equipment_tnu.get_gear(self.short, my_class['label']))
+        elif self.prefs['type'] in ['dnd']:
+            my_gear = list(equipment_osr.get_gear(self.profession, self.prefs['name'], stats_avg))
+        elif self.prefs['type'] == 'pla':
+            my_gear = []
+        else:
+            my_gear = []
+        if self.profession['extragear']:
+            for i in list(self.profession['extragear']):
+                my_gear.append(i)
+        #
+        # pull out the weapons and armour into their own lists
+        #
+        my_weapons = list(filter(lambda wep: wep.startswith('WEAPON: '), my_gear))
+        my_armour = list(filter(lambda arm: arm.startswith('ARMOUR: '), my_gear))
+        my_weaponlist = []
+        my_armourlist = []
+        for w in my_weapons:
+            my_gear.remove(w)
+            my_weaponlist.append(str.title(w[8:]))
+        for a in my_armour:
+            my_gear.remove(a)
+            my_armourlist.append(str.title(a[8:]))
+        self.weapons = sorted(my_weaponlist)
+        self.armour = sorted(my_armourlist)
+        self.gear = sorted(my_gear)
+        #
+        # now to generate the character's armour class
+        #
+        self.ac = gen_ac(self.prefs, my_armourlist)
+        if self.prefs['type'] is ['dnd']:
+            if self.prefs['acType'] == 'descend':
+                self.ac -= stats['DEX']['mod']
+            else:
+                self.ac += stats['DEX']['mod']
+        self.init_magic()
+
+    def init_magic(self):
+        #
+        # let's get those spells now:
+        #
+        self.num_spells = 0
+        self.spells = []
+        if 'caster' in self.profession['flags']:
+            self.caster = True
+            my_castmod = self.stats[self.profession['casterStat']]['mod']
+            self.num_spells = self.lvl * self.profession['spellsPerLvl'] + my_castmod
+            if self.profession['cantrips']:
+                self.spells = list(
+                    spells_osr.get_cantrips(self.prefs['name'], self.profession['spellChooseAs'],
+                                            self.profession['cantrips']))
+            if self.num_spells > 0:
+                my_spells = []
+                if self.prefs['name'] == 'tnu':
+                    my_spells = spells_tnu.get_spells(self.profession['spellChooseAs'], self.align, self.num_spells)
+                elif self.prefs['name'] in ['bnt', 'dd', 'pla']:
+                    my_spells = spells_osr.get_spells(self.prefs['name'], self.profession['spellChooseAs'], self.num_spells)
+                if self.profession['extraspells']:
+                    for i in list(self.profession['extraspells']):
+                        my_spells.append(i)
+                sorted(my_spells)
+                self.spells = my_spells + self.spells
+        else:
+            self.caster = False
+
+    def init_combat(self, game_system):
+        # time for the combat data. Right now it's just level 1 hacking,
+        # but I might update if I ever get around to multi-level generation
+        # (but admittedly this is unlikely)
+        #
+        if game_system in ['dd']:
+            combat_mod = 1
+        elif self.profession['attacksAs'] in ['best', 'mid-hi']:
+            combat_mod = 1
+        else:
+            combat_mod = 0
+        self.melee = self.stats[str(self.prefs['meleeMod'])]['mod'] + combat_mod
+        self.range = self.stats[str(self.prefs['rangeMod'])]['mod'] + combat_mod
+        # and make them look pretty:
+        if self.melee > 0:
+            self.melee = str("+" + str(self.melee))
+        else:
+            self.melee = str(self.melee)
+        if self.range > 0:
+            self.range = str("+" + str(self.range))
+        else:
+            self.range = str(self.range)
+
+    def init_race_if_applicable(self):
+        if self.prefs['races']:
+            my_race = random.choice(list(self.prefs['races']))
+            self.race = self.prefs['races'][my_race]['label']
+            self.traits = self.traits + self.prefs['races'][my_race]['traits']
+            self.languages = self.languages + self.prefs['races'][my_race]['langs']
+        elif self.profession['race']:
+            self.race = self.profession['race']
+        else:
+            self.race = 'Human'
+
+    def load_prefs_data(self):
+        self.system = self.prefs['fullName']
+        self.affects = dict(self.prefs['affects'])
+        self.languages = self.prefs['langs']
+
+    def load_profession_data(self):
+        self.short = self.profession['short']
+        self.long = self.profession['long']
+        self.lvl = int(self.profession['level'])
+        self.align = random.choice(self.profession['alignAllowed'])
+        self.restrictions = list(self.profession['restrictions'])
+        self.traits = list(self.profession['special'])
+        self.personal = self.profession['personal']
+        self.background = self.profession['background']
+        self.age = self.profession['age']
+        self.looks = self.profession['looks']
+        self.hd = self.profession['hd']
+        if 'haspa' in self.profession['flags']:
+            self.pa = 'Yes'
+        else:
+            self.pa = 'None'
+        #
+        # next come the skills, if any:
+        #
+        if self.profession['skills']:
+            self.skills = list(sorted(self.profession['skills']))
+        else:
+            self.skills = []
+
+
 def generate(game_system='tnu'):
-    ch_data = {}
     #
     # first let's load those system prefs, to accommodate multiple game variants
     #
-    if game_system not in supported_systems:
-        game_system = 'tnu'
     prefs = dict(systems.get_system_prefs(game_system.upper()))
-    ch_data['system'] = prefs['fullName']
-    #
-    # let's get that juicy character data and break it out!
-    #
-    md = dict(professions.get_profession(game_system))  # my data
-    ch_data['short'] = md['short']
-    ch_data['long'] = md['long']
-    ch_data['lvl'] = int(md['level'])
-    ch_data['align'] = random.choice(md['alignAllowed'])
-    primes = list(md['primAttr'])
-    spread = list(prefs['spread'])
-    stats_d = dice.get_spread(spread, primes)
-    ch_data['stats'] = stats_d
-    ch_data['affects'] = dict(prefs['affects'])
-    ch_data['restrictions'] = list(md['restrictions'])
-    ch_data['traits'] = list(md['special'])
-    ch_data['personal'] = md['personal']
-    ch_data['background'] = md['background']
-    ch_data['age'] = md['age']
-    ch_data['looks'] = md['looks']
-    #
-    # get stats average, for reasons:
-    #
-    stats_l = []
-    for key, value in dict.items(stats_d):
-        stats_l.append(int(value['val']))
-    stats_avg = int(round(sum(stats_l) / len(stats_l)))
-    #
-    # get character race, if applicable:
-    #
-    ch_data['languages'] = prefs['langs']
-    if prefs['races']:
-        my_race = random.choice(list(prefs['races']))
-        ch_data['race'] = prefs['races'][my_race]['label']
-        ch_data['traits'] = ch_data['traits'] + prefs['races'][my_race]['traits']
-        ch_data['languages'] = ch_data['languages'] + prefs['races'][my_race]['langs']
-    elif md['race']:
-        ch_data['race'] = md['race']
-    else:
-        ch_data['race'] = 'Human'
-    #
-    # get more basic stuff:
-    #
-    ch_data['hd'] = md['hd']
-    my_class = dict(gen_social(int(dice.roll(3, 6))))
-    ch_data['soc_class'] = my_class['title']
-    ch_data['soc_mod'] = str(my_class['mod'])
-    if 'haspa' in md['flags']:
-        ch_data['pa'] = 'Yes'
-    else:
-        ch_data['pa'] = 'None'
-    if prefs['saves']:
-        ch_data['saves'] = gen_saves(prefs['saves'], md['saves'])
-    else:
-        ch_data['saves'] = False
-    #
-    # next come the skills, if any:
-    #
-    if md['skills']:
-        ch_data['skills'] = list(sorted(md['skills']))
-    else:
-        ch_data['skills'] = False
-    #
-    # time for the combat data. Right now it's just level 1 hacking,
-    # but I might update if I ever get around to multi-level generation
-    # (but admittedly this is unlikely)
-    #
-    if game_system in ['dd']:
-        combat_mod = 1
-    elif md['attacksAs'] in ['best', 'mid-hi']:
-        combat_mod = 1
-    else:
-        combat_mod = 0
-    ch_data['melee'] = ch_data['stats'][str(prefs['meleeMod'])]['mod'] + combat_mod
-    ch_data['range'] = ch_data['stats'][str(prefs['rangeMod'])]['mod'] + combat_mod
-    # and make them look pretty:
-    if ch_data['melee'] > 0:
-        ch_data['melee'] = str("+" + str(ch_data['melee']))
-    else:
-        ch_data['melee'] = str(ch_data['melee'])
-    if ch_data['range'] > 0:
-        ch_data['range'] = str("+" + str(ch_data['range']))
-    else:
-        ch_data['range'] = str(ch_data['range'])
-    #
-    # let's get that gear list:
-    #
-    if prefs['type'] == 'tnu':
-        my_gear = list(equipment_tnu.get_gear(ch_data['short'], my_class['label']))
-    elif prefs['type'] in ['dnd']:
-        my_gear = list(equipment_osr.get_gear(md, prefs['name'], stats_avg))
-    elif prefs['type'] == 'pla':
-        my_gear = []
-    else:
-        my_gear = []
-    if md['extragear']:
-        for i in list(md['extragear']):
-            my_gear.append(i)
-    #
-    # pull out the weapons and armour into their own lists
-    #
-    my_weapons = list(filter(lambda wep: wep.startswith('WEAPON: '), my_gear))
-    my_armour = list(filter(lambda arm: arm.startswith('ARMOUR: '), my_gear))
-    my_weaponlist = []
-    my_armourlist = []
-    for w in my_weapons:
-        my_gear.remove(w)
-        my_weaponlist.append(str.title(w[8:]))
-    for a in my_armour:
-        my_gear.remove(a)
-        my_armourlist.append(str.title(a[8:]))
-    ch_data['weapons'] = sorted(my_weaponlist)
-    ch_data['armour'] = sorted(my_armourlist)
-    ch_data['gear'] = sorted(my_gear)
-    #
-    # now to generate the character's armour class
-    #
-    ch_data['ac'] = gen_ac(prefs, my_armourlist)
-    if prefs['type'] is ['dnd']:
-        if prefs['acType'] == 'descend':
-            ch_data['ac'] -= stats_d['DEX']['mod']
-        else:
-            ch_data['ac'] += stats_d['DEX']['mod']
-    #
-    # let's get those spells now:
-    #
-    ch_data['num_spells'] = 0
-    ch_data['spells'] = []
-    if 'caster' in md['flags']:
-        ch_data['caster'] = True
-        my_castmod = stats_d[md['casterStat']]['mod']
-        ch_data['num_spells'] = ch_data['lvl'] * md['spellsPerLvl'] + my_castmod
-        if md['cantrips']:
-            ch_data['spells'] = list(spells_osr.get_cantrips(prefs['name'], md['spellChooseAs'], md['cantrips']))
-        if ch_data['num_spells'] > 0:
-            my_spells = list(gen_spells(prefs['name'], md['spellChooseAs'], ch_data['align'], ch_data['num_spells']))
-            if md['extraspells']:
-                for i in list(md['extraspells']):
-                    my_spells.append(i)
-            sorted(my_spells)
-            ch_data['spells'] = my_spells + ch_data['spells']
-    else:
-        ch_data['caster'] = False
-    return ch_data
+
+    return Character(game_system, prefs)
 
 
-def print_character(system_name):
-    system_name = system_name.lower()
-    ch_data = generate(system_name)
-    print("\nA new random character for " + str(ch_data['system']))
+def print_character(game_system):
+    game_system = game_system.lower()
+    character = generate(game_system)
+    print("\nA new random character for " + str(character.system))
     print("-----------------------------------------------------")
     # print("Raw Data Print: ", gen_data)
-    print("Profession: %s;  Level: %s;  Race: %s" % (ch_data['long'], str(ch_data['lvl']), ch_data['race']))
-    print("Alignment: %s;  Age: %s;  Looks: %s" % (ch_data['align'].title(), ch_data['age'], ch_data['looks']))
+    print("Profession: %s;  Level: %s;  Race: %s" % (character.long, str(character.lvl), character.race))
+    print("Alignment: %s;  Age: %s;  Looks: %s" % (character.align.title(), character.age, character.looks))
     print("Trait: %s;  Background: %s;  Social Status: %s (%s)" %
-          (ch_data['personal'], ch_data['background'], ch_data['soc_class'], str(ch_data['soc_mod'])))
-    print("Hit Die: d%s;  Psychic Armour: %s" % (str(ch_data['hd']), str(ch_data['pa'])))
+          (character.personal, character.background, character.soc_class, str(character.soc_mod)))
+    print("Hit Die: d%s;  Psychic Armour: %s" % (str(character.hd), str(character.pa)))
     print("---------------")
     print("\nAttribute Scores:")
     print("-----------------")
-    for key, value in dict.items(ch_data['stats']):
-        print("%s: %s (%s): Affects %s" % (key, str(value['val']), str(value['mod']), str(ch_data['affects'][key])))
-    if ch_data['saves']:
+    for key, value in dict.items(character.stats):
+        print("%s: %s (%s): Affects %s" % (key, str(value['val']), str(value['mod']), str(character.affects[key])))
+    if character.saves:
         print("\nSaving Throws:")
         print("--------------")
-        for key, value in dict.items(ch_data['saves']):
+        for key, value in dict.items(character.saves):
             print("%s: %s" % (key, str(value)))
     print("\nLanguages:")
     print("----------")
-    for x in list(ch_data['languages']):
+    for x in list(character.languages):
         print(x)
-    if ch_data['skills']:
+    if character.skills:
         print("\nSkills:")
         print("-------")
-        for x in list(ch_data['skills']):
+        for x in list(character.skills):
             print(x)
     print("\nCombat Mods and Traits:")
     print("-----------------------")
-    print("Melee: %s;  Ranged: %s;  AC: %s" % (str(ch_data['melee']), str(ch_data['range']), str(ch_data['ac'])))
+    print("Melee: %s;  Ranged: %s;  AC: %s" % (str(character.melee), str(character.range), str(character.ac)))
     print("\nRestrictions:")
     print("--------------------")
-    for x in list(ch_data['restrictions']):
+    for x in list(character.restrictions):
         print(x)
     print("\nTraits and Abilities:")
     print("--------------------")
-    for x in list(ch_data['traits']):
+    for x in list(character.traits):
         print(x)
     print("\nMy Weapons:")
     print("-----------")
-    for x in list(ch_data['weapons']):
+    for x in list(character.weapons):
         print(x)
     print("\nMy Armour:")
     print("----------")
-    for x in list(ch_data['armour']):
+    for x in list(character.armour):
         print(x)
     print("\nMy Gear:")
     print("--------")
-    for x in list(ch_data['gear']):
+    for x in list(character.gear):
         print(x)
-    if ch_data['caster']:
+    if character.caster:
         print("\nSpells Known:")
         print("-------------")
-        if ch_data['num_spells'] <= 0:
-            print("I have no spells because I am the worst %s ever!" % ch_data['long'])
+        if character.num_spells <= 0:
+            print("I have no spells because I am the worst %s ever!" % character.long)
         else:
-            for i in list(ch_data['spells']):
+            for i in list(character.spells):
                 print(i)
     print("")
 
@@ -336,4 +349,5 @@ if __name__ == "__main__":
         print("tnu = The Nightmares Underneath")
         print()
         game_sys = input("Enter the system abbreviation from above: ")
-    print_character(game_sys)
+    for i in range(args.number_of_characters):
+        print_character(game_sys)

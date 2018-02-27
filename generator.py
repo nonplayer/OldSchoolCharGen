@@ -108,33 +108,27 @@ def gen_ac(prefs, armour):
 
 
 def generate(game_system='tnu'):
-    ch_data = {}
+    character = {}
     #
     # first let's load those system prefs, to accommodate multiple game variants
     #
     if game_system not in supported_systems:
         game_system = 'tnu'
     prefs = dict(systems.get_system_prefs(game_system.upper()))
-    ch_data['system'] = prefs['fullName']
+    character['system'] = prefs['fullName']
     #
     # let's get that juicy character data and break it out!
     #
-    md = dict(professions.get_profession(game_system))  # my data
-    ch_data['short'] = md['short']
-    ch_data['long'] = md['long']
-    ch_data['lvl'] = int(md['level'])
-    ch_data['align'] = random.choice(md['alignAllowed'])
-    primes = list(md['primAttr'])
+    profession = dict(professions.get_profession(game_system))
+
+    put_profession_into_character(character, profession)
+
+    primes = list(profession['primAttr'])
     spread = list(prefs['spread'])
     stats_d = dice.get_spread(spread, primes)
-    ch_data['stats'] = stats_d
-    ch_data['affects'] = dict(prefs['affects'])
-    ch_data['restrictions'] = list(md['restrictions'])
-    ch_data['traits'] = list(md['special'])
-    ch_data['personal'] = md['personal']
-    ch_data['background'] = md['background']
-    ch_data['age'] = md['age']
-    ch_data['looks'] = md['looks']
+    character['stats'] = stats_d
+    character['affects'] = dict(prefs['affects'])
+
     #
     # get stats average, for reasons:
     #
@@ -145,38 +139,38 @@ def generate(game_system='tnu'):
     #
     # get character race, if applicable:
     #
-    ch_data['languages'] = prefs['langs']
+    character['languages'] = prefs['langs']
     if prefs['races']:
         my_race = random.choice(list(prefs['races']))
-        ch_data['race'] = prefs['races'][my_race]['label']
-        ch_data['traits'] = ch_data['traits'] + prefs['races'][my_race]['traits']
-        ch_data['languages'] = ch_data['languages'] + prefs['races'][my_race]['langs']
-    elif md['race']:
-        ch_data['race'] = md['race']
+        character['race'] = prefs['races'][my_race]['label']
+        character['traits'] = character['traits'] + prefs['races'][my_race]['traits']
+        character['languages'] = character['languages'] + prefs['races'][my_race]['langs']
+    elif profession['race']:
+        character['race'] = profession['race']
     else:
-        ch_data['race'] = 'Human'
+        character['race'] = 'Human'
     #
     # get more basic stuff:
     #
-    ch_data['hd'] = md['hd']
+    character['hd'] = profession['hd']
     my_class = dict(gen_social(int(dice.roll(3, 6))))
-    ch_data['soc_class'] = my_class['title']
-    ch_data['soc_mod'] = str(my_class['mod'])
-    if 'haspa' in md['flags']:
-        ch_data['pa'] = 'Yes'
+    character['soc_class'] = my_class['title']
+    character['soc_mod'] = str(my_class['mod'])
+    if 'haspa' in profession['flags']:
+        character['pa'] = 'Yes'
     else:
-        ch_data['pa'] = 'None'
+        character['pa'] = 'None'
     if prefs['saves']:
-        ch_data['saves'] = gen_saves(prefs['saves'], md['saves'])
+        character['saves'] = gen_saves(prefs['saves'], profession['saves'])
     else:
-        ch_data['saves'] = False
+        character['saves'] = False
     #
     # next come the skills, if any:
     #
-    if md['skills']:
-        ch_data['skills'] = list(sorted(md['skills']))
+    if profession['skills']:
+        character['skills'] = list(sorted(profession['skills']))
     else:
-        ch_data['skills'] = False
+        character['skills'] = False
     #
     # time for the combat data. Right now it's just level 1 hacking,
     # but I might update if I ever get around to multi-level generation
@@ -184,34 +178,34 @@ def generate(game_system='tnu'):
     #
     if game_system in ['dd']:
         combat_mod = 1
-    elif md['attacksAs'] in ['best', 'mid-hi']:
+    elif profession['attacksAs'] in ['best', 'mid-hi']:
         combat_mod = 1
     else:
         combat_mod = 0
-    ch_data['melee'] = ch_data['stats'][str(prefs['meleeMod'])]['mod'] + combat_mod
-    ch_data['range'] = ch_data['stats'][str(prefs['rangeMod'])]['mod'] + combat_mod
+    character['melee'] = character['stats'][str(prefs['meleeMod'])]['mod'] + combat_mod
+    character['range'] = character['stats'][str(prefs['rangeMod'])]['mod'] + combat_mod
     # and make them look pretty:
-    if ch_data['melee'] > 0:
-        ch_data['melee'] = str("+" + str(ch_data['melee']))
+    if character['melee'] > 0:
+        character['melee'] = str("+" + str(character['melee']))
     else:
-        ch_data['melee'] = str(ch_data['melee'])
-    if ch_data['range'] > 0:
-        ch_data['range'] = str("+" + str(ch_data['range']))
+        character['melee'] = str(character['melee'])
+    if character['range'] > 0:
+        character['range'] = str("+" + str(character['range']))
     else:
-        ch_data['range'] = str(ch_data['range'])
+        character['range'] = str(character['range'])
     #
     # let's get that gear list:
     #
     if prefs['type'] == 'tnu':
-        my_gear = list(equipment_tnu.get_gear(ch_data['short'], my_class['label']))
+        my_gear = list(equipment_tnu.get_gear(character['short'], my_class['label']))
     elif prefs['type'] in ['dnd']:
-        my_gear = list(equipment_osr.get_gear(md, prefs['name'], stats_avg))
+        my_gear = list(equipment_osr.get_gear(profession, prefs['name'], stats_avg))
     elif prefs['type'] == 'pla':
         my_gear = []
     else:
         my_gear = []
-    if md['extragear']:
-        for i in list(md['extragear']):
+    if profession['extragear']:
+        for i in list(profession['extragear']):
             my_gear.append(i)
     #
     # pull out the weapons and armour into their own lists
@@ -226,39 +220,52 @@ def generate(game_system='tnu'):
     for a in my_armour:
         my_gear.remove(a)
         my_armourlist.append(str.title(a[8:]))
-    ch_data['weapons'] = sorted(my_weaponlist)
-    ch_data['armour'] = sorted(my_armourlist)
-    ch_data['gear'] = sorted(my_gear)
+    character['weapons'] = sorted(my_weaponlist)
+    character['armour'] = sorted(my_armourlist)
+    character['gear'] = sorted(my_gear)
     #
     # now to generate the character's armour class
     #
-    ch_data['ac'] = gen_ac(prefs, my_armourlist)
+    character['ac'] = gen_ac(prefs, my_armourlist)
     if prefs['type'] is ['dnd']:
         if prefs['acType'] == 'descend':
-            ch_data['ac'] -= stats_d['DEX']['mod']
+            character['ac'] -= stats_d['DEX']['mod']
         else:
-            ch_data['ac'] += stats_d['DEX']['mod']
+            character['ac'] += stats_d['DEX']['mod']
     #
     # let's get those spells now:
     #
-    ch_data['num_spells'] = 0
-    ch_data['spells'] = []
-    if 'caster' in md['flags']:
-        ch_data['caster'] = True
-        my_castmod = stats_d[md['casterStat']]['mod']
-        ch_data['num_spells'] = ch_data['lvl'] * md['spellsPerLvl'] + my_castmod
-        if md['cantrips']:
-            ch_data['spells'] = list(spells_osr.get_cantrips(prefs['name'], md['spellChooseAs'], md['cantrips']))
-        if ch_data['num_spells'] > 0:
-            my_spells = list(gen_spells(prefs['name'], md['spellChooseAs'], ch_data['align'], ch_data['num_spells']))
-            if md['extraspells']:
-                for i in list(md['extraspells']):
+    character['num_spells'] = 0
+    character['spells'] = []
+    if 'caster' in profession['flags']:
+        character['caster'] = True
+        my_castmod = stats_d[profession['casterStat']]['mod']
+        character['num_spells'] = character['lvl'] * profession['spellsPerLvl'] + my_castmod
+        if profession['cantrips']:
+            character['spells'] = list(spells_osr.get_cantrips(prefs['name'], profession['spellChooseAs'], profession['cantrips']))
+        if character['num_spells'] > 0:
+            my_spells = list(gen_spells(prefs['name'], profession['spellChooseAs'], character['align'], character['num_spells']))
+            if profession['extraspells']:
+                for i in list(profession['extraspells']):
                     my_spells.append(i)
             sorted(my_spells)
-            ch_data['spells'] = my_spells + ch_data['spells']
+            character['spells'] = my_spells + character['spells']
     else:
-        ch_data['caster'] = False
-    return ch_data
+        character['caster'] = False
+    return character
+
+
+def put_profession_into_character(character, profession):
+    character['short'] = profession['short']
+    character['long'] = profession['long']
+    character['lvl'] = int(profession['level'])
+    character['align'] = random.choice(profession['alignAllowed'])
+    character['restrictions'] = list(profession['restrictions'])
+    character['traits'] = list(profession['special'])
+    character['personal'] = profession['personal']
+    character['background'] = profession['background']
+    character['age'] = profession['age']
+    character['looks'] = profession['looks']
 
 
 def print_character(system_name):

@@ -20,8 +20,8 @@ import spells_tnu
 import systems
 
 parser = argparse.ArgumentParser(description='Get Game System')
-parser.add_argument('-g', '--game_system', type=str, required=True, choices=['bnt', 'dd', 'tnu'],
-                    help='The abbreviated Game System (bnt, dd, tnu)')
+parser.add_argument('-g', '--game_system', type=str, required=True, choices=['bnt', 'dd', 'm81', 'tnu'],
+                    help='The abbreviated Game System (bnt, dd, m81, tnu)')
 parser.add_argument('-H', '--hammercrawl', action='store_true',
                     help='Enable HAMMERCRAWL! extended features (currently disabled)')
 parser.add_argument('-n', '--number_of_characters', type=int, action='store', default=1,
@@ -29,7 +29,7 @@ parser.add_argument('-n', '--number_of_characters', type=int, action='store', de
 args = parser.parse_args()
 
 supported_systems = [
-    'tnu', 'dd', 'bnt'
+    'tnu', 'dd', 'bnt', 'm81',
 ]
 
 
@@ -346,6 +346,7 @@ if __name__ == "__main__":
         print("\nGame System choice is missing or invalid. Please enter one of the following systems:\n")
         print("bnt = Blood & Treasure (1st Edition)")
         print("dd  = Dark Dungeons")
+        print("m81 = Microlite81")
         print("tnu = The Nightmares Underneath")
         print()
         game_sys = input("Enter the system abbreviation from above: ")

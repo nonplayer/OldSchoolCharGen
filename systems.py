@@ -6,6 +6,7 @@ I'm sure there's got to be a better way to do this in a "pythonic" way, but I'm 
 Systems Represented:
 bnt = Blood & Treasure
 dd = Dark Dungeons (my first planned expansion, further down the road)
+m81 = Microlite81
 tnu = The Nightmares Underneath
 plt = Microlite Platinum
 
@@ -17,6 +18,7 @@ tnu = the nightmares underneath (it really is pretty unique here...)
 
 statArrays = {
     'dnd': ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'],
+    'm81': ['STR', 'DEX', 'MIND', 'CHA'],
     'tnu': ['CHA', 'DEX', 'FER', 'HEA', 'INT', 'WIL'],
     'pla': ['ICQ', 'MEE', 'MAF', 'PST', 'PRW', 'PND', 'PBT', 'RUN'],
 }
@@ -37,6 +39,12 @@ statAffects = {
         'DEX': 'Ranged Attacks, AC, Initiative',
         'CON': 'Hit Point rolls',
         'CHA': 'Leadership, Reaction rolls'
+    },
+    'm81': {
+        'STR': 'Melee Attack Rolls, Hit Point Rolls',
+        'DEX': 'Missile Attack Rolls',
+        'MIND': 'Magic Attack Rolls, Saves vs Charm/Illusion',
+        'CHA': '???'
     },
     'tnu': {
         'CHA': 'Social rolls',
@@ -161,11 +169,14 @@ dnd_races = {
 }
 
 
+#
+# Defaults are overridden by the system-specific alterations
+#
 systems = {
     'default': {
         'name': 'def',                  # shortname for the system, used in some lists and dicts
         'fullName': 'Default Display Name',
-        'type': 'dnd',                  # STR: basic system type, and associated assumptions
+        'type': 'dnd',                  # STR: used to determine armor types, equipment lists, and AC assumptions
         'hasHPs': True,                 # BOO: changes the calculations if the system has hit points
         'stats': 6,                     # INT: how many stats in this system, usually 6
         'spread': statArrays['dnd'],    # DICT: what spread of stats this system uses
@@ -174,6 +185,7 @@ systems = {
         'acType': 'ascend',             # STR: 'ascend' or 'descend'
         'meleeMod': 'STR',              # STR: stat used to calc melee attack modifier
         'rangeMod': 'DEX',              # STR: stat used to calc ranged attack modifier
+        'HPsMod': 'CON',                # STR: stat used to calc hit point mods
         'saves': False,                 # Pulls STR from Saves dict, above
         'hasWPs': False,                # BOO: notes if this system uses specific WPs a la Dark Dungeons
         'maxLvl': 10,                   # INT: maximum XP level in the game
@@ -197,6 +209,18 @@ systems = {
         'maxLvl': 36,
         'saves': saves['five'],
     },
+    'm81': {
+        'name': 'm81',
+        'fullName': 'Microlite81',
+        'type': 'dnd',
+        'stats': 4,
+        'spread': statArrays['m81'],
+        'affects': statAffects['m81'],
+        'HPsMod': 'STR',
+        'saves': saves['five'],
+        'hasWPs': True,
+        'maxLvl': 14,
+    },
     'pla': {
         'name': 'pla',
         'fullName': 'Microlite Platinum',
@@ -207,6 +231,7 @@ systems = {
         'acBase': 4,
         'meleeMod': 'PRW',
         'rangeMod': 'PRW',
+        'HPsMod': 'PND',
         'saves': saves['pla'],
         'maxLvl': 15,
     },

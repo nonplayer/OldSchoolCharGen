@@ -1,8 +1,4 @@
 """
-This file will be where I eventually expand the program to accommodate different games.
-Right now, I'm just focusing on The Nightmares Underneath.
-I'm sure there's got to be a better way to do this in a "pythonic" way, but I'm new, so this is my solution.
-
 Systems Represented:
 bnt = Blood & Treasure
 dd = Dark Dungeons (my first planned expansion, further down the road)
@@ -14,6 +10,11 @@ Valid Types:
 dnd = this game follows most basic D&D expectations
 plt = this game derives from microlite platinum
 tnu = the nightmares underneath (it really is pretty unique here...)
+
+Valid modRanges:
+classic = the classic +3 to -3 D&D stat mod range
+modern = (stat-10)/2, round down
+slim = (stat-10)/3, round down
 """
 
 statArrays = {
@@ -185,6 +186,8 @@ systems = {
         'acType': 'ascend',             # STR: 'ascend' or 'descend'
         'meleeMod': 'STR',              # STR: stat used to calc melee attack modifier
         'missileMod': 'DEX',            # STR: stat used to calc ranged attack modifier
+        'modRange': 'classic',          # STR: style of stat mods generated. classic = +3 to -3, modern = (stat-10)/2,
+                                        #      slim = (stat-10)/3
         'HPsMod': 'CON',                # STR: stat used to calc hit point mods
         'saves': False,                 # Pulls STR from Saves dict, above
         'hasWPs': False,                # BOO: notes if this system uses specific WPs a la Dark Dungeons
@@ -216,6 +219,7 @@ systems = {
         'stats': 4,
         'spread': statArrays['m81'],
         'affects': statAffects['m81'],
+        'modRange': 'slim',
         'HPsMod': 'STR',
         'saves': saves['five'],
         'hasWPs': True,
@@ -231,6 +235,7 @@ systems = {
         'acBase': 4,
         'meleeMod': 'PRW',
         'missileMod': 'PRW',
+        'modRange': 'modern',
         'HPsMod': 'PND',
         'saves': saves['pla'],
         'maxLvl': 15,
@@ -245,6 +250,7 @@ systems = {
         'acBase': 4,
         'meleeMod': 'PRW',
         'missileMod': 'PRW',
+        'modRange': 'modern',
         'saves': saves['pla'],
         'maxLvl': 15,
     },

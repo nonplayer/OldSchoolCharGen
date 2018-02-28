@@ -105,7 +105,7 @@ class Character(object):
         self.load_profession_data()
         primes = list(self.profession['primAttr'])
         spread = list(self.prefs['spread'])
-        stats = dice.get_spread(spread, primes)
+        stats = dice.get_spread(spread, primes, self.prefs['modRange'])
         self.stats = stats
 
         #

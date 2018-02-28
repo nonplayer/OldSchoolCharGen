@@ -184,7 +184,7 @@ systems = {
         'acBase': 10,                   # INT: AC base 9 or 10, usually
         'acType': 'ascend',             # STR: 'ascend' or 'descend'
         'meleeMod': 'STR',              # STR: stat used to calc melee attack modifier
-        'rangeMod': 'DEX',              # STR: stat used to calc ranged attack modifier
+        'missileMod': 'DEX',            # STR: stat used to calc ranged attack modifier
         'HPsMod': 'CON',                # STR: stat used to calc hit point mods
         'saves': False,                 # Pulls STR from Saves dict, above
         'hasWPs': False,                # BOO: notes if this system uses specific WPs a la Dark Dungeons
@@ -230,7 +230,7 @@ systems = {
         'affects': statAffects['pla'],
         'acBase': 4,
         'meleeMod': 'PRW',
-        'rangeMod': 'PRW',
+        'missileMod': 'PRW',
         'HPsMod': 'PND',
         'saves': saves['pla'],
         'maxLvl': 15,
@@ -244,7 +244,7 @@ systems = {
         'affects': statAffects['pla'],
         'acBase': 4,
         'meleeMod': 'PRW',
-        'rangeMod': 'PRW',
+        'missileMod': 'PRW',
         'saves': saves['pla'],
         'maxLvl': 15,
     },

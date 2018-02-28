@@ -213,7 +213,7 @@ class Character(object):
         else:
             combat_mod = 0
         self.melee = self.stats[str(self.prefs['meleeMod'])]['mod'] + combat_mod
-        self.range = self.stats[str(self.prefs['rangeMod'])]['mod'] + combat_mod
+        self.range = self.stats[str(self.prefs['missileMod'])]['mod'] + combat_mod
         # and make them look pretty:
         if self.melee > 0:
             self.melee = str("+" + str(self.melee))

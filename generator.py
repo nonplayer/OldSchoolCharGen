@@ -238,7 +238,7 @@ class Character(object):
     def load_prefs_data(self):
         self.system = self.prefs['fullName']
         self.affects = dict(self.prefs['affects'])
-        self.languages = self.prefs['langs']
+        self.languages = self.prefs['langs'] + self.profession['extralangs']
 
     def load_profession_data(self):
         self.short = self.profession['short']

@@ -9,6 +9,7 @@ Currently this tool can create characters for the following three old school gam
 * [The Nightmares Underneath, by Johnstone Metzger](http://www.drivethrurpg.com/product/195355/The-Nightmares-Underneath). 
 * [Dark Dungeons](http://www.drivethrurpg.com/product/177410/Dark-Dungeons)
 * [Blood & Treasure 1st Edition](http://www.drivethrurpg.com/product/124972/Blood--Treasure-Complete)
+* [Microlite81](http://www.drivethrurpg.com/product/174568/Microlite81-Complete)
 
 Additionally, I've already begun laying the groundwork for extended compatibility with a number of other games, including:
 

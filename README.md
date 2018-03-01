@@ -74,13 +74,6 @@ This is still very much a work in progress. Currently the code runs once and ret
 * **Random Character Generator:** a one-click chargen for Old School games (currently only TNU)
 * **Random Monster Treasure Roller:** an app to quickly roll on monster treasure tables (currently only Dark Dungeons/BECMI supported)
 
-### Future Plans
-
-* add attacks and modifiers
-* Compatibility for additional game systems and house rules
-    * Bonus Goal: Support for *Microlite Platinum* and it's awesome sci-fi derivative *"Robot Hack"*
-* Develop a functional web app version
-
 ### About the Code
 
 This is my first even code project, and I've been using it to teach myself the Python language. Initially I had thoughts of just forking and modifying another current chargen program I'd been using a lot, to tweak it for my own games, but after a bit of futzing around I just decided to start from scratch and learn more about coding on my own.

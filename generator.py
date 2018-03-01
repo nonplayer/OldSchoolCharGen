@@ -181,8 +181,8 @@ class Character(object):
                 elif self.system in ['bnt', 'dd', 'pla']:
                     my_spells = spells_osr.get_spells(self.system, self.profession['spellChooseAs'], self.num_spells)
                 if self.profession['extraspells']:
-                    for i in list(self.profession['extraspells']):
-                        my_spells.append(i)
+                    my_extra_spells = [i for i in list(self.profession['extraspells'])]
+                    my_spells = my_spells + my_extra_spells
                 sorted(my_spells)
                 self.spells = my_spells + self.spells
         else:

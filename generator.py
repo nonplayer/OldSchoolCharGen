@@ -108,10 +108,7 @@ class Character(object):
         self.stats = stats
         #
         # get stats average, for reasons:
-        # TODO: turn this into a list comp: sum([...]) / len(stats)
-        stat_values = []
-        for key, value in dict.items(stats):
-            stat_values.append(int(value['val']))
+        stat_values = [int(value['val']) for key, value in dict.items(stats)]
         stats_avg = int(round(sum(stat_values) / len(stat_values)))
         #
         # get more basic stuff:

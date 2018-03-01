@@ -51,7 +51,7 @@ statAffects = {
         'CHA': 'Social rolls',
         'DEX': 'Evasion, Initiative, Ranged Attacks, Special Maneuvers',
         'FER': 'Melee Attack and Damage rolls, Open Doors/Chests, Saves vs Confinement',
-        'HEA': 'Recovery Rolls, Saves vs Disease and Poison',
+        'HEA': 'Recovery Rolls, Saves vs Disease and Poison, Encumbrance Max (4 + Mod)',
         'INT': 'Surprise, Spells Memorized, Saves vs Falsehood',
         'WIL': 'Spells Mastered, Abjure Spirits, Saves vs Mental Effects'
     },

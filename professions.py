@@ -161,7 +161,7 @@ backgrounds = [
 baseline = {
     'short': 'default',                     # STR: class name for references
     'long': 'Default Class name',           # STR: class name for display
-    'race': False,                          # FALSE or STR for default race
+    'race': 'Human',                        # STR: race name of "RANDOM" to trigger the random race function
     'level': 1,                             # INT: right now only used for # of spells mastered
     'hd': 6,                                # INT: The Hit Die of the class
     'primAttr': [],                         # LIST of one or two stats for high stat roll assignments
@@ -193,6 +193,7 @@ baseline = {
 bnt_profs = {
     'default': {
         'flags': ['base'],
+        'race': 'RANDOM',
         'saves': [15, 13, 15],
     },
     'assassin': {
@@ -403,7 +404,6 @@ bnt_profs = {
 
 dd_profs = {
     'default': {
-        'race': 'Human',
         'alignAllowed': ['chaos', 'law', 'neutral'],
         'wps': 2,
         'saves': [12, 13, 14, 15, 16],
@@ -548,7 +548,6 @@ dd_profs = {
 
 m81_profs = {
     'default': {
-        'race': 'Human',
         'hd': 6,
         'alignAllowed': ['chaos', 'law', 'neutral'],
         'wps': 0,

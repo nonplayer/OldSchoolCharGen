@@ -92,7 +92,20 @@ languages_dnd = [
 
 languages_kaigaku = []
 
-dnd_races = {
+race_choices = {
+    'base': ['human', 'dwarf', 'elf', 'halfling'],
+    'bnt': ['human', 'dwarf', 'elf', 'gnome', 'halfling', 'halfelf', 'halforc'],
+    'bntx': ['human', 'dwarf', 'elf', 'gnome', 'halfling', 'halfelf', 'halforc'],
+}
+
+race_data = {
+    'base': {
+        'human': {
+            'label': "Human",
+            'traits': [],
+            'core_languages': [],
+        },
+    },
     'bnt': {
         'human': {
             'label': "Human",
@@ -177,9 +190,9 @@ dnd_races = {
 #
 systems = {
     'default': {
-        'name': 'def',                  # shortname for the system, used in some lists and dicts
-        'fullName': 'Default Display Name',
-        'type': 'dnd',                  # STR: used to determine armor types, equipment lists, and AC assumptions
+        'system_name': 'def',                  # shortname for the system, used in some lists and dicts
+        'system_fullname': 'Default Display Name',
+        'system_type': 'dnd',                  # STR: used to determine armor types, equipment lists, and AC assumptions
         'hasHPs': True,                 # BOO: changes the calculations if the system has hit points
         'stats': 6,                     # INT: how many stats in this system, usually 6
         'spread': statArrays['dnd'],    # DICT: what spread of stats this system uses
@@ -194,21 +207,23 @@ systems = {
         'saves': False,                 # Pulls STR from Saves dict, above
         'hasWPs': False,                # BOO: notes if this system uses specific WPs a la Dark Dungeons
         'maxLvl': 10,                   # INT: maximum XP level in the game
-        'races': False,
-        'core_languages': ['Common'],
-        'language_choices': languages_dnd,
+        'race_choices': ['human'],      # LIST: available choices for selecable races, keys to the data below
+        'race_data': dict(race_data['base']),   # DICT keyed to the list above
+        'core_languages': ['Common'],   # LIST: Free starting languages for all characters
+        'language_choices': languages_dnd,      # LIST of base possible bonus languages
     },
     'bnt': {
-        'name': 'bnt',
-        'fullName': 'Blood & Treasure',
+        'system_name': 'bnt',
+        'system_fullname': 'Blood & Treasure',
         'affects': statAffects['bnt'],
         'maxLvl': 20,
         'saves': saves['three'],
-        'races': dict(dnd_races['bnt']),
+        'race_choices': race_choices['bnt'],
+        'race_data': dict(race_data['bnt']),
     },
     'dd': {
-        'name': 'dd',
-        'fullName': 'Dark Dungeons',
+        'system_name': 'dd',
+        'system_fullname': 'Dark Dungeons',
         'acBase': 9,
         'acType': 'descend',
         'hasWPs': True,
@@ -216,9 +231,9 @@ systems = {
         'saves': saves['five'],
     },
     'm81': {
-        'name': 'm81',
-        'fullName': 'Microlite81',
-        'type': 'dnd',
+        'system_name': 'm81',
+        'system_fullname': 'Microlite81',
+        'system_type': 'dnd',
         'stats': 4,
         'spread': statArrays['m81'],
         'affects': statAffects['m81'],
@@ -229,9 +244,9 @@ systems = {
         'maxLvl': 14,
     },
     'pla': {
-        'name': 'pla',
-        'fullName': 'Microlite Platinum',
-        'type': 'pla',
+        'system_name': 'pla',
+        'system_fullname': 'Microlite Platinum',
+        'system_type': 'pla',
         'stats': 8,
         'spread': statArrays['pla'],
         'affects': statAffects['pla'],
@@ -244,9 +259,9 @@ systems = {
         'maxLvl': 15,
     },
     'rbh': {
-        'name': 'rbh',
-        'fullName': 'Robot Hack',
-        'type': 'pla',
+        'system_name': 'rbh',
+        'system_fullname': 'Robot Hack',
+        'system_type': 'pla',
         'stats': 8,
         'spread': statArrays['pla'],
         'affects': statAffects['pla'],
@@ -258,9 +273,9 @@ systems = {
         'maxLvl': 15,
     },
     'tnu': {
-        'name': 'tnu',
-        'fullName': 'The Nightmares Underneath',
-        'type': 'tnu',
+        'system_name': 'tnu',
+        'system_fullname': 'The Nightmares Underneath',
+        'system_type': 'tnu',
         'hasHPs': False,
         'spread': statArrays['tnu'],
         'affects': statAffects['tnu'],

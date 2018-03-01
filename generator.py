@@ -289,7 +289,9 @@ def print_character(game_system):
     print("Alignment: %s;  Age: %s;  Looks: %s" % (character.align.title(), character.age, character.looks))
     print("Trait: %s;  Background: %s;  Social Status: %s (%s)" %
           (character.personal, character.background, character.soc_class, str(character.soc_mod)))
-    if character.stats[character.hps_mod]['mod'] > 0:
+    if game_system == 'tnu':
+        print("Disposition: %sd%s;  Psychic Armour: %s" % (str(character.lvl), str(character.hd), str(character.pa)))
+    elif character.stats[character.hps_mod]['mod'] > 0:
         print("Hit Die: %sd%s+%s;  Psychic Armour: %s" %
               (str(character.lvl), str(character.hd), str(character.stats[character.hps_mod]['mod']*character.lvl),
                str(character.pa)))

@@ -55,13 +55,13 @@ def gen_social(status):
 def gen_ac(prefs, armour):
     ac_base = int(prefs['acBase'])
     ac_mod = 0
-    if prefs['name'] == 'tnu':
+    if prefs['system_name'] == 'tnu':
         # no characters in TNU actually start with plate, thus its absence
         if any('Heavy Armour' in x for x in armour):
             ac_mod += 5
         elif any('Light Armour' in x for x in armour):
             ac_mod += 3
-    elif prefs['type'] == 'dnd':
+    elif prefs['system_type'] == 'dnd':
         if any('Plate Armour' in x for x in armour):
             ac_mod += 8
         elif any('Plate Mail' in x for x in armour):
@@ -78,7 +78,7 @@ def gen_ac(prefs, armour):
             ac_mod += 2
         elif any('Padded Armour' in x for x in armour):
             ac_mod += 1
-    if prefs['name'] not in ['pla']:
+    if prefs['system_name'] not in ['pla']:
         if any('A Tower Shield' in x for x in armour):
             ac_mod += 2
         elif any('A Shield' in x for x in armour):
@@ -98,32 +98,24 @@ class Character(object):
         super(Character, self).__init__()
 
         self.load_prefs_data()
-
         #
         # let's get that juicy character data and break it out!
-        #
         self.load_profession_data()
+        self.init_race_and_languages()
         primes = list(self.profession['primAttr'])
         spread = list(self.prefs['spread'])
         stats = dice.get_spread(spread, primes, self.prefs['modRange'])
         self.stats = stats
-        self.languages = []
         #
         # get stats average, for reasons:
-        #
         # TODO: turn this into a list comp: sum([...]) / len(stats)
         stat_values = []
         for key, value in dict.items(stats):
             stat_values.append(int(value['val']))
         stats_avg = int(round(sum(stat_values) / len(stat_values)))
         #
-        # get the Race next, if the system has them
-        #
-        self.init_race_if_applicable()
-        #
         # get more basic stuff:
-        #
-        self.init_languages()
+        self.init_bonus_languages()
         my_class = dict(gen_social(int(dice.roll(3, 6))))
         self.soc_class = my_class['title']
         self.soc_mod = str(my_class['mod'])
@@ -131,17 +123,16 @@ class Character(object):
             self.saves = dict(zip(self.prefs['saves'], self.profession['saves']))
         else:
             self.saves = {}
-
-        self.init_combat(game_system)
-
         #
         # let's get that gear list:
+        self.init_combat(game_system)
         #
-        if self.prefs['type'] == 'tnu':
+        # let's get that gear list:
+        if self.system_type == 'tnu':
             my_gear = list(equipment_tnu.get_gear(self.short, my_class['label']))
-        elif self.prefs['type'] in ['dnd']:
-            my_gear = list(equipment_osr.get_gear(self.profession, self.prefs['name'], stats_avg))
-        elif self.prefs['type'] == 'pla':
+        elif self.system_type in ['dnd']:
+            my_gear = list(equipment_osr.get_gear(self.profession, self.system, stats_avg))
+        elif self.system_type == 'pla':
             my_gear = []
         else:
             my_gear = []
@@ -150,7 +141,6 @@ class Character(object):
                 my_gear.append(i)
         #
         # pull out the weapons and armour into their own lists
-        #
         my_weapons = list(filter(lambda wep: wep.startswith('WEAPON: '), my_gear))
         my_armour = list(filter(lambda arm: arm.startswith('ARMOUR: '), my_gear))
         my_weaponlist = []
@@ -166,9 +156,8 @@ class Character(object):
         self.gear = sorted(my_gear)
         #
         # now to generate the character's armour class
-        #
         self.ac = gen_ac(self.prefs, my_armourlist)
-        if self.prefs['type'] is ['dnd']:
+        if self.system_type is ['dnd']:
             if self.prefs['acType'] == 'descend':
                 self.ac -= stats['DEX']['mod']
             else:
@@ -178,7 +167,6 @@ class Character(object):
     def init_magic(self):
         #
         # let's get those spells now:
-        #
         self.num_spells = 0
         self.spells = []
         if 'caster' in self.profession['flags']:
@@ -187,14 +175,14 @@ class Character(object):
             self.num_spells = self.lvl * self.profession['spellsPerLvl'] + my_castmod
             if self.profession['cantrips']:
                 self.spells = list(
-                    spells_osr.get_cantrips(self.prefs['name'], self.profession['spellChooseAs'],
+                    spells_osr.get_cantrips(self.system, self.profession['spellChooseAs'],
                                             self.profession['cantrips']))
             if self.num_spells > 0:
                 my_spells = []
-                if self.prefs['name'] == 'tnu':
+                if self.system == 'tnu':
                     my_spells = spells_tnu.get_spells(self.profession['spellChooseAs'], self.align, self.num_spells)
-                elif self.prefs['name'] in ['bnt', 'dd', 'pla']:
-                    my_spells = spells_osr.get_spells(self.prefs['name'], self.profession['spellChooseAs'], self.num_spells)
+                elif self.system in ['bnt', 'dd', 'pla']:
+                    my_spells = spells_osr.get_spells(self.system, self.profession['spellChooseAs'], self.num_spells)
                 if self.profession['extraspells']:
                     for i in list(self.profession['extraspells']):
                         my_spells.append(i)
@@ -226,30 +214,31 @@ class Character(object):
         else:
             self.range = str(self.range)
 
-    def init_race_if_applicable(self):
-        if self.prefs['races']:
-            my_race = random.choice(list(self.prefs['races']))
-            self.race = self.prefs['races'][my_race]['label']
-            self.traits = self.traits + self.prefs['races'][my_race]['traits']
-            self.languages = self.languages + self.prefs['races'][my_race]['core_languages']
-        elif self.profession['race']:
-            self.race = self.profession['race']
+    def init_race_and_languages(self):
+        if self.profession['race'] == 'RANDOM':
+            my_race = random.choice(list(self.prefs['race_choices']))
+            self.race = self.prefs['race_data'][my_race]['label']
+            self.traits = self.traits + self.prefs['race_data'][my_race]['traits']
+            self.languages = self.prefs['race_data'][my_race]['core_languages']
         else:
-            self.race = 'Human'
+            self.race = self.profession['race']
+            self.languages = []
 
     def load_prefs_data(self):
-        self.system = self.prefs['fullName']
+        self.system = self.prefs['system_name']
+        self.system_fullname = self.prefs['system_fullname']
+        self.system_type = self.prefs['system_type']
         self.affects = dict(self.prefs['affects'])
 
-    def init_languages(self):
+    def init_bonus_languages(self):
         self.languages = self.languages + self.prefs[ 'core_languages' ] + self.profession[ 'extralangs' ]
         new_languages = self.prefs[ 'language_choices' ]
         for i in self.languages:
             if i in new_languages:
                 new_languages.remove(i)
-        if self.prefs['name'] in ['m81']:
+        if self.system in ['m81']:
             bonus_lang_choices = self.stats['MIND']['mod']
-        elif self.prefs['type'] == 'dnd':
+        elif self.system_type == 'dnd':
             bonus_lang_choices = self.stats['INT']['mod']
         else:
             bonus_lang_choices = 0
@@ -278,7 +267,6 @@ class Character(object):
             self.pa = 'None'
         #
         # next come the skills, if any:
-        #
         if self.profession['skills']:
             self.skills = list(sorted(self.profession['skills']))
         else:
@@ -288,7 +276,6 @@ class Character(object):
 def generate(game_system='tnu'):
     #
     # first let's load those system prefs, to accommodate multiple game variants
-    #
     prefs = dict(systems.get_system_prefs(game_system.upper()))
 
     return Character(game_system, prefs)
@@ -297,7 +284,7 @@ def generate(game_system='tnu'):
 def print_character(game_system):
     game_system = game_system.lower()
     character = generate(game_system)
-    print("\nA new random character for " + str(character.system))
+    print("\nA new random character for " + str(character.system_fullname))
     print("-----------------------------------------------------")
     # print("Raw Data Print: ", gen_data)
     print("Profession: %s;  Level: %s;  Race: %s" % (character.long, str(character.lvl), character.race))

@@ -107,7 +107,7 @@ class Character(object):
         spread = list(self.prefs['spread'])
         stats = dice.get_spread(spread, primes, self.prefs['modRange'])
         self.stats = stats
-
+        self.languages = []
         #
         # get stats average, for reasons:
         #
@@ -116,12 +116,14 @@ class Character(object):
         for key, value in dict.items(stats):
             stat_values.append(int(value['val']))
         stats_avg = int(round(sum(stat_values) / len(stat_values)))
-
+        #
+        # get the Race next, if the system has them
+        #
         self.init_race_if_applicable()
-
         #
         # get more basic stuff:
         #
+        self.init_languages()
         my_class = dict(gen_social(int(dice.roll(3, 6))))
         self.soc_class = my_class['title']
         self.soc_mod = str(my_class['mod'])
@@ -229,7 +231,7 @@ class Character(object):
             my_race = random.choice(list(self.prefs['races']))
             self.race = self.prefs['races'][my_race]['label']
             self.traits = self.traits + self.prefs['races'][my_race]['traits']
-            self.languages = self.languages + self.prefs['races'][my_race]['langs']
+            self.languages = self.languages + self.prefs['races'][my_race]['core_languages']
         elif self.profession['race']:
             self.race = self.profession['race']
         else:
@@ -238,7 +240,25 @@ class Character(object):
     def load_prefs_data(self):
         self.system = self.prefs['fullName']
         self.affects = dict(self.prefs['affects'])
-        self.languages = self.prefs['langs'] + self.profession['extralangs']
+
+    def init_languages(self):
+        self.languages = self.languages + self.prefs[ 'core_languages' ] + self.profession[ 'extralangs' ]
+        new_languages = self.prefs[ 'language_choices' ]
+        for i in self.languages:
+            if i in new_languages:
+                new_languages.remove(i)
+        if self.prefs['name'] in ['m81']:
+            bonus_lang_choices = self.stats['MIND']['mod']
+        elif self.prefs['type'] == 'dnd':
+            bonus_lang_choices = self.stats['INT']['mod']
+        else:
+            bonus_lang_choices = 0
+        if bonus_lang_choices > 0:
+            while bonus_lang_choices > 0:
+                newlang = random.choice(new_languages)
+                new_languages.remove(newlang)
+                bonus_lang_choices -= 1
+                self.languages.append(newlang)
 
     def load_profession_data(self):
         self.short = self.profession['short']

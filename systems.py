@@ -83,12 +83,14 @@ saves = {
     'pla': ['Mind', 'Body', 'Reflex', 'Horror Factor (HF)'],
 }
 
-langs = [
+languages_dnd = [
     'Celestial (Law)', 'Dragon', 'Druidic', 'Dwarf', 'Elemental, Air', 'Elemental, Earth',
     'Elemental, Fire', 'Elemental, Water', 'Elf', 'Giant', 'Gnoll ', 'Gnome', 'Goblin',
     'Grimlock', 'Halfling', 'Infernal (Chaos)', 'Kobold', 'Manticore', 'Medusa', 'Naga',
     'Ogre', 'Ophidian', 'Orc', 'Sylvan',
 ]
+
+languages_kaigaku = []
 
 dnd_races = {
     'bnt': {
@@ -99,7 +101,7 @@ dnd_races = {
                 '(Racial) 10% bonus to all earned experience.',
                 '(Racial) +1 bonus to all saving throws.',
                 ],
-            'langs': [],
+            'core_languages': [],
         },
         'dwarf': {
             'label': "Dwarf",
@@ -112,7 +114,7 @@ dnd_races = {
                 '(Racial) +1 attack vs goblins, hobgoblins and orcs.',
                 '(Racial) +4 AC vs large humanoids like giants.'
             ],
-            'langs': ['Dwarven'],
+            'core_languages': ['Dwarven'],
         },
         'elf': {
             'label': "Elf",
@@ -124,7 +126,7 @@ dnd_races = {
                 '(Racial) 90% magic resistance to sleep spells and enchantment spells.',
                 '(Racial) Immunity to ghoul paralysis.',
             ],
-            'langs': ['Elven'],
+            'core_languages': ['Elven'],
         },
         'gnome': {
             'label': "Gnome",
@@ -136,7 +138,7 @@ dnd_races = {
                 'Audible glamer, dancing lights and prestidigitation.',
                 '(Racial) +2 bonus on Will saving throws against illusions.',
             ],
-            'langs': ['Gnome'],
+            'core_languages': ['Gnome'],
         },
         'halfelf': {
             'label': "Half-Elf",
@@ -146,7 +148,7 @@ dnd_races = {
                 '(Racial) 30% magic resistance to sleep and enchantment spells.',
                 '(Racial) Knack for trickery.',
             ],
-            'langs': ['Elven'],
+            'core_languages': ['Elven'],
         },
         'halforc': {
             'label': "Half-Orc",
@@ -154,7 +156,7 @@ dnd_races = {
                 '(Racial) Medium size with a base speed of 30 feet.',
                 '(Racial) Darkvision to 60 feet.',
             ],
-            'langs': ['Orc'],
+            'core_languages': ['Orc'],
         },
         'halfling': {
             'label': "Halfling",
@@ -164,7 +166,7 @@ dnd_races = {
                 '(Racial) +1 bonus when attacking with slings and thrown weapons.',
                 '(Racial) Knack for hiding, moving silently and getting into trouble.',
             ],
-            'langs': ['Halfling'],
+            'core_languages': ['Halfling'],
         },
     },
 }
@@ -193,7 +195,8 @@ systems = {
         'hasWPs': False,                # BOO: notes if this system uses specific WPs a la Dark Dungeons
         'maxLvl': 10,                   # INT: maximum XP level in the game
         'races': False,
-        'langs': ['Common'],
+        'core_languages': ['Common'],
+        'language_choices': languages_dnd,
     },
     'bnt': {
         'name': 'bnt',

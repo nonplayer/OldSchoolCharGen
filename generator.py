@@ -178,7 +178,7 @@ class Character(object):
                 my_spells = []
                 if self.system == 'tnu':
                     my_spells = spells_tnu.get_spells(self.profession['spellChooseAs'], self.align, self.num_spells)
-                elif self.system in ['bnt', 'dd', 'pla']:
+                elif self.system in ['bnt', 'dd', 'm81', 'pla']:
                     my_spells = spells_osr.get_spells(self.system, self.profession['spellChooseAs'], self.num_spells)
                 if self.profession['extraspells']:
                     my_extra_spells = [i for i in list(self.profession['extraspells'])]

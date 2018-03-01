@@ -226,6 +226,7 @@ class Character(object):
         self.system_fullname = self.prefs['system_fullname']
         self.system_type = self.prefs['system_type']
         self.affects = dict(self.prefs['affects'])
+        self.hps_mod = self.prefs['HPsMod']
 
     def init_bonus_languages(self):
         self.languages = self.languages + self.prefs[ 'core_languages' ] + self.profession[ 'extralangs' ]
@@ -288,7 +289,16 @@ def print_character(game_system):
     print("Alignment: %s;  Age: %s;  Looks: %s" % (character.align.title(), character.age, character.looks))
     print("Trait: %s;  Background: %s;  Social Status: %s (%s)" %
           (character.personal, character.background, character.soc_class, str(character.soc_mod)))
-    print("Hit Die: d%s;  Psychic Armour: %s" % (str(character.hd), str(character.pa)))
+    if character.stats[character.hps_mod]['mod'] > 0:
+        print("Hit Die: %sd%s+%s;  Psychic Armour: %s" %
+              (str(character.lvl), str(character.hd), str(character.stats[character.hps_mod]['mod']*character.lvl),
+               str(character.pa)))
+    elif character.stats[character.hps_mod]['mod'] < 0:
+        print("Hit Die: %sd%s%s;  Psychic Armour: %s" %
+              (str(character.lvl), str(character.hd), str(character.stats[character.hps_mod]['mod']*character.lvl),
+               str(character.pa)))
+    else:
+        print("Hit Die: %sd%s;  Psychic Armour: %s" % (str(character.lvl), str(character.hd), str(character.pa)))
     print("---------------")
     print("\nAttribute Scores:")
     print("-----------------")

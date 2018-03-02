@@ -104,7 +104,7 @@ class Character(object):
         self.init_race_and_languages()
         primes = list(self.profession['primAttr'])
         spread = list(self.prefs['spread'])
-        stats = dice.get_spread(spread, primes, self.prefs['modRange'])
+        stats = dice.get_spread(spread, primes, self.prefs['modRange'], self.racemods)
         self.stats = stats
         #
         # get stats average, for reasons:
@@ -214,13 +214,12 @@ class Character(object):
     def init_race_and_languages(self):
         if self.profession['race'] == 'RANDOM':
             my_race = random.choice(list(self.prefs['race_choices']))
-            self.race = self.prefs['race_data'][my_race]['label']
-            self.traits = self.traits + self.prefs['race_data'][my_race]['traits']
-            self.languages = self.prefs['race_data'][my_race]['core_languages']
-            self.racemods = self.prefs['race_data'][my_race]['mods']
         else:
-            self.race = self.profession['race']
-            self.languages = []
+            my_race = 'human'
+        self.race = self.prefs['race_data'][my_race]['label']
+        self.traits = self.traits + self.prefs['race_data'][my_race]['traits']
+        self.languages = self.prefs['race_data'][my_race]['core_languages']
+        self.racemods = self.prefs['race_data'][my_race]['mods']
 
     def load_prefs_data(self):
         self.system = self.prefs['system_name']
@@ -353,7 +352,6 @@ def print_character(game_system):
             for i in list(character.spells):
                 print(i)
     print("")
-
 
 if __name__ == "__main__":
     game_sys = args.game_system

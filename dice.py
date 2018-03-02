@@ -20,9 +20,9 @@ def stats():
     return rolls
 
 
-def get_mod(stat, modRange):
+def get_mod(stat, modifier_range):
     num = int(stat)
-    if modRange == 'classic':
+    if modifier_range == 'classic':
         if num >= 18:
             mod = 3
         elif num >= 16:
@@ -37,16 +37,16 @@ def get_mod(stat, modRange):
             mod = -2
         else:
             mod = -3
-    elif modRange == 'slim':
+    elif modifier_range == 'slim':
         mod = int((num - 10) / 3)
-    elif modRange == 'modern':
+    elif modifier_range == 'modern':
         mod = math.floor((num - 10) / 2)
     else:
         mod = 0
     return mod
 
 
-def get_spread(spread, primes, modRange):
+def get_spread(spread, primes, modifier_range, racemods):
     primes = list(primes)
     spread = list(spread)
     # create the base dictionary:
@@ -61,12 +61,16 @@ def get_spread(spread, primes, modRange):
     my_stats = stats()
     for i in primes:
         num = int(my_stats.pop())
+        if i in list(dict.keys(racemods)):
+            num += racemods[i]
         final[i]['val'] = num
-        final[i]['mod'] = get_mod(num, modRange)
+        final[i]['mod'] = get_mod(num, modifier_range)
     for i in spread:
         num = int(my_stats.pop())
+        if i in list(dict.keys(racemods)):
+            num += racemods[i]
         final[i]['val'] = num
-        final[i]['mod'] = get_mod(num, modRange)
+        final[i]['mod'] = get_mod(num, modifier_range)
     return final
 
 
@@ -84,8 +88,8 @@ def main():
     sys_prefs = dict(systems.get_system_prefs('tnu'))
     primes = list(md['primAttr'])
     spread = list(sys_prefs['spread'])
-    modrange = sys_prefs['modRange']
-    for key, value in dict.items(get_spread(spread, primes, modrange)):
+    modrange = sys_prefs['modifier_range']
+    for key, value in dict.items(get_spread(spread, primes, modrange, {})):
         print(key, ":", value)
 
 

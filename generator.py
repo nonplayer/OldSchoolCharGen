@@ -20,8 +20,8 @@ import spells_tnu
 import systems
 
 parser = argparse.ArgumentParser(description='Get Game System')
-parser.add_argument('-g', '--game_system', type=str, required=True, choices=['bnt', 'dd', 'm81', 'tnu'],
-                    help='The abbreviated Game System (bnt, dd, m81, tnu)')
+parser.add_argument('-g', '--game_system', type=str, required=True, choices=['bnt', 'bntx', 'dd', 'm81', 'tnu'],
+                    help='The abbreviated Game System (bnt, bntx, dd, m81, tnu)')
 parser.add_argument('-H', '--hammercrawl', action='store_true',
                     help='Enable HAMMERCRAWL! extended features (currently disabled)')
 parser.add_argument('-n', '--number_of_characters', type=int, action='store', default=1,
@@ -29,7 +29,7 @@ parser.add_argument('-n', '--number_of_characters', type=int, action='store', de
 args = parser.parse_args()
 
 supported_systems = [
-    'tnu', 'dd', 'bnt', 'm81',
+    'tnu', 'dd', 'bnt', 'bntx', 'm81',
 ]
 
 
@@ -217,6 +217,7 @@ class Character(object):
             self.race = self.prefs['race_data'][my_race]['label']
             self.traits = self.traits + self.prefs['race_data'][my_race]['traits']
             self.languages = self.prefs['race_data'][my_race]['core_languages']
+            self.racemods = self.prefs['race_data'][my_race]['mods']
         else:
             self.race = self.profession['race']
             self.languages = []
@@ -360,10 +361,11 @@ if __name__ == "__main__":
         print("HAMMERCRAWL TIME!!!!! Okay this currently does nothing, but stay tuned for more...")
     while game_sys not in supported_systems:
         print("\nGame System choice is missing or invalid. Please enter one of the following systems:\n")
-        print("bnt = Blood & Treasure (1st Edition)")
-        print("dd  = Dark Dungeons")
-        print("m81 = Microlite81")
-        print("tnu = The Nightmares Underneath")
+        print("bnt  = Blood & Treasure (1st Edition)")
+        print("bntx = Blood & Treasure 1st Edition with Expanded Monster Races")
+        print("dd   = Dark Dungeons")
+        print("m81  = Microlite81")
+        print("tnu  = The Nightmares Underneath")
         print()
         game_sys = input("Enter the system abbreviation from above: ")
     for i in range(args.number_of_characters):

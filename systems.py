@@ -84,7 +84,7 @@ saves = {
 }
 
 languages_dnd = [
-    'Celestial (Law)', 'Dragon', 'Druidic', 'Dwarf', 'Elemental, Air', 'Elemental, Earth',
+    'Celestial (Law)', 'Dragon', 'Drow', 'Druidic', 'Dwarf', 'Elemental, Air', 'Elemental, Earth',
     'Elemental, Fire', 'Elemental, Water', 'Elf', 'Giant', 'Gnoll ', 'Gnome', 'Goblin',
     'Grimlock', 'Halfling', 'Infernal (Chaos)', 'Kobold', 'Manticore', 'Medusa', 'Naga',
     'Ogre', 'Ophidian', 'Orc', 'Sylvan',
@@ -233,6 +233,21 @@ race_data = {
                 'STR': 1,
                 'INT': 1,
                 'CHA': -2,
+            },
+        },
+        'drow': {
+            'label': 'Drow (Dark Elf)',
+            'traits': [
+                '(RACE) Darkvision 120 feet.',
+                '(RACE) Drow characters retain drow monster abilities and vulnerabilities to bright light.',
+                '(RACE) Female drow can multi-class as cleric/fighters, cleric/magic-users and cleric/thieves;'
+                ' male drow can multi-class as fighter/magic-users and magic-user/thieves. Drow can only advance'
+                ' up to 8th level.',
+            ],
+            'core_languages': ['Drow'],
+            'mods': {
+                'INT': 1,
+                'CHA': 1,
             },
         },
         'norace': {

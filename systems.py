@@ -247,7 +247,7 @@ race_data = {
             'mods': {'STR': -1, 'DEX': 1, 'CHA': -1,},
         },
         'kobold': {
-            'label': 'Race Label',
+            'label': 'Kobold',
             'traits': [
                 '(RACE) Small size creature, but with a standard speed of 30 ft.',
                 '(RACE) Darkvision 120 feet; detect stonework as well as dwarves.',

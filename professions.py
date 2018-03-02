@@ -1004,34 +1004,35 @@ base_profs_tnu = [
     'cultist', 'fighter', 'scholar', 'thief', 'wizard'
 ]
 
+base_profs_bnt = [
+    'assassin', 'barbarian', 'bard', 'cleric', 'duelist',
+    'fighter', 'mu', 'paladin', 'ranger', 'sorc', 'thief',
+]
+
+base_profs_dnd = [
+    'cleric', 'elf', 'dwarf', 'fighter', 'halfling', 'mu', 'thief'
+]
 
 # I don't do druids or monks, they're a pain in the ass
 proflists = {
     'bnt': {
-        'choices': [
-            'assassin', 'barbarian', 'bard', 'cleric', 'duelist',
-            'fighter', 'mu', 'paladin', 'ranger', 'sorc', 'thief',
-        ],
+        'choices': base_profs_bnt,
+        'dict': bnt_profs,
+    },
+    'bntx': {
+        'choices': base_profs_bnt,
         'dict': bnt_profs,
     },
     'dd': {
-        'choices': [
-            'cleric', 'elf', 'dwarf', 'fighter', 'halfling', 'mu', 'thief'
-        ],
+        'choices': base_profs_dnd,
         'dict': dd_profs,
     },
     'm81': {
-        'choices': [
-            'cleric', 'elf', 'dwarf', 'fighter', 'halfling', 'mu', 'thief'
-        ],
+        'choices': base_profs_dnd,
         'dict': m81_profs,
     },
     'tnu': {
-        'choices': [
-            'assassin', 'bard',
-            'champ_chaos', 'champ_evil', 'champ_good', 'champ_law',
-            'cultist', 'fighter', 'scholar', 'thief', 'wizard'
-        ],
+        'choices': base_profs_tnu,
         'dict': tnu_profs,
     },
     'template': {

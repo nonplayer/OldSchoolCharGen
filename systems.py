@@ -250,6 +250,21 @@ race_data = {
                 'CHA': 1,
             },
         },
+        'goblin': {
+            'label': 'Goblin',
+            'traits': [
+                '(RACE) Land speed of 20 feet.',
+                '(RACE) Darkvision 60 feet.',
+                '(RACE) Knacks for: for moving silently, riding wolves/worgs.',
+                '(RACE) Can multi-class as cleric/thieves, fighter/thieves and magic-user/ thieves.',
+            ],
+            'core_languages': ['Goblin'],
+            'mods': {
+                'STR': -1,
+                'DEX': 1,
+                'CHA': -1,
+            },
+        },
         'norace': {
             'label': 'Race Label',
             'traits': [],

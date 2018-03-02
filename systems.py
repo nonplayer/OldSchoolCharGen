@@ -191,12 +191,6 @@ race_data = {
         },
     },
     'bntx': {
-        'norace': {
-            'label': 'Race Label',
-            'traits': [],
-            'core_languages': [],
-            'mods': {},
-        },
         'aasimar': {
             'label': 'Aasimar',
             'traits': [
@@ -226,6 +220,26 @@ race_data = {
                 'WIS': -1,
                 'CHA': -1,
             },
+        },
+        'azer': {
+            'label': 'Azer',
+            'traits': [
+                '(RACE) Azer characters have darkvision to a range of 60 and retain all abilities of normal azer.',
+                '(RACE) Can multi-class as cleric/fighters, fighter/magic-users and fighter/thieves. Can only'
+                ' advance to 6th level max.',
+            ],
+            'core_languages': ['Elemental, Fire'],
+            'mods': {
+                'STR': 1,
+                'INT': 1,
+                'CHA': -2,
+            },
+        },
+        'norace': {
+            'label': 'Race Label',
+            'traits': [],
+            'core_languages': [],
+            'mods': {},
         },
     },
 }

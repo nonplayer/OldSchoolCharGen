@@ -104,6 +104,7 @@ race_data = {
             'label': "Human",
             'traits': [],
             'core_languages': [],
+            'mods': {},
         },
     },
     'bnt': {
@@ -115,6 +116,7 @@ race_data = {
                 '(Racial) +1 bonus to all saving throws.',
                 ],
             'core_languages': [],
+            'mods': {},
         },
         'dwarf': {
             'label': "Dwarf",
@@ -128,6 +130,7 @@ race_data = {
                 '(Racial) +4 AC vs large humanoids like giants.'
             ],
             'core_languages': ['Dwarven'],
+            'mods': {},
         },
         'elf': {
             'label': "Elf",
@@ -140,6 +143,7 @@ race_data = {
                 '(Racial) Immunity to ghoul paralysis.',
             ],
             'core_languages': ['Elven'],
+            'mods': {},
         },
         'gnome': {
             'label': "Gnome",
@@ -152,6 +156,7 @@ race_data = {
                 '(Racial) +2 bonus on Will saving throws against illusions.',
             ],
             'core_languages': ['Gnome'],
+            'mods': {},
         },
         'halfelf': {
             'label': "Half-Elf",
@@ -162,6 +167,7 @@ race_data = {
                 '(Racial) Knack for trickery.',
             ],
             'core_languages': ['Elven'],
+            'mods': {},
         },
         'halforc': {
             'label': "Half-Orc",
@@ -170,6 +176,7 @@ race_data = {
                 '(Racial) Darkvision to 60 feet.',
             ],
             'core_languages': ['Orc'],
+            'mods': {},
         },
         'halfling': {
             'label': "Halfling",
@@ -180,6 +187,45 @@ race_data = {
                 '(Racial) Knack for hiding, moving silently and getting into trouble.',
             ],
             'core_languages': ['Halfling'],
+            'mods': {},
+        },
+    },
+    'bntx': {
+        'norace': {
+            'label': 'Race Label',
+            'traits': [],
+            'core_languages': [],
+            'mods': {},
+        },
+        'aasimar': {
+            'label': 'Aasimar',
+            'traits': [
+                '(RACE) Darkvision 60 feet, can cast daylight 1/day, and has resistance to electricity.',
+                '(RACE) Can advance to 9th level in most classes, or unlimited in paladin.',
+            ],
+            'core_languages': [],
+            'mods': {
+                'WIS': 1,
+                'CHA': 1,
+            },
+        },
+        'automaton': {
+            'label': 'Automaton',
+            'traits': [
+                '(RACE) Immune to poison and disease, no need to breathe or eat, but can drink magical potions.',
+                '(RACE) Healing spells are only half effective on automatons; spells that repair damage to objects'
+                ' act as cure wounds spells of an equivalent level.',
+                '(RACE) Half damage from electricity, and have a natural armor class of 12.',
+                '(RACE) Can advance to 8th level in any class. Can multi-class as cleric/fighters, fighter/magic-users'
+                ' and fighter/thieves.',
+            ],
+            'core_languages': [],
+            'mods': {
+                'STR': 1,
+                'CON': 1,
+                'WIS': -1,
+                'CHA': -1,
+            },
         },
     },
 }
@@ -207,7 +253,7 @@ systems = {
         'saves': False,                 # Pulls STR from Saves dict, above
         'hasWPs': False,                # BOO: notes if this system uses specific WPs a la Dark Dungeons
         'maxLvl': 10,                   # INT: maximum XP level in the game
-        'race_choices': ['human'],      # LIST: available choices for selecable races, keys to the data below
+        'race_choices': list(dict.keys(race_data['base'])), # LIST: available choices for selecable races
         'race_data': dict(race_data['base']),   # DICT keyed to the list above
         'core_languages': ['Common'],   # LIST: Free starting languages for all characters
         'language_choices': languages_dnd,      # LIST of base possible bonus languages
@@ -218,8 +264,17 @@ systems = {
         'affects': statAffects['bnt'],
         'maxLvl': 20,
         'saves': saves['three'],
-        'race_choices': race_choices['bnt'],
+        'race_choices': list(dict.keys(race_data['bnt'])),
         'race_data': dict(race_data['bnt']),
+    },
+    'bntx': {
+        'system_name': 'bnt',
+        'system_fullname': 'Blood & Treasure, Expanded',
+        'affects': statAffects['bnt'],
+        'maxLvl': 20,
+        'saves': saves['three'],
+        'race_choices': list(dict.keys(race_data['bntx'])),
+        'race_data': dict(race_data['bntx']),
     },
     'dd': {
         'system_name': 'dd',

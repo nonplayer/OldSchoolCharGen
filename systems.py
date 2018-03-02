@@ -303,8 +303,8 @@ systems = {
         'affects': statAffects['bnt'],
         'maxLvl': 20,
         'saves': saves['three'],
-        'race_choices': list(dict.keys(race_data['bntx'])),
-        'race_data': dict(race_data['bntx']),
+        'race_choices': list(dict.keys(race_data['bntx'])) + list(dict.keys(race_data['bnt'])),
+        'race_data': {**dict(race_data['bntx']), **dict(race_data['bnt']),},
     },
     'dd': {
         'system_name': 'dd',

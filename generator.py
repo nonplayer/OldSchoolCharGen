@@ -104,11 +104,10 @@ class Character(object):
         self.init_race_and_languages()
         primes = list(self.profession['primAttr'])
         spread = list(self.prefs['spread'])
-        stats = dice.get_spread(spread, primes, self.prefs['modRange'], self.racemods)
-        self.stats = stats
+        self.stats = dice.get_spread(spread, primes, self.prefs['modRange'], self.racemods)
         #
         # get stats average, for reasons:
-        stat_values = [int(value['val']) for key, value in dict.items(stats)]
+        stat_values = [int(value['val']) for key, value in dict.items(self.stats)]
         stats_avg = int(round(sum(stat_values) / len(stat_values)))
         #
         # get more basic stuff:
@@ -134,8 +133,8 @@ class Character(object):
         else:
             my_gear = []
         if self.profession['extragear']:
-            for i in list(self.profession['extragear']):
-                my_gear.append(i)
+            for g in list(self.profession['extragear']):
+                my_gear.append(g)
         #
         # pull out the weapons and armour into their own lists
         my_weapons = list(filter(lambda wep: wep.startswith('WEAPON: '), my_gear))
@@ -156,9 +155,9 @@ class Character(object):
         self.ac = gen_ac(self.prefs, my_armourlist)
         if self.system_type is ['dnd']:
             if self.prefs['acType'] == 'descend':
-                self.ac -= stats['DEX']['mod']
+                self.ac -= self.stats['DEX']['mod']
             else:
-                self.ac += stats['DEX']['mod']
+                self.ac += self.stats['DEX']['mod']
         self.init_magic()
 
     def init_magic(self):
@@ -181,7 +180,7 @@ class Character(object):
                 elif self.system in ['bnt', 'dd', 'm81', 'pla']:
                     my_spells = spells_osr.get_spells(self.system, self.profession['spellChooseAs'], self.num_spells)
                 if self.profession['extraspells']:
-                    my_extra_spells = [i for i in list(self.profession['extraspells'])]
+                    my_extra_spells = [s for s in list(self.profession['extraspells'])]
                     my_spells = my_spells + my_extra_spells
                 sorted(my_spells)
                 self.spells = my_spells + self.spells
@@ -229,11 +228,11 @@ class Character(object):
         self.hps_mod = self.prefs['HPsMod']
 
     def init_bonus_languages(self):
-        self.languages = self.languages + self.prefs[ 'core_languages' ] + self.profession[ 'extralangs' ]
-        new_languages = self.prefs[ 'language_choices' ]
-        for i in self.languages:
-            if i in new_languages:
-                new_languages.remove(i)
+        self.languages = self.languages + self.prefs['core_languages'] + self.profession['extralangs']
+        new_languages = self.prefs['language_choices']
+        for l in self.languages:
+            if l in new_languages:
+                new_languages.remove(l)
         if self.system in ['m81']:
             bonus_lang_choices = self.stats['MIND']['mod']
         elif self.system_type == 'dnd':

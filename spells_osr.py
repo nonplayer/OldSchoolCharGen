@@ -2,10 +2,23 @@ import random
 # from random import choice as ch
 
 
+spells_basic = {
+    'cleric': [
+        'Level 1: Cure Light Wounds (R)', 'Level 1: Detect Evil', 'Level 1: Detect Magic',
+        'Level 1: Light (R)', 'Level 1: Protection From Evil', 'Level 1: Purify Food And Water (R)',
+        'Level 1: Remove Fear (R)', 'Level 1: Resist Cold ',
+    ],
+    'mu': [
+        'Level 1: Charm Person', 'Level 1: Detect Magic', 'Level 1: Floating Disc',
+        'Level 1: Hold Portal', 'Level 1: Light (R)', 'Level 1: Magic Missile', 'Level 1: Protection From Evil',
+        'Level 1: Read Languages', 'Level 1: Shield', 'Level 1: Sleep', 'Level 1: Ventriloquism',
+    ],
+}
+
 spells_dd = {
     'cleric': [
         'Level 1: Cure Light Wounds (R)', 'Level 1: Detect Evil', 'Level 1: Detect Magic',
-        'Level 1: Light (R)', 'Level 1: Protection From Evil', 'Level 1: Purify Food And Water',
+        'Level 1: Light (R)', 'Level 1: Protection From Evil', 'Level 1: Purify Food And Water (R)',
         'Level 1: Remove Fear (R)', 'Level 1: Resist Cold ',
     ],
     'mu': [
@@ -14,7 +27,6 @@ spells_dd = {
         'Level 1: Read Languages', 'Level 1: Shield', 'Level 1: Sleep', 'Level 1: Ventriloquism',
     ],
 }
-
 
 spells_bnt = {
     'bard': [
@@ -62,7 +74,6 @@ spells_bnt = {
     ],
 }
 
-
 cantrips_bnt = {
     'bard': [
         'Cantrip: Audible Glamer', 'Cantrip: Dancing Lights', 'Cantrip: Daze', 'Cantrip: Detect Magic',
@@ -91,7 +102,6 @@ cantrips_bnt = {
     ],
 }
 
-
 spells_pla = {
     'wiz': [],
     'clr': [],
@@ -100,10 +110,10 @@ spells_pla = {
     'min': [],
 }
 
-
 spells_match = {
     'bnt': spells_bnt,
     'dd': spells_dd,
+    'm81': spells_basic,
     'pla': spells_pla,
 }
 

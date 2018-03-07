@@ -9,6 +9,7 @@ Currently this tool can create characters for the following three old school gam
 * [The Nightmares Underneath, by Johnstone Metzger](http://www.drivethrurpg.com/product/195355/The-Nightmares-Underneath). 
 * [Dark Dungeons](http://www.drivethrurpg.com/product/177410/Dark-Dungeons)
 * [Blood & Treasure 1st Edition](http://www.drivethrurpg.com/product/124972/Blood--Treasure-Complete)
+* [Microlite81](http://www.drivethrurpg.com/product/174568/Microlite81-Complete)
 
 Additionally, I've already begun laying the groundwork for extended compatibility with a number of other games, including:
 
@@ -72,13 +73,6 @@ This is still very much a work in progress. Currently the code runs once and ret
 
 * **Random Character Generator:** a one-click chargen for Old School games (currently only TNU)
 * **Random Monster Treasure Roller:** an app to quickly roll on monster treasure tables (currently only Dark Dungeons/BECMI supported)
-
-### Future Plans
-
-* add attacks and modifiers
-* Compatibility for additional game systems and house rules
-    * Bonus Goal: Support for *Microlite Platinum* and it's awesome sci-fi derivative *"Robot Hack"*
-* Develop a functional web app version
 
 ### About the Code
 

@@ -161,7 +161,7 @@ backgrounds = [
 baseline = {
     'short': 'default',                     # STR: class name for references
     'long': 'Default Class name',           # STR: class name for display
-    'race': False,                          # FALSE or STR for default race
+    'race': 'Human',                        # STR: race name of "RANDOM" to trigger the random race function
     'level': 1,                             # INT: right now only used for # of spells mastered
     'hd': 6,                                # INT: The Hit Die of the class
     'primAttr': [],                         # LIST of one or two stats for high stat roll assignments
@@ -193,6 +193,7 @@ baseline = {
 bnt_profs = {
     'default': {
         'flags': ['base'],
+        'race': 'RANDOM',
         'saves': [15, 13, 15],
     },
     'assassin': {
@@ -403,7 +404,6 @@ bnt_profs = {
 
 dd_profs = {
     'default': {
-        'race': 'Human',
         'alignAllowed': ['chaos', 'law', 'neutral'],
         'wps': 2,
         'saves': [12, 13, 14, 15, 16],
@@ -543,6 +543,163 @@ dd_profs = {
             '(Class) Thiefskill: Hear Noise: 30',
         ],
         'extralangs': ['Thieves\' Cant'],
+    },
+}
+
+m81_profs = {
+    'default': {
+        'hd': 6,
+        'alignAllowed': ['chaos', 'law', 'neutral'],
+        'wps': 0,
+        'saves': [12, 13, 14, 15, 16],
+        'skills': list(random.sample(skills['dd'], 4)),
+    },
+    'cleric': {
+        'short': 'cleric',
+        'long': 'Cleric',
+        'flags': ['base', 'human', 'caster'],
+        'nextXP': '1500',
+        'primAttr': ['CHA'],
+        'restrictions': ['Clerics may wear any armour or shield, and any weapons except edged.'],
+        'weapons': 'clr',
+        'spellChooseAs': 'cleric',
+        'spellsPerLvl': 1,
+        'casterStat': 'MIND',
+        'saves': [11, 12, 14, 16, 15],
+        'extragear': ['a Holy Symbol'],
+        'special': [
+            '(Class) Spellcaster (Cleric List)',
+            '(Class) Turn Undead (DC: 10 + 2x HD of Undead. # of Daily Uses: 2 + Lvl + MIND Bonus)',
+        ],
+    },
+    'dwarf': {
+        'short': 'dwarf',
+        'long': 'Dwarf',
+        'race': 'Dwarf',
+        'primAttr': ['STR'],
+        'restrictions': ['Dwarves can wear any weapon, armour, or shield. They cannot use weapons over 4 feet'
+                         ' in length except axes and hammers.'],
+        'saves': [8, 9, 10, 13, 12],
+        'flags': ['base', 'demi'],
+        'nextXP': '2200',
+        'hd': 8,
+        'attacksAs': 'best',
+        'wps': 1,
+        'extralangs': ['Dwarf', 'Kobold', 'Goblin', 'Gnome'],
+        'special': [
+            '(Class) Fighter Bonus +1 to Attacks and Damage.',
+            '(Class) Choose 1 Weapon for "Good" Mastery: +2 to hit, Change damage to 1d2+2 (for 1d4), 1d3+3 (for 1d6),'
+            ' 1d4+4 (for 1d8), etc.',
+            '(Class) +4 Save vs Magic',
+            '(Class) Can see in darkness half as well as in light.',
+            '(Class) Stonelore (d20 + MIND bonus; DC 12 if carefully checking, DC 16 if in passing)',
+        ],
+    },
+    'elf': {
+        'short': 'elf',
+        'long': 'Elf',
+        'race': 'Elf',
+        'flags': ['base', 'demi', 'caster'],
+        'nextXP': '4000',
+        'attacksAs': 'best',
+        'wps': 1,
+        'primAttr': ['MIND'],
+        'restrictions': ['Elves can wear any armour or shield, and can use any weapon.'],
+        'spellChooseAs': 'mu',
+        'spellsPerLvl': 2,
+        'casterStat': 'MIND',
+        'saves': [12, 13, 13, 15, 15],
+        'extragear': ['a Spellbook'],
+        'extraspells': ['Read Magic'],
+        'extralangs': ['Elf', 'Orc', 'Hobgoblin', 'Gnoll'],
+        'special': [
+            '(Class) Spellcaster (Mage list)',
+            '(Class) +2 Attack and Damage bonus vs Goblinoids',
+            '(Class) Fighter Bonus +1 to Attacks and Damage.',
+            '(Class) Choose 1 Weapon for "Good" Mastery: +2 to hit, Change damage to 1d2+2 (for 1d4), 1d3+3 (for 1d6),'
+        ],
+    },
+    'fighter': {
+        'short': 'fighter',
+        'long': 'Fighter',
+        'hd': 8,
+        'primAttr': ['STR'],
+        'attacksAs': 'best',
+        'restrictions': ['Fighters can wear any armour or shield, and can use any weapon.'],
+        'wps': 1,
+        'special': [
+            '(Class) Can use All Weapons and Armour without restriction',
+            '(Class) Fighter Bonus +1 to Attacks and Damage.',
+            '(Class) Choose 1 Weapon for "Good" Mastery: +2 to hit, Change damage to 1d2+2 (for 1d4), 1d3+3 (for 1d6),'
+        ],
+    },
+    'halfling': {
+        'short': 'halfling',
+        'long': 'Halfling',
+        'race': 'Halfling',
+        'flags': ['base', 'demi'],
+        'primAttr': ['DEX'],
+        'attacksAs': 'best',
+        'restrictions': ['You can wear light or medium armor, use shields, and use any light or medium weapon. '
+                         'Due to your stature, you must wield medium weapons with two hands and '
+                         'cannot use a long bow.'],
+        'weapons': 'hlf',
+        'saves': [8, 9, 10, 13, 12],
+        'special': [
+            '(Class) Fighter Bonus +1 to Attacks and Damage.',
+            '(Class) Choose 1 Weapon for "Good" Mastery: +2 to hit, Change damage to 1d2+2 (for 1d4), 1d3+3 (for 1d6),'
+            '(Class) +4 to magic saves.',
+            '(Class) +2 to hit and damage with slings and light bows.',
+            '(Class) You can blend in background (d20 + DEX Bonus; DC 12 if outdoors, DC 16 if indoors).',
+            '(Class) You can move silently outdoors.',
+        ],
+    },
+    'mu': {
+        'short': 'mu',
+        'long': 'Magic-User',
+        'flags': ['base', 'human', 'caster'],
+        'nextXP': '2500',
+        'hd': 4,
+        'primAttr': ['MIND'],
+        'saves': [13, 13, 13, 16, 14],
+        'attacksAs': 'worst',
+        'restrictions': ['Magic-users may not wear armour and may only use daggers, staves, and slings as weapons.'],
+        'weapons': 'mag',
+        'armour': 'mag',
+        'spellChooseAs': 'mu',
+        'spellsPerLvl': 2,
+        'casterStat': 'MIND',
+        'extragear': ['a Spellbook'],
+        'extraspells': ['Read Magic'],
+        'special': [
+            '(Class) Spellcaster (Mage list)',
+        ],
+    },
+    'thief': {
+        'short': 'thief',
+        'long': 'Thief',
+        'flags': ['base', 'human'],
+        'nextXP': '1250',
+        'hd': 4,
+        'primAttr': ['DEX'],
+        'restrictions': [
+            'Thieves can wear light armor, use shields, and use any light or medium weapon.',
+        ],
+        'weapons': 'rog',
+        'armour': 'rog',
+        'extragear': ['a Set of Thieves\' Tools'],
+        'special': [
+            '(Class) Backstab: If a thief successfully sneaks up on a foe, they can Backstab which adds +4 to the'
+            ' attack roll and does x2 damage.',
+            '(Class) Thieves are specialists at urban survival as well as at picking pockets, hiding in cover,'
+            ' sneaking silently, opening locks, removing traps, climbing walls, and other tasks associated'
+            ' with theft.',
+            '(Class) Thieves may attempt to climb sheer surfaces and hide in shadows with a successful secondary'
+            ' skill roll.',
+            '(Class) Thieves have special training in listening at doors and detecting traps and secret/hidden doors.',
+        ],
+        'extralangs': ['Thieves\' Cant'],
+        'saves': [14, 15, 13, 16, 14],
     },
 }
 
@@ -847,28 +1004,35 @@ base_profs_tnu = [
     'cultist', 'fighter', 'scholar', 'thief', 'wizard'
 ]
 
+base_profs_bnt = [
+    'assassin', 'barbarian', 'bard', 'cleric', 'duelist',
+    'fighter', 'mu', 'paladin', 'ranger', 'sorc', 'thief',
+]
+
+base_profs_dnd = [
+    'cleric', 'elf', 'dwarf', 'fighter', 'halfling', 'mu', 'thief'
+]
 
 # I don't do druids or monks, they're a pain in the ass
 proflists = {
     'bnt': {
-        'choices': [
-            'assassin', 'barbarian', 'bard', 'cleric', 'duelist',
-            'fighter', 'mu', 'paladin', 'ranger', 'sorc', 'thief',
-        ],
+        'choices': base_profs_bnt,
+        'dict': bnt_profs,
+    },
+    'bntx': {
+        'choices': base_profs_bnt,
         'dict': bnt_profs,
     },
     'dd': {
-        'choices': [
-            'cleric', 'elf', 'dwarf', 'fighter', 'halfling', 'mu', 'thief'
-        ],
+        'choices': base_profs_dnd,
         'dict': dd_profs,
     },
+    'm81': {
+        'choices': base_profs_dnd,
+        'dict': m81_profs,
+    },
     'tnu': {
-        'choices': [
-            'assassin', 'bard',
-            'champ_chaos', 'champ_evil', 'champ_good', 'champ_law',
-            'cultist', 'fighter', 'scholar', 'thief', 'wizard'
-        ],
+        'choices': base_profs_tnu,
         'dict': tnu_profs,
     },
     'template': {

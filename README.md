@@ -53,8 +53,16 @@ Clerics and other divine-type casters have their *initial* spell lists prepared 
 ### Random Characters
 
 1. [Install Python](https://www.python.org/downloads/).
-2. Run the `generator.py` file.
+2. Run the `print_character.py` file. It has a number of flags to its use, which you can find with the helpfile. For example: `python print_character.py -h`
 3. Repeat step 2 to get new characters.
+
+Currently the supported game systems are as follows:
+
+* bnt = Blood & Treasure 1st Edition
+* bntx = Blood & Treasure 1st Edition plus Monster Races
+* dd = Dark Dungeons
+* m81 = Microlite81
+* tnu = The Nightmares Underneath
 
 ### Random Treasure Table Rolls
 

@@ -198,7 +198,7 @@ race_data = {
                 '(RACE) Can advance to 9th level in most classes, or unlimited in paladin.',
             ],
             'core_languages': [],
-            'mods': {'WIS': 1, 'CHA': 1,},
+            'mods': {'WIS': 1, 'CHA': 1},
         },
         'automaton': {
             'label': 'Automaton',
@@ -211,7 +211,7 @@ race_data = {
                 ' and fighter/thieves.',
             ],
             'core_languages': [],
-            'mods': {'STR': 1, 'CON': 1, 'WIS': -1, 'CHA': -1,},
+            'mods': {'STR': 1, 'CON': 1, 'WIS': -1, 'CHA': -1},
         },
         'azer': {
             'label': 'Azer',
@@ -221,7 +221,7 @@ race_data = {
                 ' advance to 6th level max.',
             ],
             'core_languages': ['Elemental, Fire'],
-            'mods': {'STR': 1, 'INT': 1, 'CHA': -2,},
+            'mods': {'STR': 1, 'INT': 1, 'CHA': -2},
         },
         'drow': {
             'label': 'Drow (Dark Elf)',
@@ -233,7 +233,7 @@ race_data = {
                 ' up to 8th level.',
             ],
             'core_languages': ['Drow'],
-            'mods': {'INT': 1, 'CHA': 1,},
+            'mods': {'INT': 1, 'CHA': 1},
         },
         'goblin': {
             'label': 'Goblin',
@@ -244,7 +244,7 @@ race_data = {
                 '(RACE) Can multi-class as cleric/thieves, fighter/thieves and magic-user/ thieves.',
             ],
             'core_languages': ['Goblin'],
-            'mods': {'STR': -1, 'DEX': 1, 'CHA': -1,},
+            'mods': {'STR': -1, 'DEX': 1, 'CHA': -1},
         },
         'kobold': {
             'label': 'Kobold',
@@ -255,7 +255,7 @@ race_data = {
                 '(RACE) Can multi-class as cleric/sorcerers, fighter/sorcerers and sorcerer/thieves.',
             ],
             'core_languages': ['Kobold'],
-            'mods': {'STR': -2, 'DEX': 1, 'CON': -1,},
+            'mods': {'STR': -2, 'DEX': 1, 'CON': -1},
         },
     },
 }
@@ -269,6 +269,7 @@ systems = {
         'system_name': 'def',                  # shortname for the system, used in some lists and dicts
         'system_fullname': 'Default Display Name',
         'system_type': 'dnd',                  # STR: used to determine armor types, equipment lists, and AC assumptions
+        'setting': 'fantasy',           # STR: game setting, for use with random setting-specific elements
         'hasHPs': True,                 # BOO: changes the calculations if the system has hit points
         'stats': 6,                     # INT: how many stats in this system, usually 6
         'spread': statArrays['dnd'],    # DICT: what spread of stats this system uses
@@ -283,7 +284,7 @@ systems = {
         'saves': False,                 # Pulls STR from Saves dict, above
         'hasWPs': False,                # BOO: notes if this system uses specific WPs a la Dark Dungeons
         'maxLvl': 10,                   # INT: maximum XP level in the game
-        'race_choices': list(dict.keys(race_data['base'])), # LIST: available choices for selecable races
+        'race_choices': list(dict.keys(race_data['base'])),  # LIST: available choices for selecable races
         'race_data': dict(race_data['base']),   # DICT keyed to the list above
         'core_languages': ['Common'],   # LIST: Free starting languages for all characters
         'language_choices': languages_dnd,      # LIST of base possible bonus languages
@@ -304,7 +305,7 @@ systems = {
         'maxLvl': 20,
         'saves': saves['three'],
         'race_choices': list(dict.keys(race_data['bntx'])) + list(dict.keys(race_data['bnt'])),
-        'race_data': {**dict(race_data['bntx']), **dict(race_data['bnt']),},
+        'race_data': {**dict(race_data['bntx']), **dict(race_data['bnt'])},
     },
     'dd': {
         'system_name': 'dd',

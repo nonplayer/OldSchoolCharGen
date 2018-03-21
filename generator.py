@@ -15,6 +15,7 @@ import dice
 import equipment_osr
 import equipment_tnu
 import professions
+import setting
 import spells_osr
 import spells_tnu
 import systems
@@ -98,6 +99,7 @@ class Character(object):
         super(Character, self).__init__()
 
         self.load_prefs_data()
+        self.gen_setting_data()
         #
         # let's get that juicy character data and break it out!
         self.load_profession_data()
@@ -224,6 +226,7 @@ class Character(object):
         self.system = self.prefs['system_name']
         self.system_fullname = self.prefs['system_fullname']
         self.system_type = self.prefs['system_type']
+        self.setting = self.prefs['setting']
         self.affects = dict(self.prefs['affects'])
         self.hps_mod = self.prefs['HPsMod']
 
@@ -253,10 +256,6 @@ class Character(object):
         self.align = random.choice(self.profession['alignAllowed'])
         self.restrictions = list(self.profession['restrictions'])
         self.traits = list(self.profession['special'])
-        self.personal = self.profession['personal']
-        self.background = self.profession['background']
-        self.age = self.profession['age']
-        self.looks = self.profession['looks']
         self.hd = self.profession['hd']
         if 'haspa' in self.profession['flags']:
             self.pa = 'Yes'
@@ -268,6 +267,13 @@ class Character(object):
             self.skills = list(sorted(self.profession['skills']))
         else:
             self.skills = []
+
+    def gen_setting_data(self):
+        setting_data = setting.get_setting_data(self.setting)
+        self.personality = random.choice(setting_data['personality'])
+        self.background = random.choice(setting_data['background'])
+        self.age = random.choice(setting_data['age'])
+        self.looks = random.choice(setting_data['looks'])
 
 
 def generate(game_system='tnu'):
@@ -287,7 +293,7 @@ def print_character(game_system):
     print("Profession: %s;  Level: %s;  Race: %s" % (character.long, str(character.lvl), character.race))
     print("Alignment: %s;  Age: %s;  Looks: %s" % (character.align.title(), character.age, character.looks))
     print("Trait: %s;  Background: %s;  Social Status: %s (%s)" %
-          (character.personal, character.background, character.soc_class, str(character.soc_mod)))
+          (character.personality, character.background, character.soc_class, str(character.soc_mod)))
     if game_system == 'tnu':
         print("Disposition: %sd%s;  Psychic Armour: %s" % (str(character.lvl), str(character.hd), str(character.pa)))
     elif character.stats[character.hps_mod]['mod'] > 0:

@@ -41,6 +41,14 @@ statAffects = {
         'CON': 'Hit Point rolls',
         'CHA': 'Leadership, Reaction rolls'
     },
+    'ham': {
+        'STR': 'Melee Attack Rolls, Damage with Melee and Thrown',
+        'DEX': 'Area Effect Saves, Missile Attack Rolls, AC, Initiative',
+        'CON': 'Body Saves, Hit Die Rolls',
+        'INT': 'Magic-User Spells',
+        'WIS': 'Mind Saves, Cleric Spells, Initiative',
+        'CHA': 'Fate Saves'
+    },
     'm81': {
         'STR': 'Melee Attack Rolls, Hit Point Rolls',
         'DEX': 'Missile Attack Rolls',
@@ -80,6 +88,7 @@ saves = {
     'three': ['Fortitude', 'Reflex', 'Willpower'],
     'five': ['Death Ray & Poison', 'Magic Wands', 'Paralysis & Petrification', 'Breath Weapon', 'Rod, Staff, & Spell'],
     'six': statArrays['dnd'],
+    'ham': ['Body', 'Mind', 'Death', 'Area Effects', 'Fate and Fortune'],
     'pla': ['Mind', 'Body', 'Reflex', 'Horror Factor (HF)'],
 }
 
@@ -315,6 +324,14 @@ systems = {
         'hasWPs': True,
         'maxLvl': 36,
         'saves': saves['five'],
+    },
+    'ham': {
+        'system_name': 'ham',
+        'system_fullname': 'HAMMERCRAWL!',
+        'affects': statAffects['ham'],  # DICT: reference of what each stat in the system affects during play
+        'HPsMod': 'CON',                # STR: stat used to calc hit point mods
+        'saves': saves['ham'],
+        'maxLvl': 15,                   # INT: maximum XP level in the game
     },
     'm81': {
         'system_name': 'm81',

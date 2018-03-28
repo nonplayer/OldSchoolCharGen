@@ -82,6 +82,7 @@ class Character(object):
     def __init__(self, game_system, prefs):
         self.prefs = prefs
         self.profession = dict(professions.get_profession(game_system))
+        self.init_skills()
 
         super(Character, self).__init__()
 
@@ -201,6 +202,17 @@ class Character(object):
         else:
             self.range = str(self.range)
 
+    def init_skills(self):
+        if self.profession['skills'] == 'RANDOM':
+            self.skills = []
+            my_list = list(self.prefs['skill_choices'])
+            self.skills = [s for s in list(random.sample(my_list, 4))]
+            self.skills = sorted(self.skills)
+        elif self.profession['skills']:
+            self.skills = list(sorted(self.profession['skills']))
+        else:
+            self.skills = self.profession['skills']
+
     def init_race_and_languages(self):
         if self.profession['race'] == 'RANDOM':
             my_race = random.choice(list(self.prefs['race_choices']))
@@ -250,12 +262,6 @@ class Character(object):
             self.pa = 'Yes'
         else:
             self.pa = 'None'
-        #
-        # next come the skills, if any:
-        if self.profession['skills']:
-            self.skills = list(sorted(self.profession['skills']))
-        else:
-            self.skills = []
 
     def gen_setting_data(self):
         setting_data = setting.get_setting_data(self.setting)

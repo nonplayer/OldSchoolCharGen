@@ -101,6 +101,26 @@ languages_dnd = [
 
 languages_kaigaku = []
 
+skills_bnt = [
+    'Balance (DEX)', 'Bend bars (STR)', 'Break down doors (STR)', 'Climb sheer surfaces (STR)',
+    'Decipher codes (INT)', 'Escape bonds (DEX)', 'Find secret doors (INT)', 'Find traps (INT)',
+    'Hide in shadows (DEX)', 'Jump (STR)', 'Listen at doors (WIS)', 'Move silently (DEX)',
+    'Open locks (DEX)', 'Pick pockets (DEX)', 'Remove traps (DEX)', 'Riding (DEX)', 'Survival (WIS)',
+    'Swimming (STR)', 'Tracking (WIS)', 'Trickery (CHA)'
+]
+
+skills_dnd = [
+    'Arcane Lore (Int)', 'Balance (Dex)', 'Bluff (Cha)', 'Cooking (Wis)',
+    'Craft (Choice of Medium) (Dex)', 'Diplomacy (Cha)', 'Disguise (Cha)',
+    'Engineering (Int)', 'Escape Artist (Dex)', 'Etiquette (Choice of Culture) (Cha)',
+    'First Aid (Wis)', 'Gambling (Cha)', 'Geography (Int)', 'History (Int)',
+    'Intimidation (Str or Cha)', 'Jumping (Str)', 'Language (Choice) (Special)',
+    'Laws (Choice of Culture) (Int)', 'Lip Reading (Wis)', 'Magical Engineering (Int)',
+    'Nature Lore (Int)', 'Navigating (Wis)', 'Performance (Choice of Medium) (Cha)',
+    'Religious Lore (Int)', 'Riding (Choose Animal) (Dex)', 'Sense Motive (Wis)',
+    'Swimming (Str)', 'Tracking (Wis)'
+]
+
 race_choices = {
     'base': ['human', 'dwarf', 'elf', 'halfling', 'halfogre'],
     'bnt': ['human', 'dwarf', 'elf', 'gnome', 'halfling', 'halfelf', 'halforc'],
@@ -321,6 +341,7 @@ systems = {
         'race_data': dict(race_data['base']),   # DICT keyed to the list above
         'core_languages': ['Common'],   # LIST: Free starting languages for all characters
         'language_choices': languages_dnd,      # LIST of base possible bonus languages
+        'skill_choices': skills_dnd,
     },
     'bnt': {
         'system_name': 'bnt',
@@ -330,6 +351,7 @@ systems = {
         'saves': saves['three'],
         'race_choices': list(dict.keys(race_data['bnt'])),
         'race_data': dict(race_data['bnt']),
+        'skill_choices': skills_bnt,
     },
     'bntx': {
         'system_name': 'bnt',

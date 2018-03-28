@@ -42,27 +42,6 @@ import random
 from random import choice as ch
 from dice import roll as die
 
-skills = {
-    'bnt': [
-        'Balance (DEX)', 'Bend bars (STR)', 'Break down doors (STR)', 'Climb sheer surfaces (STR)',
-        'Decipher codes (INT)', 'Escape bonds (DEX)', 'Find secret doors (INT)', 'Find traps (INT)',
-        'Hide in shadows (DEX)', 'Jump (STR)', 'Listen at doors (WIS)', 'Move silently (DEX)',
-        'Open locks (DEX)', 'Pick pockets (DEX)', 'Remove traps (DEX)', 'Riding (DEX)', 'Survival (WIS)',
-        'Swimming (STR)', 'Tracking (WIS)', 'Trickery (CHA)'
-    ],
-    'dd': [
-        'Arcane Lore (Int)', 'Balance (Dex)', 'Bluff (Cha)', 'Cooking (Wis)',
-        'Craft (Choice of Medium) (Dex)', 'Diplomacy (Cha)', 'Disguise (Cha)',
-        'Engineering (Int)', 'Escape Artist (Dex)', 'Etiquette (Choice of Culture) (Cha)',
-        'First Aid (Wis)', 'Gambling (Cha)', 'Geography (Int)', 'History (Int)',
-        'Intimidation (Str or Cha)', 'Jumping (Str)', 'Language (Choice) (Special)',
-        'Laws (Choice of Culture) (Int)', 'Lip Reading (Wis)', 'Magical Engineering (Int)',
-        'Nature Lore (Int)', 'Navigating (Wis)', 'Performance (Choice of Medium) (Cha)',
-        'Religious Lore (Int)', 'Riding (Choose Animal) (Dex)', 'Sense Motive (Wis)',
-        'Swimming (Str)', 'Tracking (Wis)'
-    ]
-}
-
 baseline = {
     'short': 'default',                     # STR: class name for references
     'long': 'Default Class name',           # STR: class name for display
@@ -74,7 +53,7 @@ baseline = {
     'nextXP': '2000',                       # STR: amount of XP needed for next level
     'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],    # LIST of allowed alignments for random choice
     'attacksAs': 'mid',                     # STRING: what category of combat bonuses
-    'skills': False,                        # LIST of skills for the class
+    'skills': [],                           # LIST of skills for the class
     'restrictions': ['Placeholder for Restrictions'],               # Unsure, placeholder
     'special': ['Placeholder for Special Abilities'],               # Unsure, placeholder
     'wps': False,                           # INT: How many starting Weapon Proficiencies
@@ -307,7 +286,7 @@ dd_profs = {
         'alignAllowed': ['chaos', 'law', 'neutral'],
         'wps': 2,
         'saves': [12, 13, 14, 15, 16],
-        'skills': list(random.sample(skills['dd'], 4)),
+        'skills': 'RANDOM',
     },
     'cleric': {
         'short': 'cleric',
@@ -453,7 +432,7 @@ ham_profs = {
         'hd': 6,
         'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],
         'attacksAs': 'mid',
-        'skills': False,  # LIST of skills for the class
+        'skills': 'RANDOM',
         'weapons': 'war',
         'armour': 'war',
         'saves': [0, 1, 1, 0, 0],
@@ -571,7 +550,7 @@ m81_profs = {
         'alignAllowed': ['chaos', 'law', 'neutral'],
         'wps': 0,
         'saves': [12, 13, 14, 15, 16],
-        'skills': list(random.sample(skills['dd'], 4)),
+        'skills': 'RANDOM',
     },
     'cleric': {
         'short': 'cleric',

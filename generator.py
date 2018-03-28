@@ -9,6 +9,7 @@ Don't forget half-stats for TNU
 """
 
 import random
+import re
 
 import dice
 import equipment_osr
@@ -131,6 +132,8 @@ class Character(object):
         my_armourlist = []
         for w in my_weapons:
             my_gear.remove(w)
+            if self.system == 'ham':
+                w = re.sub(',\sDmg:\s\d+d\d+', '', w)
             my_weaponlist.append(str.title(w[8:]))
         for a in my_armour:
             my_gear.remove(a)
@@ -165,7 +168,7 @@ class Character(object):
                 my_spells = []
                 if self.system == 'tnu':
                     my_spells = spells_tnu.get_spells(self.profession['spellChooseAs'], self.align, self.num_spells)
-                elif self.system in ['bnt', 'dd', 'm81', 'pla']:
+                elif self.system in ['bnt', 'dd', 'ham', 'm81']:
                     my_spells = spells_osr.get_spells(self.system, self.profession['spellChooseAs'], self.num_spells)
                 if self.profession['extraspells']:
                     my_extra_spells = [s for s in list(self.profession['extraspells'])]
@@ -202,7 +205,7 @@ class Character(object):
         if self.profession['race'] == 'RANDOM':
             my_race = random.choice(list(self.prefs['race_choices']))
         else:
-            my_race = 'human'
+            my_race = self.profession['race']
         self.race = self.prefs['race_data'][my_race]['label']
         self.traits = self.traits + self.prefs['race_data'][my_race]['traits']
         self.languages = self.prefs['race_data'][my_race]['core_languages']

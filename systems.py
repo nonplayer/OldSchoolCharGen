@@ -114,7 +114,7 @@ skills_dnd = [
     'Craft (Choice of Medium) (Dex)', 'Diplomacy (Cha)', 'Disguise (Cha)',
     'Engineering (Int)', 'Escape Artist (Dex)', 'Etiquette (Choice of Culture) (Cha)',
     'First Aid (Wis)', 'Gambling (Cha)', 'Geography (Int)', 'History (Int)',
-    'Intimidation (Str or Cha)', 'Jumping (Str)', 'Language (Choice) (Special)',
+    'Intimidation (Str or Cha)', 'Jumping (Str)',
     'Laws (Choice of Culture) (Int)', 'Lip Reading (Wis)', 'Magical Engineering (Int)',
     'Nature Lore (Int)', 'Navigating (Wis)', 'Performance (Choice of Medium) (Cha)',
     'Religious Lore (Int)', 'Riding (Choose Animal) (Dex)', 'Sense Motive (Wis)',
@@ -341,7 +341,7 @@ systems = {
         'race_data': dict(race_data['base']),   # DICT keyed to the list above
         'core_languages': ['Common'],   # LIST: Free starting languages for all characters
         'language_choices': languages_dnd,      # LIST of base possible bonus languages
-        'skill_choices': skills_dnd,
+        'skill_choices': skills_dnd,    # LIST of skills for the random skill assigner
     },
     'bnt': {
         'system_name': 'bnt',

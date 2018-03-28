@@ -88,7 +88,7 @@ saves = {
     'three': ['Fortitude', 'Reflex', 'Willpower'],
     'five': ['Death Ray & Poison', 'Magic Wands', 'Paralysis & Petrification', 'Breath Weapon', 'Rod, Staff, & Spell'],
     'six': statArrays['dnd'],
-    'ham': ['Body', 'Mind', 'Death', 'Area Effects', 'Fate and Fortune'],
+    'ham': ['Area (+DEX mod)', 'Body (+CON mod)', 'Death (No mods)', 'Fate (+CHA mod)', 'Mind (+WIS mod)'],
     'pla': ['Mind', 'Body', 'Reflex', 'Horror Factor (HF)'],
 }
 
@@ -102,7 +102,7 @@ languages_dnd = [
 languages_kaigaku = []
 
 race_choices = {
-    'base': ['human', 'dwarf', 'elf', 'halfling'],
+    'base': ['human', 'dwarf', 'elf', 'halfling', 'halfogre'],
     'bnt': ['human', 'dwarf', 'elf', 'gnome', 'halfling', 'halfelf', 'halforc'],
     'bntx': ['human', 'dwarf', 'elf', 'gnome', 'halfling', 'halfelf', 'halforc'],
 }
@@ -111,6 +111,30 @@ race_data = {
     'base': {
         'human': {
             'label': "Human",
+            'traits': [],
+            'core_languages': [],
+            'mods': {},
+        },
+        'dwarf': {
+            'label': "Dwarf",
+            'traits': [],
+            'core_languages': [],
+            'mods': {},
+        },
+        'elf': {
+            'label': "Elf",
+            'traits': [],
+            'core_languages': [],
+            'mods': {},
+        },
+        'halfling': {
+            'label': "Halfling",
+            'traits': [],
+            'core_languages': [],
+            'mods': {},
+        },
+        'halfogre': {
+            'label': "Half-Ogre",
             'traits': [],
             'core_languages': [],
             'mods': {},

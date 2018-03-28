@@ -7,16 +7,14 @@ import argparse
 import generator
 
 parser = argparse.ArgumentParser(description='Get Game System')
-parser.add_argument('-g', '--game_system', type=str, required=True, choices=['bnt', 'bntx', 'dd', 'm81', 'tnu'],
-                    help='The abbreviated Game System (bnt, bntx, dd, m81, tnu)')
-parser.add_argument('-H', '--hammercrawl', action='store_true',
-                    help='Enable HAMMERCRAWL! extended features (currently disabled)')
+parser.add_argument('-g', '--game_system', type=str, required=True, choices=['bnt', 'bntx', 'dd', 'ham', 'm81', 'tnu'],
+                    help='The abbreviated Game System (bnt, bntx, dd, ham, m81, tnu)')
 parser.add_argument('-n', '--number_of_characters', type=int, action='store', default=1,
                     help='How many character to generate.')
 args = parser.parse_args()
 
 supported_systems = [
-    'tnu', 'dd', 'bnt', 'bntx', 'm81',
+    'dd', 'bnt', 'bntx', 'ham', 'm81', 'tnu'
 ]
 
 
@@ -97,14 +95,13 @@ def print_character(game_system):
 
 if __name__ == "__main__":
     game_sys = args.game_system
-    if args.hammercrawl:
-        print("HAMMERCRAWL TIME!!!!! Okay this currently does nothing, but stay tuned for more...")
     while game_sys not in supported_systems:
         print("\nGame System choice is missing or invalid. Please enter one of the following systems:\n")
         print("bnt  = Blood & Treasure (1st Edition)")
         print("bntx = Blood & Treasure 1st Edition with Expanded Monster Races")
         print("dd   = Dark Dungeons")
         print("m81  = Microlite81")
+        print("ham  = HAMMERCRAWL!")
         print("tnu  = The Nightmares Underneath")
         print()
         game_sys = input("Enter the system abbreviation from above: ")

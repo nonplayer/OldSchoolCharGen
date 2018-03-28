@@ -12,17 +12,18 @@ human/demi      = are they human or demihuman (for "race as class" games
 caster          = designates the class as starting with magic
 subclass        = has special subclass stuff, like with demihumans
 haspa           = class has psychic armor
+mu-weapons      = (Hammercrawl) Generate a Magic-User Weapon for this character
 
 alignments options:
 'chaos', 'evil', 'good', 'law', 'neutral'
 
 "attacksAs" options:
-best    = best bonuses in the game              (+17 bnt, +23 dd)
+best    = best bonuses in the game              (+17 bnt, +23 dd, +15 ham)
 mid-hi  = just above mid-ter for some games     (+15 bnt)
-mid     = mid-tier attack bonuses               (+13 bnt, +18 dd)
+mid     = mid-tier attack bonuses               (+13 bnt, +18 dd, +7 ham)
 mid-lo  = just below mid-tier for some games    (+9 bnt)
-worst   = worst bonuses in the game             (+7 bnt, +8 dd)
-none    = absolutely no level-based bonuses! to combat!
+worst   = worst bonuses in the game             (+7 bnt, +8 dd, +5 ham)
+none    = absolutely no level-based bonuses! to combat!     (+0 ham)
 NOTE!: at least in base TNU, characters all use either best or none
 NOTE2: My long term plan if I add level selector is to work some code wizardry which is based on
 automagically spreading the bonuses out across the base system's total levels.
@@ -65,7 +66,7 @@ skills = {
 baseline = {
     'short': 'default',                     # STR: class name for references
     'long': 'Default Class name',           # STR: class name for display
-    'race': 'Human',                        # STR: race name of "RANDOM" to trigger the random race function
+    'race': 'human',                        # STR: lowercase name, or "RANDOM" to trigger the random race function
     'level': 1,                             # INT: right now only used for # of spells mastered
     'hd': 6,                                # INT: The Hit Die of the class
     'primAttr': [],                         # LIST of one or two stats for high stat roll assignments
@@ -329,7 +330,7 @@ dd_profs = {
     'dwarf': {
         'short': 'dwarf',
         'long': 'Dwarf',
-        'race': 'Dwarf',
+        'race': 'dwarf',
         'flags': ['base', 'demi'],
         'nextXP': '2200',
         'hd': 8,
@@ -347,7 +348,7 @@ dd_profs = {
     'elf': {
         'short': 'elf',
         'long': 'Elf',
-        'race': 'Elf',
+        'race': 'elf',
         'flags': ['base', 'demi', 'caster'],
         'nextXP': '4000',
         'primAttr': ['STR', 'INT'],
@@ -380,7 +381,7 @@ dd_profs = {
     'halfling': {
         'short': 'halfling',
         'long': 'Halfling',
-        'race': 'Halfling',
+        'race': 'halfling',
         'flags': ['base', 'demi'],
         'primAttr': ['DEX', 'CON'],
         'restrictions': ['Halflings can wear any armour or shield, and can use any small weapon. They cannot use '
@@ -444,6 +445,125 @@ dd_profs = {
         'extralangs': ['Thieves\' Cant'],
     },
 }
+
+ham_profs = {
+    'default': {
+        'flags': ['base', 'human'],
+        'race': 'human',
+        'hd': 6,
+        'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],
+        'attacksAs': 'mid',
+        'skills': False,  # LIST of skills for the class
+        'weapons': 'war',
+        'armour': 'war',
+        'saves': [0, 1, 1, 0, 0],
+    },
+    'cleric': {
+        'short': 'cleric',  # STR: class name for references
+        'long': 'Cleric',  # STR: class name for display
+        'flags': ['base', 'human', 'caster'],
+        'alignAllowed': ['chaos', 'evil', 'good', 'law'],
+        'primAttr': ['WIS', 'CHA'],
+        'saves': [0, 0, 0, 1, 0],
+        'weapons': 'clr',
+        'casterStat': 'WIS',  # STRING: stat used for spells, if a caster
+        'spellsPerLvl': 2,
+        'spellChooseAs': 'cleric',  # STRING: if caster, usually = short
+        'restrictions': ['Placeholder for Restrictions'],
+        'special': ['Placeholder for Special Abilities'],
+    },
+    'dwarf': {
+        'short': 'dwarf',  # STR: class name for references
+        'long': 'Dwarven Defender',
+        'race': 'dwarf',
+        'hd': 8,
+        'primAttr': ['STR', 'CON'],
+        'flags': ['base', 'demi'],  # LIST of flags for different effects
+        'attacksAs': 'best',
+        'restrictions': ['Placeholder for Restrictions'],
+        'special': ['Placeholder for Special Abilities'],
+    },
+    'elf': {
+        'short': 'elf',  # STR: class name for references
+        'long': 'Elven Exemplar',
+        'race': 'elf',
+        'flags': ['base', 'demi', 'caster'],  # LIST of flags for different effects
+        'hd': 8,
+        'primAttr': ['DEX', 'INT'],
+        'saves': [0, 0, 1, 0 ,1],
+        'casterStat': 'INT',  # STRING: stat used for spells, if a caster
+        'spellsPerLvl': 1,
+        'spellChooseAs': 'mu',  # STRING: if caster, usually = short
+        'extraspells': ['Level 1: Read Magic'],
+        'restrictions': ['Placeholder for Restrictions'],
+        'special': ['Placeholder for Special Abilities'],
+    },
+    'fighter': {
+        'short': 'fighter',  # STR: class name for references
+        'long': 'Fighter',  # STR: class name for display
+        'hd': 8,
+        'attacksAs': 'best',
+        'primAttr': ['STR', 'CON'],
+        'restrictions': ['Placeholder for Restrictions'],
+        'special': ['Placeholder for Special Abilities'],
+    },
+    'halfling': {
+        'short': 'halfling',  # STR: class name for references
+        'long': 'Halfling Burglar',
+        'race': 'halfling',
+        'flags': ['base', 'demi'],  # LIST of flags for different effects
+        'primAttr': ['DEX', 'CHA'],
+        'saves': [1, 1, 1, 1, 1],
+        'weapons': 'hlf',
+        'restrictions': ['Placeholder for Restrictions'],
+        'special': ['Placeholder for Special Abilities'],
+    },
+    'halfogre': {
+        'short': 'halfogre',  # STR: class name for references
+        'long': 'Half-Ogre Berzerker',  # STR: class name for display
+        'race': 'halfogre',  # STR: race name of "RANDOM" to trigger the random race function
+        'flags': ['base', 'demi'],  # LIST of flags for different effects
+        'attacksAs': 'best',
+        'alignAllowed': ['chaos', 'evil', 'good', 'neutral'],
+        'hd': 10,
+        'primAttr': ['STR', 'CON'],
+        'restrictions': ['Placeholder for Restrictions'],
+        'special': ['Placeholder for Special Abilities'],
+    },
+    'mu': {
+        'short': 'mu',  # STR: class name for references
+        'long': 'Magic-User',  # STR: class name for display
+        'flags': ['base', 'human', 'caster', 'mu-weapons'],
+        'attacksAs': 'none',
+        'hd': 4,
+        'primAttr': ['INT'],
+        'saves': [0, 0, 0, 0, 1],
+        'weapons': 'mag',
+        'armour': 'mag',
+        'casterStat': 'INT',  # STRING: stat used for spells, if a caster
+        'spellsPerLvl': 2,
+        'spellChooseAs': 'mu',  # STRING: if caster, usually = short
+        'extragear': ['a Spellbook'],
+        'extraspells': ['At Will: Read Magic'],
+        'restrictions': ['Placeholder for Restrictions'],
+        'special': ['Placeholder for Special Abilities'],
+    },
+    'thief': {
+        'short': 'thief',  # STR: class name for references
+        'long': 'Thief',  # STR: class name for display
+        'attacksAs': 'worst',
+        'primAttr': ['DEX', 'INT'],
+        'saves': [1, 0, 0, 1, 0],
+        'weapons': 'rog',
+        'armour': 'rog',
+        'extragear': ['a Set of Thieves\' Tools'],
+        'extralangs': ['Thieves\' Cant'],
+        'restrictions': ['Placeholder for Restrictions'],
+        'special': ['Placeholder for Special Abilities'],
+    },
+}
+
+# 'cleric', 'elf', 'dwarf', 'fighter', 'halfogre', 'halfling', 'mu', 'thief'
 
 m81_profs = {
     'default': {
@@ -912,6 +1032,10 @@ base_profs_dnd = [
     'cleric', 'elf', 'dwarf', 'fighter', 'halfling', 'mu', 'thief'
 ]
 
+base_profs_ham = [
+    'cleric', 'elf', 'dwarf', 'fighter', 'halfogre', 'halfling', 'mu', 'thief'
+]
+
 # I don't do druids or monks, they're a pain in the ass
 proflists = {
     'bnt': {
@@ -925,6 +1049,10 @@ proflists = {
     'dd': {
         'choices': base_profs_dnd,
         'dict': dd_profs,
+    },
+    'ham': {
+        'choices': base_profs_ham,
+        'dict': ham_profs,
     },
     'm81': {
         'choices': base_profs_dnd,

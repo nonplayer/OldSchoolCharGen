@@ -112,6 +112,7 @@ spells_pla = {
 
 spells_match = {
     'bnt': spells_bnt,
+    'ham': spells_dd,
     'dd': spells_dd,
     'm81': spells_basic,
     'pla': spells_pla,

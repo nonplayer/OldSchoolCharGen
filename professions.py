@@ -12,17 +12,18 @@ human/demi      = are they human or demihuman (for "race as class" games
 caster          = designates the class as starting with magic
 subclass        = has special subclass stuff, like with demihumans
 haspa           = class has psychic armor
+mu-weapons      = (Hammercrawl) Generate a Magic-User Weapon for this character
 
 alignments options:
 'chaos', 'evil', 'good', 'law', 'neutral'
 
 "attacksAs" options:
-best    = best bonuses in the game              (+17 bnt, +23 dd)
+best    = best bonuses in the game              (+17 bnt, +23 dd, +15 ham)
 mid-hi  = just above mid-ter for some games     (+15 bnt)
-mid     = mid-tier attack bonuses               (+13 bnt, +18 dd)
+mid     = mid-tier attack bonuses               (+13 bnt, +18 dd, +7 ham)
 mid-lo  = just below mid-tier for some games    (+9 bnt)
-worst   = worst bonuses in the game             (+7 bnt, +8 dd)
-none    = absolutely no level-based bonuses! to combat!
+worst   = worst bonuses in the game             (+7 bnt, +8 dd, +5 ham)
+none    = absolutely no level-based bonuses! to combat!     (+0 ham)
 NOTE!: at least in base TNU, characters all use either best or none
 NOTE2: My long term plan if I add level selector is to work some code wizardry which is based on
 automagically spreading the bonuses out across the base system's total levels.
@@ -39,129 +40,12 @@ war = selects as warrior
 
 import random
 from random import choice as ch
-import dice
 from dice import roll as die
-
-skills = {
-    'bnt': [
-        'Balance (DEX)', 'Bend bars (STR)', 'Break down doors (STR)', 'Climb sheer surfaces (STR)',
-        'Decipher codes (INT)', 'Escape bonds (DEX)', 'Find secret doors (INT)', 'Find traps (INT)',
-        'Hide in shadows (DEX)', 'Jump (STR)', 'Listen at doors (WIS)', 'Move silently (DEX)',
-        'Open locks (DEX)', 'Pick pockets (DEX)', 'Remove traps (DEX)', 'Riding (DEX)', 'Survival (WIS)',
-        'Swimming (STR)', 'Tracking (WIS)', 'Trickery (CHA)'
-    ],
-    'dd': [
-        'Arcane Lore (Int)', 'Balance (Dex)', 'Bluff (Cha)', 'Cooking (Wis)',
-        'Craft (Choice of Medium) (Dex)', 'Diplomacy (Cha)', 'Disguise (Cha)',
-        'Engineering (Int)', 'Escape Artist (Dex)', 'Etiquette (Choice of Culture) (Cha)',
-        'First Aid (Wis)', 'Gambling (Cha)', 'Geography (Int)', 'History (Int)',
-        'Intimidation (Str or Cha)', 'Jumping (Str)', 'Language (Choice) (Special)',
-        'Laws (Choice of Culture) (Int)', 'Lip Reading (Wis)', 'Magical Engineering (Int)',
-        'Nature Lore (Int)', 'Navigating (Wis)', 'Performance (Choice of Medium) (Cha)',
-        'Religious Lore (Int)', 'Riding (Choose Animal) (Dex)', 'Sense Motive (Wis)',
-        'Swimming (Str)', 'Tracking (Wis)'
-    ]
-}
-
-ages = [
-    'Early Teens', 'Late Teens', 'Young Adult', 'Adult', 'Middle-Aged', 'Elder', 'Ancient',
-]
-
-looks = [
-    'Drab', 'Threadbare', 'Fancy', 'Filthy', 'Disguised', 'Common',
-    'Skivvies', 'Antiquated', 'Anachronistic', 'Slovenly',
-]
-
-personals = [
-    'Accusative', 'Active', 'Adventurous', 'Affable', 'Affectionate', 'Aggressive', 'Agreeable',
-    'Aimless', 'Aloof', 'Altruistic', 'Amazed', 'Analytical', 'Angry', 'Animated', 'Annoying',
-    'Anxious', 'Apathetic', 'Apologetic', 'Apprehensive', 'Argumentative', 'Arrogant', 'Articulate',
-    'Artist', 'Athletic', 'Attentive', 'Beautiful', 'Bigoted', 'Bitter', 'Blustering', 'Boastful',
-    'Bookish', 'Bossy', 'Braggart', 'Brash', 'Brave', 'Bullying', 'Callous', 'Calm', 'Candid',
-    'Cantankerous', 'Capricious', 'Careful', 'Careless', 'Caring', 'Casual', 'Catty', 'Cautious',
-    'Cavalier', 'Charming', 'Chaste', 'Chauvinistic', 'Cheeky', 'Cheerful', 'Childish', 'Chivalrous',
-    'Clueless', 'Clumsy', 'Clumsy', 'Cocky', 'Comforting', 'Communicative', 'Complacent', 'Condescending',
-    'Confident', 'Conformist', 'Confused', 'Conscientious', 'Conservative', 'Contentious', 'Contrarian',
-    'Controlling', 'Contumely', 'Conventional', 'Cooperative', 'Courageous', 'Courteous', 'Cowardly',
-    'Coy', 'Crabby', 'Cranky', 'Critical', 'Cruel', 'Cultured', 'Curious', 'Cynical', 'Daring', 'Daring',
-    'Deceitful', 'Deceptive', 'Defensive', 'Defiant', 'Deliberate', 'Deluded', 'Depraved', 'Discreet',
-    'Dishonest', 'Disingenuous', 'Disloyal', 'Disrespectful', 'Distant', 'Distracted', 'Distraught',
-    'Docile', 'Doleful', 'Dominating', 'Dramatic', 'Drug-addled', 'Drunkard', 'Dull', 'Earthy',
-    'Eccentric', 'Educated', 'Elitist', 'Emotional', 'Enigmatic', 'Enthusiastic', 'Epicurean', 'Ethical',
-    'Excited', 'Expressive', 'Extroverted', 'Faithful', 'Fanatical', 'Fastidious', 'Fatalistic',
-    'Fearful', 'Fearless', 'Feisty', 'Feral', 'Feuding', 'Fierce', 'Flamboyant', 'Flippant', 'Flirtatious',
-    'Foolhardy', 'Foppish', 'Foreign', 'Forgiving', 'Friendly', 'Frightened', 'Frivolous', 'Frustrated',
-    'Funny', 'Furtive', 'Generous', 'Genial', 'Gentle', 'Gloomy', 'Goofy', 'Gossip', 'Graceful', 'Gracious',
-    'Grave', 'Greasy', 'Greedy', 'Gregarious', 'Grouchy', 'Groveling', 'Gruff', 'Guilty', 'Gullible',
-    'Happy', 'Hard working', 'Harsh', 'Hateful', 'Heartbroken', 'Helpful', 'Hoarder', 'Honest', 'Hopeful',
-    'Hostile', 'Humble', 'Humorless', 'Humorous', 'Hungry', 'Idealistic', 'Idiosyncratic', 'Ill',
-    'Imaginative', 'Imitative', 'Impatient', 'Impetuous', 'Implacable', 'Impractical', 'Impulsive',
-    'Inattentive', 'Incoherent', 'Indifferent', 'Indiscreet', 'Individualist', 'Indolent', 'Indomitable',
-    'Indulgent', 'Industrious', 'Inexorable', 'Inexpressive', 'Insecure', 'Insensitive', 'Insomniac',
-    'Instructive', 'Intolerant', 'Intransigent', 'Introverted', 'Irreligious', 'Irresponsible',
-    'Irreverent', 'Irritable', 'Jealous', 'Jocular', 'Joking', 'Jolly', 'Joyous', 'Judgmental', 'Jumpy',
-    'Kind', 'Know-it-all', 'Languid', 'Lawful', 'Layabout', 'Lazy', 'Lethargic', 'Lewd', 'Liar', 'Likable',
-    'Lippy', 'Listless', 'Loquacious', 'Loud', 'Loving', 'Loyal', 'Lucky', 'Lust', 'Madcap', 'Magical',
-    'Magnanimous', 'Malicious', 'Maudlin', 'Mean', 'Meddlesome', 'Melancholy', 'Melodramatic', 'Merciless',
-    'Merry', 'Meticulous', 'Mischievous', 'Miscreant', 'Miserly', 'Modest', 'Moody', 'Moralistic', 'Morbid',
-    'Morose', 'Mournful', 'Mousy', 'Mouthy', 'Musical', 'Mysterious', 'Mystical', 'Naive', 'Narrow-minded',
-    'Needy', 'Nefarious', 'Nervous', 'Nettlesome', 'Neurotic', 'Nihilist', 'Noble', 'Nonchalant',
-    'Nurturing', 'Obdurate', 'Obedient', 'Oblivious', 'Obnoxious', 'Obsequious', 'Obsessive', 'Obstinate',
-    'Obtuse', 'Odd', 'Off-putting', 'Optimistic', 'Organized', 'Ornery', 'Orphan', 'Ostentatious',
-    'Outgoing', 'Overbearing', 'Overconfident', 'Paranoid', 'Passionate', 'Pathological', 'Patient',
-    'Peaceful', 'Peacemaker', 'Pensive', 'Pertinacious', 'Pessimistic', 'Philanderer', 'Philosophical',
-    'Phony', 'Pious', 'Playful', 'Pleasant', 'Poised', 'Polite', 'Pompous', 'Pondering', 'Pontificating',
-    'Practical', 'Prejudiced', 'Preoccupied', 'Pretentious', 'Promiscuous', 'Proper', 'Proselytizing',
-    'Proud', 'Prudent', 'Prudish', 'Prying', 'Puerile', 'Pugnacious', 'Punctual', 'Quiet', 'Quirky',
-    'Rascal', 'Rash', 'Realistic', 'Rebellious', 'Reckless', 'Refined', 'Repellent', 'Reserved',
-    'Respectful', 'Responsible', 'Restless', 'Reticent', 'Reverent', 'Rigid', 'Risk-taking', 'Romantic',
-    'Rude', 'Sadistic', 'Sarcastic', 'Sardonic', 'Sassy', 'Savage', 'Scared', 'Scolding', 'Secretive',
-    'Seeker', 'Self-destructive', 'Self-effacing', 'Selfish', 'Selfless', 'Senile', 'Sensible', 'Sensitive',
-    'Sensual', 'Sentimental', 'Serene', 'Serious', 'Servile', 'Sexual', 'Shallow', 'Shameful',
-    'Shameless', 'Shifty', 'Shrewd', 'Shy', 'Sincere', 'Slanderous', 'Sly', 'Smug', 'Snobbish', 'Sober',
-    'Sociable', 'Solemn', 'Solicitous', 'Solitary', 'Sophisticated', 'Spendthrift', 'Spiteful', 'Stern',
-    'Stingy', 'Stoic', 'Stubborn', 'Stylish', 'Submissive', 'Sultry', 'Superstitious', 'Surly', 'Suspicious',
-    'Sybarite', 'Sycophantic', 'Sympathetic', 'Taciturn', 'Tactful', 'Tattooed', 'Tawdry', 'Teetotaler',
-    'Temperamental', 'Tempestuous', 'Thief', 'Thorough', 'Thrifty', 'Thrifty', 'Timid', 'Tolerant',
-    'Transparent', 'Treacherous', 'Troublemaker', 'Trusting', 'Truthful', 'Uncommitted', 'Understanding',
-    'Unfriendly', 'Unhinged', 'Uninhibited', 'Unpredictable', 'Unruly', 'Unsupportive', 'Vague', 'Vain',
-    'Vapid', 'Vengeful', 'Vigilant', 'Violent', 'Vivacious', 'Vulgar', 'Wanderlust', 'Wanton', 'Wasteful',
-    'Weary', 'Well-travelled', 'Whimsical', 'Whiny', 'Wicked', 'Wisecracking', 'Wistful', 'Witty',
-    'Youthful', 'Zealous',
-]
-
-backgrounds = [
-    'Accountant', 'Acrobat', 'Actor', 'Alchemist', 'Animal seller', 'Animal trainer', 'Apiarist',
-    'Apothecary', 'Architect', 'Armourer', 'Artillerist', 'Artist', 'Astrologer', 'Author', 'Baker',
-    'Banker', 'Barber', 'Barkeep', 'Beggar', 'Blacksmith', 'Boat builder', 'Bodyguard', 'Bookbinder',
-    'Bounty hunter', 'Bow maker', 'Brewer', 'Builder', 'Butcher', 'Calligrapher', 'Candle maker',
-    'Captain', 'Caravan driver', 'Carpenter', 'Carpet maker', 'Cart maker', 'Cartographer', 'Carver',
-    'Cavalry', 'Cheese maker', 'Chef', 'Clerk', 'Clock maker', 'Cloth dyer', 'Clothier', 'Clown',
-    'Coach driver', 'Cobbler', 'Composer', 'Cook', 'Cooper', 'Coppersmith', 'Counterfeiter', 'Courier',
-    'Courtesan', 'Courtier', 'Custodian', 'Demagogue', 'Doctor', 'Engineer', 'Engraver', 'Explorer',
-    'Falconer', 'Farmer', 'Fence', 'Fisher', 'Fletcher', 'Flower seller', 'Food seller', 'Forester',
-    'Forger', 'Fortune teller', 'Fruit seller', 'Furniture maker', 'Furrier', 'Gambler', 'Gamekeeper',
-    'Gardener', 'General', 'Glass maker', 'Goldsmith', 'Governess', 'Grave digger', 'Groom', 'Guard',
-    'Guide', 'Haberdasher', 'Hatter', 'Healer', 'Herald', 'Horse trader', 'Hosteler', 'Hunter',
-    'Illustrator', 'Innkeeper', 'Jailer', 'Jester', 'Jeweller', 'Judge', 'Labourer', 'Laundress',
-    'Lawyer', 'Lead smith', 'Leather worker', 'Librarian', 'Linen maker', 'Locksmith', 'Maid', 'Marine',
-    'Mercenary', 'Merchant', 'Midwife', 'Miller', 'Miner', 'Minstrel', 'Moneylender', 'Musician',
-    'Navigator', 'Net maker', 'Noble', 'Nurse', 'Official', 'Outfitter', 'Page', 'Painter', 'Paper maker',
-    'Pawnbroker', 'Peasant', 'Peddler', 'Perfumer', 'Pharmacist', 'Photographer', 'Physician', 'Pilgrim',
-    'Pilot', 'Pimp', 'Pirate', 'Playwright', 'Plumber', 'Poacher', 'Police', 'Porter', 'Potter', 'Priest',
-    'Printer', 'Professor', 'Prospector', 'Prostitute', 'Purser', 'Ranger', 'Ratcatcher', 'Roofer',
-    'Rope maker', 'Runner', 'Saddler', 'Sail maker', 'Sailor', 'Scavenger', 'Scholar', 'Scout', 'Scribe',
-    'Sculptor', 'Servant', 'Server', 'Sharpener', 'Shepherd', 'Shipwright', 'Shopkeeper', 'Silk trader',
-    'Silversmith', 'Soap maker', 'Soldier', 'Spice trader', 'Squire', 'Stabler', 'Stevedore', 'Steward',
-    'Stonemason', 'Student', 'Tailor', 'Tattooist', 'Tax collector', 'Taxidermist', 'Teacher', 'Thief',
-    'Thug', 'Tile maker', 'Tinker', 'Trader', 'Trapper', 'Undertaker', 'Veterinarian', 'Vintner',
-    'Water seller', 'Weaponsmith', 'Weaver', 'Wheelwright', 'Wine seller', 'Woodcutter'
-]
 
 baseline = {
     'short': 'default',                     # STR: class name for references
     'long': 'Default Class name',           # STR: class name for display
-    'race': 'Human',                        # STR: race name of "RANDOM" to trigger the random race function
+    'race': 'human',                        # STR: lowercase name, or "RANDOM" to trigger the random race function
     'level': 1,                             # INT: right now only used for # of spells mastered
     'hd': 6,                                # INT: The Hit Die of the class
     'primAttr': [],                         # LIST of one or two stats for high stat roll assignments
@@ -169,7 +53,7 @@ baseline = {
     'nextXP': '2000',                       # STR: amount of XP needed for next level
     'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],    # LIST of allowed alignments for random choice
     'attacksAs': 'mid',                     # STRING: what category of combat bonuses
-    'skills': False,                        # LIST of skills for the class
+    'skills': [],                           # LIST of skills for the class
     'restrictions': ['Placeholder for Restrictions'],               # Unsure, placeholder
     'special': ['Placeholder for Special Abilities'],               # Unsure, placeholder
     'wps': False,                           # INT: How many starting Weapon Proficiencies
@@ -183,11 +67,6 @@ baseline = {
     'saves': False,                         # FALSE or else a LIST of integers, in order
     'extragear': False,                     # either False or LIST: some professions have extra gear, put it here
     'extralangs': [],                       # LIST if any bonus languages come with the class
-    # a bunch of fun random character traits follow:
-    'personal': random.choice(personals),
-    'background': random.choice(backgrounds),
-    'age': random.choice(ages),
-    'looks': random.choice(looks),
 }
 
 bnt_profs = {
@@ -407,7 +286,7 @@ dd_profs = {
         'alignAllowed': ['chaos', 'law', 'neutral'],
         'wps': 2,
         'saves': [12, 13, 14, 15, 16],
-        'skills': list(random.sample(skills['dd'], 4)),
+        'skills': 'RANDOM',
     },
     'cleric': {
         'short': 'cleric',
@@ -430,7 +309,7 @@ dd_profs = {
     'dwarf': {
         'short': 'dwarf',
         'long': 'Dwarf',
-        'race': 'Dwarf',
+        'race': 'dwarf',
         'flags': ['base', 'demi'],
         'nextXP': '2200',
         'hd': 8,
@@ -448,7 +327,7 @@ dd_profs = {
     'elf': {
         'short': 'elf',
         'long': 'Elf',
-        'race': 'Elf',
+        'race': 'elf',
         'flags': ['base', 'demi', 'caster'],
         'nextXP': '4000',
         'primAttr': ['STR', 'INT'],
@@ -481,7 +360,7 @@ dd_profs = {
     'halfling': {
         'short': 'halfling',
         'long': 'Halfling',
-        'race': 'Halfling',
+        'race': 'halfling',
         'flags': ['base', 'demi'],
         'primAttr': ['DEX', 'CON'],
         'restrictions': ['Halflings can wear any armour or shield, and can use any small weapon. They cannot use '
@@ -546,13 +425,252 @@ dd_profs = {
     },
 }
 
+ham_profs = {
+    'default': {
+        'flags': ['base', 'human'],
+        'race': 'human',
+        'hd': 6,
+        'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],
+        'attacksAs': 'mid',
+        'skills': 'RANDOM',
+        'weapons': 'war',
+        'armour': 'war',
+        'saves': [0, 1, 1, 0, 0],
+    },
+    'cleric': {
+        'short': 'cleric',  # STR: class name for references
+        'long': 'Cleric',  # STR: class name for display
+        'flags': ['base', 'human', 'caster'],
+        'alignAllowed': ['chaos', 'evil', 'good', 'law'],
+        'primAttr': ['WIS', 'CHA'],
+        'saves': [0, 0, 0, 1, 0],
+        'weapons': 'clr',
+        'casterStat': 'WIS',  # STRING: stat used for spells, if a caster
+        'spellsPerLvl': 2,
+        'spellChooseAs': 'cleric',  # STRING: if caster, usually = short
+        'extragear': ['A visible Symbol of your Holy Faith'],
+        'restrictions': ['Can use all weapons, shields, and armour that are not otherwise prohibited by your deity.',
+                         'You cannot be of Neutral Alignment'],
+        'special': [
+            '(Class) You cast spells from the Cleric spell list. You begin the game with a holy prayerbook which '
+            'contains a chance for randomly-determined clerical prayers. At each new level you add two (2) new '
+            'prayers to your book, and you can add more by sanctifying, converting, and transcribing prayers to '
+            'other gods found on scrolls and books in dungeons. At level 1 you can only cast level 1 spells. This '
+            'maximum spell level increases by +1 at every odd-numbered level of experience.',
+            '(Class) Once per Day per Level of Experience, you can hold aloft your holy symbol and turn back '
+            'undead, devils, demons, and any others that the \'Smith deems to be enemies of your faith. Opponents '
+            'must make Mind saves based on the difference in Level/HD Tiers. Targets who fail this save must cower, '
+            'flee, or possibly even take damage or be destroyed.',
+        ],
+    },
+    'dwarf': {
+        'short': 'dwarf',  # STR: class name for references
+        'long': 'Dwarven Defender',
+        'race': 'dwarf',
+        'hd': 8,
+        'primAttr': ['STR', 'CON'],
+        'flags': ['base', 'demi'],  # LIST of flags for different effects
+        'attacksAs': 'best',
+        'extralangs': ['Dwarf'],
+        'restrictions': ['Can use all weapons, shields, and armour except longbows.'],
+        'special': [
+            '(Class) If wearing Medium or heavier armour you do not suffer AC penalties from low DEX. Heavy armour '
+            'never reduces your movement speed.',
+            '(Class) You are never lost when underground with solid earth or stone beneath their feet. You know the '
+            'local grades and depth, and can feel air flow naturally. You have a 50% chance of detecting '
+            'hidden stonework just by passing, and automatically find them if you spend a turn searching.',
+            '(Class) You have a bonus melee attack die at first level (total of two), and gain a new one at '
+            'levels 5, 10, and 15. When attacking, declare target(s) and then roll all of your attack dice, but only '
+            'one damage die. Each hit applies the same amount of damage.',
+            '(Class) You have advantage on all Body and Death Saves.',
+            '(Class) You can use a Shield Bash with any one of your successful attack dice. As a Dwarf You do not '
+            'lose the AC bonus of the shield when using the bash.',
+        ],
+    },
+    'elf': {
+        'short': 'elf',  # STR: class name for references
+        'long': 'Elven Exemplar',
+        'race': 'elf',
+        'flags': ['base', 'demi', 'caster'],  # LIST of flags for different effects
+        'hd': 8,
+        'primAttr': ['DEX', 'INT'],
+        'saves': [0, 0, 1, 0, 1],
+        'casterStat': 'INT',  # STRING: stat used for spells, if a caster
+        'spellsPerLvl': 1,
+        'spellChooseAs': 'mu',  # STRING: if caster, usually = short
+        'extralangs': ['Elf'],
+        'extraspells': ['Level 1: Read Magic'],
+        'restrictions': ['Can use all weapons, shields, and armour. Armour may limit spellcasting.'],
+        'special': [
+            '(Class) Immune to sleep, charm, slow, haste, aging, and energy drain effects, *unless* they are results '
+            'of the magic of an Elf (self or other, alive or undead).',
+            '(Class) You cast spells from the magic-user list. Begin the game with a spellbook containing Read Magic '
+            'and possible randomly-determined bonus spells. At each new level gain one (1) new spell to your book '
+            'from ongoing experimentation, and you can add more by transcribing scrolls and magical texts '
+            'found in dungeons. At level 1 you can only cast level 1 spells. This maximum spell level increases by '
+            '+1 at every odd-numbered level of experience.',
+            '(Class) You are better at casting in armour than humans. You suffer no chance of spell failure in '
+            'Light armour, and a 25%/50%/75% chance when wearing medium/heavy/plate armours, respectively. '
+            'Failed spells are forgotten per normal rules.',
+            '(Class) You can fight with two weapons at once. When wielding two one-handed weapons, roll one extra '
+            'attack die, but lower the damage die by one step (to a d6) for the entire assault. At level 9, this '
+            'increases to two extra attack dice.',
+            '(Class) You excel at the Bow. At second level, you gain a second attack die when using Short and Long '
+            'Bows, and a third at level 10. Each attack die requires one arrow from your quiver. When attacking '
+            'with a bow, declare target(s) first and then roll all of the attack dice, but only one damage die. '
+            'Each hits applies the same amount of damage.',
+            '(Class) You have a 50% chance of noticing concealed non-stonework doors and panels simply by passing '
+            'near them, and automatically find them if you spend a turn searching.',
+            '(Class) You have a bonus melee attack die at first level (total of two), and gain a new one at '
+            'levels 5, 10, and 15. When attacking, declare target(s) and then roll all of your attack dice, but '
+            'only one damage die. Each hits applies the same amount of damage.',
+        ],
+    },
+    'fighter': {
+        'short': 'fighter',  # STR: class name for references
+        'long': 'Fighter',  # STR: class name for display
+        'hd': 8,
+        'attacksAs': 'best',
+        'primAttr': ['STR', 'CON'],
+        'restrictions': ['You can use all weapons, shields, and armour.'],
+        'special': [
+            '(Class) You have a bonus melee attack die at first level (total of two), and gain a new one at levels '
+            '3, 6, 9, 12, and 15. When attacking, declare target(s) and then roll all of the attack dice, but only '
+            'one damage die. Each hit applies the same amount of damage.',
+            '(Class) *Not Today!* Once per experience level (cumulative), when you would take damage (from any '
+            'source) that would reduce your Hit Points from positive to Zero or below, you can instead remain at 1 '
+            'HP and negate the rest of the damage from that attack. Lucky Fighters can save these uses up across '
+            'multiple experience levels.',
+            '(Class) You have advantage on all Hit Dice rolls, and reroll all 1s on Hit Dice.',
+            '(Class) You can use a Shield Bash with any one of your successful attack dice, losing the shield AC '
+            'bonus until your next turn in combat.',
+            '(Class) When using a two-handed weapon, roll an extra damage die with your attacks, applying the '
+            'total result to all attacks that hit.',
+        ],
+    },
+    'halfling': {
+        'short': 'halfling',  # STR: class name for references
+        'long': 'Halfling Burglar',
+        'race': 'halfling',
+        'flags': ['base', 'demi'],  # LIST of flags for different effects
+        'primAttr': ['DEX', 'CHA'],
+        'saves': [1, 1, 1, 1, 1],
+        'weapons': 'hlf',
+        'extralangs': ['Halfling'],
+        'restrictions': ['Can use all small weapons one-handed, or medium two-handed, and shields. Cannot use '
+                         'two-handed human-sized weapons.'],
+        'special': [
+            '(Class) You gain a bonus melee attack die at levels 4, 8, and 12. When attacking, declare your target(s) '
+            'and then roll all your attack dice, but only one damage die. Each hit applies the same amount of damage.',
+            '(Class) You have the following Thief Skills: Lockpicking, Perception, Stealth (with Advantage), '
+            'Thief-Climbing, and Trap-Finding (with Disadvantage). Additionally, at level you add +1 to any two of '
+            'these Skills. Each additional XP level you add two more points as you see fit. You cannot add more points '
+            'to any one skill than your current level.',
+            '(Class) Unless you have proven to be an obvious threat, or your opponents are otherwise specifically '
+            'predisposed against you, you are always attacked last.',
+            '(Class) You can draw from inner strength for a sudden display of unexpected fierceness. By spending 1 '
+            'Hit Point rolling your attacks, you increase the damage die for your attacks this round by one step.',
+            '(Class) You roll with advantage on Tactical Attacks.',
+        ],
+    },
+    'halfogre': {
+        'short': 'halfogre',  # STR: class name for references
+        'long': 'Half-Ogre Berzerker',  # STR: class name for display
+        'race': 'halfogre',  # STR: race name of "RANDOM" to trigger the random race function
+        'flags': ['base', 'demi'],  # LIST of flags for different effects
+        'attacksAs': 'best',
+        'alignAllowed': ['chaos', 'evil', 'good', 'neutral'],
+        'hd': 10,
+        'primAttr': ['STR', 'CON'],
+        'extralangs': ['Ogre'],
+        'restrictions': ['Can use all weapons and shields. Armour must be custom made. You cannot be Law aligned.'],
+        'special': [
+            '(Class) You are built like an icehouses. All armour must be custom made at increased costs and time, '
+            'and only Halfling-sized creatures or smaller can move through your occupied space.',
+            '(Class) When you take damage, make a Mind save (target: 12) or go into an uncontrollable violent fury. '
+            'During this rage, take advantage on melee and thrown damage dice rolls, immunity to critical fumbles, '
+            'and disadvantage on all saves except Body and Death. Your actions must follow a specific course (ask '
+            'the \'Smith). You can voluntarily fail either save and willingly let the rage happen and/or knock '
+            'you unconscious afterward. You can also trigger it on your own by causing yourself 1 point of damage '
+            'with a weapon.',
+            '(Class) You get a bonus attack die at first level (total of two), and gain a new one at levels 5, 10, '
+            'and 15. When attacking, declare target(s) and then roll all your attack dice, but only one damage '
+            'die. Each hit applies the same amount of damage.',
+            '(Class) When using a two-handed weapon, roll d12 damage dice with your attacks (instead of d10), '
+            'applying the result to all attacks that hit.',
+        ],
+    },
+    'mu': {
+        'short': 'mu',  # STR: class name for references
+        'long': 'Magic-User',  # STR: class name for display
+        'flags': ['base', 'human', 'caster', 'mu-weapons'],
+        'attacksAs': 'none',
+        'hd': 4,
+        'primAttr': ['INT'],
+        'saves': [0, 0, 0, 0, 1],
+        'weapons': 'mag',
+        'armour': 'mag',
+        'casterStat': 'INT',  # STRING: stat used for spells, if a caster
+        'spellsPerLvl': 2,
+        'spellChooseAs': 'mu',  # STRING: if caster, usually = short
+        'extragear': ['a Spellbook'],
+        'extraspells': ['At Will: Read Magic'],
+        'restrictions': ['Can not use two-handed weapons except staves. Can not wear heavy armour or use shields. '
+                         'Other armour can cause spell failure.'],
+        'special': [
+            '(Class) You cannot wear Heavy armour, and suffer a chance of spell failure while wearing other armour. '
+            'In Light armour, the chance is 50%, and in Medium armour the chance is 75%. Failed spells are '
+            'forgotten per normal rules.',
+            '(Class) You cast spells from the Magic-User spell list. You begin the game with a spellbook containing '
+            'Read Magic and a potential for other randomly-determined bonus spells. At each new level you add 2 new '
+            'spells to your book from experimentation, and you can add more by transcribing scrolls and magical '
+            'texts found in dungeons. At level 1 you can safely cast level 1 spells. This maximum spell level '
+            'increases by +1 at every odd-numbered level of experience. Take note of the Highcast ability, below.',
+            '(Class) *Highcaster* You can prepare and attempt to cast spells of higher level than you normally would '
+            'be able to, provided you have a copy of the spell in your book. Casting the spell requires permanent '
+            'loss of INT score equal to the difference in allowed spell levels. Spells cast in this fashion are '
+            'always immediately forgotten.',
+            '(Class) *Bloodcaster* You can choose to take damage instead of forgetting spells. The amount of '
+            'damage taken is equal to the level of spell just cast. If below Zero HP, this burns CON instead.',
+            '(Class) You can cast the spell *Read Magic* freely and at will, without need to prepare or memorize.',
+            '(Class) You can use special mage-only weapons: The Wand and The Staff.',
+        ],
+    },
+    'thief': {
+        'short': 'thief',  # STR: class name for references
+        'long': 'Thief',  # STR: class name for display
+        'attacksAs': 'worst',
+        'primAttr': ['DEX', 'INT'],
+        'saves': [1, 0, 0, 1, 0],
+        'weapons': 'rog',
+        'armour': 'rog',
+        'extragear': ['a Set of Thieves\' Tools'],
+        'extralangs': ['Thieves\' Cant'],
+        'restrictions': ['You can use any weapons and armour that the Hammersmith deems to be suitably sneaky.'],
+        'special': [
+            '(Class) *Stabbity!* When using a melee weapon to attack a foe against which you either have attack '
+            'advantage or are hidden from perception, double your total damage against that foe on a successful hit. '
+            'This multiple increases by +1 at levels 3, 6, 9, 12, and 15.',
+            '(Class) You have access to special Thief-Only skills: Deciphering (INT), Lockpicking (DEX), Perception '
+            '(WIS), Stealth (DEX), Thief-climbing (STR), Tracking (WIS), Trap-finding (INT), and Trap-breaking (DEX). '
+            'At first level you must randomly determine one Thief Skill to be your Bailiwick, and one to be your '
+            'Failing. You get advantage on checks related to your Bailiwick, and disadvantage on checks related to '
+            'your Failing. Additionally, at level one you can add +1 to any four Thief Skills. Each additional '
+            'level you add four more points to your skills as you see fit. The total bonus on a skill can never '
+            'exceed your level.',
+            '(Class) You roll with advantage on Tactical Attacks.',
+            '(Class) You have advantage on all Saves against the effects of Traps.',
+        ],
+    },
+}
+
 m81_profs = {
     'default': {
         'hd': 6,
         'alignAllowed': ['chaos', 'law', 'neutral'],
         'wps': 0,
         'saves': [12, 13, 14, 15, 16],
-        'skills': list(random.sample(skills['dd'], 4)),
+        'skills': 'RANDOM',
     },
     'cleric': {
         'short': 'cleric',
@@ -575,7 +693,7 @@ m81_profs = {
     'dwarf': {
         'short': 'dwarf',
         'long': 'Dwarf',
-        'race': 'Dwarf',
+        'race': 'dwarf',
         'primAttr': ['STR'],
         'restrictions': ['Dwarves can wear any weapon, armour, or shield. They cannot use weapons over 4 feet'
                          ' in length except axes and hammers.'],
@@ -598,7 +716,7 @@ m81_profs = {
     'elf': {
         'short': 'elf',
         'long': 'Elf',
-        'race': 'Elf',
+        'race': 'elf',
         'flags': ['base', 'demi', 'caster'],
         'nextXP': '4000',
         'attacksAs': 'best',
@@ -636,7 +754,7 @@ m81_profs = {
     'halfling': {
         'short': 'halfling',
         'long': 'Halfling',
-        'race': 'Halfling',
+        'race': 'halfling',
         'flags': ['base', 'demi'],
         'primAttr': ['DEX'],
         'attacksAs': 'best',
@@ -985,7 +1103,6 @@ tnu_profs = {
     },
 }
 
-
 '''
 fey_knight = {}
 halfling = {}
@@ -996,7 +1113,6 @@ TO ADD:
 tnu racial_profs = [fey_knight, halfling]
 tnu optional_profs = [berserker, disciple]
 '''
-
 
 base_profs_tnu = [
     'assassin', 'bard',
@@ -1013,6 +1129,10 @@ base_profs_dnd = [
     'cleric', 'elf', 'dwarf', 'fighter', 'halfling', 'mu', 'thief'
 ]
 
+base_profs_ham = [
+    'cleric', 'elf', 'dwarf', 'fighter', 'halfogre', 'halfling', 'mu', 'thief'
+]
+
 # I don't do druids or monks, they're a pain in the ass
 proflists = {
     'bnt': {
@@ -1026,6 +1146,10 @@ proflists = {
     'dd': {
         'choices': base_profs_dnd,
         'dict': dd_profs,
+    },
+    'ham': {
+        'choices': base_profs_ham,
+        'dict': ham_profs,
     },
     'm81': {
         'choices': base_profs_dnd,

@@ -41,6 +41,14 @@ statAffects = {
         'CON': 'Hit Point rolls',
         'CHA': 'Leadership, Reaction rolls'
     },
+    'ham': {
+        'STR': 'Melee Attack Rolls, Damage with Melee and Thrown',
+        'DEX': 'Area Effect Saves, Missile Attack Rolls, AC, Initiative',
+        'CON': 'Body Saves, Hit Die Rolls',
+        'INT': 'Magic-User Spells',
+        'WIS': 'Mind Saves, Cleric Spells, Initiative',
+        'CHA': 'Fate Saves'
+    },
     'm81': {
         'STR': 'Melee Attack Rolls, Hit Point Rolls',
         'DEX': 'Missile Attack Rolls',
@@ -80,6 +88,7 @@ saves = {
     'three': ['Fortitude', 'Reflex', 'Willpower'],
     'five': ['Death Ray & Poison', 'Magic Wands', 'Paralysis & Petrification', 'Breath Weapon', 'Rod, Staff, & Spell'],
     'six': statArrays['dnd'],
+    'ham': ['Area (+DEX mod)', 'Body (+CON mod)', 'Death (No mods)', 'Fate (+CHA mod)', 'Mind (+WIS mod)'],
     'pla': ['Mind', 'Body', 'Reflex', 'Horror Factor (HF)'],
 }
 
@@ -92,8 +101,43 @@ languages_dnd = [
 
 languages_kaigaku = []
 
+skills_bnt = [
+    'Balance (DEX)', 'Bend bars (STR)', 'Break down doors (STR)', 'Climb sheer surfaces (STR)',
+    'Decipher codes (INT)', 'Escape bonds (DEX)', 'Find secret doors (INT)', 'Find traps (INT)',
+    'Hide in shadows (DEX)', 'Jump (STR)', 'Listen at doors (WIS)', 'Move silently (DEX)',
+    'Open locks (DEX)', 'Pick pockets (DEX)', 'Remove traps (DEX)', 'Riding (DEX)', 'Survival (WIS)',
+    'Swimming (STR)', 'Tracking (WIS)', 'Trickery (CHA)'
+]
+
+skills_dnd = [
+    'Arcane Lore (Int)', 'Balance (Dex)', 'Bluff (Cha)', 'Cooking (Wis)',
+    'Craft (Choice of Medium) (Dex)', 'Diplomacy (Cha)', 'Disguise (Cha)',
+    'Engineering (Int)', 'Escape Artist (Dex)', 'Etiquette (Choice of Culture) (Cha)',
+    'First Aid (Wis)', 'Gambling (Cha)', 'Geography (Int)', 'History (Int)',
+    'Intimidation (Str or Cha)', 'Jumping (Str)',
+    'Laws (Choice of Culture) (Int)', 'Lip Reading (Wis)', 'Magical Engineering (Int)',
+    'Nature Lore (Int)', 'Navigating (Wis)', 'Performance (Choice of Medium) (Cha)',
+    'Religious Lore (Int)', 'Riding (Choose Animal) (Dex)', 'Sense Motive (Wis)',
+    'Swimming (Str)', 'Tracking (Wis)'
+]
+
+skills_weird = [
+    'Accounting (INT)', 'Ballet (DEX)', 'Being Drunk Before Noon (CON)',
+    'Birdwatching (WIS)', 'Blathering (CHA)', 'Bobsledding (STR)',
+    'Bonsai (DEX)', 'Butchery (DEX)', 'Caber Tossing (STR)',
+    'Chess (INT)', 'Dog Grooming (DEX)', 'Doomsaying (WIS)',
+    'Feline Husbandry (INT)', 'Food Tasting (CON)', 'Funny Walks (DEX)',
+    'Gourmand (INT)', 'Horsehair Braiding (DEX)', 'Juggling (DEX)',
+    'Landscaping (STR)', 'Looking Conspicuous (CHA)', 'Milk (WIS)',
+    'Mime (DEX)', 'Miniature Equine Aficionado (INT)', 'Poison-Making (INT)',
+    'Pouting (CHA)', 'Puppetry (DEX)', 'Selfies (CHA)',
+    'SEO (INT)', 'Skiing (STR)', 'Spotlight Stealing (CHA)',
+    'Stone-Skipping (DEX)', 'Squaredancing (DEX)', 'Surfing (DEX)',
+    'Sword-Swallowing (CON)', 'Tanning (CON)', 'Useless Card Tricks (DEX)',
+]
+
 race_choices = {
-    'base': ['human', 'dwarf', 'elf', 'halfling'],
+    'base': ['human', 'dwarf', 'elf', 'halfling', 'halfogre'],
     'bnt': ['human', 'dwarf', 'elf', 'gnome', 'halfling', 'halfelf', 'halforc'],
     'bntx': ['human', 'dwarf', 'elf', 'gnome', 'halfling', 'halfelf', 'halforc'],
 }
@@ -102,6 +146,30 @@ race_data = {
     'base': {
         'human': {
             'label': "Human",
+            'traits': [],
+            'core_languages': [],
+            'mods': {},
+        },
+        'dwarf': {
+            'label': "Dwarf",
+            'traits': [],
+            'core_languages': [],
+            'mods': {},
+        },
+        'elf': {
+            'label': "Elf",
+            'traits': [],
+            'core_languages': [],
+            'mods': {},
+        },
+        'halfling': {
+            'label': "Halfling",
+            'traits': [],
+            'core_languages': [],
+            'mods': {},
+        },
+        'halfogre': {
+            'label': "Half-Ogre",
             'traits': [],
             'core_languages': [],
             'mods': {},
@@ -198,7 +266,7 @@ race_data = {
                 '(RACE) Can advance to 9th level in most classes, or unlimited in paladin.',
             ],
             'core_languages': [],
-            'mods': {'WIS': 1, 'CHA': 1,},
+            'mods': {'WIS': 1, 'CHA': 1},
         },
         'automaton': {
             'label': 'Automaton',
@@ -211,7 +279,7 @@ race_data = {
                 ' and fighter/thieves.',
             ],
             'core_languages': [],
-            'mods': {'STR': 1, 'CON': 1, 'WIS': -1, 'CHA': -1,},
+            'mods': {'STR': 1, 'CON': 1, 'WIS': -1, 'CHA': -1},
         },
         'azer': {
             'label': 'Azer',
@@ -221,7 +289,7 @@ race_data = {
                 ' advance to 6th level max.',
             ],
             'core_languages': ['Elemental, Fire'],
-            'mods': {'STR': 1, 'INT': 1, 'CHA': -2,},
+            'mods': {'STR': 1, 'INT': 1, 'CHA': -2},
         },
         'drow': {
             'label': 'Drow (Dark Elf)',
@@ -233,7 +301,7 @@ race_data = {
                 ' up to 8th level.',
             ],
             'core_languages': ['Drow'],
-            'mods': {'INT': 1, 'CHA': 1,},
+            'mods': {'INT': 1, 'CHA': 1},
         },
         'goblin': {
             'label': 'Goblin',
@@ -244,7 +312,7 @@ race_data = {
                 '(RACE) Can multi-class as cleric/thieves, fighter/thieves and magic-user/ thieves.',
             ],
             'core_languages': ['Goblin'],
-            'mods': {'STR': -1, 'DEX': 1, 'CHA': -1,},
+            'mods': {'STR': -1, 'DEX': 1, 'CHA': -1},
         },
         'kobold': {
             'label': 'Kobold',
@@ -255,7 +323,7 @@ race_data = {
                 '(RACE) Can multi-class as cleric/sorcerers, fighter/sorcerers and sorcerer/thieves.',
             ],
             'core_languages': ['Kobold'],
-            'mods': {'STR': -2, 'DEX': 1, 'CON': -1,},
+            'mods': {'STR': -2, 'DEX': 1, 'CON': -1},
         },
     },
 }
@@ -269,6 +337,7 @@ systems = {
         'system_name': 'def',                  # shortname for the system, used in some lists and dicts
         'system_fullname': 'Default Display Name',
         'system_type': 'dnd',                  # STR: used to determine armor types, equipment lists, and AC assumptions
+        'setting': 'fantasy',           # STR: game setting, for use with random setting-specific elements
         'hasHPs': True,                 # BOO: changes the calculations if the system has hit points
         'stats': 6,                     # INT: how many stats in this system, usually 6
         'spread': statArrays['dnd'],    # DICT: what spread of stats this system uses
@@ -283,10 +352,12 @@ systems = {
         'saves': False,                 # Pulls STR from Saves dict, above
         'hasWPs': False,                # BOO: notes if this system uses specific WPs a la Dark Dungeons
         'maxLvl': 10,                   # INT: maximum XP level in the game
-        'race_choices': list(dict.keys(race_data['base'])), # LIST: available choices for selecable races
+        'race_choices': list(dict.keys(race_data['base'])),  # LIST: available choices for selecable races
         'race_data': dict(race_data['base']),   # DICT keyed to the list above
         'core_languages': ['Common'],   # LIST: Free starting languages for all characters
         'language_choices': languages_dnd,      # LIST of base possible bonus languages
+        'skill_choices': skills_dnd,    # LIST of skills for the random skill assigner
+        'skills_mod': 'INT',            # STR all caps of stat used to modify starting skills
     },
     'bnt': {
         'system_name': 'bnt',
@@ -296,6 +367,7 @@ systems = {
         'saves': saves['three'],
         'race_choices': list(dict.keys(race_data['bnt'])),
         'race_data': dict(race_data['bnt']),
+        'skill_choices': skills_bnt,
     },
     'bntx': {
         'system_name': 'bnt',
@@ -304,7 +376,7 @@ systems = {
         'maxLvl': 20,
         'saves': saves['three'],
         'race_choices': list(dict.keys(race_data['bntx'])) + list(dict.keys(race_data['bnt'])),
-        'race_data': {**dict(race_data['bntx']), **dict(race_data['bnt']),},
+        'race_data': {**dict(race_data['bntx']), **dict(race_data['bnt'])},
     },
     'dd': {
         'system_name': 'dd',
@@ -314,6 +386,15 @@ systems = {
         'hasWPs': True,
         'maxLvl': 36,
         'saves': saves['five'],
+    },
+    'ham': {
+        'system_name': 'ham',
+        'system_fullname': 'HAMMERCRAWL!',
+        'affects': statAffects['ham'],  # DICT: reference of what each stat in the system affects during play
+        'HPsMod': 'CON',                # STR: stat used to calc hit point mods
+        'saves': saves['ham'],
+        'maxLvl': 15,                   # INT: maximum XP level in the game
+        'skill_choices': skills_dnd + skills_weird,
     },
     'm81': {
         'system_name': 'm81',
@@ -327,6 +408,7 @@ systems = {
         'saves': saves['five'],
         'hasWPs': True,
         'maxLvl': 14,
+        'skills_mod': 'MIND',
     },
     'pla': {
         'system_name': 'pla',

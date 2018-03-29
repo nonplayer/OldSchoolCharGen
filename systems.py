@@ -121,6 +121,21 @@ skills_dnd = [
     'Swimming (Str)', 'Tracking (Wis)'
 ]
 
+skills_weird = [
+    'Accounting (INT)', 'Ballet (DEX)', 'Being Drunk Before Noon (CON)',
+    'Birdwatching (WIS)', 'Blathering (CHA)', 'Bobsledding (STR)',
+    'Bonsai (DEX)', 'Butchery (DEX)', 'Caber Tossing (STR)',
+    'Chess (INT)', 'Dog Grooming (DEX)', 'Doomsaying (WIS)',
+    'Feline Husbandry (INT)', 'Food Tasting (CON)', 'Funny Walks (DEX)',
+    'Gourmand (INT)', 'Horsehair Braiding (DEX)', 'Juggling (DEX)',
+    'Landscaping (STR)', 'Looking Conspicuous (CHA)', 'Milk (WIS)',
+    'Mime (DEX)', 'Miniature Equine Aficionado (INT)', 'Poison-Making (INT)',
+    'Pouting (CHA)', 'Puppetry (DEX)', 'Selfies (CHA)',
+    'SEO (INT)', 'Skiing (STR)', 'Spotlight Stealing (CHA)',
+    'Stone-Skipping (DEX)', 'Squaredancing (DEX)', 'Surfing (DEX)',
+    'Sword-Swallowing (CON)', 'Tanning (CON)', 'Useless Card Tricks (DEX)',
+]
+
 race_choices = {
     'base': ['human', 'dwarf', 'elf', 'halfling', 'halfogre'],
     'bnt': ['human', 'dwarf', 'elf', 'gnome', 'halfling', 'halfelf', 'halforc'],
@@ -378,6 +393,7 @@ systems = {
         'HPsMod': 'CON',                # STR: stat used to calc hit point mods
         'saves': saves['ham'],
         'maxLvl': 15,                   # INT: maximum XP level in the game
+        'skill_choices': skills_dnd + skills_weird,
     },
     'm81': {
         'system_name': 'm81',

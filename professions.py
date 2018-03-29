@@ -573,7 +573,7 @@ m81_profs = {
     'dwarf': {
         'short': 'dwarf',
         'long': 'Dwarf',
-        'race': 'Dwarf',
+        'race': 'dwarf',
         'primAttr': ['STR'],
         'restrictions': ['Dwarves can wear any weapon, armour, or shield. They cannot use weapons over 4 feet'
                          ' in length except axes and hammers.'],
@@ -596,7 +596,7 @@ m81_profs = {
     'elf': {
         'short': 'elf',
         'long': 'Elf',
-        'race': 'Elf',
+        'race': 'elf',
         'flags': ['base', 'demi', 'caster'],
         'nextXP': '4000',
         'attacksAs': 'best',
@@ -634,7 +634,7 @@ m81_profs = {
     'halfling': {
         'short': 'halfling',
         'long': 'Halfling',
-        'race': 'Halfling',
+        'race': 'halfling',
         'flags': ['base', 'demi'],
         'primAttr': ['DEX'],
         'attacksAs': 'best',

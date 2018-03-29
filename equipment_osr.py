@@ -130,7 +130,7 @@ weapons_clr = [
 ]
 
 weapons_hlf = [
-    'WEAPON: Axe, Hand (1H, R: 10/20/30ft, Dmg: Dmg: 1d6)',
+    'WEAPON: Axe, Hand (1H, R: 10/20/30ft, Dmg: 1d6)',
     'WEAPON: Blackjack (1H, special)',
     'WEAPON: Blowgun (Large) w/ 5 Darts (R: 20/25/30ft, special)',
     'WEAPON: Blowgun (Small) w/ 5 Darts (R: 10/20/30ft, special)',

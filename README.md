@@ -4,12 +4,13 @@ This is a Python-based tool to generate random first-level characters for "old s
 
 ## Systems Compatibility
 
-Currently this tool can create characters for the following three old school games:
+Currently this tool can create characters for the following old school games:
 
-* [The Nightmares Underneath, by Johnstone Metzger](http://www.drivethrurpg.com/product/195355/The-Nightmares-Underneath). 
+* [The Nightmares Underneath, by Johnstone Metzger](http://www.drivethrurpg.com/product/195355/The-Nightmares-Underneath).
 * [Dark Dungeons](http://www.drivethrurpg.com/product/177410/Dark-Dungeons)
 * [Blood & Treasure 1st Edition](http://www.drivethrurpg.com/product/124972/Blood--Treasure-Complete)
 * [Microlite81](http://www.drivethrurpg.com/product/174568/Microlite81-Complete)
+* **New:** [HAMMERCRAWL!](https://github.com/nonplayer/hammercrawl/) is my own OSR creation, and is now supported by this generator.
 
 Additionally, I've already begun laying the groundwork for extended compatibility with a number of other games, including:
 
@@ -61,6 +62,7 @@ Currently the supported game systems are as follows:
 * bnt = Blood & Treasure 1st Edition
 * bntx = Blood & Treasure 1st Edition plus Monster Races
 * dd = Dark Dungeons
+* ham = HAMMERCRAWL!
 * m81 = Microlite81
 * tnu = The Nightmares Underneath
 
@@ -80,7 +82,7 @@ if __name__ == "__main__":
 This is still very much a work in progress. Currently the code runs once and returns printed output only. Right now, there are two main components I'm working on:
 
 * **Random Character Generator:** a one-click chargen for Old School games (currently only TNU)
-* **Random Monster Treasure Roller:** an app to quickly roll on monster treasure tables (currently only Dark Dungeons/BECMI supported)
+* **Random Monster Treasure Roller:** (EXPERIMENTAL!) an app to quickly roll on monster treasure tables (currently only Dark Dungeons/BECMI supported)
 
 ### About the Code
 

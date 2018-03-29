@@ -82,7 +82,6 @@ class Character(object):
     def __init__(self, game_system, prefs):
         self.prefs = prefs
         self.profession = dict(professions.get_profession(game_system))
-        self.init_skills()
 
         super(Character, self).__init__()
 
@@ -95,6 +94,7 @@ class Character(object):
         primes = list(self.profession['primAttr'])
         spread = list(self.prefs['spread'])
         self.stats = dice.get_spread(spread, primes, self.prefs['modRange'], self.racemods)
+        self.init_skills()
         #
         # get stats average, for reasons:
         stat_values = [int(value['val']) for key, value in dict.items(self.stats)]
@@ -206,7 +206,10 @@ class Character(object):
         if self.profession['skills'] == 'RANDOM':
             self.skills = []
             my_list = list(self.prefs['skill_choices'])
-            self.skills = [s for s in list(random.sample(my_list, 4))]
+            my_num_skills = self.stats[self.prefs['skills_mod']]['mod'] + 4
+            if my_num_skills < 1:
+                my_num_skills = 1
+            self.skills = [s for s in list(random.sample(my_list, my_num_skills))]
             self.skills = sorted(self.skills)
         elif self.profession['skills']:
             self.skills = list(sorted(self.profession['skills']))

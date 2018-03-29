@@ -357,6 +357,7 @@ systems = {
         'core_languages': ['Common'],   # LIST: Free starting languages for all characters
         'language_choices': languages_dnd,      # LIST of base possible bonus languages
         'skill_choices': skills_dnd,    # LIST of skills for the random skill assigner
+        'skills_mod': 'INT',            # STR all caps of stat used to modify starting skills
     },
     'bnt': {
         'system_name': 'bnt',
@@ -407,6 +408,7 @@ systems = {
         'saves': saves['five'],
         'hasWPs': True,
         'maxLvl': 14,
+        'skills_mod': 'MIND',
     },
     'pla': {
         'system_name': 'pla',

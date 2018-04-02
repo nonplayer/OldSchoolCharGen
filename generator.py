@@ -19,6 +19,7 @@ import setting
 import spells_osr
 import spells_tnu
 import systems
+import wizweaps
 
 
 def gen_social(status):
@@ -139,6 +140,8 @@ class Character(object):
         for a in my_armour:
             my_gear.remove(a)
             my_armourlist.append(str.title(a[8:]))
+        if 'mu-weapons' in self.profession['flags']:
+            my_weaponlist.append(wizweaps.generate())
         self.weapons = sorted(my_weaponlist)
         self.armour = sorted(my_armourlist)
         self.gear = sorted(my_gear)

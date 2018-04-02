@@ -132,16 +132,17 @@ def generate():
         energy_base = 'defends by generating'
         mechanical = 'It funcations as a +2 AC Shield when gripped with both hands for the entire round. If hit ' \
                      'with a Nat 20, it runs out of power and must be recharged by burning a spell of any level.'
-    elif nature == 'Wand':
+    else:
         energy_base = 'attacks with'
-        mechanical = 'It functions as a sling (R: 40/80/160ft, Dmg: 1d4) with near-infinite ammo. On a Natural 1 it ' \
-                 'runs out of power and must be recharged by burning a spell of any level.'
+        mechanical = 'It functions as a sling (Atk Bonus: INT mod, R: 40/80/160ft, Dmg: 1d4) with near-infinite ' \
+                     'ammo. On a Natural 1 it runs out of power and must be recharged by burning a spell of any level.'
     energy_form = random.choice(energy_forms)
     energy_type = random.choice(energy_types)
-    my_weapon = "A Wizard's %s made of %s, decorated with %s of %s, and tipped with a %s %s. When held, you notice %s. It %s %s of %s. %s" % (nature, component, decoration, material, tip_feature, tip_type, effect, energy_base, energy_form, energy_type, mechanical)
+    my_weapon = "A Wizard's %s made of %s, decorated with %s of %s, and tipped with a %s %s. When held, you notice" \
+                " %s. It %s %s of %s. %s" % (nature, component, decoration, material, tip_feature, tip_type, effect,
+                                             energy_base, energy_form, energy_type, mechanical)
     return my_weapon
 
 
 if __name__ == "__main__":
-    my_weapon = generate()
-    print(my_weapon)
+    print(generate())

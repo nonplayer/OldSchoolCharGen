@@ -7,17 +7,22 @@ The base list of options was provided by Grey Knight on Google Plus, used with t
 import random
 
 components = [
-    'birch wood', 'bone',
+    'animal bone', 'birch wood',
     'brass', 'bronze',
-    'copper', 'granite',
+    'copper', 'delicious candy',
+    'granite',
     'green glass', 'hazel wood',
+    'human bone',
     'iron', 'ivory',
     'mahogany', 'maple wood',
     'marble', 'oak wood',
     'pine wood', 'petrified wood',
+    'reforged blades',
     'rowan wood', 'rusted iron',
     'sandstone', 'steel',
     'terracotta', 'tin',
+    'twisted and bound tentacles',
+    'welded chains',
     'wicker', 'wrought iron',
 ]
 
@@ -49,16 +54,16 @@ materials = [
 ]
 
 tip_features = [
-    'agate', 'amber',
-    'amethyst', 'brass',
-    'clear glass', 'diamond-studded',
-    'emerald-studded', 'garnet-studded',
-    'golden', 'ivory',
-    'jade', 'mirrored',
-    'mother-of-pearl', 'pearly',
-    'peridot', 'porcelain',
-    'rusty', 'sapphire-studded',
-    'silver', 'turquoise',
+    'an agate', 'an amber',
+    'an amethyst', 'a brass',
+    'a clear glass', 'a diamond-studded',
+    'an emerald-studded', 'a garnet-studded',
+    'a golden', 'an ivory',
+    'a jade', 'a mirrored',
+    'a mother-of-pearl', 'a pearly',
+    'a peridot', 'a porcelain',
+    'a rusty', 'a sapphire-studded',
+    'a silver', 'a turquoise',
 ]
 
 tip_types = [
@@ -76,15 +81,19 @@ tip_types = [
 
 effects = [
     'a burning smell', 'a distant buzzing noise',
-    'a faint glow', 'a shimmering haze',
+    'a faint glow', 'a goosing in your skin', 'a shimmering haze',
     'a slight vibration', 'a soft murmur',
+    'a tickle in your palm',
     'an occasional popping noise', 'an occasional twitch',
-    'an oily sheen', 'intermittent puffs of smoke',
+    'an oily sheen', 'an unnatural feeling of arousal',
+    'intermittent puffs of smoke',
     'intermittent sparkles', 'it balances easily on its end',
     'it is cold to the touch', 'it is damp to the touch',
     'it is warm to the touch', 'it rotates slowly by itself',
     'it writhes in your grip', 'the scent of incense',
-    'the scent of minty herbs', 'the smell of sulphur',
+    'the scent of minty herbs', 'the scene of old books',
+    'the scent of old leather', 'the smell of sulphur',
+    'the distant stink of rotting flesh',
 ]
 
 energy_bases = [
@@ -138,7 +147,7 @@ def generate():
                      'ammo. On a Natural 1 it runs out of power and must be recharged by burning a spell of any level.'
     energy_form = random.choice(energy_forms)
     energy_type = random.choice(energy_types)
-    my_weapon = "A Wizard's %s made of %s, decorated with %s of %s, and tipped with a %s %s. When held, you notice" \
+    my_weapon = "A Wizard's %s made of %s, decorated with %s of %s, and tipped with %s %s. When held, you notice" \
                 " %s. It %s %s of %s. %s" % (nature, component, decoration, material, tip_feature, tip_type, effect,
                                              energy_base, energy_form, energy_type, mechanical)
     return my_weapon

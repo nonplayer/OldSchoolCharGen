@@ -148,7 +148,7 @@ class Character(object):
         #
         # now to generate the character's armour class
         self.ac = gen_ac(self.prefs, my_armourlist)
-        if self.system_type is ['dnd']:
+        if self.system_type == 'dnd':
             if self.prefs['acType'] == 'descend':
                 self.ac -= self.stats['DEX']['mod']
             else:

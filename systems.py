@@ -47,7 +47,7 @@ statAffects = {
         'CON': 'Body Saves, Hit Die Rolls',
         'INT': 'Magic-User Spells',
         'WIS': 'Mind Saves, Cleric Spells, Initiative',
-        'CHA': 'Fate Saves'
+        'CHA': 'Luck Saves'
     },
     'm81': {
         'STR': 'Melee Attack Rolls, Hit Point Rolls',
@@ -88,7 +88,7 @@ saves = {
     'three': ['Fortitude', 'Reflex', 'Willpower'],
     'five': ['Death Ray & Poison', 'Magic Wands', 'Paralysis & Petrification', 'Breath Weapon', 'Rod, Staff, & Spell'],
     'six': statArrays['dnd'],
-    'ham': ['Area (+DEX mod)', 'Body (+CON mod)', 'Death (No mods)', 'Fate (+CHA mod)', 'Mind (+WIS mod)'],
+    'ham': ['Area  (+DEX mod)', 'Body  (+CON mod)', 'Death  (No mods)', 'Luck  (+CHA mod)', 'Mind  (+WIS mod)', 'Rally (+CHA mod)'],
     'pla': ['Mind', 'Body', 'Reflex', 'Horror Factor (HF)'],
 }
 

@@ -435,7 +435,7 @@ ham_profs = {
         'skills': 'RANDOM',
         'weapons': 'war',
         'armour': 'war',
-        'saves': [0, 1, 1, 0, 0],
+        'saves': [0, 1, 1, 0, 0, 0],
     },
     'cleric': {
         'short': 'cleric',  # STR: class name for references
@@ -443,7 +443,7 @@ ham_profs = {
         'flags': ['base', 'human', 'caster'],
         'alignAllowed': ['chaos', 'evil', 'good', 'law'],
         'primAttr': ['WIS', 'CHA'],
-        'saves': [0, 0, 0, 1, 0],
+        'saves': [0, 0, 0, 1, 0, 1],
         'weapons': 'clr',
         'casterStat': 'WIS',  # STRING: stat used for spells, if a caster
         'spellsPerLvl': 2,
@@ -494,7 +494,7 @@ ham_profs = {
         'flags': ['base', 'demi', 'caster'],  # LIST of flags for different effects
         'hd': 8,
         'primAttr': ['DEX', 'INT'],
-        'saves': [0, 0, 1, 0, 1],
+        'saves': [0, 0, 1, 0, 1, 0],
         'casterStat': 'INT',  # STRING: stat used for spells, if a caster
         'spellsPerLvl': 1,
         'spellChooseAs': 'mu',  # STRING: if caster, usually = short
@@ -532,6 +532,7 @@ ham_profs = {
         'hd': 8,
         'attacksAs': 'best',
         'primAttr': ['STR', 'CON'],
+        'saves': [0, 1, 1, 0, 0, 1],
         'restrictions': ['You can use all weapons, shields, and armour.'],
         'special': [
             '(Class) You have a bonus melee attack die at first level (total of two), and gain a new one at levels '
@@ -554,7 +555,7 @@ ham_profs = {
         'race': 'halfling',
         'flags': ['base', 'demi'],  # LIST of flags for different effects
         'primAttr': ['DEX', 'CHA'],
-        'saves': [1, 1, 1, 1, 1],
+        'saves': [1, 1, 1, 1, 1, 1],
         'weapons': 'hlf',
         'extralangs': ['Halfling'],
         'restrictions': ['Can use all small weapons one-handed, or medium two-handed, and shields. Cannot use '
@@ -607,7 +608,7 @@ ham_profs = {
         'attacksAs': 'none',
         'hd': 4,
         'primAttr': ['INT'],
-        'saves': [0, 0, 0, 0, 1],
+        'saves': [0, 0, 0, 0, 1, 0],
         'weapons': 'mag',
         'armour': 'mag',
         'casterStat': 'INT',  # STRING: stat used for spells, if a caster
@@ -641,7 +642,7 @@ ham_profs = {
         'long': 'Thief',  # STR: class name for display
         'attacksAs': 'worst',
         'primAttr': ['DEX', 'INT'],
-        'saves': [1, 0, 0, 1, 0],
+        'saves': [1, 0, 0, 1, 0, 0],
         'weapons': 'rog',
         'armour': 'rog',
         'extragear': ['a Set of Thieves\' Tools'],

@@ -139,7 +139,7 @@ def generate():
     effect = random.choice(effects)
     if nature == 'Staff':
         energy_base = 'defends by generating'
-        mechanical = 'It funcations as a +2 AC Shield when gripped with both hands for the entire round. If hit ' \
+        mechanical = 'It functions as a +2 AC Shield when gripped with both hands for the entire round. If hit ' \
                      'with a Nat 20, it runs out of power and must be recharged by burning a spell of any level.'
     else:
         energy_base = 'attacks with'

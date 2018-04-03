@@ -91,7 +91,7 @@ effects = [
     'it is cold to the touch', 'it is damp to the touch',
     'it is warm to the touch', 'it rotates slowly by itself',
     'it writhes in your grip', 'the scent of incense',
-    'the scent of minty herbs', 'the scene of old books',
+    'the scent of minty herbs', 'the scent of old books',
     'the scent of old leather', 'the smell of sulphur',
     'the distant stink of rotting flesh',
 ]

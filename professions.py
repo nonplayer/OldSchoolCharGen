@@ -538,10 +538,10 @@ ham_profs = {
             '(Class) You have a bonus melee attack die at first level (total of two), and gain a new one at levels '
             '3, 6, 9, 12, and 15. When attacking, declare target(s) and then roll all of the attack dice, but only '
             'one damage die. Each hit applies the same amount of damage.',
-            '(Class) *Not Today!* Once per experience level (cumulative), when you would take damage (from any '
-            'source) that would reduce your Hit Points from positive to Zero or below, you can instead remain at 1 '
-            'HP and negate the rest of the damage from that attack. Lucky Fighters can save these uses up across '
-            'multiple experience levels.',
+            '(Class) *Not Today!* At first level and each level after, you gain a single use of "Not Today!" When '
+            'you would take damage (from any source) that would reduce your HP from positive to Zero or below, you '
+            'can spend a use and instead remain at 1 HP and negate the rest of the damage from that attack. These '
+            'uses accumulate with each level, but each use is permanently lost upon spending.',
             '(Class) You have advantage on all Hit Dice rolls, and reroll all 1s on Hit Dice.',
             '(Class) You can use a Shield Bash with any one of your successful attack dice, losing the shield AC '
             'bonus until your next turn in combat.',

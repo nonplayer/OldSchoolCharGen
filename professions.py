@@ -564,9 +564,7 @@ ham_profs = {
             '(Class) You gain a bonus melee attack die at levels 4, 8, and 12. When attacking, declare your target(s) '
             'and then roll all your attack dice, but only one damage die. Each hit applies the same amount of damage.',
             '(Class) You have the following Thief Skills: Lockpicking, Perception, Stealth (with Advantage), '
-            'Thief-Climbing, and Trap-Finding (with Disadvantage). Additionally, at level you add +1 to any two of '
-            'these Skills. Each additional XP level you add two more points as you see fit. You cannot add more points '
-            'to any one skill than your current level.',
+            'Thief-Climbing, and Trap-Finding (with Disadvantage).',
             '(Class) Unless you have proven to be an obvious threat, or your opponents are otherwise specifically '
             'predisposed against you, you are always attacked last.',
             '(Class) You can draw from inner strength for a sudden display of unexpected fierceness. By spending 1 '
@@ -656,9 +654,8 @@ ham_profs = {
             '(WIS), Stealth (DEX), Thief-climbing (STR), Tracking (WIS), Trap-finding (INT), and Trap-breaking (DEX). '
             'At first level you must randomly determine one Thief Skill to be your Bailiwick, and one to be your '
             'Failing. You get advantage on checks related to your Bailiwick, and disadvantage on checks related to '
-            'your Failing. Additionally, at level one you can add +1 to any four Thief Skills. Each additional '
-            'level you add four more points to your skills as you see fit. The total bonus on a skill can never '
-            'exceed your level.',
+            'your Failing,  Once per adventure per experience level, you can attempt to reroll a failed Thief Skill '
+            'check. This count resets upon Returning to Town.',
             '(Class) You roll with advantage on Tactical Attacks.',
             '(Class) You have advantage on all Saves against the effects of Traps.',
         ],

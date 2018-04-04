@@ -44,7 +44,14 @@ def print_character(game_system):
     print("\nAttribute Scores:")
     print("-----------------")
     for key, value in dict.items(character.stats):
-        print("%s: %s (%s): Affects %s" % (key, str(value['val']), str(value['mod']), str(character.affects[key])))
+        if int(value['val']) < 10 and int(value['mod']) < 0:
+            print("%s:  %s (%s): Affects %s" % (key, str(value['val']), str(value['mod']), str(character.affects[key])))
+        elif int(value['val']) < 10 and int(value['mod']) >= 0:
+            print("%s:  %s (+%s): Affects %s" % (key, str(value['val']), str(value['mod']), str(character.affects[key])))
+        elif int(value['val']) > 9 and int(value['mod']) >= 0:
+            print("%s: %s (+%s): Affects %s" % (key, str(value['val']), str(value['mod']), str(character.affects[key])))
+        else:
+            print("%s: %s (%s): Affects %s" % (key, str(value['val']), str(value['mod']), str(character.affects[key])))
     if character.saves:
         print("\nSaving Throws:")
         print("--------------")

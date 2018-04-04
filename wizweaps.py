@@ -44,12 +44,12 @@ materials = [
     'animal horn', 'coral',
     'gold', 'jade',
     'jasper', 'lead',
-    'mirrored glass', 'mother-of-pearl', 'obsidian',
-    'onyx', 'platinum',
-    'porcelain', 'quartz',
-    'shell', 'silver',
-    'tortoise shell', 'titanium',
-    'zinc',
+    'mirrored glass', 'mother-of-pearl',
+    'obsidian', 'onyx',
+    'platinum', 'porcelain',
+    'quartz', 'shell',
+    'silver', 'tortoise shell',
+    'titanium', 'zinc',
 ]
 
 tip_features = [

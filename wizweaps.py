@@ -1,6 +1,6 @@
 """
 This file generates weaponry for the custom Wizard Weapons house rules.
-The original idea for this was inspired by an OSR blog post which no longer exists.
+The original idea for this was inspired by a gaming blog post which no longer exists.
 The base list of options was provided by Grey Knight on Google Plus, used with their permission (CC0)
 """
 
@@ -10,9 +10,8 @@ components = [
     'animal bone', 'birch wood',
     'brass', 'bronze',
     'copper', 'delicious candy',
-    'granite',
-    'green glass', 'hazel wood',
-    'human bone',
+    'granite', 'green glass',
+    'hazel wood', 'human bone',
     'iron', 'ivory',
     'mahogany', 'maple wood',
     'marble', 'oak wood',

@@ -1,6 +1,6 @@
 # About this Project
 
-This is a Python-based tool to generate random first-level characters for "old school" D&D-like tabletop role-playing games.
+This is a Python-based tool to generate random first-level characters for "classic old school" D&D-like tabletop role-playing games.
 
 ## Systems Compatibility
 
@@ -10,7 +10,7 @@ Currently this tool can create characters for the following old school games:
 * [Dark Dungeons](http://www.drivethrurpg.com/product/177410/Dark-Dungeons)
 * [Blood & Treasure 1st Edition](http://www.drivethrurpg.com/product/124972/Blood--Treasure-Complete)
 * [Microlite81](http://www.drivethrurpg.com/product/174568/Microlite81-Complete)
-* **New:** [HAMMERCRAWL!](https://github.com/nonplayer/hammercrawl/) is my own OSR creation, and is now supported by this generator.
+* **New:** [HAMMERCRAWL!](https://github.com/nonplayer/hammercrawl/) is my own creation, and is now supported by this generator.
 
 Additionally, I've already begun laying the groundwork for extended compatibility with a number of other games, including:
 
@@ -19,7 +19,7 @@ Additionally, I've already begun laying the groundwork for extended compatibilit
 	- Beyond the Wall
 	- The Black Hack
 	- Kaigaku
-	
+
 My hope is that as I add more systems and automate more of the decisions, adding in further systems compatibility will eventually be as simple as adding a new set of system prefs and hitting go.
 
 ### Mechanics Notes
@@ -38,13 +38,13 @@ This also means that should I ever decide to let this app create characters of h
 
 For The Nightmares Underneath, I'm of course using that game's *amazing* built-in random gear generator, which is based upon rolls that determine a character's Social Class. The results are pretty wonderful, and just looking at a character's stats and list of starting gear can inspire instant story. The gear lists from that system have been recreated here with about 99% faithful translation (a *very* small handful of choices had to be tweaked for simplicity of coding at my new skill level).
 
-For the others, I'm using my own ground-up home-brew system, pulling from a glommed-together list of gear from a variety of OSR games. Instead of using starting character money rolls, I'm basing the lists off of the average of the character's initial six stats - the better their stat rolls, the fewer gear options they start with. The result is a rough "starting balance of survivability" wherein characters with higher stats have higher mechanical chances of excelling, while those with lower stats have more potential gear-based options for survival.
+For the others, I'm using my own ground-up home-brew system, pulling from a glommed-together list of gear from a variety of "classic" games. Instead of using starting character money rolls, I'm basing the lists off of the average of the character's initial six stats - the better their stat rolls, the fewer gear options they start with. The result is a rough "starting balance of survivability" wherein characters with higher stats have higher mechanical chances of excelling, while those with lower stats have more potential gear-based options for survival.
 
 For the sake of simplicity, with *most* of the other D&D-like games I'm planning to use the same weapon and gear lists and options. This will result in characters not 100% accurate to their game variant's core gear lists, but still "acceptably playable" in adventures using that game's engine. *Dark Dungeons* and *Blood & Treasure* don't have exactly the same armour types, for example, but there's enough similarity that the lists are basically interchangeable.
 
 ### Spell Lists
 
-First off, note that in OSR games I always automatically give all "arcane" type casters the Red Magic spell *in addition to* other spell choices. Frankly I think that making it a slot-requiring spell at all is complete bullshit, but to satisfy basic system conventions I still add it in as a free spell, just in case.
+First off, note that in most of the games I always automatically give all "arcane" type casters the Red Magic spell *in addition to* other spell choices. Frankly I think that making it a slot-requiring spell at all is complete bullshit, but to satisfy basic system conventions I still add it in as a free spell, just in case.
 
 Clerics and other divine-type casters have their *initial* spell lists prepared so you can just jump into the dungeon and start playing. For all other casters, initial spell lists represent the spells in your caster's initial spellbook.
 

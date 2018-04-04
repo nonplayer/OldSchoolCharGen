@@ -12,11 +12,11 @@ import random
 import re
 
 import dice
-import equipment_osr
+import equipment
 import equipment_tnu
 import professions
 import setting
-import spells_osr
+import spells
 import spells_tnu
 import systems
 import wizweaps
@@ -118,7 +118,7 @@ class Character(object):
         if self.system_type == 'tnu':
             my_gear = list(equipment_tnu.get_gear(self.short, my_class['label']))
         elif self.system_type in ['dnd']:
-            my_gear = list(equipment_osr.get_gear(self.profession, self.system, stats_avg))
+            my_gear = list(equipment.get_gear(self.profession, self.system, stats_avg))
         elif self.system_type == 'pla':
             my_gear = []
         else:
@@ -166,14 +166,14 @@ class Character(object):
             self.num_spells = self.lvl * self.profession['spellsPerLvl'] + my_castmod
             if self.profession['cantrips']:
                 self.spells = list(
-                    spells_osr.get_cantrips(self.system, self.profession['spellChooseAs'],
-                                            self.profession['cantrips']))
+                    spells.get_cantrips(self.system, self.profession['spellChooseAs'],
+                                        self.profession['cantrips']))
             if self.num_spells > 0:
                 my_spells = []
                 if self.system == 'tnu':
                     my_spells = spells_tnu.get_spells(self.profession['spellChooseAs'], self.align, self.num_spells)
                 elif self.system in ['bnt', 'dd', 'ham', 'm81']:
-                    my_spells = spells_osr.get_spells(self.system, self.profession['spellChooseAs'], self.num_spells)
+                    my_spells = spells.get_spells(self.system, self.profession['spellChooseAs'], self.num_spells)
                 if self.profession['extraspells']:
                     my_extra_spells = [s for s in list(self.profession['extraspells'])]
                     my_spells = my_spells + my_extra_spells

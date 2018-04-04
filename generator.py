@@ -50,7 +50,7 @@ def gen_ac(prefs, armour):
             ac_mod += 5
         elif any('Light Armour' in x for x in armour):
             ac_mod += 3
-    elif prefs['system_type'] == 'dnd':
+    elif prefs['system_assumptions'] == 'dnd':
         if any('Plate Armour' in x for x in armour):
             ac_mod += 8
         elif any('Plate Mail' in x for x in armour):
@@ -115,11 +115,11 @@ class Character(object):
         self.init_combat(game_system)
         #
         # let's get that gear list:
-        if self.system_type == 'tnu':
+        if self.system_assumptions == 'tnu':
             my_gear = list(equipment_tnu.get_gear(self.short, my_class['label']))
-        elif self.system_type in ['dnd']:
+        elif self.system_assumptions in ['dnd']:
             my_gear = list(equipment.get_gear(self.profession, self.system, stats_avg))
-        elif self.system_type == 'pla':
+        elif self.system_assumptions == 'pla':
             my_gear = []
         else:
             my_gear = []
@@ -148,7 +148,7 @@ class Character(object):
         #
         # now to generate the character's armour class
         self.ac = gen_ac(self.prefs, my_armourlist)
-        if self.system_type == 'dnd':
+        if self.system_assumptions == 'dnd':
             if self.prefs['acType'] == 'descend':
                 self.ac -= self.stats['DEX']['mod']
             else:
@@ -232,7 +232,7 @@ class Character(object):
     def load_prefs_data(self):
         self.system = self.prefs['system_name']
         self.system_fullname = self.prefs['system_fullname']
-        self.system_type = self.prefs['system_type']
+        self.system_assumptions = self.prefs['system_assumptions']
         self.setting = self.prefs['setting']
         self.affects = dict(self.prefs['affects'])
         self.hps_mod = self.prefs['HPsMod']
@@ -245,7 +245,7 @@ class Character(object):
                 new_languages.remove(l)
         if self.system in ['m81']:
             bonus_lang_choices = self.stats['MIND']['mod']
-        elif self.system_type == 'dnd':
+        elif self.system_assumptions == 'dnd':
             bonus_lang_choices = self.stats['INT']['mod']
         else:
             bonus_lang_choices = 0

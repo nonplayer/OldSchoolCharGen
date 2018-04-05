@@ -47,7 +47,7 @@ statAffects = {
         'CON': 'Body Saves, Hit Die Rolls',
         'INT': 'Magic-User Spells',
         'WIS': 'Mind Saves, Cleric Spells, Initiative',
-        'CHA': 'Fate Saves'
+        'CHA': 'Luck Saves'
     },
     'm81': {
         'STR': 'Melee Attack Rolls, Hit Point Rolls',
@@ -88,7 +88,7 @@ saves = {
     'three': ['Fortitude', 'Reflex', 'Willpower'],
     'five': ['Death Ray & Poison', 'Magic Wands', 'Paralysis & Petrification', 'Breath Weapon', 'Rod, Staff, & Spell'],
     'six': statArrays['dnd'],
-    'ham': ['Area (+DEX mod)', 'Body (+CON mod)', 'Death (No mods)', 'Fate (+CHA mod)', 'Mind (+WIS mod)'],
+    'ham': ['Area  (+DEX mod)', 'Body  (+CON mod)', 'Death  (No mods)', 'Luck  (+CHA mod)', 'Mind  (+WIS mod)', 'Rally (+CHA mod)'],
     'pla': ['Mind', 'Body', 'Reflex', 'Horror Factor (HF)'],
 }
 
@@ -334,9 +334,9 @@ race_data = {
 #
 systems = {
     'default': {
-        'system_name': 'def',                  # shortname for the system, used in some lists and dicts
+        'system_name': 'def',           # shortname for the system, used in some lists and dicts
         'system_fullname': 'Default Display Name',
-        'system_type': 'dnd',                  # STR: used to determine armor types, equipment lists, and AC assumptions
+        'system_assumptions': 'dnd',    # STR: used to determine armor types, equipment lists, and AC assumptions
         'setting': 'fantasy',           # STR: game setting, for use with random setting-specific elements
         'hasHPs': True,                 # BOO: changes the calculations if the system has hit points
         'stats': 6,                     # INT: how many stats in this system, usually 6
@@ -399,7 +399,7 @@ systems = {
     'm81': {
         'system_name': 'm81',
         'system_fullname': 'Microlite81',
-        'system_type': 'dnd',
+        'system_assumptions': 'dnd',
         'stats': 4,
         'spread': statArrays['m81'],
         'affects': statAffects['m81'],
@@ -413,7 +413,7 @@ systems = {
     'pla': {
         'system_name': 'pla',
         'system_fullname': 'Microlite Platinum',
-        'system_type': 'pla',
+        'system_assumptions': 'pla',
         'stats': 8,
         'spread': statArrays['pla'],
         'affects': statAffects['pla'],
@@ -428,7 +428,7 @@ systems = {
     'rbh': {
         'system_name': 'rbh',
         'system_fullname': 'Robot Hack',
-        'system_type': 'pla',
+        'system_assumptions': 'pla',
         'stats': 8,
         'spread': statArrays['pla'],
         'affects': statAffects['pla'],
@@ -442,7 +442,7 @@ systems = {
     'tnu': {
         'system_name': 'tnu',
         'system_fullname': 'The Nightmares Underneath',
-        'system_type': 'tnu',
+        'system_assumptions': 'tnu',
         'hasHPs': False,
         'spread': statArrays['tnu'],
         'affects': statAffects['tnu'],

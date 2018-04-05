@@ -435,7 +435,7 @@ ham_profs = {
         'skills': 'RANDOM',
         'weapons': 'war',
         'armour': 'war',
-        'saves': [0, 1, 1, 0, 0],
+        'saves': [0, 1, 1, 0, 0, 0],
     },
     'cleric': {
         'short': 'cleric',  # STR: class name for references
@@ -443,7 +443,7 @@ ham_profs = {
         'flags': ['base', 'human', 'caster'],
         'alignAllowed': ['chaos', 'evil', 'good', 'law'],
         'primAttr': ['WIS', 'CHA'],
-        'saves': [0, 0, 0, 1, 0],
+        'saves': [0, 0, 0, 1, 0, 1],
         'weapons': 'clr',
         'casterStat': 'WIS',  # STRING: stat used for spells, if a caster
         'spellsPerLvl': 2,
@@ -494,7 +494,7 @@ ham_profs = {
         'flags': ['base', 'demi', 'caster'],  # LIST of flags for different effects
         'hd': 8,
         'primAttr': ['DEX', 'INT'],
-        'saves': [0, 0, 1, 0, 1],
+        'saves': [0, 0, 1, 0, 1, 0],
         'casterStat': 'INT',  # STRING: stat used for spells, if a caster
         'spellsPerLvl': 1,
         'spellChooseAs': 'mu',  # STRING: if caster, usually = short
@@ -532,15 +532,16 @@ ham_profs = {
         'hd': 8,
         'attacksAs': 'best',
         'primAttr': ['STR', 'CON'],
+        'saves': [0, 1, 1, 0, 0, 1],
         'restrictions': ['You can use all weapons, shields, and armour.'],
         'special': [
             '(Class) You have a bonus melee attack die at first level (total of two), and gain a new one at levels '
             '3, 6, 9, 12, and 15. When attacking, declare target(s) and then roll all of the attack dice, but only '
             'one damage die. Each hit applies the same amount of damage.',
-            '(Class) *Not Today!* Once per experience level (cumulative), when you would take damage (from any '
-            'source) that would reduce your Hit Points from positive to Zero or below, you can instead remain at 1 '
-            'HP and negate the rest of the damage from that attack. Lucky Fighters can save these uses up across '
-            'multiple experience levels.',
+            '(Class) *Not Today!* At first level and each level after, you gain a single use of "Not Today!" When '
+            'you would take damage (from any source) that would reduce your HP from positive to Zero or below, you '
+            'can spend a use and instead remain at 1 HP and negate the rest of the damage from that attack. These '
+            'uses accumulate with each level, but each use is permanently lost upon spending.',
             '(Class) You have advantage on all Hit Dice rolls, and reroll all 1s on Hit Dice.',
             '(Class) You can use a Shield Bash with any one of your successful attack dice, losing the shield AC '
             'bonus until your next turn in combat.',
@@ -554,7 +555,7 @@ ham_profs = {
         'race': 'halfling',
         'flags': ['base', 'demi'],  # LIST of flags for different effects
         'primAttr': ['DEX', 'CHA'],
-        'saves': [1, 1, 1, 1, 1],
+        'saves': [1, 1, 1, 1, 1, 1],
         'weapons': 'hlf',
         'extralangs': ['Halfling'],
         'restrictions': ['Can use all small weapons one-handed, or medium two-handed, and shields. Cannot use '
@@ -563,9 +564,7 @@ ham_profs = {
             '(Class) You gain a bonus melee attack die at levels 4, 8, and 12. When attacking, declare your target(s) '
             'and then roll all your attack dice, but only one damage die. Each hit applies the same amount of damage.',
             '(Class) You have the following Thief Skills: Lockpicking, Perception, Stealth (with Advantage), '
-            'Thief-Climbing, and Trap-Finding (with Disadvantage). Additionally, at level you add +1 to any two of '
-            'these Skills. Each additional XP level you add two more points as you see fit. You cannot add more points '
-            'to any one skill than your current level.',
+            'Thief-Climbing, and Trap-Finding (with Disadvantage).',
             '(Class) Unless you have proven to be an obvious threat, or your opponents are otherwise specifically '
             'predisposed against you, you are always attacked last.',
             '(Class) You can draw from inner strength for a sudden display of unexpected fierceness. By spending 1 '
@@ -607,7 +606,7 @@ ham_profs = {
         'attacksAs': 'none',
         'hd': 4,
         'primAttr': ['INT'],
-        'saves': [0, 0, 0, 0, 1],
+        'saves': [0, 0, 0, 0, 1, 0],
         'weapons': 'mag',
         'armour': 'mag',
         'casterStat': 'INT',  # STRING: stat used for spells, if a caster
@@ -641,7 +640,7 @@ ham_profs = {
         'long': 'Thief',  # STR: class name for display
         'attacksAs': 'worst',
         'primAttr': ['DEX', 'INT'],
-        'saves': [1, 0, 0, 1, 0],
+        'saves': [1, 0, 0, 1, 0, 0],
         'weapons': 'rog',
         'armour': 'rog',
         'extragear': ['a Set of Thieves\' Tools'],
@@ -655,9 +654,8 @@ ham_profs = {
             '(WIS), Stealth (DEX), Thief-climbing (STR), Tracking (WIS), Trap-finding (INT), and Trap-breaking (DEX). '
             'At first level you must randomly determine one Thief Skill to be your Bailiwick, and one to be your '
             'Failing. You get advantage on checks related to your Bailiwick, and disadvantage on checks related to '
-            'your Failing. Additionally, at level one you can add +1 to any four Thief Skills. Each additional '
-            'level you add four more points to your skills as you see fit. The total bonus on a skill can never '
-            'exceed your level.',
+            'your Failing,  Once per adventure per experience level, you can attempt to reroll a failed Thief Skill '
+            'check. This count resets upon Returning to Town.',
             '(Class) You roll with advantage on Tactical Attacks.',
             '(Class) You have advantage on all Saves against the effects of Traps.',
         ],

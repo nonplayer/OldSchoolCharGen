@@ -12,13 +12,14 @@ import random
 import re
 
 import dice
-import equipment_osr
+import equipment
 import equipment_tnu
 import professions
 import setting
-import spells_osr
+import spells
 import spells_tnu
 import systems
+import wizweaps
 
 
 def gen_social(status):
@@ -49,7 +50,7 @@ def gen_ac(prefs, armour):
             ac_mod += 5
         elif any('Light Armour' in x for x in armour):
             ac_mod += 3
-    elif prefs['system_type'] == 'dnd':
+    elif prefs['system_assumptions'] == 'dnd':
         if any('Plate Armour' in x for x in armour):
             ac_mod += 8
         elif any('Plate Mail' in x for x in armour):
@@ -114,11 +115,11 @@ class Character(object):
         self.init_combat(game_system)
         #
         # let's get that gear list:
-        if self.system_type == 'tnu':
+        if self.system_assumptions == 'tnu':
             my_gear = list(equipment_tnu.get_gear(self.short, my_class['label']))
-        elif self.system_type in ['dnd']:
-            my_gear = list(equipment_osr.get_gear(self.profession, self.system, stats_avg))
-        elif self.system_type == 'pla':
+        elif self.system_assumptions in ['dnd']:
+            my_gear = list(equipment.get_gear(self.profession, self.system, stats_avg))
+        elif self.system_assumptions == 'pla':
             my_gear = []
         else:
             my_gear = []
@@ -139,13 +140,15 @@ class Character(object):
         for a in my_armour:
             my_gear.remove(a)
             my_armourlist.append(str.title(a[8:]))
+        if 'mu-weapons' in self.profession['flags']:
+            my_weaponlist.append(wizweaps.generate())
         self.weapons = sorted(my_weaponlist)
         self.armour = sorted(my_armourlist)
         self.gear = sorted(my_gear)
         #
         # now to generate the character's armour class
         self.ac = gen_ac(self.prefs, my_armourlist)
-        if self.system_type is ['dnd']:
+        if self.system_assumptions == 'dnd':
             if self.prefs['acType'] == 'descend':
                 self.ac -= self.stats['DEX']['mod']
             else:
@@ -163,14 +166,14 @@ class Character(object):
             self.num_spells = self.lvl * self.profession['spellsPerLvl'] + my_castmod
             if self.profession['cantrips']:
                 self.spells = list(
-                    spells_osr.get_cantrips(self.system, self.profession['spellChooseAs'],
-                                            self.profession['cantrips']))
+                    spells.get_cantrips(self.system, self.profession['spellChooseAs'],
+                                        self.profession['cantrips']))
             if self.num_spells > 0:
                 my_spells = []
                 if self.system == 'tnu':
                     my_spells = spells_tnu.get_spells(self.profession['spellChooseAs'], self.align, self.num_spells)
                 elif self.system in ['bnt', 'dd', 'ham', 'm81']:
-                    my_spells = spells_osr.get_spells(self.system, self.profession['spellChooseAs'], self.num_spells)
+                    my_spells = spells.get_spells(self.system, self.profession['spellChooseAs'], self.num_spells)
                 if self.profession['extraspells']:
                     my_extra_spells = [s for s in list(self.profession['extraspells'])]
                     my_spells = my_spells + my_extra_spells
@@ -229,7 +232,7 @@ class Character(object):
     def load_prefs_data(self):
         self.system = self.prefs['system_name']
         self.system_fullname = self.prefs['system_fullname']
-        self.system_type = self.prefs['system_type']
+        self.system_assumptions = self.prefs['system_assumptions']
         self.setting = self.prefs['setting']
         self.affects = dict(self.prefs['affects'])
         self.hps_mod = self.prefs['HPsMod']
@@ -242,7 +245,7 @@ class Character(object):
                 new_languages.remove(l)
         if self.system in ['m81']:
             bonus_lang_choices = self.stats['MIND']['mod']
-        elif self.system_type == 'dnd':
+        elif self.system_assumptions == 'dnd':
             bonus_lang_choices = self.stats['INT']['mod']
         else:
             bonus_lang_choices = 0

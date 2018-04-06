@@ -502,28 +502,21 @@ ham_profs = {
         'extraspells': ['Level 1: Read Magic'],
         'restrictions': ['Can use all weapons, shields, and armour. Armour may limit spellcasting.'],
         'special': [
-            '(Class) Immune to sleep, charm, slow, haste, aging, and energy drain effects, *unless* they are results '
-            'of the magic of an Elf (self or other, alive or undead).',
-            '(Class) You cast spells from the magic-user list. Begin the game with a spellbook containing Read Magic '
-            'and possible randomly-determined bonus spells. At each new level gain one (1) new spell to your book '
-            'from ongoing experimentation, and you can add more by transcribing scrolls and magical texts '
-            'found in dungeons. At level 1 you can only cast level 1 spells. This maximum spell level increases by '
-            '+1 at every odd-numbered level of experience.',
-            '(Class) You are better at casting in armour than humans. You suffer no chance of spell failure in '
-            'Light armour, and a 25%/50%/75% chance when wearing medium/heavy/plate armours, respectively. '
-            'Failed spells are forgotten per normal rules.',
-            '(Class) You can fight with two weapons at once. When wielding two one-handed weapons, roll one extra '
-            'attack die, but lower the damage die by one step (to a d6) for the entire assault. At level 9, this '
-            'increases to two extra attack dice.',
-            '(Class) You excel at the Bow. At second level, you gain a second attack die when using Short and Long '
-            'Bows, and a third at level 10. Each attack die requires one arrow from your quiver. When attacking '
-            'with a bow, declare target(s) first and then roll all of the attack dice, but only one damage die. '
-            'Each hits applies the same amount of damage.',
-            '(Class) You have a 50% chance of noticing concealed non-stonework doors and panels simply by passing '
-            'near them, and automatically find them if you spend a turn searching.',
-            '(Class) You have a bonus melee attack die at first level (total of two), and gain a new one at '
-            'levels 5, 10, and 15. When attacking, declare target(s) and then roll all of your attack dice, but '
-            'only one damage die. Each hits applies the same amount of damage.',
+            '(Class) Immune to sleep, charm, slow, haste, aging, and energy drain effects, except from another Elf.',
+            '(Class) Cast spells from the magic-user list. Starting spellbook contains Read Magic and randomly-'
+            'determined bonus spells. At each new level gain 1 new spell from ongoing experimentation. You can add '
+            'more from scrolls and texts found in dungeons. At level 1 you can only cast level 1 spells. Max spell '
+            'level increases +1 at every odd-numbered level.',
+            '(Class) You can cast in armour. You suffer no chance of spell failure in Light, and a 25%/50%/75% '
+            'chance in medium/heavy/plate, respectively. Failed spells are forgotten.',
+            '(Class) You can fight with two weapons. Roll one extra attack die, but lower the damage die by one step '
+            '(to a d6) for the action. At level 9, this increases to two extra attack dice.',
+            '(Class) At second level, you gain a second attack die when using normal Bows, and a third at level 10. '
+            'Each die requires ammo. Declare target(s) and then roll all of the attack dice, but only one damage die.',
+            '(Class) 50% chance of noticing concealed non-stonework features simply by passing near them, and '
+            'automatically if you spend a turn searching.',
+            '(Class) Bonus melee attack die at first level, and gain a new one at levels 5, 10, and 15. When '
+            'attacking, declare target(s) and roll all of your dice, but only one damage die.',
         ],
     },
     'fighter': {
@@ -617,21 +610,18 @@ ham_profs = {
         'restrictions': ['Can not use two-handed weapons except staves. Can not wear heavy armour or use shields. '
                          'Other armour can cause spell failure.'],
         'special': [
-            '(Class) You cannot wear Heavy armour, and suffer a chance of spell failure while wearing other armour. '
-            'In Light armour, the chance is 50%, and in Medium armour the chance is 75%. Failed spells are '
-            'forgotten per normal rules.',
-            '(Class) You cast spells from the Magic-User spell list. You begin the game with a spellbook containing '
-            'Read Magic and a potential for other randomly-determined bonus spells. At each new level you add 2 new '
-            'spells to your book from experimentation, and you can add more by transcribing scrolls and magical '
-            'texts found in dungeons. At level 1 you can safely cast level 1 spells. This maximum spell level '
-            'increases by +1 at every odd-numbered level of experience. Take note of the Highcast ability, below.',
-            '(Class) *Highcaster* You can prepare and attempt to cast spells of higher level than you normally would '
-            'be able to, provided you have a copy of the spell in your book. Casting the spell requires permanent '
-            'loss of INT score equal to the difference in allowed spell levels. Spells cast in this fashion are '
-            'always immediately forgotten.',
-            '(Class) *Bloodcaster* You can choose to take damage instead of forgetting spells. The amount of '
-            'damage taken is equal to the level of spell just cast. If below Zero HP, this burns CON instead.',
-            '(Class) You can cast the spell *Read Magic* freely and at will, without need to prepare or memorize.',
+            '(Class) Cannot wear Heavy armour, and suffer a chance of spell failure while wearing other. '
+            'Chance is 50%/75% in Light/Medium, respectively. Failed spells are forgotten.',
+            '(Class) Cast magic-user spells. Start with a spellbook containing Read Magic and other randomly bonus '
+            'spells. At each level you add 2 new spells from experimentation, and you can add more from scrolls '
+            'magical texts found in dungeons. At level 1 you can safely cast level 1 spells. Max spell level '
+            'increases by +1 at every odd-numbered level of experience. ',
+            '(Class) You can prepare and try to cast spells of higher level than your normal Max, if you have a copy '
+            'of the spell in your book. Casting requires permanent loss of INT equal to the difference in allowed '
+            'levels. Spells cast this way are always immediately forgotten.',
+            '(Class) You can choose to take damage instead of forgetting spells. The amount is equal to the level of '
+            'spell just cast. If below Zero HP, this burns CON instead.',
+            '(Class) You can cast *Read Magic* freely and at will, no prep required.',
             '(Class) You can use special mage-only weapons: The Wand and The Staff.',
         ],
     },

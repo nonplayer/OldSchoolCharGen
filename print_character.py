@@ -21,7 +21,8 @@ supported_systems = [
 def print_character(game_system):
     game_system = game_system.lower()
     character = generator.generate(game_system)
-    print("\nA new random character for " + str(character.system_fullname))
+    print("-----------------------------------------------------")
+    print("A new random character for " + str(character.system_fullname))
     print("-----------------------------------------------------")
     # print("Raw Data Print: ", gen_data)
     print("Profession: %s;  Level: %s;  Race: %s" % (character.long, str(character.lvl), character.race))
@@ -97,7 +98,7 @@ def print_character(game_system):
         else:
             for s in list(character.spells):
                 print(s)
-    print("")
+    print("-----------------------------------------------------")
 
 
 if __name__ == "__main__":

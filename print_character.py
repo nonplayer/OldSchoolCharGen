@@ -18,9 +18,7 @@ supported_systems = [
 ]
 
 
-def print_character(game_system):
-    game_system = game_system.lower()
-    character = generator.generate(game_system)
+def print_character(character):
     print("-----------------------------------------------------")
     print("A new random character for " + str(character.system_fullname))
     print("-----------------------------------------------------")
@@ -29,7 +27,7 @@ def print_character(game_system):
     print("Alignment: %s;  Age: %s;  Looks: %s" % (character.align.title(), character.age, character.looks))
     print("Trait: %s;  Background: %s;  Social Status: %s (%s)" %
           (character.personality, character.background, character.soc_class, str(character.soc_mod)))
-    if game_system == 'tnu':
+    if character.system == 'tnu':
         print("Disposition: %sd%s;  Psychic Armour: %s" % (str(character.lvl), str(character.hd), str(character.pa)))
     elif character.stats[character.hps_mod]['mod'] > 0:
         print("Hit Die: %sd%s+%s;  Psychic Armour: %s" %
@@ -48,7 +46,8 @@ def print_character(game_system):
         if int(value['val']) < 10 and int(value['mod']) < 0:
             print("%s:  %s (%s): Affects %s" % (key, str(value['val']), str(value['mod']), str(character.affects[key])))
         elif int(value['val']) < 10 and int(value['mod']) >= 0:
-            print("%s:  %s (+%s): Affects %s" % (key, str(value['val']), str(value['mod']), str(character.affects[key])))
+            print("%s:  %s (+%s): Affects %s" % (key, str(value['val']), str(value['mod']),
+                                                 str(character.affects[key])))
         elif int(value['val']) > 9 and int(value['mod']) >= 0:
             print("%s: %s (+%s): Affects %s" % (key, str(value['val']), str(value['mod']), str(character.affects[key])))
         else:
@@ -114,4 +113,5 @@ if __name__ == "__main__":
         print()
         game_sys = input("Enter the system abbreviation from above: ")
     for n in range(args.number_of_characters):
-        print_character(game_sys)
+        new_character = generator.generate(game_sys.lower())
+        print_character(new_character)

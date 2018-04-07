@@ -12,8 +12,9 @@ import random
 import re
 
 import dice
-import equipment
+from dice import roll as die
 import equipment_tnu
+import gear
 import professions
 import setting
 import spells
@@ -111,21 +112,14 @@ class Character(object):
         else:
             self.saves = {}
         #
-        # let's get that gear list:
+        # let's get that basic combat data:
         self.init_combat(game_system)
         #
-        # let's get that gear list:
+        # now for gear:
         if self.system_assumptions == 'tnu':
-            my_gear = list(equipment_tnu.get_gear(self.short, my_class['label']))
-        elif self.system_assumptions in ['dnd']:
-            my_gear = list(equipment.get_gear(self.profession, self.system, stats_avg))
-        elif self.system_assumptions == 'pla':
-            my_gear = []
+            my_gear = self.get_gear_tnu(my_class)
         else:
-            my_gear = []
-        if self.profession['extragear']:
-            for g in list(self.profession['extragear']):
-                my_gear.append(g)
+            my_gear = self.get_gear_dnd(stats_avg)
         #
         # pull out the weapons and armour into their own lists
         my_weapons = list(filter(lambda wep: wep.startswith('WEAPON: '), my_gear))
@@ -153,7 +147,61 @@ class Character(object):
                 self.ac -= self.stats['DEX']['mod']
             else:
                 self.ac += self.stats['DEX']['mod']
+        #
+        # and finally, we conclude with spells and magic:
         self.init_magic()
+
+    def get_gear_tnu(self, my_class):
+        my_gear = list(equipment_tnu.get_gear(self.short, my_class['label']))
+        return my_gear
+
+    def get_gear_dnd(self, stats_avg):
+        weapon_cls = self.profession['weapons']
+        armour_cls = self.profession['armour']
+        gear_bonus = ['Satchel']
+        if self.profession['weapons'] in ['war', 'hlf']:
+            bonus_wps = 1
+        elif self.profession['weapons'] in ['mag']:
+            bonus_wps = -1
+        else:
+            bonus_wps = 0
+        if stats_avg >= 16:
+            wps_choices = basic_choices = advanced_choices = 1
+            weapon_cls = armour_cls = 'fuckall'
+            money = [str(die(1, 6)) + ' copper coins']
+            gear_bonus = gear_bonus + ['a half-eaten turkey leg from a disgusting place we won\'t mention,',
+                                       'the bloody tooth of someone - or something - recently deprived of its '
+                                       'favorite tooth']
+        elif stats_avg >= 13:
+            wps_choices = 2 + bonus_wps
+            basic_choices = 6
+            advanced_choices = 4
+            money = [str(die(3, 6)) + ' silver coins']
+        elif stats_avg >= 9:
+            wps_choices = 3 + bonus_wps
+            basic_choices = 8
+            advanced_choices = 6
+            money = [str(die(3, 6)) + ' gold coins']
+        elif stats_avg >= 6:
+            wps_choices = 4 + bonus_wps
+            basic_choices = 10
+            advanced_choices = 8
+            money = [str(die(10, 6)) + ' gold coins']
+        else:
+            wps_choices = 3 + bonus_wps
+            basic_choices = advanced_choices = 12
+            money = [str(die(10, 6)) + ' gold coins']
+        gearlist = gear.get_gearlist(weapon_cls, armour_cls)
+        gear_wps = list(random.sample(gearlist['weapons'], wps_choices))
+        gear_arm = [random.choice(gearlist['armour'])]
+        gear_base = list(random.sample(gearlist['basic'], basic_choices))
+        gear_advanced = list(random.sample(gearlist['advanced'], advanced_choices))
+        gear_misc = random.sample(gear.get_misc(), 1)
+        my_gear = gear_base + gear_advanced + gear_wps + gear_arm + gear_misc + gear_bonus + money
+        if self.profession['extragear']:
+            for g in list(self.profession['extragear']):
+                my_gear.append(g)
+        return my_gear
 
     def init_magic(self):
         #
@@ -249,7 +297,7 @@ class Character(object):
             bonus_lang_choices = self.stats['INT']['mod']
         else:
             bonus_lang_choices = 0
-        if bonus_lang_choices > 0:
+        if bonus_lang_choices > 0 and len(new_languages) > 0:
             while bonus_lang_choices > 0:
                 newlang = random.choice(new_languages)
                 new_languages.remove(newlang)

@@ -33,6 +33,13 @@ armour = {
         'ARMOUR: Leather Armour (Light, AC+2)',
         'ARMOUR: Padded Armour (Light, AC+1)',
     ],
+    'brb': [
+        'ARMOUR: Chain Mail (Medium, AC+5)',
+        'ARMOUR: Scale Mail (Medium, AC+4)',
+        'ARMOUR: Studded Leather (Light, AC+3)',
+        'ARMOUR: Leather Armour (Light, AC+2)',
+        'ARMOUR: Padded Armour (Light, AC+1)',
+    ],
     'fuckall': [
         'ARMOUR: blood-covered rags',
         'ARMOUR: a set of ragged prison clothes',

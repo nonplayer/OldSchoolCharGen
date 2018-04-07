@@ -576,6 +576,7 @@ ham_profs = {
         'alignAllowed': ['chaos', 'evil', 'good', 'neutral'],
         'hd': 10,
         'primAttr': ['STR', 'CON'],
+        'armour': 'brb',
         'extralangs': ['Ogre'],
         'restrictions': ['Can use all weapons and shields. Armour must be custom made. You cannot be Law aligned.'],
         'special': [

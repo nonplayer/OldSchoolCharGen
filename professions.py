@@ -366,6 +366,7 @@ dd_profs = {
         'restrictions': ['Halflings can wear any armour or shield, and can use any small weapon. They cannot use '
                          'medium or large weapons due to their small stature.'],
         'weapons': 'hlf',
+        'armour': 'hlf',
         'saves': [8, 9, 10, 13, 12],
         'special': [
             '(Class) Small: -2 AC bonus vs creatures larger than humans.',
@@ -550,6 +551,7 @@ ham_profs = {
         'primAttr': ['DEX', 'CHA'],
         'saves': [1, 1, 1, 1, 1, 1],
         'weapons': 'hlf',
+        'armour': 'hlf',
         'extralangs': ['Halfling'],
         'restrictions': ['Can use all small weapons one-handed, or medium two-handed, and shields. Cannot use '
                          'two-handed human-sized weapons.'],
@@ -577,7 +579,7 @@ ham_profs = {
         'extralangs': ['Ogre'],
         'restrictions': ['Can use all weapons and shields. Armour must be custom made. You cannot be Law aligned.'],
         'special': [
-            '(Class) You are built like an icehouses. All armour must be custom made at increased costs and time, '
+            '(Class) You are built like an icehouse. All armour must be custom made at increased costs and time, '
             'and only Halfling-sized creatures or smaller can move through your occupied space.',
             '(Class) When you take damage, make a Mind save (target: 12) or go into an uncontrollable violent fury. '
             'During this rage, take advantage on melee and thrown damage dice rolls, immunity to critical fumbles, '
@@ -750,6 +752,7 @@ m81_profs = {
                          'Due to your stature, you must wield medium weapons with two hands and '
                          'cannot use a long bow.'],
         'weapons': 'hlf',
+        'armour': 'hlf',
         'saves': [8, 9, 10, 13, 12],
         'special': [
             '(Class) Fighter Bonus +1 to Attacks and Damage.',

@@ -185,7 +185,7 @@ gear = {
     ],
     'advanced': [
         'Acid (1 flask)', 'Alchemist Fire (1 flask)', 'Antitoxin (1 vial)', 'Bell (tiny)',
-        'Belladona', 'Blanket (winter)', 'Block and Tackle', 'Caltrobs (2-pound bag)',
+        'Belladona', 'Blanket (winter)', 'Block and Tackle', 'Caltrops (2-pound bag)',
         'Candles x10', 'Case (for map or scroll)', 'Chain (10 ft)', 'Chest', 'Cooking Pot (iron)',
         'Fishing Net (25 sq ft)', 'Fishing Hook, Line, and Pole', 'Garlic', 'Grappling Hook',
         'Hammer (small)', 'Holy Symbol', 'Holy Water (small vial)', 'Ink pot, quill, and paper',

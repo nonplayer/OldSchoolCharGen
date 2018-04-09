@@ -205,11 +205,17 @@ miscellany = [
     'an irritable tabby cat', 'a map to an island that doesn\'t exist', 'a pure white badger pelt',
     'a set of pornographic goblin trading cards', 'a single strip of slightly used sandpaper',
     'a petrified dragon egg', 'a lock of hair from your mother or father', 'a fake beard',
-    'rusted nipple clamps', "two weird puppets", str(die(2, 3)) + ' commemorative plates',
+    'rusted nipple clamps', "two weird puppets", '1D6 commemorative plates',
     'a bottle of freshly-harvested llama milk', 'a free drink coupon for the Inn, but it expires soon...',
     'a tendency to insert yourself into conversations', 'unsettling memories from last night',
     'a strong distrust for the government', 'an unsettlingly sexy facial scar',
     'a free spirit that cannot be shackled by despair', 'an obviously fake accent',
+    'a feeling like you forgot something very important before heading out...',
+    'a case of the wiggles', 'a recently-unlocked chastity belt',
+    'a letter of recommendation from someone important', 'a tourist brochure for the first dungeon',
+    'a signed Maseym''s Bears Base-Ball', 'an unlodgeable wedgie',
+    'a very nice fitted suit', 'a scrap of finel-groomed gnoll hair',
+    'a visible tattoo that you intensely regret',
 ]
 
 

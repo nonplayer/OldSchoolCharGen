@@ -1160,29 +1160,36 @@ proflists = {
 
 # this returns a random character profession and all its base data
 def get_profession(system='tnu'):
-    my_list = proflists[system]['choices']
-    my_dict = proflists[system]['dict']
-    prof_data = baseline
-    syst_defs = my_dict['default']
-    prof_data.update(syst_defs)
-    prof_spec = my_dict[random.choice(my_list)]
-    prof_data.update(prof_spec)
-    return prof_data
+    game_professions_choices = proflists[system]['choices']
+    game_professions_dict = proflists[system]['dict']
+    profession_data = baseline
+    system_defaults = game_professions_dict['default']
+    profession_data.update(system_defaults)
+    my_random_profession = game_professions_dict[random.choice(game_professions_choices)]
+    profession_data.update(my_random_profession)
+    return profession_data
 
 
-'''
-def get_system_prefs(system='tnu'):
-    sysprefs = dict(systems['default'])
-    specific = dict(systems[system.lower()])
-    sysprefs.update(specific)
-    return sysprefs
-'''
-
-
-'''
-for key, value in dict.items(get_profession()):
-    print(key, ":", value)
-'''
+# this returns a random character profession and all its base data
+def get_hammerclass(classroll, subroll):
+    if classroll >= 17:
+        hammercrawl_profession = 'halfogre'
+    elif classroll >= 14:
+        hammercrawl_profession = 'halfling'
+    elif classroll >= 8:
+        humans = ['cleric', 'fighter', 'mu', 'thief']
+        hammercrawl_profession = humans[subroll - 1]
+    elif classroll >= 5:
+        hammercrawl_profession = 'dwarf'
+    else:
+        hammercrawl_profession = 'elf'
+    game_professions_dict = proflists['ham']['dict']
+    profession_data = baseline
+    system_defaults = game_professions_dict['default']
+    profession_data.update(system_defaults)
+    my_random_profession = game_professions_dict[hammercrawl_profession]
+    profession_data.update(my_random_profession)
+    return profession_data
 
 
 if __name__ == "__main__":

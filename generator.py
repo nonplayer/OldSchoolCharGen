@@ -83,7 +83,12 @@ def gen_ac(prefs, armour):
 class Character(object):
     def __init__(self, game_system, prefs):
         self.prefs = prefs
-        self.profession = dict(professions.get_profession(game_system))
+        if game_system is 'ham':
+            classroll = die(3, 6)
+            subroll = die(1,4)
+            self.profession = dict(professions.get_hammerclass(classroll, subroll))
+        else:
+            self.profession = dict(professions.get_profession(game_system))
 
         super(Character, self).__init__()
 

@@ -134,7 +134,7 @@ skills_dnd = [
 skills_weird = [
     'Art Criticism (INT)', 'Being Drunk Before Noon (CON)', 'Being Forgotten (CHA)',
     'Birdwatching (WIS)', 'Blathering (CHA)', 'Bobsledding (STR)',
-    'Bonsai (DEX)', 'Bovine Husbandry (INT)', 'Busking (CHA)',
+    'Bonsai (DEX)', 'Bovine Husbandry (INT)', 'Busking (CHA)', 'Cat Facts (INT)',
     'Chess (INT)', 'Dog Grooming (DEX)', 'Doomsaying (WIS)',
     'Equine Husbandry (INT)', 'Feline Husbandry (INT)', 'Food Cart Management (INT)',
     'Food Tasting (CON)', 'Freestyle Beats (CHA)', 'Funny Walks (DEX)',

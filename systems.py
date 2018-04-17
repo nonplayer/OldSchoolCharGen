@@ -47,7 +47,7 @@ statAffects = {
         'CON': 'Body Saves, Hit Die Rolls',
         'INT': 'Magic-User Spells',
         'WIS': 'Mind Saves, Cleric Spells, Initiative',
-        'CHA': 'Luck Saves'
+        'CHA': 'Luck Saves, Rally Saves'
     },
     'm81': {
         'STR': 'Melee Attack Rolls, Hit Point Rolls',

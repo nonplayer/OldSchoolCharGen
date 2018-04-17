@@ -19,7 +19,7 @@ supported_systems = [
 
 
 def print_character(character):
-    print("-----------------------------------------------------")
+    print()
     print("A new random character for " + str(character.system_fullname))
     print("-----------------------------------------------------")
     # print("Raw Data Print: ", gen_data)
@@ -92,7 +92,7 @@ def print_character(character):
         else:
             for s in list(character.spells):
                 print(s)
-    print("-----------------------------------------------------")
+    print("--------------------")
 
 
 if __name__ == "__main__":

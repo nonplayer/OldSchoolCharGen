@@ -500,7 +500,7 @@ ham_profs = {
         'casterStat': 'INT',  # STRING: stat used for spells, if a caster
         'spellsPerLvl': 1,
         'spellChooseAs': 'mu',  # STRING: if caster, usually = short
-        'extragear': ['a spellbook']
+        'extragear': ['a spellbook'],
         'extralangs': ['Elf'],
         'extraspells': ['Level 1: Read Magic'],
         'restrictions': ['Can use all weapons, shields, and armour. Armour may limit spellcasting.'],

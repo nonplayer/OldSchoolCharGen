@@ -304,7 +304,7 @@ class Character(object):
         else:
             bonus_lang_choices = 0
         if bonus_lang_choices > 0 and len(new_languages) > 0:
-            while bonus_lang_choices > 0:
+            while bonus_lang_choices > 0 and len(new_languages) > 0:
                 newlang = random.choice(new_languages)
                 new_languages.remove(newlang)
                 bonus_lang_choices -= 1

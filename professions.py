@@ -65,7 +65,7 @@ baseline = {
     'casterStat': '',                       # STRING: stat used for spells, if a caster
     'extraspells': False,                   # either False or some magicians get free spells plus their choices
     'saves': False,                         # FALSE or else a LIST of integers, in order
-    'extragear': False,                     # either False or LIST: some professions have extra gear, put it here
+    'extragear': [],                        # either False or LIST: some professions have extra gear, put it here
     'extralangs': [],                       # LIST if any bonus languages come with the class
 }
 
@@ -434,6 +434,7 @@ ham_profs = {
         'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],
         'attacksAs': 'mid',
         'skills': 'RANDOM',
+        'extragear': [],
         'weapons': 'war',
         'armour': 'war',
         'saves': [0, 1, 1, 0, 0, 0],
@@ -449,7 +450,7 @@ ham_profs = {
         'casterStat': 'WIS',  # STRING: stat used for spells, if a caster
         'spellsPerLvl': 2,
         'spellChooseAs': 'cleric',  # STRING: if caster, usually = short
-        'extragear': ['A visible Symbol of your Holy Faith'],
+        'extragear': ['a visible Symbol of your Holy Faith', 'a Prayerbook'],
         'restrictions': ['Can use all weapons, shields, and armour that are not otherwise prohibited by your deity.',
                          'You cannot be of Neutral Alignment'],
         'special': [
@@ -499,6 +500,7 @@ ham_profs = {
         'casterStat': 'INT',  # STRING: stat used for spells, if a caster
         'spellsPerLvl': 1,
         'spellChooseAs': 'mu',  # STRING: if caster, usually = short
+        'extragear': ['a spellbook']
         'extralangs': ['Elf'],
         'extraspells': ['Level 1: Read Magic'],
         'restrictions': ['Can use all weapons, shields, and armour. Armour may limit spellcasting.'],
@@ -552,6 +554,7 @@ ham_profs = {
         'saves': [1, 1, 1, 1, 1, 1],
         'weapons': 'hlf',
         'armour': 'hlf',
+        'extragear': ['a set of Thieves\' tools'],
         'extralangs': ['Halfling'],
         'restrictions': ['Can use all small weapons one-handed, or medium two-handed, and shields. Cannot use '
                          'two-handed human-sized weapons.'],

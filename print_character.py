@@ -110,3 +110,4 @@ if __name__ == "__main__":
     for n in range(args.number_of_characters):
         new_character = generator.generate(game_sys.lower())
         print_character(new_character)
+        new_character = None

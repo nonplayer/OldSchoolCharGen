@@ -85,7 +85,7 @@ class Character(object):
         self.prefs = prefs
         if game_system is 'ham':
             classroll = die(3, 6)
-            subroll = die(1,4)
+            subroll = die(1, 4)
             self.profession = dict(professions.get_hammerclass(classroll, subroll))
         else:
             self.profession = dict(professions.get_profession(game_system))
@@ -122,28 +122,28 @@ class Character(object):
         #
         # now for gear:
         if self.system_assumptions == 'tnu':
-            my_gear = self.get_gear_tnu(my_class)
+            self.my_gear_dump = self.get_gear_tnu(my_class)
         else:
-            my_gear = self.get_gear_dnd(stats_avg)
+            self.my_gear_dump = self.get_gear_dnd(stats_avg)
         #
         # pull out the weapons and armour into their own lists
-        my_weapons = list(filter(lambda wep: wep.startswith('WEAPON: '), my_gear))
-        my_armour = list(filter(lambda arm: arm.startswith('ARMOUR: '), my_gear))
+        my_weapons = list(filter(lambda wep: wep.startswith('WEAPON: '), self.my_gear_dump))
+        my_armour = list(filter(lambda arm: arm.startswith('ARMOUR: '), self.my_gear_dump))
         my_weaponlist = []
         my_armourlist = []
         for w in my_weapons:
-            my_gear.remove(w)
+            self.my_gear_dump.remove(w)
             if self.system == 'ham':
                 w = re.sub(',\sDmg:\s\d+d\d+', '', w)
             my_weaponlist.append(str.title(w[8:]))
         for a in my_armour:
-            my_gear.remove(a)
+            self.my_gear_dump.remove(a)
             my_armourlist.append(str.title(a[8:]))
         if 'mu-weapons' in self.profession['flags']:
             my_weaponlist.append(wizweaps.generate())
         self.weapons = sorted(my_weaponlist)
         self.armour = sorted(my_armourlist)
-        self.gear = sorted(my_gear)
+        self.gear = sorted(self.my_gear_dump)
         #
         # now to generate the character's armour class
         self.ac = gen_ac(self.prefs, my_armourlist)
@@ -157,8 +157,8 @@ class Character(object):
         self.init_magic()
 
     def get_gear_tnu(self, my_class):
-        my_gear = list(equipment_tnu.get_gear(self.short, my_class['label']))
-        return my_gear
+        my_gear_collection = list(equipment_tnu.get_gear(self.short, my_class['label']))
+        return my_gear_collection
 
     def get_gear_dnd(self, stats_avg):
         weapon_cls = self.profession['weapons']
@@ -202,11 +202,12 @@ class Character(object):
         gear_base = list(random.sample(gearlist['basic'], basic_choices))
         gear_advanced = list(random.sample(gearlist['advanced'], advanced_choices))
         gear_misc = random.sample(gear.get_misc(), 1)
-        my_gear = gear_base + gear_advanced + gear_wps + gear_arm + gear_misc + gear_bonus + money
-        if self.profession['extragear']:
-            for g in list(self.profession['extragear']):
-                my_gear.append(g)
-        return my_gear
+        my_gear_collection = gear_base + gear_advanced + gear_wps + gear_arm + gear_misc + gear_bonus + money
+        bonus_class_gear = list(self.profession['extragear'])
+        if len(bonus_class_gear) > 0:
+            for g in bonus_class_gear:
+                my_gear_collection.append(g)
+        return my_gear_collection
 
     def init_magic(self):
         #

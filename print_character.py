@@ -23,22 +23,17 @@ def print_character(character):
     print("A new random character for " + str(character.system_fullname))
     print("-----------------------------------------------------")
     # print("Raw Data Print: ", gen_data)
-    print("Profession: %s;  Level: %s;  Race: %s" % (character.long, str(character.lvl), character.race))
+    if character.system == 'tnu':
+        print("Profession: %s;  Level: %s;  Race: %s" % (character.long, str(character.lvl), character.race))
+    else:
+        print("Profession: %s;  Level: %s;  Race: %s;  Hit Die: %sd%s + %s mod" %
+              (character.long, str(character.lvl), character.race, str(character.lvl), str(character.hd),
+               str(character.hps_mod)))
     print("Alignment: %s;  Age: %s;  Looks: %s" % (character.align.title(), character.age, character.looks))
     print("Trait: %s;  Background: %s;  Social Status: %s (%s)" %
           (character.personality, character.background, character.soc_class, str(character.soc_mod)))
     if character.system == 'tnu':
         print("Disposition: %sd%s;  Psychic Armour: %s" % (str(character.lvl), str(character.hd), str(character.pa)))
-    elif character.stats[character.hps_mod]['mod'] > 0:
-        print("Hit Die: %sd%s+%s;  Psychic Armour: %s" %
-              (str(character.lvl), str(character.hd), str(character.stats[character.hps_mod]['mod']*character.lvl),
-               str(character.pa)))
-    elif character.stats[character.hps_mod]['mod'] < 0:
-        print("Hit Die: %sd%s%s;  Psychic Armour: %s" %
-              (str(character.lvl), str(character.hd), str(character.stats[character.hps_mod]['mod']*character.lvl),
-               str(character.pa)))
-    else:
-        print("Hit Die: %sd%s;  Psychic Armour: %s" % (str(character.lvl), str(character.hd), str(character.pa)))
     print("---------------")
     print("\nAttribute Scores:")
     print("-----------------")

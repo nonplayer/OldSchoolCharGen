@@ -212,10 +212,14 @@ miscellany = [
     'a free spirit that cannot be shackled by despair', 'an obviously fake accent',
     'a feeling like you forgot something very important before heading out...',
     'a case of the wiggles', 'a recently-unlocked chastity belt',
-    'a letter of recommendation from someone important', 'a tourist brochure for the first dungeon',
-    'a signed Maseym''s Bears Base-Ball', 'an unlodgeable wedgie',
-    'a very nice fitted suit', 'a scrap of finel-groomed gnoll hair',
-    'a visible tattoo that you intensely regret',
+    'a letter of recommendation from someone important', 'a tourist brochure for the dungeon',
+    'a signed Maseym\'s Bears Base-Ball', 'an unlodgeable wedgie',
+    'a very nice fitted suit', 'a scrap of finely-groomed gnoll hair',
+    'a visible tattoo that you deeply regret', 'a massive debt of back rent',
+    'an unbreakable padlock that can never be opened once clicked (currently open)',
+    'shame, so much shame', 'the constant doting of your parents',
+    'the knowledge that you recently betrayed someone in the party', 'a conspicuously dead parrot',
+    'a strong craving for pot pies', 'a rock in a sock',
 ]
 
 

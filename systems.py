@@ -127,7 +127,7 @@ skills_dnd = [
     'Pottery (DEX)', 'Religious Lore (INT)', 'Riding (Choose Animal) (DEX)', 'Rope Use (DEX)',
     'Running (CON)', 'Seamanship (WIS)', 'Seamstress/Tailor (DEX)', 'Sense Motive (WIS)',
     'Set Snares (DEX)', 'Singing (CHA)', 'Stonemasonry (STR)', 'Survival (WIS)',
-    'Swimming (STR)', 'Tanning (CON)', 'Tracking (WIS)Tumbling (DEX)',
+    'Swimming (STR)', 'Tanning (CON)', 'Tumbling (DEX)',
     'Ventriloquism (CHA)', 'Weaponsmithing (STR)', 'Weather Sense (WIS)', 'Weaving (DEX)',
 ]
 

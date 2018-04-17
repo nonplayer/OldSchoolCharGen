@@ -178,18 +178,18 @@ weapons = {
 
 gear = {
     'basic': [
-        'Backpack', 'Bedroll', 'Belt Purse', 'Chalk (10 pcs)', 'Cloak', 'Crowbar', 'Firewood (3 units)',
-        'Flask', 'Lantern (hooded) w/ 2 flasks of oil', 'Mug or Tankard', 'Rain Hat',
-        'Rations (7 units iron)', 'Rations (7 units standard)', 'Rope (50 ft)', 'Sack, Small',
-        'Sack, Large', 'Sewing Kit', 'Tent', 'Tinder Box', 'Torches x5', 'Waterskin', 'Whetstone',
+        'Backpack', 'Bedroll', 'Belt Purse', 'Chalk (1d10 pcs)', 'Cloak', 'Crowbar', 'Firewood (1d4 units)',
+        'Flask', 'Lantern (hooded) w/ 1d2 flasks of oil', 'Mug or Tankard', 'Rain Hat',
+        'Rations (iron, 2d4 units)', 'Rations (standard, 2d4 units)', 'Rope (50 ft)', 'Sack, Small',
+        'Sack, Large', 'Sewing Kit', 'Tent', 'Tinder Box', 'Torches (1d6)', 'Waterskin', 'Whetstone',
     ],
     'advanced': [
-        'Acid (1 flask)', 'Alchemist Fire (1 flask)', 'Antitoxin (1 vial)', 'Bell (tiny)',
+        'Acid (1d4 flasks)', 'Alchemist Fire (1d4 flasks)', 'Antitoxin (1d4 vials)', 'Bell (tiny)',
         'Belladona', 'Blanket (winter)', 'Block and Tackle', 'Caltrops (2-pound bag)',
-        'Candles x10', 'Case (for map or scroll)', 'Chain (10 ft)', 'Chest', 'Cooking Pot (iron)',
+        'Candles (1d10)', 'Case (for map or scroll)', 'Chain (10 ft)', 'Chest', 'Cooking Pot (iron)',
         'Fishing Net (25 sq ft)', 'Fishing Hook, Line, and Pole', 'Garlic', 'Grappling Hook',
         'Hammer (small)', 'Holy Symbol', 'Holy Water (small vial)', 'Ink pot, quill, and paper',
-        'Iron Spike', 'Lantern (bullseye) w/ 2 flasks of oil', 'Mallet and Stakes (3)',
+        'Iron Spike', 'Lantern (bullseye) w/ 1d2 flasks of oil', 'Mallet and 1d6 Stakes',
         'Manacles', 'Mirror (steel)', 'Notebook (small)', 'Pole (10 ft)', 'Sealing Wax',
         'Signal Whistle', 'Silver cross', 'Silver mirror', 'Soap (1 pound)', 'Spyglass',
         'Steel mirror', 'Wine (1 qt.)', 'Wolvesbane', 'Wooden cross',

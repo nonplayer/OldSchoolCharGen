@@ -213,7 +213,7 @@ miscellany = [
     'a feeling like you forgot something very important before heading out...',
     'a case of the wiggles', 'a recently-unlocked chastity belt',
     'a letter of recommendation from someone important', 'a tourist brochure for the dungeon',
-    'a signed Maseym\'s Bears Base-Ball', 'an unlodgeable wedgie',
+    'a signed Maseym\'s Bears Base-Ball', 'an undislodgeable wedgie',
     'a very nice fitted suit', 'a scrap of finely-groomed gnoll hair',
     'a visible tattoo that you deeply regret', 'a massive debt of back rent',
     'an unbreakable padlock that can never be opened once clicked (currently open)',

@@ -483,7 +483,7 @@ ham_profs = {
             '(Class) You are never lost when underground with solid earth or stone beneath their feet. You know the '
             'local grades and depth, and can feel air flow naturally. You have a 50% chance of detecting '
             'hidden stonework just by passing, and automatically find them if you spend a turn searching.',
-            '(Class) You have a bonus melee attack die at first level (total of two), and gain a new one at '
+            '(Class) You have a bonus attack die at first level (total of two), and gain a new one at '
             'levels 5, 10, and 15. When attacking, declare target(s) and then roll all of your attack dice, but only '
             'one damage die. Each hit applies the same amount of damage.',
             '(Class) You have advantage on all Body and Death Saves.',
@@ -517,11 +517,9 @@ ham_profs = {
             'chance in medium/heavy/plate, respectively. Failed spells are forgotten.',
             '(Class) You can fight with two weapons. Roll one extra attack die, but lower the damage die by one step '
             '(to a d6) for the action. At level 9, this increases to two extra attack dice.',
-            '(Class) At second level, you gain a second attack die when using normal Bows, and a third at level 10. '
-            'Each die requires ammo. Declare target(s) and then roll all of the attack dice, but only one damage die.',
             '(Class) 50% chance of noticing concealed non-stonework features simply by passing near them, and '
             'automatically if you spend a turn searching.',
-            '(Class) Bonus melee attack die at first level, and gain a new one at levels 5, 10, and 15. When '
+            '(Class) Bonus attack die at first level, and gain a new one at levels 5, 10, and 15. When '
             'attacking, declare target(s) and roll all of your dice, but only one damage die.',
         ],
     },
@@ -535,7 +533,7 @@ ham_profs = {
         'saves': [0, 1, 1, 0, 0, 1],
         'restrictions': ['You can use all weapons, shields, and armour.'],
         'special': [
-            '(Class) You have a bonus melee attack die at first level (total of two), and gain a new one at levels '
+            '(Class) You have a bonus attack die at first level (total of two), and gain a new one at levels '
             '3, 6, 9, 12, and 15. When attacking, declare target(s) and then roll all of the attack dice, but only '
             'one damage die. Each hit applies the same amount of damage.',
             '(Class) *Not Today!* At first level and each level after, you gain a single use of "Not Today!" When '

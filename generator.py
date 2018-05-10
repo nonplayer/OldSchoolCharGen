@@ -247,6 +247,7 @@ class Character(object):
             combat_mod = 1
         else:
             combat_mod = 0
+        self.number_of_attacks = self.profession['numAttacks']
         self.melee = self.stats[str(self.prefs['meleeMod'])]['mod'] + combat_mod
         self.range = self.stats[str(self.prefs['missileMod'])]['mod'] + combat_mod
         # and make them look pretty:

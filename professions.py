@@ -56,6 +56,7 @@ baseline = {
     'skills': [],                           # LIST of skills for the class
     'restrictions': ['Placeholder for Restrictions'],               # Unsure, placeholder
     'special': ['Placeholder for Special Abilities'],               # Unsure, placeholder
+    'numAttacks': 1,                        # INT: number of attack dice at first level
     'wps': False,                           # INT: How many starting Weapon Proficiencies
     'weapons': 'war',                       # STR: Category of weapons allowed as choices
     'armour': 'war',                        # STR: Category of armours allowed as choices
@@ -440,16 +441,16 @@ ham_profs = {
         'saves': [0, 1, 1, 0, 0, 0],
     },
     'cleric': {
-        'short': 'cleric',  # STR: class name for references
-        'long': 'Cleric',  # STR: class name for display
+        'short': 'cleric',
+        'long': 'Cleric',
         'flags': ['base', 'human', 'caster'],
         'alignAllowed': ['chaos', 'evil', 'good', 'law'],
         'primAttr': ['WIS', 'CHA'],
         'saves': [0, 0, 0, 1, 0, 1],
         'weapons': 'clr',
-        'casterStat': 'WIS',  # STRING: stat used for spells, if a caster
+        'casterStat': 'WIS',
         'spellsPerLvl': 2,
-        'spellChooseAs': 'cleric',  # STRING: if caster, usually = short
+        'spellChooseAs': 'cleric',
         'extragear': ['a visible Symbol of your Holy Faith', 'a Prayerbook'],
         'restrictions': ['Can use all weapons, shields, and armour that are not otherwise prohibited by your deity.',
                          'You cannot be of Neutral Alignment'],
@@ -466,12 +467,13 @@ ham_profs = {
         ],
     },
     'dwarf': {
-        'short': 'dwarf',  # STR: class name for references
+        'short': 'dwarf',
         'long': 'Dwarven Defender',
         'race': 'dwarf',
         'hd': 8,
         'primAttr': ['STR', 'CON'],
-        'flags': ['base', 'demi'],  # LIST of flags for different effects
+        'flags': ['base', 'demi'],
+        'numAttacks': 2,
         'attacksAs': 'best',
         'extralangs': ['Dwarf'],
         'restrictions': ['Can use all weapons, shields, and armour except longbows.'],
@@ -490,16 +492,17 @@ ham_profs = {
         ],
     },
     'elf': {
-        'short': 'elf',  # STR: class name for references
+        'short': 'elf',
         'long': 'Elven Exemplar',
         'race': 'elf',
-        'flags': ['base', 'demi', 'caster'],  # LIST of flags for different effects
+        'flags': ['base', 'demi', 'caster'],
+        'numAttacks': 2,
         'hd': 8,
         'primAttr': ['DEX', 'INT'],
         'saves': [0, 0, 1, 0, 1, 0],
-        'casterStat': 'INT',  # STRING: stat used for spells, if a caster
+        'casterStat': 'INT',
         'spellsPerLvl': 1,
-        'spellChooseAs': 'mu',  # STRING: if caster, usually = short
+        'spellChooseAs': 'mu',
         'extragear': ['a spellbook'],
         'extralangs': ['Elf'],
         'extraspells': ['Level 1: Read Magic'],
@@ -523,10 +526,11 @@ ham_profs = {
         ],
     },
     'fighter': {
-        'short': 'fighter',  # STR: class name for references
-        'long': 'Fighter',  # STR: class name for display
+        'short': 'fighter',
+        'long': 'Fighter',
         'hd': 8,
         'attacksAs': 'best',
+        'numAttacks': 2,
         'primAttr': ['STR', 'CON'],
         'saves': [0, 1, 1, 0, 0, 1],
         'restrictions': ['You can use all weapons, shields, and armour.'],
@@ -546,10 +550,10 @@ ham_profs = {
         ],
     },
     'halfling': {
-        'short': 'halfling',  # STR: class name for references
+        'short': 'halfling',
         'long': 'Halfling Burglar',
         'race': 'halfling',
-        'flags': ['base', 'demi'],  # LIST of flags for different effects
+        'flags': ['base', 'demi'],
         'primAttr': ['DEX', 'CHA'],
         'saves': [1, 1, 1, 1, 1, 1],
         'weapons': 'hlf',
@@ -571,11 +575,12 @@ ham_profs = {
         ],
     },
     'halfogre': {
-        'short': 'halfogre',  # STR: class name for references
-        'long': 'Half-Ogre Berzerker',  # STR: class name for display
-        'race': 'halfogre',  # STR: race name of "RANDOM" to trigger the random race function
-        'flags': ['base', 'demi'],  # LIST of flags for different effects
+        'short': 'halfogre',
+        'long': 'Half-Ogre Berzerker',
+        'race': 'halfogre',
+        'flags': ['base', 'demi'],
         'attacksAs': 'best',
+        'numAttacks': 2,
         'alignAllowed': ['chaos', 'evil', 'good', 'neutral'],
         'hd': 10,
         'primAttr': ['STR', 'CON'],
@@ -599,8 +604,8 @@ ham_profs = {
         ],
     },
     'mu': {
-        'short': 'mu',  # STR: class name for references
-        'long': 'Magic-User',  # STR: class name for display
+        'short': 'mu',
+        'long': 'Magic-User',
         'flags': ['base', 'human', 'caster', 'mu-weapons'],
         'attacksAs': 'none',
         'hd': 4,
@@ -608,9 +613,9 @@ ham_profs = {
         'saves': [0, 0, 0, 0, 1, 0],
         'weapons': 'mag',
         'armour': 'mag',
-        'casterStat': 'INT',  # STRING: stat used for spells, if a caster
+        'casterStat': 'INT',
         'spellsPerLvl': 2,
-        'spellChooseAs': 'mu',  # STRING: if caster, usually = short
+        'spellChooseAs': 'mu',
         'extragear': ['a Spellbook'],
         'extraspells': ['At Will: Read Magic'],
         'restrictions': ['Can not use two-handed weapons except staves. Can not wear heavy armour or use shields. '
@@ -632,8 +637,8 @@ ham_profs = {
         ],
     },
     'thief': {
-        'short': 'thief',  # STR: class name for references
-        'long': 'Thief',  # STR: class name for display
+        'short': 'thief',
+        'long': 'Thief',
         'attacksAs': 'worst',
         'primAttr': ['DEX', 'INT'],
         'saves': [1, 0, 0, 1, 0, 0],

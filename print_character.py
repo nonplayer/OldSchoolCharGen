@@ -63,7 +63,11 @@ def print_character(character):
             print(x)
     print("\nCombat Mods and Traits:")
     print("-----------------------")
-    print("Melee: %s;  Ranged: %s;  AC: %s" % (str(character.melee), str(character.range), str(character.ac)))
+    if character.system == 'ham':
+        print("# of Attack Dice: %s;  Melee: %s;  Ranged: %s;  AC: %s" %
+              (int(character.number_of_attacks), str(character.melee), str(character.range), str(character.ac)))
+    else:
+        print("Melee: %s;  Ranged: %s;  AC: %s" % (str(character.melee), str(character.range), str(character.ac)))
     print("\nRestrictions:")
     print("--------------------")
     for x in list(character.restrictions):

@@ -188,6 +188,7 @@ gear = {
         'Belladona', 'Blanket (winter)', 'Block and Tackle', 'Caltrops (2-pound bag)',
         'Candles (1d10)', 'Case (for map or scroll)', 'Chain (10 ft)', 'Chest', 'Cooking Pot (iron)',
         'Fishing Net (25 sq ft)', 'Fishing Hook, Line, and Pole', 'Garlic', 'Grappling Hook',
+        'Healing Potions (1d4 vials, each heals for 1d6+1 HP)',
         'Hammer (small)', 'Holy Symbol', 'Holy Water (small vial)', 'Ink pot, quill, and paper',
         'Iron Spike', 'Lantern (bullseye) w/ 1d2 flasks of oil', 'Mallet and 1d6 Stakes',
         'Manacles', 'Mirror (steel)', 'Notebook (small)', 'Pole (10 ft)', 'Sealing Wax',

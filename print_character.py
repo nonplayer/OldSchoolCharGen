@@ -26,7 +26,7 @@ def print_character(character):
     if character.system == 'tnu':
         print("Profession: %s;  Level: %s;  Race: %s" % (character.long, str(character.lvl), character.race))
     else:
-        print("Profession: %s;  Level: %s;  Race: %s;  Hit Die: %sd%s + %s mod" %
+        print("Character Class: %s;  Level: %s;  Race: %s;  Hit Die: %sd%s + %s mod" %
               (character.long, str(character.lvl), character.race, str(character.lvl), str(character.hd),
                str(character.hps_mod)))
     print("Alignment: %s;  Age: %s;  Looks: %s" % (character.align.title(), character.age, character.looks))

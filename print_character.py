@@ -64,7 +64,7 @@ def print_character(character):
     print("-----------------------")
     if character.system == 'ham':
         print("# of Attack Dice: %sd20;  Melee: %s;  Ranged: %s;  Hit Die: d%s;  AC: %s" %
-              (int(character.number_of_attacks), str(character.melee), str(character.range),
+              (str(character.number_of_attacks), str(character.melee), str(character.range),
                str(character.hd), str(character.ac)))
     else:
         print("Melee: %s;  Ranged: %s;  AC: %s" % (str(character.melee), str(character.range), str(character.ac)))

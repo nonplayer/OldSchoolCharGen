@@ -19,16 +19,15 @@ supported_systems = [
 
 
 def print_character(character):
-    print()
     print("A new random character for " + str(character.system_fullname))
     print("-----------------------------------------------------")
     # print("Raw Data Print: ", gen_data)
     if character.system == 'tnu':
         print("Profession: %s;  Level: %s;  Race: %s" % (character.long, str(character.lvl), character.race))
     else:
-        print("Character Class: %s;  Level: %s;  Race: %s;  Hit Die: %sd%s + %s mod" %
-              (character.long, str(character.lvl), character.race, str(character.lvl), str(character.hd),
-               str(character.hps_mod)))
+        print("Character Class: %s;  Level: %s;  Race: %s;  Hit Dice: %sd%s;  Max Hit Points: %s" %
+              (character.long, str(character.lvl), character.race, str(character.lvl), str(character.hd), str((character.hd) +
+               character.stats[str(character.hps_mod)]['mod'])))
     print("Alignment: %s;  Age: %s;  Looks: %s" % (character.align.title(), character.age, character.looks))
     print("Trait: %s;  Background: %s;  Social Status: %s (%s)" %
           (character.personality, character.background, character.soc_class, str(character.soc_mod)))
@@ -64,8 +63,9 @@ def print_character(character):
     print("\nCombat Mods and Traits:")
     print("-----------------------")
     if character.system == 'ham':
-        print("# of Attack Dice: %sd20;  Melee: %s;  Ranged: %s;  AC: %s" %
-              (int(character.number_of_attacks), str(character.melee), str(character.range), str(character.ac)))
+        print("# of Attack Dice: %sd20;  Melee: %s;  Ranged: %s;  Hit Die: d%s;  AC: %s" %
+              (int(character.number_of_attacks), str(character.melee), str(character.range),
+               str(character.hd), str(character.ac)))
     else:
         print("Melee: %s;  Ranged: %s;  AC: %s" % (str(character.melee), str(character.range), str(character.ac)))
     print("\nRestrictions:")

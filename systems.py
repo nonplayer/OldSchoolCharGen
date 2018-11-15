@@ -404,7 +404,6 @@ systems = {
         'system_name': 'ham',
         'system_fullname': 'HAMMERCRAWL!',
         'affects': statAffects['ham'],  # DICT: reference of what each stat in the system affects during play
-        'HPsMod': 'CON',                # STR: stat used to calc hit point mods
         'saves': saves['ham'],
         'maxLvl': 15,                   # INT: maximum XP level in the game
         'skill_choices': skills_dnd + skills_weird,

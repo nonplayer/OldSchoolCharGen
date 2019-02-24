@@ -220,7 +220,7 @@ miscellany = [
     'an unbreakable padlock that can never be opened once clicked (currently open)',
     'shame, so much shame', 'the constant doting of your parents',
     'the knowledge that you recently betrayed someone in the party', 'a conspicuously dead parrot',
-    'a strong craving for pot pies', 'a rock in a sock',
+    'a strong craving for pot pies', 'a rock in a sock', 'a student loan disbursement check (requires Bank)',
 ]
 
 

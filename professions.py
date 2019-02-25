@@ -455,15 +455,12 @@ ham_profs = {
         'restrictions': ['Can use all weapons, shields, and armour that are not otherwise prohibited by your deity.',
                          'You cannot be of Neutral Alignment'],
         'special': [
-            '(Class) You cast spells from the Cleric spell list. You begin the game with a holy prayerbook which '
-            'contains a chance for randomly-determined clerical prayers. At each new level you add two (2) new '
-            'prayers to your book, and you can add more by sanctifying, converting, and transcribing prayers to '
-            'other gods found on scrolls and books in dungeons. At level 1 you can only cast level 1 spells. This '
-            'maximum spell level increases by +1 at every odd-numbered level of experience.',
-            '(Class) Once per Day per Level of Experience, you can hold aloft your holy symbol and turn back '
-            'undead, devils, demons, and any others that the \'Smith deems to be enemies of your faith. Opponents '
-            'must make Mind saves based on the difference in Level/HD Tiers. Targets who fail this save must cower, '
-            'flee, or possibly even take damage or be destroyed.',
+            '(Class) CAST SPELLS! from the Cleric list. You begin the game with a holy prayerbook and spells. Add new '
+            'prayers by leveling up, and also by sanctifying and converting discovered heretical prayers. Maximum '
+            'spell level starts at 1, and increases by +1 at odd-numbered levels of experience.',
+            '(Class) Once per Day per XP Level, you can hold aloft your holy symbol and turn back enemies of your '
+            'faith. Opponents make Mind saves based on difference in Level/HD Tiers. Failures must cower, flee, or '
+            'possibly even take damage or be destroyed.',
         ],
     },
     'dwarf': {
@@ -509,11 +506,10 @@ ham_profs = {
         'restrictions': ['Can use all weapons, shields, and armour. Armour may limit spellcasting.'],
         'special': [
             '(Class) Immune to sleep, charm, slow, haste, aging, and energy drain effects, except from another Elf.',
-            '(Class) Cast spells from the magic-user list. Starting spellbook contains Read Magic and randomly-'
-            'determined bonus spells. At each new level gain 1 new spell from ongoing experimentation. You can add '
-            'more from scrolls and texts found in dungeons. At level 1 you can only cast level 1 spells. Max spell '
-            'level increases +1 at every odd-numbered level.',
-            '(Class) You can cast in armour. You suffer no chance of spell failure in Light, and a 25%/50%/75% '
+            '(Class) Cast spells from the magic-user list. Starting spellbook contains Read Magic and possibly others.'
+            ' Gain new spells my leveling up, and from plundered scrolls and texts. Max spell level starts at 1, '
+            'and increases +1 at every odd-numbered level.',
+            '(Class) You can cast in armour. No chance of spell failure in Light armour, and only a 25%/50%/75% '
             'chance in medium/heavy/plate, respectively. Failed spells are forgotten.',
             '(Class) You can fight with two weapons. Roll one extra attack die, but lower the damage die by one step '
             '(to a d6) for the action. At level 9, this increases to two extra attack dice.',
@@ -586,14 +582,12 @@ ham_profs = {
         'extralangs': ['Ogre'],
         'restrictions': ['Can use all weapons and shields. Armour must be custom made. You cannot be Law aligned.'],
         'special': [
-            '(Class) You are built like an icehouse. All armour must be custom made at increased costs and time, '
-            'and only Halfling-sized creatures or smaller can move through your occupied space.',
+            '(Class) You are MASSIVE. All armour must be custom made at increased costs and time, and only '
+            'Halfling-sized creatures or smaller can move through your occupied space.',
             '(Class) When you take damage, make a Mind save (target: 12) or go into an uncontrollable violent fury. '
             'During this rage, take advantage on melee and thrown damage dice rolls, immunity to critical fumbles, '
             'and disadvantage on all saves except Body and Death. Your actions must follow a specific course (ask '
-            'the \'Smith). You can voluntarily fail either save and willingly let the rage happen and/or knock '
-            'you unconscious afterward. You can also trigger it on your own by causing yourself 1 point of damage '
-            'with a weapon.',
+            'the \'Smith). You can also trigger it on your own by causing yourself 1 point of damage with a weapon.',
             '(Class) You get a bonus attack die at first level (total of two), and gain a new one at levels 5, 10, '
             'and 15. When attacking, declare target(s) and then roll all your attack dice, but only one damage '
             'die. Each hit applies the same amount of damage.',
@@ -621,13 +615,12 @@ ham_profs = {
         'special': [
             '(Class) Cannot wear Heavy armour, and suffer a chance of spell failure while wearing other. '
             'Chance is 50%/75% in Light/Medium, respectively. Failed spells are forgotten.',
-            '(Class) Cast magic-user spells. Start with a spellbook containing Read Magic and other randomly bonus '
-            'spells. At each level you add 2 new spells from experimentation, and you can add more from scrolls '
-            'magical texts found in dungeons. At level 1 you can safely cast level 1 spells. Max spell level '
-            'increases by +1 at every odd-numbered level of experience. ',
-            '(Class) You can prepare and try to cast spells of higher level than your normal Max, if you have a copy '
-            'of the spell in your book. Casting requires permanent loss of INT equal to the difference in allowed '
-            'levels. Spells cast this way are always immediately forgotten.',
+            '(Class) Cast magic-user spells. Start with a spellbook containing Read Magic and possibly others. Add '
+            'new spells from leveling up, and from plundered scrolls and texts. Max "safe" spell level starts at 1, '
+            'and raises +1 at every odd-numbered level of experience.',
+            '(Class) You can prepare and try to cast higher level spells, if you have a copy of the spell. Doing so '
+            'causes permanent loss of INT equal to the difference in allowed levels. Spells cast this way are always '
+            'immediately forgotten.',
             '(Class) You can choose to take damage instead of forgetting spells. The amount is equal to the level of '
             'spell just cast. If below Zero HP, this burns CON instead.',
             '(Class) You can cast *Read Magic* freely and at will, no prep required.',

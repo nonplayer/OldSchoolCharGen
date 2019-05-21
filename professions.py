@@ -566,6 +566,7 @@ ham_profs = {
             '(Class) You can draw from inner strength for a sudden display of unexpected fierceness. By spending 1 '
             'Hit Point rolling your attacks, you increase the damage die for your attacks this round by one step.',
             '(Class) You roll with advantage on Tactical Attacks.',
+            '(Class) All items are one size greater for Encumbrance limits.',
         ],
     },
     'halfogre': {
@@ -584,6 +585,7 @@ ham_profs = {
         'special': [
             '(Class) You are MASSIVE. All armour must be custom made at increased costs and time, and only '
             'Halfling-sized creatures or smaller can move through your occupied space.',
+            '(Class) You can stow Huge size items for 3 Encumbrance slots.',
             '(Class) When you take damage, make a Mind save (target: 12) or go into an uncontrollable violent fury. '
             'During this rage, take advantage on melee and thrown damage dice rolls, immunity to critical fumbles, '
             'and disadvantage on all saves except Body and Death. Your actions must follow a specific course (ask '

@@ -206,7 +206,7 @@ miscellany = [
     'an irritable tabby cat', 'a map to an island that doesn\'t exist', 'a pure white badger pelt',
     'a set of pornographic goblin trading cards', 'a single strip of slightly used sandpaper',
     'a petrified dragon egg', 'a lock of hair from your mother or father', 'a fake beard',
-    'rusted nipple clamps', "two weird puppets", '1D6 commemorative plates',
+    'rusted nipple clamps', 'two weird puppets', '1D6 commemorative plates',
     'a bottle of freshly-harvested llama milk', 'a free drink coupon for the Inn, but it expires soon...',
     'a tendency to insert yourself into conversations', 'unsettling memories from last night',
     'a strong distrust for the government', 'an unsettlingly sexy facial scar',

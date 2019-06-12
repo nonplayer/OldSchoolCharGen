@@ -99,6 +99,13 @@ languages_dnd = [
     'Ogre', 'Ophidian', 'Orc', 'Sylvan',
 ]
 
+languages_ham = [
+    'Celestial (Law)', 'Dragon', 'Drow', 'Druidic', 'Dwarf', 'Elemental, Air', 'Elemental, Earth',
+    'Elemental, Fire', 'Elemental, Water', 'Elf', 'Esperanto', 'Giant', 'Gnoll ', 'Gnome', 'Goblin',
+    'Grimlock', 'Halfling', 'Infernal (Chaos)', 'Kobold', 'Manticore', 'Medusa', 'Naga',
+    'Ogre', 'Ophidian', 'Orc', 'Pidgin (Pick 2)', 'Pigeon', 'Sylvan', 'Teenager',
+]
+
 languages_kaigaku = []
 
 skills_bnt = [
@@ -403,9 +410,10 @@ systems = {
     'ham': {
         'system_name': 'ham',
         'system_fullname': 'HAMMERCRAWL!',
-        'affects': statAffects['ham'],  # DICT: reference of what each stat in the system affects during play
+        'affects': statAffects['ham'],
         'saves': saves['ham'],
-        'maxLvl': 15,                   # INT: maximum XP level in the game
+        'maxLvl': 15,
+        'language_choices': languages_ham,
         'skill_choices': skills_dnd + skills_weird,
     },
     'm81': {

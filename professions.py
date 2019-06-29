@@ -559,8 +559,8 @@ ham_profs = {
         'special': [
             '(Class) You gain a bonus melee attack die at levels 4, 8, and 12. When attacking, declare your target(s) '
             'and then roll all your attack dice, but only one damage die. Each hit applies the same amount of damage.',
-            '(Class) You have the following Thief Skills: Lockpicking, Perception, Stealth (with Advantage), '
-            'Thief-Climbing, and Trap-Finding (with Disadvantage).',
+            '(Class) You have the following Thief Skills: Break/Enter (DEX), Climb/Leap (STR with Disadvantage), '
+            'Find/Seek (WIS), Hide/Sneak (DEX with advantage), and Snatch/Grab (DEX).',
             '(Class) Unless you have proven to be an obvious threat, or your opponents are otherwise specifically '
             'predisposed against you, you are always attacked last.',
             '(Class) You can draw from inner strength for a sudden display of unexpected fierceness. By spending 1 '
@@ -644,12 +644,12 @@ ham_profs = {
             '(Class) *Stabbity!* When using a melee weapon to attack a foe against which you either have attack '
             'advantage or are hidden from perception, double your total damage against that foe on a successful hit. '
             'This multiple increases by +1 at levels 3, 6, 9, 12, and 15.',
-            '(Class) You have access to special Thief-Only skills: Deciphering (INT), Lockpicking (DEX), Perception '
-            '(WIS), Stealth (DEX), Thief-climbing (STR), Tracking (WIS), Trap-finding (INT), and Trap-breaking (DEX). '
-            'At first level you must randomly determine one Thief Skill to be your Bailiwick, and one to be your '
+            '(Class) You have Thiefskills: Appraise/Identify (INT), Break/Enter (DEX), Climb/Leap (STR), '
+            'Find & Seek (WIS), Forge/Decipher (INT), Hide/Sneak (DEX), Lie/Cheat (CHA), and Snatch/Grab (DEX). At '
+            'first level you must randomly determine one Thief Skill to be your Bailiwick, and one to be your '
             'Failing. You get advantage on checks related to your Bailiwick, and disadvantage on checks related to '
             'your Failing,  Once per adventure per experience level, you can attempt to reroll a failed Thief Skill '
-            'check. This count resets upon Returning to Town.',
+            'check. This count resets upon Returning to Town. At 9th level, your Thiefskills magically evolve.',
             '(Class) You roll with advantage on Tactical Attacks.',
             '(Class) You have advantage on all Saves against the effects of Traps.',
         ],

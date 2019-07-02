@@ -11,6 +11,7 @@ parser.add_argument('-g', '--game_system', type=str, required=True, choices=['bn
                     help='The abbreviated Game System (bnt, bntx, dd, ham, m81, tnu)')
 parser.add_argument('-n', '--number_of_characters', type=int, action='store', default=1,
                     help='How many character to generate.')
+parser.add_argument('-y', '--silly', action='store_true', help='Use the "silly" skill and item options.')
 args = parser.parse_args()
 
 supported_systems = [
@@ -112,6 +113,8 @@ if __name__ == "__main__":
         print()
         game_sys = input("Enter the system abbreviation from above: ")
     for n in range(args.number_of_characters):
-        new_character = generator.generate(game_sys.lower())
+        new_character = generator.generate(game_sys.lower(), args.silly)
         print_character(new_character)
         new_character = None
+    if args.silly:
+        print("SILLY IS A GO!!")

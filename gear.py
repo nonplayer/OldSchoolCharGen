@@ -197,32 +197,6 @@ gear = {
     ],
 }
 
-miscellany = [
-    'crippling apathy', 'twitchy eyes', 'a Certain "je ne sais quoi"', 'a love of horrible puns',
-    'a feeling of general loathing for everyone around you', 'a case of the wiggles', 'wanderlust in your heart',
-    'an independent streak', 'the first love letter anyone every wrote you', 'a sack full of bandit ears',
-    'a regrettable haircut', 'chronic silent but deadly gas', 'curious pocket lint', 'inappropriate laughing',
-    'a first edition manuscript of "Winter\'s Sullen Cry"', 'all of your nail clippings, ever',
-    'an irritable tabby cat', 'a map to an island that doesn\'t exist', 'a pure white badger pelt',
-    'a set of pornographic goblin trading cards', 'a single strip of slightly used sandpaper',
-    'a petrified dragon egg', 'a lock of hair from your mother or father', 'a fake beard',
-    'rusted nipple clamps', 'two weird puppets', '1D6 commemorative plates',
-    'a bottle of freshly-harvested llama milk', 'a free drink coupon for the Inn, but it expires soon...',
-    'a tendency to insert yourself into conversations', 'unsettling memories from last night',
-    'a strong distrust for the government', 'an unsettlingly sexy facial scar',
-    'a free spirit that cannot be shackled by despair', 'an obviously fake accent',
-    'a feeling like you forgot something very important before heading out...',
-    'a case of the wiggles', 'a recently-unlocked chastity belt',
-    'a letter of recommendation from someone important', 'a tourist brochure for the dungeon',
-    'a signed Maseym\'s Bears Base-Ball', 'an undislodgeable wedgie',
-    'a very nice fitted suit', 'a scrap of finely-groomed gnoll hair',
-    'a visible tattoo that you deeply regret', 'a massive debt of back rent',
-    'an unbreakable padlock that can never be opened once clicked (currently open)',
-    'shame, so much shame', 'the constant doting of your parents',
-    'the knowledge that you recently betrayed someone in the party', 'a conspicuously dead parrot',
-    'a strong craving for pot pies', 'a rock in a sock', 'a student loan disbursement check (requires Bank)',
-]
-
 
 def get_weapons(cls):
     weapons_list = list(weapons[cls])
@@ -232,11 +206,6 @@ def get_weapons(cls):
 def get_armour(cls):
     armour_list = list(armour[cls])
     return armour_list
-
-
-def get_misc():
-    misc = list(miscellany)
-    return misc
 
 
 def get_basic_gear():
@@ -255,7 +224,6 @@ def get_gearlist(w_cls, a_cls):
         'armour': get_armour(a_cls),
         'basic': get_basic_gear(),
         'advanced': get_advanced_gear(),
-        'misc': get_misc(),
     }
     return gearlist
 

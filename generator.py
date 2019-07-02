@@ -17,6 +17,7 @@ import equipment_tnu
 import gear
 import professions
 import setting
+import silly
 import spells
 import spells_tnu
 import systems
@@ -81,8 +82,13 @@ def gen_ac(prefs, armour):
 
 
 class Character(object):
-    def __init__(self, game_system, prefs):
+    def __init__(self, game_system, prefs, silly=False):
         self.prefs = prefs
+        if silly:
+            self.silly = True
+            self.init_silly()
+        else:
+            self.silly = False
         if game_system is 'ham':
             classroll = die(3, 6)
             subroll = die(1, 4)
@@ -144,7 +150,6 @@ class Character(object):
         self.weapons = sorted(my_weaponlist)
         self.armour = sorted(my_armourlist)
         self.gear = sorted(self.my_gear_dump)
-        #
         # now to generate the character's armour class
         self.ac = gen_ac(self.prefs, my_armourlist)
         if self.system_assumptions == 'dnd':
@@ -201,13 +206,28 @@ class Character(object):
         gear_arm = [random.choice(gearlist['armour'])]
         gear_base = list(random.sample(gearlist['basic'], basic_choices))
         gear_advanced = list(random.sample(gearlist['advanced'], advanced_choices))
-        gear_misc = random.sample(gear.get_misc(), 1)
-        my_gear_collection = gear_base + gear_advanced + gear_wps + gear_arm + gear_misc + gear_bonus + money
+        my_gear_collection = gear_base + gear_advanced + gear_wps + gear_arm + gear_bonus + money
+        if self.silly:
+            gear_silly = random.sample(self.silly_gear, 1)
+            my_gear_collection = my_gear_collection + gear_silly
         bonus_class_gear = list(self.profession['extragear'])
         if len(bonus_class_gear) > 0:
             for g in bonus_class_gear:
                 my_gear_collection.append(g)
         return my_gear_collection
+
+    def init_silly(self):
+        silly_prefs = dict(silly.get_silly())
+        self.silly_skills = silly_prefs['skills']
+        self.silly_gear = silly_prefs['gear']
+        self.silly_langs = silly_prefs['langs']
+
+#        for key in silly_prefs:
+#            if key in prefs:
+#                prefs[key] = prefs[key] + silly_prefs[key]
+#            else:
+#                pass
+#        return prefs
 
     def init_magic(self):
         #
@@ -264,6 +284,8 @@ class Character(object):
         if self.profession['skills'] == 'RANDOM':
             self.skills = []
             my_list = list(self.prefs['skill_choices'])
+            if self.silly:
+                my_list = my_list + self.silly_skills
             my_num_skills = self.stats[self.prefs['skills_mod']]['mod'] + 4
             if my_num_skills < 1:
                 my_num_skills = 1
@@ -295,6 +317,8 @@ class Character(object):
     def init_bonus_languages(self):
         self.languages = self.languages + self.prefs['core_languages'] + self.profession['extralangs']
         new_languages = self.prefs['language_choices']
+        if self.silly:
+            new_languages = new_languages + self.silly_langs
         for l in self.languages:
             if l in new_languages:
                 new_languages.remove(l)
@@ -331,12 +355,11 @@ class Character(object):
         self.looks = random.choice(setting_data['looks'])
 
 
-def generate(game_system='tnu'):
+def generate(game_system='tnu', silly=False):
     #
     # first let's load those system prefs, to accommodate multiple game variants
     prefs = dict(systems.get_system_prefs(game_system.upper()))
-
-    return Character(game_system, prefs)
+    return Character(game_system, prefs, silly)
 
 
 if __name__ == "__main__":

@@ -101,9 +101,9 @@ languages_dnd = [
 
 languages_ham = [
     'Celestial (Law)', 'Dragon', 'Drow', 'Druidic', 'Dwarf', 'Elemental, Air', 'Elemental, Earth',
-    'Elemental, Fire', 'Elemental, Water', 'Elf', 'Esperanto', 'Giant', 'Gnoll ', 'Gnome', 'Goblin',
+    'Elemental, Fire', 'Elemental, Water', 'Elf', 'Giant', 'Gnoll ', 'Gnome', 'Goblin',
     'Grimlock', 'Halfling', 'Infernal (Chaos)', 'Kobold', 'Manticore', 'Medusa', 'Naga',
-    'Ogre', 'Ophidian', 'Orc', 'Pidgin (Pick 2)', 'Pigeon', 'Sylvan', 'Teenager',
+    'Ogre', 'Ophidian', 'Orc', 'Sylvan',
 ]
 
 languages_kaigaku = []
@@ -136,24 +136,6 @@ skills_dnd = [
     'Set Snares (DEX)', 'Singing (CHA)', 'Stonemasonry (STR)', 'Survival (WIS)',
     'Swimming (STR)', 'Tanning (CON)', 'Tumbling (DEX)',
     'Ventriloquism (CHA)', 'Weaponsmithing (STR)', 'Weather Sense (WIS)', 'Weaving (DEX)',
-]
-
-skills_weird = [
-    'Art Criticism (INT)', 'Being Drunk Before Noon (CON)', 'Being Forgotten (CHA)',
-    'Birdwatching (WIS)', 'Blathering (CHA)', 'Bobsledding (STR)',
-    'Bonsai (DEX)', 'Bovine Husbandry (INT)', 'Busking (CHA)', 'Cat Facts (INT)',
-    'Chess (INT)', 'Dog Grooming (DEX)', 'Doomsaying (WIS)',
-    'Equine Husbandry (INT)', 'Feline Husbandry (INT)', 'Food Cart Management (INT)',
-    'Food Tasting (CON)', 'Freestyle Beats (CHA)', 'Funny Walks (DEX)',
-    'Getting Picked Last (CHA)', 'Gourmand (INT)', 'Horsehair Braiding (DEX)',
-    'Hullabaloo (CHA)', 'Landscaping (STR)', 'Limericks (CHA)',
-    'Looking Conspicuous (CHA)', 'Milk (WIS)', 'Mime (DEX)',
-    'Miniature Equine Aficionado (INT)', 'Multi-Level Marketing (INT)', 'Poison-Making (INT)',
-    'Pouting (CHA)', 'Puppetry (DEX)', 'Selfies (CHA)',
-    'SEO (INT)', 'Skiing (STR)', 'Spotlight Stealing (CHA)',
-    'Squaredancing (DEX)', 'Stone-Skipping (DEX)', 'Surfing (DEX)',
-    'Sword-Swallowing (CON)', 'Tightrope-Walking (DEX)', 'Ursine Husbandry (CON)',
-    'Useless Card Tricks (DEX)',
 ]
 
 race_choices = {
@@ -413,8 +395,6 @@ systems = {
         'affects': statAffects['ham'],
         'saves': saves['ham'],
         'maxLvl': 15,
-        'language_choices': languages_ham,
-        'skill_choices': skills_dnd + skills_weird,
     },
     'm81': {
         'system_name': 'm81',

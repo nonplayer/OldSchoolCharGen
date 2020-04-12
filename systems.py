@@ -45,7 +45,7 @@ statAffects = {
         'STR': 'Melee Attack Rolls, Damage with Melee and Thrown',
         'DEX': 'Area Effect Saves, Missile Attack Rolls, AC, Initiative',
         'CON': 'Body Saves, Hit Die Rolls',
-        'INT': 'Magic-User Spells',
+        'INT': 'Bonus Skills, Magic-User Spells',
         'WIS': 'Mind Saves, Cleric Spells, Initiative',
         'CHA': 'Luck Saves, Rally Saves'
     },

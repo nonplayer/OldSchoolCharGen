@@ -35,18 +35,18 @@ silly = {
         'Art Criticism (INT)', 'Being Drunk Before Noon (CON)', 'Being Forgotten (CHA)',
         'Birdwatching (WIS)', 'Blathering (CHA)', 'Bobsledding (STR)',
         'Bonsai (DEX)', 'Bovine Husbandry (INT)', 'Busking (CHA)', 'Cat Facts (INT)',
-        'Chess (INT)', 'Dog Grooming (DEX)', 'Doomsaying (WIS)',
+        'Chess (INT)', 'Dog Grooming (DEX)', 'Doomsaying (WIS)', 'Dramatic Flexing (STR)',
         'Equine Husbandry (INT)', 'Feline Husbandry (INT)', 'Food Cart Management (INT)',
         'Food Tasting (CON)', 'Freestyle Beats (CHA)', 'Funny Walks (DEX)',
-        'Getting Picked Last (CHA)', 'Gourmand (INT)', 'Horsehair Braiding (DEX)',
+        'Getting Picked Last (CHA)', 'Gourmand (INT)', 'Hookah Repair (DEX)', 'Horsehair Braiding (DEX)',
         'Hullabaloo (CHA)', 'Landscaping (STR)', 'Limericks (CHA)',
         'Looking Conspicuous (CHA)', 'Milk (WIS)', 'Mime (DEX)',
         'Miniature Equine Aficionado (INT)', 'Multi-Level Marketing (INT)', 'Poison-Making (INT)',
         'Pouting (CHA)', 'Puppetry (DEX)', 'Selfies (CHA)',
         'SEO (INT)', 'Skiing (STR)', 'Spotlight Stealing (CHA)',
         'Squaredancing (DEX)', 'Stone-Skipping (DEX)', 'Surfing (DEX)',
-        'Sword-Swallowing (CON)', 'Tightrope-Walking (DEX)', 'Ursine Husbandry (CON)',
-        'Useless Card Tricks (DEX)',
+        'Sword-Swallowing (CON)', 'The Heimlich Maneuver (STR)', 'Tightrope-Walking (DEX)',
+        'Ursine Husbandry (CON)', 'Useless Card Tricks (DEX)',
     ]
 }
 

@@ -357,7 +357,7 @@ systems = {
         'saves': False,                 # Pulls STR from Saves dict, above
         'hasWPs': False,                # BOO: notes if this system uses specific WPs a la Dark Dungeons
         'maxLvl': 10,                   # INT: maximum XP level in the game
-        'race_choices': list(dict.keys(race_data['base'])),  # LIST: available choices for selecable races
+        'race_choices': list(dict.keys(race_data['base'])),  # LIST: available choices for selectable races
         'race_data': dict(race_data['base']),   # DICT keyed to the list above
         'core_languages': ['Common'],   # LIST: Free starting languages for all characters
         'language_choices': languages_dnd,      # LIST of base possible bonus languages

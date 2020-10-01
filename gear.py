@@ -2,7 +2,7 @@
 testing new way to generate gear
 """
 
-from dice import roll as die
+# from dice import roll as die
 
 armour = {
     'mag': [
@@ -229,4 +229,4 @@ def get_gearlist(w_cls, a_cls):
 
 
 if __name__ == "__main__":
-    print(get_gearlist('rog'))
+    print(get_gearlist('rog', 'rog'))

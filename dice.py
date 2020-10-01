@@ -62,7 +62,7 @@ def get_spread(spread, primes, modifier_range, racemods):
     rolls = 0
     for i in spread:
         final.update({i: {'val': 0, 'mod': 0}})
-        rolls +=1
+        rolls += 1
     random.shuffle(primes)
     random.shuffle(spread)
     # separate the prime attributes from the mix first:

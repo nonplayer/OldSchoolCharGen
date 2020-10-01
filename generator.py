@@ -146,7 +146,7 @@ class Character(object):
         for w in my_weapons:
             self.my_gear_dump.remove(w)
             if self.system == 'ham':
-                w = re.sub(',\sDmg:\s\d+d\d+', '', w)
+                w = re.sub(r',\sDmg:\s\d+d\d+', '', w)
             my_weaponlist.append(str.title(w[8:]))
         for a in my_armour:
             self.my_gear_dump.remove(a)
@@ -228,12 +228,12 @@ class Character(object):
         self.silly_gear = silly_prefs['gear']
         self.silly_langs = silly_prefs['langs']
 
-#        for key in silly_prefs:
-#            if key in prefs:
-#                prefs[key] = prefs[key] + silly_prefs[key]
-#            else:
-#                pass
-#        return prefs
+    #        for key in silly_prefs:
+    #            if key in prefs:
+    #                prefs[key] = prefs[key] + silly_prefs[key]
+    #            else:
+    #                pass
+    #        return prefs
 
     def init_magic(self):
         #
@@ -325,9 +325,9 @@ class Character(object):
         new_languages = self.prefs['language_choices']
         if self.silly:
             new_languages = new_languages + self.silly_langs
-        for l in self.languages:
-            if l in new_languages:
-                new_languages.remove(l)
+        for lang in self.languages:
+            if lang in new_languages:
+                new_languages.remove(lang)
         if self.system in ['m81']:
             bonus_lang_choices = self.stats['MIND']['mod']
         elif self.system_assumptions == 'dnd':

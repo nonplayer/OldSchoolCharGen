@@ -27,8 +27,8 @@ def print_character(character):
         print("Profession: %s;  Level: %s;  Race: %s" % (character.long, str(character.lvl), character.race))
     else:
         print("Character Class: %s;  Level: %s;  Race: %s;  Hit Dice: %sd%s;  Max Hit Points: %s" %
-              (character.long, str(character.lvl), character.race, str(character.lvl), str(character.hd), str((character.hd) +
-               character.stats[str(character.hps_mod)]['mod'])))
+              (character.long, str(character.lvl), character.race, str(character.lvl), str(character.hd),
+               str(character.hd + character.stats[str(character.hps_mod)]['mod'])))
     print("Alignment: %s;  Age: %s;  Looks: %s" % (character.align.title(), character.age, character.looks))
     print("Trait: %s;  Background: %s;  Social Status: %s (%s)" %
           (character.personality, character.background, character.soc_class, str(character.soc_mod)))
@@ -113,8 +113,6 @@ if __name__ == "__main__":
         print()
         game_sys = input("Enter the system abbreviation from above: ")
     for n in range(args.number_of_characters):
-        new_character = generator.generate(game_sys.lower(), args.silly)
-        print_character(new_character)
-        new_character = None
+        print_character(generator.generate(game_sys.lower(), args.silly))
     if args.silly:
         print("SILLY IS A GO!!")

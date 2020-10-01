@@ -14,7 +14,8 @@ import re
 import dice
 from dice import roll as die
 import equipment_tnu
-import gear
+import gear_dnd
+import gear_ham
 import professions
 import setting
 import silly
@@ -136,7 +137,7 @@ class Character(object):
         if self.system_assumptions == 'tnu':
             self.my_gear_dump = self.get_gear_tnu(my_class)
         else:
-            self.my_gear_dump = self.get_gear_dnd(stats_avg)
+            self.my_gear_dump = self.get_gear_dnd(stats_avg, self.system)
         #
         # pull out the weapons and armour into their own lists
         my_weapons = list(filter(lambda wep: wep.startswith('WEAPON: '), self.my_gear_dump))
@@ -171,10 +172,10 @@ class Character(object):
         my_gear_collection = list(equipment_tnu.get_gear(self.short, my_class['label']))
         return my_gear_collection
 
-    def get_gear_dnd(self, stats_avg):
+    def get_gear_dnd(self, stats_avg, system):
         weapon_cls = self.profession['weapons']
         armour_cls = self.profession['armour']
-        gear_bonus = ['Satchel']
+        gear_bonus = []
         if self.profession['weapons'] in ['war', 'hlf']:
             bonus_wps = 2
         elif self.profession['weapons'] in ['mag']:
@@ -194,26 +195,39 @@ class Character(object):
             wps_choices = 0 + bonus_wps
             basic_choices = 4
             advanced_choices = 2
-            money = [str(die(3, 6)) + ' silver coins']
+            if system == 'ham':
+                money = [str(die(1, 6)) + ' coins']
+            else:
+                money = [str(die(3, 6)) + ' silver coins']
         elif stats_avg >= 9:
             wps_choices = 1 + bonus_wps
             basic_choices = 5
             advanced_choices = 4
-            money = [str(die(3, 6)) + ' gold coins']
+            if system == 'ham':
+                money = [str(die(4, 8)) + ' coins']
+            else:
+                money = [str(die(3, 6)) + ' gold coins']
         elif stats_avg >= 6:
             wps_choices = 2 + bonus_wps
             basic_choices = 8
             advanced_choices = 6
-            money = [str(die(3, 6)) + ' platinum coins']
+            if system == 'ham':
+                money = [str(die(10, 10)) + ' coins']
+            else:
+                money = [str(die(3, 6)) + ' platinum coins']
         else:
             wps_choices = 3 + bonus_wps
             basic_choices = advanced_choices = 10
             money = [str(die(10, 6)) + ' assorted gems']
-        gearlist = gear.get_gearlist(weapon_cls, armour_cls)
+        if system == 'ham':
+            gearlist = gear_ham.get_gearlist(weapon_cls, armour_cls)
+        else:
+            gearlist = gear_dnd.get_gearlist(weapon_cls, armour_cls)
         gear_wps = list(random.sample(gearlist['weapons'], wps_choices))
         gear_arm = [random.choice(gearlist['armour'])]
         gear_base = list(random.sample(gearlist['basic'], basic_choices))
         gear_advanced = list(random.sample(gearlist['advanced'], advanced_choices))
+        gear_bonus = gear_bonus + list(gearlist['free'])
         my_gear_collection = gear_base + gear_advanced + gear_wps + gear_arm + gear_bonus + money
         if self.silly:
             gear_silly = random.sample(self.silly_gear, 1)

@@ -1,5 +1,10 @@
 """
-testing new way to generate gear
+DnD Variant Gear Generator
+
+All weapons are marked with WEAPON: at the beginning
+All armours are marked with ARMOUR: at the beginning
+I'm considering doing the same for MAGIC: but haven't added it yet
+these tags will be used to pull them from the gear dump and separate into their own categories
 """
 
 # from dice import roll as die
@@ -224,9 +229,10 @@ def get_gearlist(w_cls, a_cls):
         'armour': get_armour(a_cls),
         'basic': get_basic_gear(),
         'advanced': get_advanced_gear(),
+        'free': [],
     }
     return gearlist
 
 
 if __name__ == "__main__":
-    print(get_gearlist('rog', 'rog'))
+    print(get_gearlist('rog', 'rog', 'dnd'))

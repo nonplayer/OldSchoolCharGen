@@ -176,37 +176,39 @@ class Character(object):
         armour_cls = self.profession['armour']
         gear_bonus = ['Satchel']
         if self.profession['weapons'] in ['war', 'hlf']:
-            bonus_wps = 1
+            bonus_wps = 2
         elif self.profession['weapons'] in ['mag']:
-            bonus_wps = -1
-        else:
             bonus_wps = 0
+        else:
+            bonus_wps = 1
+        #
+        # the idea here is: the lower your stats, the more starting gear you get to compensate for sucking so hard
         if stats_avg >= 16:
             wps_choices = basic_choices = advanced_choices = 1
             weapon_cls = armour_cls = 'fuckall'
-            money = [str(die(1, 6)) + ' copper coins']
+            money = [str(die(1, 6)) + ' assorted coin shavings']
             gear_bonus = gear_bonus + ['a half-eaten turkey leg from a disgusting place we won\'t mention,',
                                        'the bloody tooth of someone - or something - recently deprived of its '
                                        'favorite tooth']
         elif stats_avg >= 13:
-            wps_choices = 2 + bonus_wps
-            basic_choices = 6
-            advanced_choices = 4
+            wps_choices = 0 + bonus_wps
+            basic_choices = 4
+            advanced_choices = 2
             money = [str(die(3, 6)) + ' silver coins']
         elif stats_avg >= 9:
-            wps_choices = 3 + bonus_wps
-            basic_choices = 8
-            advanced_choices = 6
+            wps_choices = 1 + bonus_wps
+            basic_choices = 5
+            advanced_choices = 4
             money = [str(die(3, 6)) + ' gold coins']
         elif stats_avg >= 6:
-            wps_choices = 4 + bonus_wps
-            basic_choices = 10
-            advanced_choices = 8
-            money = [str(die(10, 6)) + ' gold coins']
+            wps_choices = 2 + bonus_wps
+            basic_choices = 8
+            advanced_choices = 6
+            money = [str(die(3, 6)) + ' platinum coins']
         else:
             wps_choices = 3 + bonus_wps
-            basic_choices = advanced_choices = 12
-            money = [str(die(10, 6)) + ' gold coins']
+            basic_choices = advanced_choices = 10
+            money = [str(die(10, 6)) + ' assorted gems']
         gearlist = gear.get_gearlist(weapon_cls, armour_cls)
         gear_wps = list(random.sample(gearlist['weapons'], wps_choices))
         gear_arm = [random.choice(gearlist['armour'])]

@@ -113,9 +113,15 @@ class Character(object):
         stat_values = [int(value['val']) for key, value in dict.items(self.stats)]
         stats_avg = int(round(sum(stat_values) / len(stat_values)))
         #
-        # get more basic stuff:
+        # get languages
         self.init_bonus_languages()
-        my_class = dict(gen_social(int(dice.roll(3, 6))))
+        #
+        # get social status
+        if 'SOC' in self.stats:
+            soc_score = self.stats['SOC']['val']
+        else:
+            soc_score = int(dice.roll(3, 6))
+        my_class = dict(gen_social(soc_score))
         self.soc_class = my_class['title']
         self.soc_mod = str(my_class['mod'])
         if self.prefs['saves']:

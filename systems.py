@@ -19,6 +19,7 @@ slim = (stat-10)/3, round down
 
 statArrays = {
     'dnd': ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'],
+    'ham': ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA', 'SOC'],
     'm81': ['STR', 'DEX', 'MIND', 'CHA'],
     'tnu': ['CHA', 'DEX', 'FER', 'HEA', 'INT', 'WIL'],
     'pla': ['ICQ', 'MEE', 'MAF', 'PST', 'PRW', 'PND', 'PBT', 'RUN'],
@@ -47,7 +48,8 @@ statAffects = {
         'CON': 'Body Saves, Hit Die Rolls',
         'INT': 'Bonus Skills, Magic-User Spells',
         'WIS': 'Mind Saves, Cleric Spells, Initiative',
-        'CHA': 'Luck Saves, Rally Saves'
+        'CHA': 'Luck Saves, Rally Saves',
+        'SOC': 'Social Encounters, Reactions'
     },
     'm81': {
         'STR': 'Melee Attack Rolls, Hit Point Rolls',
@@ -88,7 +90,8 @@ saves = {
     'three': ['Fortitude', 'Reflex', 'Willpower'],
     'five': ['Death Ray & Poison', 'Magic Wands', 'Paralysis & Petrification', 'Breath Weapon', 'Rod, Staff, & Spell'],
     'six': statArrays['dnd'],
-    'ham': ['Area  (+DEX mod)', 'Body  (+CON mod)', 'Death  (No mods)', 'Luck  (+CHA mod)', 'Mind  (+WIS mod)', 'Rally (+CHA mod)'],
+    'ham': ['Area  (+DEX mod)', 'Body  (+CON mod)', 'Death  (No mods)', 'Luck  (+CHA mod)', 'Mind  (+WIS mod)',
+            'Rally (+CHA mod)'],
     'pla': ['Mind', 'Body', 'Reflex', 'Horror Factor (HF)'],
 }
 
@@ -392,6 +395,8 @@ systems = {
     'ham': {
         'system_name': 'ham',
         'system_fullname': 'HAMMERCRAWL!',
+        'stats': 7,
+        'spread': statArrays['ham'],
         'affects': statAffects['ham'],
         'saves': saves['ham'],
         'maxLvl': 15,

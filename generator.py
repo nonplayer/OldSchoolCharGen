@@ -89,7 +89,7 @@ class Character(object):
             self.init_silly()
         else:
             self.silly = False
-        if game_system is 'ham':
+        if game_system == 'ham':
             classroll = die(3, 6)
             subroll = die(1, 4)
             self.profession = dict(professions.get_hammerclass(classroll, subroll))

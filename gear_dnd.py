@@ -235,4 +235,4 @@ def get_gearlist(w_cls, a_cls):
 
 
 if __name__ == "__main__":
-    print(get_gearlist('rog', 'rog', 'dnd'))
+    print(get_gearlist('rog', 'rog'))

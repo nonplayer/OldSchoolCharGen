@@ -49,7 +49,7 @@ statAffects = {
         'INT': 'Bonus Skills, Magic-User Spells',
         'WIS': 'Mind Saves, Cleric Spells, Initiative',
         'CHA': 'Luck Saves, Rally Saves',
-        'SOC': 'Social Encounters, Reactions'
+        'SOC': 'Social Reactions, Starting Money'
     },
     'm81': {
         'STR': 'Melee Attack Rolls, Hit Point Rolls',

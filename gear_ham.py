@@ -47,7 +47,7 @@ armour = {
         'ARMOUR: a Shield made from the lid of a rubbish bin (1H, Size M, DEF+1)',
     ],
     'holyfuckingshit': [
-        'ARMOUR: A Randomly-Rolled Magical Armour, class-appropriate, which crumbles to dust upon your death.',
+        'ARMOUR: A Randomly-Rolled Magical Armour, class-appropriate.',
     ],
 }
 
@@ -189,14 +189,14 @@ weapons = {
         'WEAPON: a recently-detached human leg, usable as a club (1H, Size M, Dmg: M+1)',
     ],
     'holyfuckingshit': [
-        'WEAPON: A Randomly-Rolled Magical Weapon, class-appropriate, which crumbles to dust upon your death.',
-        'WEAPON: A Randomly-Rolled Magical Weapon, class-appropriate, which crumbles to dust upon your death.',
-        'WEAPON: A Randomly-Rolled Magical Weapon, class-appropriate, which crumbles to dust upon your death.',
-        'WEAPON: A Randomly-Rolled Magical Weapon, class-appropriate, which crumbles to dust upon your death.',
-        'WEAPON: A Randomly-Rolled Magical Weapon, class-appropriate, which crumbles to dust upon your death.',
-        'WEAPON: A Randomly-Rolled Magical Weapon, class-appropriate, which crumbles to dust upon your death.',
-        'WEAPON: A Randomly-Rolled Magical Weapon, class-appropriate, which crumbles to dust upon your death.',
-        'WEAPON: A Randomly-Rolled Magical Weapon, class-appropriate, which crumbles to dust upon your death.',
+        'WEAPON: A Randomly-Rolled Magical Weapon, class-appropriate.',
+        'WEAPON: A Randomly-Rolled Magical Weapon, class-appropriate.',
+        'WEAPON: A Randomly-Rolled Magical Weapon, class-appropriate.',
+        'WEAPON: A Randomly-Rolled Magical Weapon, class-appropriate.',
+        'WEAPON: A Randomly-Rolled Magical Weapon, class-appropriate.',
+        'WEAPON: A Randomly-Rolled Magical Weapon, class-appropriate.',
+        'WEAPON: A Randomly-Rolled Magical Weapon, class-appropriate.',
+        'WEAPON: A Randomly-Rolled Magical Weapon, class-appropriate.',
     ]
 }
 

@@ -110,9 +110,9 @@ class Character(object):
         self.stats = dice.get_spread(spread, primes, self.prefs['modRange'], self.racemods)
         self.init_skills()
         #
-        # get stats average, for reasons:
-        stat_values = [int(value['val']) for key, value in dict.items(self.stats)]
-        stats_avg = int(round(sum(stat_values) / len(stat_values)))
+        # get stats average, for reasons now deprecated:
+        # stat_values = [int(value['val']) for key, value in dict.items(self.stats)]
+        # stats_avg = int(round(sum(stat_values) / len(stat_values)))
         #
         # get languages
         self.init_bonus_languages()
@@ -136,7 +136,7 @@ class Character(object):
         if self.system_assumptions == 'tnu':
             self.my_gear_dump = self.get_gear_tnu(my_class)
         else:
-            self.my_gear_dump = self.get_gear_dnd(stats_avg, self.system)
+            self.my_gear_dump = self.get_gear_dnd(soc_score, self.system)
         #
         # pull out the weapons and armour into their own lists
         my_weapons = list(filter(lambda wep: wep.startswith('WEAPON: '), self.my_gear_dump))
@@ -169,7 +169,7 @@ class Character(object):
         my_gear_collection = list(equipment_tnu.get_gear(self.short, my_class['label']))
         return my_gear_collection
 
-    def get_gear_dnd(self, stats_avg, system):
+    def get_gear_dnd(self, social, system):
         weapon_cls = self.profession['weapons']
         armour_cls = self.profession['armour']
         gear_bonus = []
@@ -181,16 +181,14 @@ class Character(object):
             bonus_wps = 0
         else:
             bonus_wps = 1
-        #
-        # the idea here is: the lower your stats, the more starting gear you get to compensate for sucking so hard
-        if stats_avg >= 16:
+        if social <= 4:
             wps_choices = basic_choices = advanced_choices = 1
             weapon_cls = armour_cls = 'fuckall'
             money = [str(die(1, 6)) + ' assorted coin shavings']
             gear_bonus = gear_bonus + ['a half-eaten turkey leg from a disgusting place we won\'t mention,',
                                        'the bloody tooth of someone - or something - recently deprived of its '
                                        'favorite tooth']
-        elif stats_avg >= 13:
+        elif social <= 8:
             wps_choices = 0 + bonus_wps
             basic_choices = 4
             advanced_choices = 2
@@ -198,7 +196,7 @@ class Character(object):
                 money = [str(die(1, 6)) + ' coins']
             else:
                 money = [str(die(3, 6)) + ' silver coins']
-        elif stats_avg >= 9:
+        elif social <= 12:
             wps_choices = 1 + bonus_wps
             basic_choices = 5
             advanced_choices = 4
@@ -206,7 +204,7 @@ class Character(object):
                 money = [str(die(4, 8)) + ' coins']
             else:
                 money = [str(die(3, 6)) + ' gold coins']
-        elif stats_avg >= 6:
+        elif social <= 15:
             wps_choices = 2 + bonus_wps
             basic_choices = 8
             advanced_choices = 6
@@ -214,8 +212,17 @@ class Character(object):
                 money = [str(die(10, 10)) + ' coins']
             else:
                 money = [str(die(3, 6)) + ' platinum coins']
-        else:
+        elif social <= 17:
             wps_choices = 3 + bonus_wps
+            basic_choices = 8
+            advanced_choices = 8
+            if system == 'ham':
+                money = [str(die(20, 20)) + ' coins']
+            else:
+                money = [str(die(3, 6)) + ' platinum coins']
+        else:
+            wps_choices = 1
+            weapon_cls = armour_cls = 'holyfuckingshit'
             basic_choices = advanced_choices = 10
             money = [str(die(10, 6)) + ' assorted gems']
         if system == 'ham':

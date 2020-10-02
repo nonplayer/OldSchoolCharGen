@@ -286,7 +286,7 @@ dd_profs = {
     'default': {
         'alignAllowed': ['chaos', 'law', 'neutral'],
         'wps': 2,
-        'saves': [12, 13, 14, 15, 16],
+        'saves': [12, 13, 14, 15, 16, 16],
         'skills': 'RANDOM',
     },
     'cleric': {
@@ -300,7 +300,7 @@ dd_profs = {
         'spellChooseAs': 'cleric',
         'spellsPerLvl': 1,
         'casterStat': 'WIS',
-        'saves': [11, 12, 14, 16, 15],
+        'saves': [11, 12, 14, 16, 15, 15],
         'extragear': ['a Holy Symbol'],
         'special': [
             '(Class) Spellcaster (Cleric List)',
@@ -319,7 +319,7 @@ dd_profs = {
         'restrictions': ['Dwarves can wear any armour or shield, and can use any small or medium weapon. '
                          'They cannot use large weapons due to their stature.'],
         'wps': 4,
-        'saves': [8, 9, 10, 13, 12],
+        'saves': [8, 9, 10, 13, 12, 12],
         'special': [
             '(Class) Heatvision',
             '(Class) Stonelore (1d6 roll, 2 or less finds details)',
@@ -336,7 +336,7 @@ dd_profs = {
         'spellChooseAs': 'mu',
         'spellsPerLvl': 2,
         'casterStat': 'INT',
-        'saves': [12, 13, 13, 15, 15],
+        'saves': [12, 13, 13, 15, 15, 15],
         'extragear': ['a Spellbook'],
         'extraspells': ['Read Magic'],
         'special': [
@@ -368,7 +368,7 @@ dd_profs = {
                          'medium or large weapons due to their small stature.'],
         'weapons': 'hlf',
         'armour': 'hlf',
-        'saves': [8, 9, 10, 13, 12],
+        'saves': [8, 9, 10, 13, 12, 12],
         'special': [
             '(Class) Small: -2 AC bonus vs creatures larger than humans.',
             '(Class) Nimble: +1 initiative, and +1 attack with ranged weapons.',
@@ -391,7 +391,7 @@ dd_profs = {
         'spellChooseAs': 'mu',
         'spellsPerLvl': 2,
         'casterStat': 'INT',
-        'saves': [13, 14, 13, 16, 15],
+        'saves': [13, 14, 13, 16, 15, 15],
         'extragear': ['a Spellbook'],
         'extraspells': ['Read Magic'],
         'special': [
@@ -410,7 +410,7 @@ dd_profs = {
                          'or shields. Thieves may use any missile weapon.'],
         'weapons': 'rog',
         'armour': 'rog',
-        'saves': [13, 14, 13, 16, 15],
+        'saves': [13, 14, 13, 16, 15, 15],
         'extragear': ['a Set of Thieves\' Tools'],
         'special': [
             '(Class) Sneak Attack: +4 attack, x2 damage',
@@ -661,7 +661,7 @@ m81_profs = {
         'hd': 6,
         'alignAllowed': ['chaos', 'law', 'neutral'],
         'wps': 0,
-        'saves': [12, 13, 14, 15, 16],
+        'saves': [14],
         'skills': 'RANDOM',
     },
     'cleric': {
@@ -674,8 +674,8 @@ m81_profs = {
         'weapons': 'clr',
         'spellChooseAs': 'cleric',
         'spellsPerLvl': 1,
-        'casterStat': 'MIND',
-        'saves': [11, 12, 14, 16, 15],
+        'casterStat': 'MND',
+        'saves': [15],
         'extragear': ['a Holy Symbol'],
         'special': [
             '(Class) Spellcaster (Cleric List)',
@@ -689,7 +689,6 @@ m81_profs = {
         'primAttr': ['STR'],
         'restrictions': ['Dwarves can wear any weapon, armour, or shield. They cannot use weapons over 4 feet'
                          ' in length except axes and hammers.'],
-        'saves': [8, 9, 10, 13, 12],
         'flags': ['base', 'demi'],
         'nextXP': '2200',
         'hd': 8,
@@ -713,12 +712,12 @@ m81_profs = {
         'nextXP': '4000',
         'attacksAs': 'best',
         'wps': 1,
-        'primAttr': ['MIND'],
+        'primAttr': ['MND'],
         'restrictions': ['Elves can wear any armour or shield, and can use any weapon.'],
         'spellChooseAs': 'mu',
         'spellsPerLvl': 2,
-        'casterStat': 'MIND',
-        'saves': [12, 13, 13, 15, 15],
+        'casterStat': 'MND',
+        'saves': [17],
         'extragear': ['a Spellbook'],
         'extraspells': ['Read Magic'],
         'extralangs': ['Elf', 'Orc', 'Hobgoblin', 'Gnoll'],
@@ -755,7 +754,7 @@ m81_profs = {
                          'cannot use a long bow.'],
         'weapons': 'hlf',
         'armour': 'hlf',
-        'saves': [8, 9, 10, 13, 12],
+        'saves': [15],
         'special': [
             '(Class) Fighter Bonus +1 to Attacks and Damage.',
             '(Class) Choose 1 Weapon for "Good" Mastery: +2 to hit, Change damage to 1d2+2 (for 1d4), 1d3+3 (for 1d6),'
@@ -771,15 +770,15 @@ m81_profs = {
         'flags': ['base', 'human', 'caster'],
         'nextXP': '2500',
         'hd': 4,
-        'primAttr': ['MIND'],
-        'saves': [13, 13, 13, 16, 14],
+        'primAttr': ['MND'],
+        'saves': [16],
         'attacksAs': 'worst',
         'restrictions': ['Magic-users may not wear armour and may only use daggers, staves, and slings as weapons.'],
         'weapons': 'mag',
         'armour': 'mag',
         'spellChooseAs': 'mu',
         'spellsPerLvl': 2,
-        'casterStat': 'MIND',
+        'casterStat': 'MND',
         'extragear': ['a Spellbook'],
         'extraspells': ['Read Magic'],
         'special': [
@@ -810,7 +809,7 @@ m81_profs = {
             '(Class) Thieves have special training in listening at doors and detecting traps and secret/hidden doors.',
         ],
         'extralangs': ['Thieves\' Cant'],
-        'saves': [14, 15, 13, 16, 14],
+        'saves': [14, 15, 13, 16, 14, 14],
     },
 }
 

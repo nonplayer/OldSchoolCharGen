@@ -20,7 +20,7 @@ slim = (stat-10)/3, round down
 statArrays = {
     'dnd': ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'],
     'ham': ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA', 'SOC'],
-    'm81': ['STR', 'DEX', 'MIND', 'CHA'],
+    'm81': ['STR', 'DEX', 'MND', 'CHA'],
     'tnu': ['CHA', 'DEX', 'FER', 'HEA', 'INT', 'WIL'],
     'pla': ['ICQ', 'MEE', 'MAF', 'PST', 'PRW', 'PND', 'PBT', 'RUN'],
 }
@@ -54,7 +54,7 @@ statAffects = {
     'm81': {
         'STR': 'Melee Attack Rolls, Hit Point Rolls',
         'DEX': 'Missile Attack Rolls',
-        'MIND': 'Magic Attack Rolls, Saves vs Charm/Illusion',
+        'MND': 'Magic Attack Rolls, Saves vs Charm/Illusion',
         'CHA': '???'
     },
     'tnu': {
@@ -86,13 +86,32 @@ dealing with currently.
 
 
 saves = {
-    'one': ['Saving Throw'],
-    'three': ['Fortitude', 'Reflex', 'Willpower'],
-    'five': ['Death Ray & Poison', 'Magic Wands', 'Paralysis & Petrification', 'Breath Weapon', 'Rod, Staff, & Spell'],
-    'six': statArrays['dnd'],
-    'ham': ['Area  (+DEX mod)', 'Body  (+CON mod)', 'Death  (No mods)', 'Luck  (+CHA mod)', 'Mind  (+WIS mod)',
-            'Rally (+CHA mod)'],
-    'pla': ['Mind', 'Body', 'Reflex', 'Horror Factor (HF)'],
+    'one': {
+        'names': ['Saving Throw'],
+        'mods': ['None'],
+    },
+    'three': {
+        'names': ['Fortitude', 'Reflex', 'Willpower'],
+        'mods': ['CON', 'DEX', 'WIS'],
+    },
+    'six': {
+        'names': list(statArrays['dnd']),
+        'mods': list(statArrays['dnd']),
+    },
+    # note for classic I made it six, as spells tend to get weird separate bonuses
+    'classic': {
+        'names': ['Death Ray & Poison', 'Magic Wands', 'Paralysis & Petrification', 'Breath Weapon', 'Rod & Staff',
+                  'Spell'],
+        'mods': ['None', 'None', 'None', 'None', 'None', 'WIS'],
+    },
+    'ham': {
+        'names': ['Area  (+DEX)', 'Body  (+CON)', 'Death (+nil)', 'Luck  (+CHA)', 'Mind  (+WIS)', 'Rally (+CHA)'],
+        'mods': ['DEX', 'CON', 'None', 'CHA', 'WIS', 'CHA'],
+    },
+    'pla': {
+        'names': ['Mind', 'Body', 'Reflex', 'Horror Factor (HF)'],
+        'mods': ['MEE', 'PND', 'PRW', 'None', 'None'],
+    },
 }
 
 languages_dnd = [
@@ -390,7 +409,7 @@ systems = {
         'acType': 'descend',
         'hasWPs': True,
         'maxLvl': 36,
-        'saves': saves['five'],
+        'saves': dict(saves['classic']),
     },
     'ham': {
         'system_name': 'ham',
@@ -398,7 +417,8 @@ systems = {
         'stats': 7,
         'spread': statArrays['ham'],
         'affects': statAffects['ham'],
-        'saves': saves['ham'],
+        #'saves': saves['ham'],
+        'saves': dict(saves['ham']),
         'maxLvl': 15,
     },
     'm81': {
@@ -410,10 +430,10 @@ systems = {
         'affects': statAffects['m81'],
         'modRange': 'slim',
         'HPsMod': 'STR',
-        'saves': saves['five'],
+        'saves': saves['one'],
         'hasWPs': True,
         'maxLvl': 14,
-        'skills_mod': 'MIND',
+        'skills_mod': 'MND',
     },
     'pla': {
         'system_name': 'pla',

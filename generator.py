@@ -125,10 +125,9 @@ class Character(object):
         my_class = dict(gen_social(soc_score))
         self.soc_class = my_class['title']
         self.soc_mod = str(my_class['mod'])
-        if self.prefs['saves']:
-            self.saves = dict(zip(self.prefs['saves'], self.profession['saves']))
-        else:
-            self.saves = {}
+        #
+        # time to get those saving throws
+        self.saves = self.init_saves()
         #
         # let's get that basic combat data:
         self.init_combat(game_system)
@@ -302,6 +301,23 @@ class Character(object):
         else:
             self.range = str(self.range)
 
+    def init_saves(self):
+        #saves_array = {}
+        #if self.system == 'ham':
+        prof_mods = list(self.profession['saves'])
+        stat_mods_array = []
+        for val in list(self.prefs['saves']['mods']):
+            prof_mod = int(prof_mods.pop(0))
+            if val != 'None':
+                stat_mod = int(self.stats[val]['mod']) + prof_mod
+            else:
+                stat_mod = prof_mod
+            stat_mods_array.append(stat_mod)
+        saves_array = dict(zip(self.prefs['saves']['names'], stat_mods_array))
+        # elif self.prefs['saves']:
+        #     saves_array = dict(zip(self.prefs['saves'], self.profession['saves']))
+        return saves_array
+
     def init_skills(self):
         if self.profession['skills'] == 'RANDOM':
             self.skills = []
@@ -345,7 +361,7 @@ class Character(object):
             if lang in new_languages:
                 new_languages.remove(lang)
         if self.system in ['m81']:
-            bonus_lang_choices = self.stats['MIND']['mod']
+            bonus_lang_choices = self.stats['MND']['mod']
         elif self.system_assumptions == 'dnd':
             bonus_lang_choices = self.stats['INT']['mod']
         else:

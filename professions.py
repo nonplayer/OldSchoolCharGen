@@ -451,7 +451,7 @@ ham_profs = {
         'casterStat': 'WIS',
         'spellsPerLvl': 2,
         'spellChooseAs': 'cleric',
-        'extragear': ['a visible Symbol of your Holy Faith', 'a Prayerbook'],
+        'extragear': ['a visible Symbol of your Holy Faith (S)', 'a Prayerbook (M)'],
         'restrictions': ['Can use all weapons, shields, and armour that are not otherwise prohibited by your deity.',
                          'You cannot be of Neutral Alignment'],
         'special': [
@@ -473,6 +473,7 @@ ham_profs = {
         'numAttacks': 2,
         'attacksAs': 'best',
         'extralangs': ['Dwarf'],
+        'extragear': ['ARMOUR: a Small Shield (1H, Size M, DEF+2)'],
         'restrictions': ['Can use all weapons, shields, and armour except longbows.'],
         'special': [
             '(Class) If wearing Medium or heavier armour you do not suffer AC penalties from low DEX. Heavy armour '
@@ -500,7 +501,7 @@ ham_profs = {
         'casterStat': 'INT',
         'spellsPerLvl': 1,
         'spellChooseAs': 'mu',
-        'extragear': ['a spellbook'],
+        'extragear': ['a spellbook (M)'],
         'extralangs': ['Elf'],
         'extraspells': ['Level 1: Read Magic'],
         'restrictions': ['Can use all weapons, shields, and armour. Armour may limit spellcasting.'],
@@ -552,7 +553,7 @@ ham_profs = {
         'saves': [1, 1, 1, 1, 1, 1],
         'weapons': 'hlf',
         'armour': 'hlf',
-        'extragear': ['a set of Thieves\' tools'],
+        'extragear': ['a set of Thieves\' tools (M)'],
         'extralangs': ['Halfling'],
         'restrictions': ['Can use all small weapons one-handed, or medium two-handed, and shields. Cannot use '
                          'two-handed human-sized weapons.'],
@@ -610,7 +611,7 @@ ham_profs = {
         'casterStat': 'INT',
         'spellsPerLvl': 2,
         'spellChooseAs': 'mu',
-        'extragear': ['a Spellbook'],
+        'extragear': ['a Spellbook (M)'],
         'extraspells': ['At Will: Read Magic'],
         'restrictions': ['Can not use two-handed weapons except staves. Can not wear heavy armour or use shields. '
                          'Other armour can cause spell failure.'],
@@ -637,7 +638,7 @@ ham_profs = {
         'saves': [1, 0, 0, 1, 0, 0],
         'weapons': 'rog',
         'armour': 'rog',
-        'extragear': ['a Set of Thieves\' Tools'],
+        'extragear': ['a Set of Thieves\' Tools (M)', 'WEAPON: Dagger (1H, Size S, R: 10/30ft, Dmg: M+1, Thrown)'],
         'extralangs': ['Thieves\' Cant'],
         'restrictions': ['You can use any weapons and armour that the Hammersmith deems to be suitably sneaky.'],
         'special': [

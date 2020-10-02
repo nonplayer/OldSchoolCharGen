@@ -145,8 +145,6 @@ class Character(object):
         my_armourlist = []
         for w in my_weapons:
             self.my_gear_dump.remove(w)
-            if self.system == 'ham':
-                w = re.sub(r',\sDmg:\s\d+d\d+', '', w)
             my_weaponlist.append(str.title(w[8:]))
         for a in my_armour:
             self.my_gear_dump.remove(a)
@@ -175,7 +173,9 @@ class Character(object):
         weapon_cls = self.profession['weapons']
         armour_cls = self.profession['armour']
         gear_bonus = []
-        if self.profession['weapons'] in ['war', 'hlf']:
+        if self.short == 'fighter':
+            bonus_wps = 3
+        elif self.profession['weapons'] in ['war', 'hlf']:
             bonus_wps = 2
         elif self.profession['weapons'] in ['mag']:
             bonus_wps = 0

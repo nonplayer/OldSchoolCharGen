@@ -127,7 +127,10 @@ class Character(object):
         self.soc_mod = str(my_class['mod'])
         #
         # time to get those saving throws
-        self.saves = self.init_saves()
+        if self.prefs['saves']:
+            self.saves = self.init_saves()
+        else:
+            self.saves = False
         #
         # let's get that basic combat data:
         self.init_combat(game_system)

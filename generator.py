@@ -9,7 +9,7 @@ Don't forget half-stats for TNU
 """
 
 import random
-import re
+# import re
 
 import dice
 from dice import roll as die
@@ -312,8 +312,8 @@ class Character(object):
             self.range = str(self.range)
 
     def init_saves(self):
-        #saves_array = {}
-        #if self.system == 'ham':
+        # saves_array = {}
+        # if self.system == 'ham':
         prof_mods = list(self.profession['saves'])
         stat_mods_array = []
         for val in list(self.prefs['saves']['mods']):

@@ -533,8 +533,8 @@ ham_profs = {
             'you would take damage (from any source) that would reduce your HP from positive to Zero or below, you '
             'can spend a use and negate all of the damage from that attack. These uses accumulate with each level, '
             'but each use is permanently lost when used.',
-            '(Class) You have advantage on all Hit Dice rolls, and reroll all 1s on Hit Dice.',
-            '(Class) You can use a Shield Bash with any one of your successful attack dice, losing the shield AC '
+            '(Class) When leveling up, you reroll your Hit Points twice, and keep the best result.',
+            '(Class) You can use a Shield Bash with any one of your successful attack dice, losing the shield DEF '
             'bonus until your next turn in combat.',
             '(Class) When using a two-handed weapon, roll an extra damage die with your attacks, applying the '
             'total result to all attacks that hit.',
@@ -554,15 +554,14 @@ ham_profs = {
         'restrictions': ['Can use all small weapons one-handed, or medium two-handed, and shields. Cannot use '
                          'two-handed human-sized weapons.'],
         'special': [
-            '(Class) You gain a bonus melee attack die at levels 4, 8, and 12. When attacking, declare your target(s) '
-            'and then roll all your attack dice, but only one damage die. Each hit applies the same amount of damage.',
-            '(Class) You have the following Thief Skills: Break/Enter (DEX), Climb/Leap (STR with Disadvantage), '
-            'Find/Seek (WIS), Hide/Sneak (DEX with advantage), and Snatch/Grab (DEX).',
-            '(Class) Unless you have proven to be an obvious threat, or your opponents are otherwise specifically '
-            'predisposed against you, you are always attacked last.',
+            '(Class) You gain a bonus melee attack die at levels 4, 8, and 12.',
+            '(Class) You have the following Thief Skills: Break/Enter (DEX), Climb/Leap (STR with a Bane), '
+            'Find/Seek (WIS), Hide/Sneak (DEX with a Boon), and Snatch/Grab (DEX).',
+            '(Class) Unless you have proven to be an obvious threat, or your opponents  specifically hate you, '
+            'you are always attacked last.',
             '(Class) You can draw from inner strength for a sudden display of unexpected fierceness. By spending 1 '
             'Hit Point rolling your attacks, you increase the damage die for your attacks this round by one step.',
-            '(Class) You roll with advantage on Tactical Attacks.',
+            '(Class) You receive a Boon on Tactical Attacks.',
             '(Class) All items are one size greater for Encumbrance limits.',
         ],
     },
@@ -584,12 +583,11 @@ ham_profs = {
             'Halfling-sized creatures or smaller can move through your occupied space.',
             '(Class) You can stow Huge size items for 3 Encumbrance slots.',
             '(Class) When you take damage, make a Mind save (target: 12) or go into an uncontrollable violent fury. '
-            'During this rage, take advantage on melee and thrown damage dice rolls, immunity to critical fumbles, '
-            'and disadvantage on all saves except Body and Death. Your actions must follow a specific course (ask '
-            'the \'Smith). You can also trigger it on your own by causing yourself 1 point of damage with a weapon.',
-            '(Class) You get a bonus attack die at first level (total of two), and gain a new one at levels 5, 10, '
-            'and 15. When attacking, declare target(s) and then roll all your attack dice, but only one damage '
-            'die. Each hit applies the same amount of damage.',
+            'During this rage, gain an extra attack die (and another at levels 7 and 14), gain temporary extra HP = '
+            '1/2 your level (up), and suffer 2 Banes on all saves except Body and Death. Your actions must follow a '
+            'specific course (ask the \'Smith). You can also trigger it on your own by causing yourself 1 point of '
+            'damage with a weapon.',
+            '(Class) You get a bonus attack die at levels 5, 10, and 15.',
             '(Class) When using a two-handed weapon, roll d12 damage dice with your attacks (instead of d10), '
             'applying the result to all attacks that hit.',
         ],
@@ -617,9 +615,9 @@ ham_profs = {
             '(Class) Cast magic-user spells. Start with a spellbook containing Read Magic and possibly others. Add '
             'new spells from leveling up, and from plundered scrolls and texts. Max "safe" spell level starts at 1, '
             'and raises +1 at every odd-numbered level of experience.',
-            '(Class) You can prepare and try to cast higher level spells, if you have a copy of the spell. Doing so '
-            'causes permanent loss of INT equal to the difference in allowed levels. Spells cast this way are always '
-            'immediately forgotten.',
+            '(Class) You can also prepare and "High Cast" higher level spells, if you have a copy of the spell. '
+            'Doing so causes permanent loss of INT equal to the difference in allowed levels. Spells cast this way '
+            'are always immediately forgotten.',
             '(Class) You can choose to take damage instead of forgetting spells. The amount is equal to the level of '
             'spell just cast. If below Zero HP, this burns CON instead.',
             '(Class) You can cast *Read Magic* freely and at will, no prep required.',
@@ -638,17 +636,17 @@ ham_profs = {
         'extralangs': ['Thieves\' Cant'],
         'restrictions': ['You can use any weapons and armour that the Hammersmith deems to be suitably sneaky.'],
         'special': [
-            '(Class) *Stabbity!* When using a melee weapon to attack a foe against which you either have attack '
-            'advantage or are hidden from perception, double your total damage against that foe on a successful hit. '
+            '(Class) *Stabbity!* When using a melee weapon to attack a foe against which you either have net Boons or '
+            'are hidden from perception, double your total damage against that foe on a successful hit. '
             'This multiple increases by +1 at levels 3, 6, 9, 12, and 15.',
             '(Class) You have Thiefskills: Appraise/Identify (INT), Break/Enter (DEX), Climb/Leap (STR), '
             'Find & Seek (WIS), Forge/Decipher (INT), Hide/Sneak (DEX), Lie/Cheat (CHA), and Snatch/Grab (DEX). At '
-            'first level you must randomly determine one Thief Skill to be your Bailiwick, and one to be your '
-            'Failing. You get advantage on checks related to your Bailiwick, and disadvantage on checks related to '
-            'your Failing,  Once per adventure per experience level, you can attempt to reroll a failed Thief Skill '
-            'check. This count resets upon Returning to Town. At 9th level, your Thiefskills magically evolve.',
-            '(Class) You roll with advantage on Tactical Attacks.',
-            '(Class) You have advantage on all Saves against the effects of Traps.',
+            'first level you must randomly determine one Thief Skill to be your Bailiwick (which receives a Boon), '
+            'and one to be your Failing (which receives a Bane). Once per adventure per XP level, you can attempt '
+            'to reroll a failed Thief Skill check. This count resets upon Returning to Town. At 9th level, your '
+            'Thiefskills magically evolve.',
+            '(Class) You receive a Boon on Tactical Attacks.',
+            '(Class) You receive a Boon on Saves against Trap effects. Add another total Boon at levels 4, 9, and 13.',
         ],
     },
 }

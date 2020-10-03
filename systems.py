@@ -380,6 +380,8 @@ systems = {
         'race_data': dict(race_data['base']),   # DICT keyed to the list above
         'core_languages': ['Common'],   # LIST: Free starting languages for all characters
         'language_choices': languages_dnd,      # LIST of base possible bonus languages
+        'bonus_langs': True,            # BOO: set False if system has no automatic bonus langs from stats
+        'bonus_langs_stat': 'INT',      # STR only if bonus_langs is True
         'skill_choices': skills_dnd,    # LIST of skills for the random skill assigner
         'skills_mod': 'INT',            # STR all caps of stat used to modify starting skills
         'encumbrance': False,           # Does this system use Encumbrance, and if so, what style
@@ -427,7 +429,6 @@ systems = {
     'm81': {
         'system_name': 'm81',
         'system_fullname': 'Microlite81',
-        'system_assumptions': 'dnd',
         'stats': 4,
         'spread': statArrays['m81'],
         'affects': statAffects['m81'],
@@ -437,6 +438,7 @@ systems = {
         'hasWPs': True,
         'maxLvl': 14,
         'skills_mod': 'MND',
+        'bonus_langs_stat': 'MND',
     },
     'pla': {
         'system_name': 'pla',
@@ -452,6 +454,7 @@ systems = {
         'HPsMod': 'PND',
         # 'saves': saves['pla'],
         'maxLvl': 15,
+        'bonus_langs': False,
     },
     'rbh': {
         'system_name': 'rbh',
@@ -466,6 +469,7 @@ systems = {
         'modRange': 'modern',
         'saves': saves['pla'],
         'maxLvl': 15,
+        'bonus_langs': False,
     },
     'tnu': {
         'system_name': 'tnu',
@@ -475,6 +479,7 @@ systems = {
         'spread': statArrays['tnu'],
         'affects': statAffects['tnu'],
         'meleeMod': 'FER',
+        'bonus_langs': False,
     },
 }
 

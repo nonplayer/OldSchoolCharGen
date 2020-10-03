@@ -377,10 +377,8 @@ class Character(object):
         for lang in self.languages:
             if lang in new_languages:
                 new_languages.remove(lang)
-        if self.system in ['m81']:
-            bonus_lang_choices = self.stats['MND']['mod']
-        elif self.system_assumptions == 'dnd':
-            bonus_lang_choices = self.stats['INT']['mod']
+        if self.prefs['bonus_langs']:
+            bonus_lang_choices = self.stats[self.prefs['bonus_langs_stat']]['mod']
         else:
             bonus_lang_choices = 0
         while bonus_lang_choices > 0 and len(new_languages) > 0:

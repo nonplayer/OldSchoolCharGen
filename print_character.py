@@ -21,7 +21,10 @@ supported_systems = [
 
 
 def print_character(character):
-    print("A new random character for " + str(character.system_fullname))
+    if args.silly:
+        print("A new random SILLY character for " + str(character.system_fullname))
+    else:
+        print("A new random character for " + str(character.system_fullname))
     print("-----------------------------------------------------")
     # print("Raw Data Print: ", gen_data)
     if character.system == 'tnu':
@@ -118,5 +121,3 @@ if __name__ == "__main__":
         game_sys = input("Enter the system abbreviation from above: ")
     for n in range(args.number_of_characters):
         print_character(generator.generate(game_sys.lower(), args.silly))
-    if args.silly:
-        print("SILLY IS A GO!!")

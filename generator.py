@@ -95,7 +95,6 @@ class Character(object):
         # to use 1d20 here to offset the lack of true randomness
         if game_system == 'ham':
             classroll = die(1, 20)
-            print("MY CLASSROLL IS " + str(classroll))
             subroll = die(1, 4)
             self.profession = dict(professions.get_hammerclass(classroll, subroll))
         else:

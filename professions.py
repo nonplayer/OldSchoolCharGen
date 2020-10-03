@@ -1203,16 +1203,19 @@ def get_profession(system='def'):
     return profession_data
 
 
-# this returns a random character profession and all its base data
+#
+# this returns a random HAMMERCRAWL! character profession and all its base data
+# NOTE: I've skewed this greater since I'm using 1d20 instead of 3d6 here, to offset the lack of true randomness.
+#
 def get_hammerclass(classroll, subroll):
-    if classroll >= 17:
+    if classroll >= 18:
         hammercrawl_profession = 'halfogre'
     elif classroll >= 14:
         hammercrawl_profession = 'halfling'
     elif classroll >= 8:
         humans = ['cleric', 'fighter', 'mu', 'thief']
         hammercrawl_profession = humans[subroll - 1]
-    elif classroll >= 5:
+    elif classroll >= 4:
         hammercrawl_profession = 'dwarf'
     else:
         hammercrawl_profession = 'elf'

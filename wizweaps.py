@@ -138,11 +138,12 @@ def generate():
     effect = random.choice(effects)
     if nature == 'Staff':
         energy_base = 'defends by generating'
-        mechanical = 'It functions as a +2 AC Shield when gripped with both hands for the entire round. If hit ' \
-                     'with a Nat 20, it runs out of power and must be recharged by burning a spell of any level.'
+        mechanical = 'With a Defensive Action, the staff adds your Level to Defense until your next action, in ' \
+                     'addition to normal Banes. If hit with a Nat 20, it runs out of power and must be recharged ' \
+                     'by burning a spell of any level.'
     else:
         energy_base = 'attacks with'
-        mechanical = 'It functions as a sling (Atk Bonus: INT mod, R: 40/80/160ft, Dmg: 1d4) with near-infinite ' \
+        mechanical = 'It functions like a sling (Attack +INT mod, R: 80/160ft) with near-infinite ' \
                      'ammo. On a Natural 1 it runs out of power and must be recharged by burning a spell of any level.'
     energy_form = random.choice(energy_forms)
     energy_type = random.choice(energy_types)

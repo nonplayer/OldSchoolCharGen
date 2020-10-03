@@ -357,9 +357,12 @@ race_data = {
 # Defaults are overridden by the system-specific alterations
 #
 systems = {
+    # a fallback blank system for when adding new systems
+    'def': {},
+    # the default base assumptions for all new games is "new" DnD rules (3.x+) unless overwritten
     'default': {
         'system_name': 'def',           # shortname for the system, used in some lists and dicts
-        'system_fullname': 'Default Display Name',
+        'system_fullname': 'Default Display Name (DnD New)',
         'system_assumptions': 'dnd',    # STR: used to determine armor types, equipment lists, and AC assumptions
         'setting': 'fantasy',           # STR: game setting, for use with random setting-specific elements
         'hasHPs': True,                 # BOO: changes the calculations if the system has hit points
@@ -373,9 +376,9 @@ systems = {
         'modRange': 'classic',          # STR: style of stat mods generated. classic = +3 to -3, modern = (stat-10)/2,
                                         #      slim = (stat-10)/3
         'HPsMod': 'CON',                # STR: stat used to calc hit point mods
-        'saves': False,                 # Pulls STR from Saves dict, above
+        'saves': dict(saves['six']),    # Pulls STR from Saves dict, above
         'hasWPs': False,                # BOO: notes if this system uses specific WPs a la Dark Dungeons
-        'maxLvl': 10,                   # INT: maximum XP level in the game
+        'maxLvl': 20,                   # INT: maximum XP level in the game
         'race_choices': list(dict.keys(race_data['base'])),  # LIST: available choices for selectable races
         'race_data': dict(race_data['base']),   # DICT keyed to the list above
         'core_languages': ['Common'],   # LIST: Free starting languages for all characters
@@ -386,35 +389,37 @@ systems = {
         'skills_mod': 'INT',            # STR all caps of stat used to modify starting skills
         'encumbrance': False,           # Does this system use Encumbrance, and if so, what style
     },
-    # a fallback blank system for when adding new systems
-    'def': {},
+    # actual systems and inherited baselines below, alphabetically
+    'dnd_old': {
+        'system_name': 'dnd',
+        'system_fullname': '"Old School" Dungeons and Dragons',
+        'acBase': 9,
+        'acType': 'descend',
+        'saves': dict(saves['classic']),
+        'hasWPs': False,
+        'maxLvl': 10,
+    },
     'bnt': {
         'system_name': 'bnt',
         'system_fullname': 'Blood & Treasure',
         'affects': statAffects['bnt'],
-        'maxLvl': 20,
         'saves': saves['three'],
         'race_choices': list(dict.keys(race_data['bnt'])),
         'race_data': dict(race_data['bnt']),
         'skill_choices': skills_bnt,
     },
     'bntx': {
-        'system_name': 'bnt',
         'system_fullname': 'Blood & Treasure, Expanded',
-        'affects': statAffects['bnt'],
-        'maxLvl': 20,
-        'saves': saves['three'],
+        'system_baseline': 'bnt',
         'race_choices': list(dict.keys(race_data['bntx'])) + list(dict.keys(race_data['bnt'])),
         'race_data': {**dict(race_data['bntx']), **dict(race_data['bnt'])},
     },
     'dd': {
         'system_name': 'dd',
         'system_fullname': 'Dark Dungeons',
-        'acBase': 9,
-        'acType': 'descend',
+        'system_baseline': 'dnd_old',
         'hasWPs': True,
         'maxLvl': 36,
-        'saves': dict(saves['classic']),
     },
     'ham': {
         'system_name': 'ham',
@@ -442,7 +447,7 @@ systems = {
     },
     'pla': {
         'system_name': 'pla',
-        'system_fullname': 'Microlite Platinum',
+        'system_fullname': 'Microlite Platinum (WIP)',
         'system_assumptions': 'pla',
         'stats': 8,
         'spread': statArrays['pla'],
@@ -452,24 +457,14 @@ systems = {
         'missileMod': 'PRW',
         'modRange': 'modern',
         'HPsMod': 'PND',
-        # 'saves': saves['pla'],
+        'saves': False,
         'maxLvl': 15,
         'bonus_langs': False,
     },
     'rbh': {
         'system_name': 'rbh',
-        'system_fullname': 'Robot Hack',
-        'system_assumptions': 'pla',
-        'stats': 8,
-        'spread': statArrays['pla'],
-        'affects': statAffects['pla'],
-        'acBase': 4,
-        'meleeMod': 'PRW',
-        'missileMod': 'PRW',
-        'modRange': 'modern',
-        'saves': saves['pla'],
-        'maxLvl': 15,
-        'bonus_langs': False,
+        'system_fullname': 'Robot Hack (WIP)',
+        'system_baseline': 'pla',
     },
     'tnu': {
         'system_name': 'tnu',
@@ -479,6 +474,8 @@ systems = {
         'spread': statArrays['tnu'],
         'affects': statAffects['tnu'],
         'meleeMod': 'FER',
+        'maxLvl': 10,
+        'saves': False,
         'bonus_langs': False,
     },
 }
@@ -489,6 +486,9 @@ def get_system_prefs(system='def'):
         system = 'def'
     sysprefs = dict(systems['default'])
     specific = dict(systems[system.lower()])
+    if 'system_baseline' in list(dict.keys(specific)):
+        baseline = dict(systems[str(specific['system_baseline'])])
+        sysprefs.update(baseline)
     sysprefs.update(specific)
     return sysprefs
 

@@ -1157,6 +1157,10 @@ proflists = {
         'choices': base_profs_pla,
         'dict': pla_profs,
     },
+    'rbh': {
+        'choices': base_profs_pla,
+        'dict': pla_profs,
+    },
     'tnu': {
         'choices': base_profs_tnu,
         'dict': tnu_profs,
@@ -1168,7 +1172,7 @@ proflists = {
 }
 
 supported_systems = [
-    'dd', 'bnt', 'bntx', 'ham', 'm81', 'pla', 'tnu'
+    'dd', 'bnt', 'bntx', 'ham', 'm81', 'pla', 'rbh', 'tnu'
 ]
 
 

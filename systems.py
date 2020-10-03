@@ -466,6 +466,11 @@ systems = {
         'system_fullname': 'Robot Hack (WIP)',
         'system_baseline': 'pla',
     },
+    'rpt': {
+        'system_name': 'rpt',
+        'system_fullname': 'Ruptures (WIP)',
+        'system_baseline': 'pla',
+    },
     'tnu': {
         'system_name': 'tnu',
         'system_fullname': 'The Nightmares Underneath',

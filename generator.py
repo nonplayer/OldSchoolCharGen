@@ -136,6 +136,7 @@ class Character(object):
         self.init_combat(game_system)
         #
         # now for gear:
+        self.init_emcumbrance()
         if self.system_assumptions == 'tnu':
             self.my_gear_dump = self.get_gear_tnu(my_class)
         else:
@@ -246,6 +247,12 @@ class Character(object):
             for g in bonus_class_gear:
                 my_gear_collection.append(g)
         return my_gear_collection
+
+    def init_emcumbrance(self):
+        if self.prefs['encumbrance'] == 'ham':
+            self.encumbrance = int(self.stats['INT']['val'] + self.stats['STR']['mod'])
+        else:
+            self.encumbrance = False
 
     def init_silly(self):
         silly_prefs = dict(silly.get_silly())

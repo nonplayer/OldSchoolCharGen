@@ -382,6 +382,7 @@ systems = {
         'language_choices': languages_dnd,      # LIST of base possible bonus languages
         'skill_choices': skills_dnd,    # LIST of skills for the random skill assigner
         'skills_mod': 'INT',            # STR all caps of stat used to modify starting skills
+        'encumbrance': False,           # Does this system use Encumbrance, and if so, what style
     },
     # a fallback blank system for when adding new systems
     'def': {},
@@ -421,6 +422,7 @@ systems = {
         'affects': statAffects['ham'],
         'saves': dict(saves['ham']),
         'maxLvl': 15,
+        'encumbrance': 'ham',
     },
     'm81': {
         'system_name': 'm81',

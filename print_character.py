@@ -86,7 +86,10 @@ def print_character(character):
     print("----------")
     for x in list(character.armour):
         print(x)
-    print("\nMy Gear:")
+    if character.encumbrance:
+        print("\nMy Gear: [Max Encumbrance: " + str(character.encumbrance) + "]")
+    else:
+        print("\nMy Gear:")
     print("--------")
     for x in list(character.gear):
         print(x)

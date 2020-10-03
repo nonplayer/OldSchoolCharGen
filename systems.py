@@ -19,9 +19,10 @@ slim = (stat-10)/3, round down
 
 statArrays = {
     'dnd': ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'],
-    'm81': ['STR', 'DEX', 'MIND', 'CHA'],
+    'ham': ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA', 'SOC'],
+    'm81': ['STR', 'DEX', 'MND', 'CHA'],
     'tnu': ['CHA', 'DEX', 'FER', 'HEA', 'INT', 'WIL'],
-    'pla': ['ICQ', 'MEE', 'MAF', 'PST', 'PRW', 'PND', 'PBT', 'RUN'],
+    'pla': ['ICQ', 'MEE', 'MAF', 'PST', 'PRW', 'PND', 'PBT', 'MOV'],
 }
 
 statAffects = {
@@ -45,14 +46,15 @@ statAffects = {
         'STR': 'Melee Attack Rolls, Damage with Melee and Thrown',
         'DEX': 'Area Effect Saves, Missile Attack Rolls, AC, Initiative',
         'CON': 'Body Saves, Hit Die Rolls',
-        'INT': 'Magic-User Spells',
+        'INT': 'Bonus Skills, Magic-User Spells',
         'WIS': 'Mind Saves, Cleric Spells, Initiative',
-        'CHA': 'Luck Saves'
+        'CHA': 'Luck Saves, Rally Saves',
+        'SOC': 'Social Reactions, Starting Money'
     },
     'm81': {
         'STR': 'Melee Attack Rolls, Hit Point Rolls',
         'DEX': 'Missile Attack Rolls',
-        'MIND': 'Magic Attack Rolls, Saves vs Charm/Illusion',
+        'MND': 'Magic Attack Rolls, Saves vs Charm/Illusion',
         'CHA': '???'
     },
     'tnu': {
@@ -84,15 +86,42 @@ dealing with currently.
 
 
 saves = {
-    'one': ['Saving Throw'],
-    'three': ['Fortitude', 'Reflex', 'Willpower'],
-    'five': ['Death Ray & Poison', 'Magic Wands', 'Paralysis & Petrification', 'Breath Weapon', 'Rod, Staff, & Spell'],
-    'six': statArrays['dnd'],
-    'ham': ['Area  (+DEX mod)', 'Body  (+CON mod)', 'Death  (No mods)', 'Luck  (+CHA mod)', 'Mind  (+WIS mod)', 'Rally (+CHA mod)'],
-    'pla': ['Mind', 'Body', 'Reflex', 'Horror Factor (HF)'],
+    'one': {
+        'names': ['Saving Throw'],
+        'mods': ['None'],
+    },
+    'three': {
+        'names': ['Fortitude', 'Reflex', 'Willpower'],
+        'mods': ['CON', 'DEX', 'WIS'],
+    },
+    'six': {
+        'names': list(statArrays['dnd']),
+        'mods': list(statArrays['dnd']),
+    },
+    # note for classic I made it six, as spells tend to get weird separate bonuses
+    'classic': {
+        'names': ['Death Ray & Poison', 'Magic Wands', 'Paralysis & Petrification', 'Breath Weapon', 'Rod & Staff',
+                  'Spell'],
+        'mods': ['None', 'None', 'None', 'None', 'None', 'WIS'],
+    },
+    'ham': {
+        'names': ['Area  (+DEX)', 'Body  (+CON)', 'Death (+nil)', 'Luck  (+CHA)', 'Mind  (+WIS)', 'Rally (+CHA)'],
+        'mods': ['DEX', 'CON', 'None', 'CHA', 'WIS', 'CHA'],
+    },
+    'pla': {
+        'names': ['Mind', 'Body', 'Reflex', 'Horror Factor (HF)'],
+        'mods': ['MEE', 'PND', 'PRW', 'None', 'None'],
+    },
 }
 
 languages_dnd = [
+    'Celestial (Law)', 'Dragon', 'Drow', 'Druidic', 'Dwarf', 'Elemental, Air', 'Elemental, Earth',
+    'Elemental, Fire', 'Elemental, Water', 'Elf', 'Giant', 'Gnoll ', 'Gnome', 'Goblin',
+    'Grimlock', 'Halfling', 'Infernal (Chaos)', 'Kobold', 'Manticore', 'Medusa', 'Naga',
+    'Ogre', 'Ophidian', 'Orc', 'Sylvan',
+]
+
+languages_ham = [
     'Celestial (Law)', 'Dragon', 'Drow', 'Druidic', 'Dwarf', 'Elemental, Air', 'Elemental, Earth',
     'Elemental, Fire', 'Elemental, Water', 'Elf', 'Giant', 'Gnoll ', 'Gnome', 'Goblin',
     'Grimlock', 'Halfling', 'Infernal (Chaos)', 'Kobold', 'Manticore', 'Medusa', 'Naga',
@@ -110,30 +139,25 @@ skills_bnt = [
 ]
 
 skills_dnd = [
-    'Arcane Lore (Int)', 'Balance (Dex)', 'Bluff (Cha)', 'Cooking (Wis)',
-    'Craft (Choice of Medium) (Dex)', 'Diplomacy (Cha)', 'Disguise (Cha)',
-    'Engineering (Int)', 'Escape Artist (Dex)', 'Etiquette (Choice of Culture) (Cha)',
-    'First Aid (Wis)', 'Gambling (Cha)', 'Geography (Int)', 'History (Int)',
-    'Intimidation (Str or Cha)', 'Jumping (Str)',
-    'Laws (Choice of Culture) (Int)', 'Lip Reading (Wis)', 'Magical Engineering (Int)',
-    'Nature Lore (Int)', 'Navigating (Wis)', 'Performance (Choice of Medium) (Cha)',
-    'Religious Lore (Int)', 'Riding (Choose Animal) (Dex)', 'Sense Motive (Wis)',
-    'Swimming (Str)', 'Tracking (Wis)'
-]
-
-skills_weird = [
-    'Accounting (INT)', 'Ballet (DEX)', 'Being Drunk Before Noon (CON)',
-    'Birdwatching (WIS)', 'Blathering (CHA)', 'Bobsledding (STR)',
-    'Bonsai (DEX)', 'Butchery (DEX)', 'Caber Tossing (STR)',
-    'Chess (INT)', 'Dog Grooming (DEX)', 'Doomsaying (WIS)',
-    'Feline Husbandry (INT)', 'Food Tasting (CON)', 'Funny Walks (DEX)',
-    'Gourmand (INT)', 'Horsehair Braiding (DEX)', 'Juggling (DEX)',
-    'Landscaping (STR)', 'Looking Conspicuous (CHA)', 'Milk (WIS)',
-    'Mime (DEX)', 'Miniature Equine Aficionado (INT)', 'Poison-Making (INT)',
-    'Pouting (CHA)', 'Puppetry (DEX)', 'Selfies (CHA)',
-    'SEO (INT)', 'Skiing (STR)', 'Spotlight Stealing (CHA)',
-    'Stone-Skipping (DEX)', 'Squaredancing (DEX)', 'Surfing (DEX)',
-    'Sword-Swallowing (CON)', 'Tanning (CON)', 'Useless Card Tricks (DEX)',
+    'Accounting (INT)', 'Agriculture (INT)', 'Animal Handling (INT)', 'Animal Training (INT)',
+    'Appraising (INT)', 'Arcane Lore (INT)', 'Armorer (STR)', 'Artistic Ability (CHA)',
+    'Astrology (WIS)', 'Balance (DEX)', 'Ballet (DEX)', 'Blacksmithing (STR)',
+    'Bluff (CHA)', 'Bowyer/Fletcher (DEX)', 'Brewing (INT)', 'Butchery (DEX)',
+    'Caber Tossing (STR)', 'Carpentry (STR)', 'Charioteering (DEX)', 'Cobbling (DEX)',
+    'Cooking (WIS)', 'Dancing (DEX)', 'Diplomacy (CHA)', 'Direction Sense (WIS)',
+    'Disguise (WIS)', 'Engineering (INT)', 'Escape Artist (DEX)', 'Etiquette (Choice of Culture) (CHA)',
+    'Fire-building (DEX)', 'First Aid (WIS)', 'Fishing (WIS)', 'Forgery (DEX)',
+    'Gambling (CHA)', 'Gaming (INT)', 'Gem-Cutting (DEX)', 'Geography (INT)',
+    'Healing (INT)', 'Heraldry (INT)', 'Herbalism (INT)', 'History, Ancient (INT)',
+    'History, Local (INT)', 'Hunting (WIS)', 'Intimidation (STR or CHA)', 'Juggling (DEX)',
+    'Jumping (STR)', 'Laws (Choice of Culture) (INT)', 'Leatherworking (DEX)', 'Lip Reading (WIS)',
+    'Magical Engineering (INT)', 'Mining (INT)', 'Mountaineering (WIS)', 'Musical Instrument (DEX)',
+    'Nature Lore (INT)', 'Navigating (WIS)', 'Painting (DEX)', 'Performance (Choice of Medium) (CHA)',
+    'Pottery (DEX)', 'Religious Lore (INT)', 'Riding (Choose Animal) (DEX)', 'Rope Use (DEX)',
+    'Running (CON)', 'Seamanship (WIS)', 'Seamstress/Tailor (DEX)', 'Sense Motive (WIS)',
+    'Set Snares (DEX)', 'Singing (CHA)', 'Stonemasonry (STR)', 'Survival (WIS)',
+    'Swimming (STR)', 'Tanning (CON)', 'Tumbling (DEX)',
+    'Ventriloquism (CHA)', 'Weaponsmithing (STR)', 'Weather Sense (WIS)', 'Weaving (DEX)',
 ]
 
 race_choices = {
@@ -333,10 +357,10 @@ race_data = {
 # Defaults are overridden by the system-specific alterations
 #
 systems = {
+    # the default base assumptions for all new games is "new" DnD rules (3.x+) unless overwritten
     'default': {
         'system_name': 'def',           # shortname for the system, used in some lists and dicts
-        'system_fullname': 'Default Display Name',
-        'system_assumptions': 'dnd',    # STR: used to determine armor types, equipment lists, and AC assumptions
+        'system_fullname': 'Default Display Name (DnD New)',
         'setting': 'fantasy',           # STR: game setting, for use with random setting-specific elements
         'hasHPs': True,                 # BOO: changes the calculations if the system has hit points
         'stats': 6,                     # INT: how many stats in this system, usually 6
@@ -344,116 +368,133 @@ systems = {
         'affects': statAffects['dnd'],  # DICT: reference of what each stat in the system affects during play
         'acBase': 10,                   # INT: AC base 9 or 10, usually
         'acType': 'ascend',             # STR: 'ascend' or 'descend'
+        'acSystem': 'dnd',              # STR: "dnd" = basic D&D armour rules. "pla" = platinum armour rules
         'meleeMod': 'STR',              # STR: stat used to calc melee attack modifier
         'missileMod': 'DEX',            # STR: stat used to calc ranged attack modifier
         'modRange': 'classic',          # STR: style of stat mods generated. classic = +3 to -3, modern = (stat-10)/2,
                                         #      slim = (stat-10)/3
         'HPsMod': 'CON',                # STR: stat used to calc hit point mods
-        'saves': False,                 # Pulls STR from Saves dict, above
+        'saves': dict(saves['six']),    # Pulls STR from Saves dict, above
         'hasWPs': False,                # BOO: notes if this system uses specific WPs a la Dark Dungeons
-        'maxLvl': 10,                   # INT: maximum XP level in the game
-        'race_choices': list(dict.keys(race_data['base'])),  # LIST: available choices for selecable races
+        'maxLvl': 20,                   # INT: maximum XP level in the game
+        'race_choices': list(dict.keys(race_data['base'])),  # LIST: available choices for selectable races
         'race_data': dict(race_data['base']),   # DICT keyed to the list above
         'core_languages': ['Common'],   # LIST: Free starting languages for all characters
         'language_choices': languages_dnd,      # LIST of base possible bonus languages
+        'bonus_langs': True,            # BOO: set False if system has no automatic bonus langs from stats
+        'bonus_langs_stat': 'INT',      # STR only if bonus_langs is True
         'skill_choices': skills_dnd,    # LIST of skills for the random skill assigner
         'skills_mod': 'INT',            # STR all caps of stat used to modify starting skills
+        'encumbrance': False,           # Does this system use Encumbrance, and if so, what style
+    },
+    # a fallback blank system for when adding new systems
+    'def': {
+        'saves': False,                 # def saves is False to make adding new systems less error-prone
+    },
+    # actual systems and inherited baselines below, alphabetically
+    'dnd_old': {
+        'system_name': 'dnd',
+        'system_fullname': '"Old School" Dungeons and Dragons',
+        'acBase': 9,
+        'acType': 'descend',
+        'saves': dict(saves['classic']),
+        'hasWPs': False,
+        'maxLvl': 10,
     },
     'bnt': {
         'system_name': 'bnt',
         'system_fullname': 'Blood & Treasure',
         'affects': statAffects['bnt'],
-        'maxLvl': 20,
         'saves': saves['three'],
         'race_choices': list(dict.keys(race_data['bnt'])),
         'race_data': dict(race_data['bnt']),
         'skill_choices': skills_bnt,
     },
     'bntx': {
-        'system_name': 'bnt',
         'system_fullname': 'Blood & Treasure, Expanded',
-        'affects': statAffects['bnt'],
-        'maxLvl': 20,
-        'saves': saves['three'],
+        'system_baseline': 'bnt',
         'race_choices': list(dict.keys(race_data['bntx'])) + list(dict.keys(race_data['bnt'])),
         'race_data': {**dict(race_data['bntx']), **dict(race_data['bnt'])},
     },
     'dd': {
         'system_name': 'dd',
         'system_fullname': 'Dark Dungeons',
-        'acBase': 9,
-        'acType': 'descend',
+        'system_baseline': 'dnd_old',
         'hasWPs': True,
         'maxLvl': 36,
-        'saves': saves['five'],
     },
     'ham': {
         'system_name': 'ham',
         'system_fullname': 'HAMMERCRAWL!',
-        'affects': statAffects['ham'],  # DICT: reference of what each stat in the system affects during play
-        'HPsMod': 'CON',                # STR: stat used to calc hit point mods
-        'saves': saves['ham'],
-        'maxLvl': 15,                   # INT: maximum XP level in the game
-        'skill_choices': skills_dnd + skills_weird,
+        'stats': 7,
+        'spread': statArrays['ham'],
+        'affects': statAffects['ham'],
+        'saves': dict(saves['ham']),
+        'maxLvl': 15,
+        'encumbrance': 'ham',
     },
     'm81': {
         'system_name': 'm81',
         'system_fullname': 'Microlite81',
-        'system_assumptions': 'dnd',
         'stats': 4,
         'spread': statArrays['m81'],
         'affects': statAffects['m81'],
         'modRange': 'slim',
         'HPsMod': 'STR',
-        'saves': saves['five'],
+        'saves': saves['one'],
         'hasWPs': True,
         'maxLvl': 14,
-        'skills_mod': 'MIND',
+        'skills_mod': 'MND',
+        'bonus_langs_stat': 'MND',
     },
     'pla': {
         'system_name': 'pla',
-        'system_fullname': 'Microlite Platinum',
-        'system_assumptions': 'pla',
+        'system_fullname': 'Microlite Platinum (WIP)',
         'stats': 8,
         'spread': statArrays['pla'],
         'affects': statAffects['pla'],
         'acBase': 4,
+        'acSystem': 'pla',
         'meleeMod': 'PRW',
         'missileMod': 'PRW',
         'modRange': 'modern',
         'HPsMod': 'PND',
-        'saves': saves['pla'],
+        'saves': False,
         'maxLvl': 15,
+        'bonus_langs': False,
     },
     'rbh': {
         'system_name': 'rbh',
-        'system_fullname': 'Robot Hack',
-        'system_assumptions': 'pla',
-        'stats': 8,
-        'spread': statArrays['pla'],
-        'affects': statAffects['pla'],
-        'acBase': 4,
-        'meleeMod': 'PRW',
-        'missileMod': 'PRW',
-        'modRange': 'modern',
-        'saves': saves['pla'],
-        'maxLvl': 15,
+        'system_fullname': 'Robot Hack (WIP)',
+        'system_baseline': 'pla',
+    },
+    'rpt': {
+        'system_name': 'rpt',
+        'system_fullname': 'Ruptures (WIP)',
+        'system_baseline': 'pla',
     },
     'tnu': {
         'system_name': 'tnu',
         'system_fullname': 'The Nightmares Underneath',
-        'system_assumptions': 'tnu',
         'hasHPs': False,
         'spread': statArrays['tnu'],
         'affects': statAffects['tnu'],
         'meleeMod': 'FER',
+        'maxLvl': 10,
+        'saves': False,
+        'bonus_langs': False,
     },
 }
 
 
-def get_system_prefs(system='tnu'):
+def get_system_prefs(system='def'):
+    if system not in list(dict.keys(systems)):
+        system = 'def'
     sysprefs = dict(systems['default'])
     specific = dict(systems[system.lower()])
+    if 'system_baseline' in list(dict.keys(specific)):
+        baseline = dict(systems[str(specific['system_baseline'])])
+        sysprefs.update(baseline)
     sysprefs.update(specific)
     return sysprefs
 

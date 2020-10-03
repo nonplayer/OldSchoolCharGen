@@ -112,6 +112,7 @@ spells_pla = {
 
 spells_match = {
     'bnt': spells_bnt,
+    'bntx': spells_bnt,
     'ham': spells_dd,
     'dd': spells_dd,
     'm81': spells_basic,
@@ -120,6 +121,7 @@ spells_match = {
 
 cantrips_match = {
     'bnt': cantrips_bnt,
+    'bntx': cantrips_bnt,
 }
 
 

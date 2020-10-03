@@ -7,39 +7,34 @@ import argparse
 import generator
 
 parser = argparse.ArgumentParser(description='Get Game System')
-parser.add_argument('-g', '--game_system', type=str, required=True, choices=['bnt', 'bntx', 'dd', 'ham', 'm81', 'tnu'],
-                    help='The abbreviated Game System (bnt, bntx, dd, ham, m81, tnu)')
+parser.add_argument('-g', '--game_system', type=str, required=True,
+                    choices=['bnt', 'bntx', 'dd', 'def', 'ham', 'm81', 'pla', 'rbh', 'rpt', 'tnu'],
+                    help='The abbreviated Game System (bnt, bntx, def, dd, ham, m81, pla, rbh, rpt, tnu)')
 parser.add_argument('-n', '--number_of_characters', type=int, action='store', default=1,
                     help='How many character to generate.')
+parser.add_argument('-y', '--silly', action='store_true', help='Use the "silly" skill and item options.')
 args = parser.parse_args()
 
 supported_systems = [
-    'dd', 'bnt', 'bntx', 'ham', 'm81', 'tnu'
+    'bnt', 'bntx', 'dd', 'def', 'ham', 'm81', 'pla', 'rbh', 'rpt', 'tnu'
 ]
 
 
-def print_character(game_system):
-    game_system = game_system.lower()
-    character = generator.generate(game_system)
-    print("\nA new random character for " + str(character.system_fullname))
+def print_character(character):
+    print("A new random character for " + str(character.system_fullname))
     print("-----------------------------------------------------")
     # print("Raw Data Print: ", gen_data)
-    print("Profession: %s;  Level: %s;  Race: %s" % (character.long, str(character.lvl), character.race))
+    if character.system == 'tnu':
+        print("Profession: %s;  Level: %s;  Race: %s" % (character.long, str(character.lvl), character.race))
+    else:
+        print("Character Class: %s;  Level: %s;  Race: %s;  Hit Dice: %sd%s;  Max Hit Points: %s" %
+              (character.long, str(character.lvl), character.race, str(character.lvl), str(character.hd),
+               str(character.hd + character.stats[str(character.hps_mod)]['mod'])))
     print("Alignment: %s;  Age: %s;  Looks: %s" % (character.align.title(), character.age, character.looks))
     print("Trait: %s;  Background: %s;  Social Status: %s (%s)" %
           (character.personality, character.background, character.soc_class, str(character.soc_mod)))
-    if game_system == 'tnu':
+    if character.system == 'tnu':
         print("Disposition: %sd%s;  Psychic Armour: %s" % (str(character.lvl), str(character.hd), str(character.pa)))
-    elif character.stats[character.hps_mod]['mod'] > 0:
-        print("Hit Die: %sd%s+%s;  Psychic Armour: %s" %
-              (str(character.lvl), str(character.hd), str(character.stats[character.hps_mod]['mod']*character.lvl),
-               str(character.pa)))
-    elif character.stats[character.hps_mod]['mod'] < 0:
-        print("Hit Die: %sd%s%s;  Psychic Armour: %s" %
-              (str(character.lvl), str(character.hd), str(character.stats[character.hps_mod]['mod']*character.lvl),
-               str(character.pa)))
-    else:
-        print("Hit Die: %sd%s;  Psychic Armour: %s" % (str(character.lvl), str(character.hd), str(character.pa)))
     print("---------------")
     print("\nAttribute Scores:")
     print("-----------------")
@@ -47,7 +42,8 @@ def print_character(game_system):
         if int(value['val']) < 10 and int(value['mod']) < 0:
             print("%s:  %s (%s): Affects %s" % (key, str(value['val']), str(value['mod']), str(character.affects[key])))
         elif int(value['val']) < 10 and int(value['mod']) >= 0:
-            print("%s:  %s (+%s): Affects %s" % (key, str(value['val']), str(value['mod']), str(character.affects[key])))
+            print("%s:  %s (+%s): Affects %s" % (key, str(value['val']), str(value['mod']),
+                                                 str(character.affects[key])))
         elif int(value['val']) > 9 and int(value['mod']) >= 0:
             print("%s: %s (+%s): Affects %s" % (key, str(value['val']), str(value['mod']), str(character.affects[key])))
         else:
@@ -68,7 +64,12 @@ def print_character(game_system):
             print(x)
     print("\nCombat Mods and Traits:")
     print("-----------------------")
-    print("Melee: %s;  Ranged: %s;  AC: %s" % (str(character.melee), str(character.range), str(character.ac)))
+    if character.system == 'ham':
+        print("# of Attack Dice: %sd20;  Melee: %s;  Ranged: %s;  Hit Die: d%s;  DEF: %s" %
+              (str(character.number_of_attacks), str(character.melee), str(character.range),
+               str(character.hd), str(character.ac)))
+    else:
+        print("Melee: %s;  Ranged: %s;  AC: %s" % (str(character.melee), str(character.range), str(character.ac)))
     print("\nRestrictions:")
     print("--------------------")
     for x in list(character.restrictions):
@@ -85,7 +86,10 @@ def print_character(game_system):
     print("----------")
     for x in list(character.armour):
         print(x)
-    print("\nMy Gear:")
+    if character.encumbrance:
+        print("\nMy Gear: [Max Encumbrance: " + str(character.encumbrance) + "]")
+    else:
+        print("\nMy Gear:")
     print("--------")
     for x in list(character.gear):
         print(x)
@@ -97,7 +101,7 @@ def print_character(game_system):
         else:
             for s in list(character.spells):
                 print(s)
-    print("")
+    print("--------------------")
 
 
 if __name__ == "__main__":
@@ -113,4 +117,6 @@ if __name__ == "__main__":
         print()
         game_sys = input("Enter the system abbreviation from above: ")
     for n in range(args.number_of_characters):
-        print_character(game_sys)
+        print_character(generator.generate(game_sys.lower(), args.silly))
+    if args.silly:
+        print("SILLY IS A GO!!")

@@ -56,6 +56,7 @@ baseline = {
     'skills': [],                           # LIST of skills for the class
     'restrictions': ['Placeholder for Restrictions'],               # Unsure, placeholder
     'special': ['Placeholder for Special Abilities'],               # Unsure, placeholder
+    'numAttacks': 1,                        # INT: number of attack dice at first level
     'wps': False,                           # INT: How many starting Weapon Proficiencies
     'weapons': 'war',                       # STR: Category of weapons allowed as choices
     'armour': 'war',                        # STR: Category of armours allowed as choices
@@ -65,8 +66,13 @@ baseline = {
     'casterStat': '',                       # STRING: stat used for spells, if a caster
     'extraspells': False,                   # either False or some magicians get free spells plus their choices
     'saves': False,                         # FALSE or else a LIST of integers, in order
-    'extragear': False,                     # either False or LIST: some professions have extra gear, put it here
+    'extragear': [],                        # either False or LIST: some professions have extra gear, put it here
     'extralangs': [],                       # LIST if any bonus languages come with the class
+}
+
+def_profs = {
+    'default': {},
+    'fighter': {}
 }
 
 bnt_profs = {
@@ -285,7 +291,7 @@ dd_profs = {
     'default': {
         'alignAllowed': ['chaos', 'law', 'neutral'],
         'wps': 2,
-        'saves': [12, 13, 14, 15, 16],
+        'saves': [12, 13, 14, 15, 16, 16],
         'skills': 'RANDOM',
     },
     'cleric': {
@@ -299,7 +305,7 @@ dd_profs = {
         'spellChooseAs': 'cleric',
         'spellsPerLvl': 1,
         'casterStat': 'WIS',
-        'saves': [11, 12, 14, 16, 15],
+        'saves': [11, 12, 14, 16, 15, 15],
         'extragear': ['a Holy Symbol'],
         'special': [
             '(Class) Spellcaster (Cleric List)',
@@ -318,7 +324,7 @@ dd_profs = {
         'restrictions': ['Dwarves can wear any armour or shield, and can use any small or medium weapon. '
                          'They cannot use large weapons due to their stature.'],
         'wps': 4,
-        'saves': [8, 9, 10, 13, 12],
+        'saves': [8, 9, 10, 13, 12, 12],
         'special': [
             '(Class) Heatvision',
             '(Class) Stonelore (1d6 roll, 2 or less finds details)',
@@ -335,7 +341,7 @@ dd_profs = {
         'spellChooseAs': 'mu',
         'spellsPerLvl': 2,
         'casterStat': 'INT',
-        'saves': [12, 13, 13, 15, 15],
+        'saves': [12, 13, 13, 15, 15, 15],
         'extragear': ['a Spellbook'],
         'extraspells': ['Read Magic'],
         'special': [
@@ -366,7 +372,8 @@ dd_profs = {
         'restrictions': ['Halflings can wear any armour or shield, and can use any small weapon. They cannot use '
                          'medium or large weapons due to their small stature.'],
         'weapons': 'hlf',
-        'saves': [8, 9, 10, 13, 12],
+        'armour': 'hlf',
+        'saves': [8, 9, 10, 13, 12, 12],
         'special': [
             '(Class) Small: -2 AC bonus vs creatures larger than humans.',
             '(Class) Nimble: +1 initiative, and +1 attack with ranged weapons.',
@@ -389,7 +396,7 @@ dd_profs = {
         'spellChooseAs': 'mu',
         'spellsPerLvl': 2,
         'casterStat': 'INT',
-        'saves': [13, 14, 13, 16, 15],
+        'saves': [13, 14, 13, 16, 15, 15],
         'extragear': ['a Spellbook'],
         'extraspells': ['Read Magic'],
         'special': [
@@ -408,7 +415,7 @@ dd_profs = {
                          'or shields. Thieves may use any missile weapon.'],
         'weapons': 'rog',
         'armour': 'rog',
-        'saves': [13, 14, 13, 16, 15],
+        'saves': [13, 14, 13, 16, 15, 15],
         'extragear': ['a Set of Thieves\' Tools'],
         'special': [
             '(Class) Sneak Attack: +4 attack, x2 damage',
@@ -433,175 +440,166 @@ ham_profs = {
         'alignAllowed': ['chaos', 'evil', 'good', 'law', 'neutral'],
         'attacksAs': 'mid',
         'skills': 'RANDOM',
+        'extragear': [],
         'weapons': 'war',
         'armour': 'war',
         'saves': [0, 1, 1, 0, 0, 0],
     },
     'cleric': {
-        'short': 'cleric',  # STR: class name for references
-        'long': 'Cleric',  # STR: class name for display
+        'short': 'cleric',
+        'long': 'Cleric',
         'flags': ['base', 'human', 'caster'],
         'alignAllowed': ['chaos', 'evil', 'good', 'law'],
         'primAttr': ['WIS', 'CHA'],
         'saves': [0, 0, 0, 1, 0, 1],
         'weapons': 'clr',
-        'casterStat': 'WIS',  # STRING: stat used for spells, if a caster
+        'casterStat': 'WIS',
         'spellsPerLvl': 2,
-        'spellChooseAs': 'cleric',  # STRING: if caster, usually = short
-        'extragear': ['A visible Symbol of your Holy Faith'],
+        'spellChooseAs': 'cleric',
+        'extragear': ['a visible Symbol of your Holy Faith (S)', 'a Prayerbook (M)'],
         'restrictions': ['Can use all weapons, shields, and armour that are not otherwise prohibited by your deity.',
                          'You cannot be of Neutral Alignment'],
         'special': [
-            '(Class) You cast spells from the Cleric spell list. You begin the game with a holy prayerbook which '
-            'contains a chance for randomly-determined clerical prayers. At each new level you add two (2) new '
-            'prayers to your book, and you can add more by sanctifying, converting, and transcribing prayers to '
-            'other gods found on scrolls and books in dungeons. At level 1 you can only cast level 1 spells. This '
-            'maximum spell level increases by +1 at every odd-numbered level of experience.',
-            '(Class) Once per Day per Level of Experience, you can hold aloft your holy symbol and turn back '
-            'undead, devils, demons, and any others that the \'Smith deems to be enemies of your faith. Opponents '
-            'must make Mind saves based on the difference in Level/HD Tiers. Targets who fail this save must cower, '
-            'flee, or possibly even take damage or be destroyed.',
+            '(Class) CAST SPELLS! from the Cleric list. You begin the game with a holy prayerbook and spells. Add new '
+            'prayers by leveling up, and also by sanctifying and converting discovered heretical prayers. Maximum '
+            'spell level starts at 1, and increases by +1 at odd-numbered levels of experience.',
+            '(Class) Once per Day per XP Level, you can hold aloft your holy symbol and turn back enemies of your '
+            'faith. Opponents make Mind saves based on difference in Level/HD Tiers. Failures must cower, flee, or '
+            'possibly even take damage or be destroyed.',
         ],
     },
     'dwarf': {
-        'short': 'dwarf',  # STR: class name for references
+        'short': 'dwarf',
         'long': 'Dwarven Defender',
         'race': 'dwarf',
         'hd': 8,
         'primAttr': ['STR', 'CON'],
-        'flags': ['base', 'demi'],  # LIST of flags for different effects
+        'flags': ['base', 'demi'],
+        'numAttacks': 2,
         'attacksAs': 'best',
         'extralangs': ['Dwarf'],
+        'extragear': ['ARMOUR: a Small Shield (1H, Size M, DEF+2)'],
         'restrictions': ['Can use all weapons, shields, and armour except longbows.'],
         'special': [
-            '(Class) If wearing Medium or heavier armour you do not suffer AC penalties from low DEX. Heavy armour '
-            'never reduces your movement speed.',
+            '(Class) Heavy or plate armour affects neither your DEX nor your movement speed.',
             '(Class) You are never lost when underground with solid earth or stone beneath their feet. You know the '
             'local grades and depth, and can feel air flow naturally. You have a 50% chance of detecting '
-            'hidden stonework just by passing, and automatically find them if you spend a turn searching.',
-            '(Class) You have a bonus melee attack die at first level (total of two), and gain a new one at '
-            'levels 5, 10, and 15. When attacking, declare target(s) and then roll all of your attack dice, but only '
-            'one damage die. Each hit applies the same amount of damage.',
-            '(Class) You have advantage on all Body and Death Saves.',
-            '(Class) You can use a Shield Bash with any one of your successful attack dice. As a Dwarf You do not '
-            'lose the AC bonus of the shield when using the bash.',
+            'hidden stonework just by passing, and automatically find them if you spend a Beat searching.',
+            '(Class) You have a bonus MELEE attack die at first level (total of two), and gain a new one at '
+            'levels 5, 10, and 15.',
+            '(Class) You have a Boon on all Body and Death Saves.',
+            '(Class) You can Shield Bash with any one of your successful attack dice. You do not lose the DEF bonus'
+            ' of the shield when using the bash.',
         ],
     },
     'elf': {
-        'short': 'elf',  # STR: class name for references
+        'short': 'elf',
         'long': 'Elven Exemplar',
         'race': 'elf',
-        'flags': ['base', 'demi', 'caster'],  # LIST of flags for different effects
+        'flags': ['base', 'demi', 'caster'],
+        'numAttacks': 2,
         'hd': 8,
         'primAttr': ['DEX', 'INT'],
         'saves': [0, 0, 1, 0, 1, 0],
-        'casterStat': 'INT',  # STRING: stat used for spells, if a caster
+        'casterStat': 'INT',
         'spellsPerLvl': 1,
-        'spellChooseAs': 'mu',  # STRING: if caster, usually = short
+        'spellChooseAs': 'mu',
+        'extragear': ['a spellbook (M)'],
         'extralangs': ['Elf'],
         'extraspells': ['Level 1: Read Magic'],
         'restrictions': ['Can use all weapons, shields, and armour. Armour may limit spellcasting.'],
         'special': [
-            '(Class) Immune to sleep, charm, slow, haste, aging, and energy drain effects, *unless* they are results '
-            'of the magic of an Elf (self or other, alive or undead).',
-            '(Class) You cast spells from the magic-user list. Begin the game with a spellbook containing Read Magic '
-            'and possible randomly-determined bonus spells. At each new level gain one (1) new spell to your book '
-            'from ongoing experimentation, and you can add more by transcribing scrolls and magical texts '
-            'found in dungeons. At level 1 you can only cast level 1 spells. This maximum spell level increases by '
-            '+1 at every odd-numbered level of experience.',
-            '(Class) You are better at casting in armour than humans. You suffer no chance of spell failure in '
-            'Light armour, and a 25%/50%/75% chance when wearing medium/heavy/plate armours, respectively. '
-            'Failed spells are forgotten per normal rules.',
-            '(Class) You can fight with two weapons at once. When wielding two one-handed weapons, roll one extra '
-            'attack die, but lower the damage die by one step (to a d6) for the entire assault. At level 9, this '
-            'increases to two extra attack dice.',
-            '(Class) You excel at the Bow. At second level, you gain a second attack die when using Short and Long '
-            'Bows, and a third at level 10. Each attack die requires one arrow from your quiver. When attacking '
-            'with a bow, declare target(s) first and then roll all of the attack dice, but only one damage die. '
-            'Each hits applies the same amount of damage.',
-            '(Class) You have a 50% chance of noticing concealed non-stonework doors and panels simply by passing '
-            'near them, and automatically find them if you spend a turn searching.',
-            '(Class) You have a bonus melee attack die at first level (total of two), and gain a new one at '
-            'levels 5, 10, and 15. When attacking, declare target(s) and then roll all of your attack dice, but '
-            'only one damage die. Each hits applies the same amount of damage.',
+            '(Class) Immune to sleep, charm, slow, haste, aging, and energy drain effects, except from another Elf.',
+            '(Class) Cast spells from the magic-user list. Starting spellbook contains Read Magic and possibly others.'
+            ' Gain new spells my leveling up, and from plundered scrolls and texts. Max spell level starts at 1, '
+            'and increases +1 at every odd-numbered level.',
+            '(Class) You can cast in armour. No chance of spell failure in Light armour, and only a 25%/50%/75% '
+            'chance in medium/heavy/plate, respectively. Failed spells are forgotten.',
+            '(Class) You can fight with two weapons. Roll one extra attack die, but lower the damage die by one step '
+            '(to a d6) for the action. At level 9, this increases to two extra attack dice.',
+            '(Class) 50% chance of noticing concealed non-stonework features simply by passing near them, automatic '
+            'if you spend a Beat searching.',
+            '(Class) Bonus attack die at first level, and gain a new one at levels 5, 10, and 15.',
         ],
     },
     'fighter': {
-        'short': 'fighter',  # STR: class name for references
-        'long': 'Fighter',  # STR: class name for display
+        'short': 'fighter',
+        'long': 'Fighter',
         'hd': 8,
         'attacksAs': 'best',
+        'numAttacks': 2,
         'primAttr': ['STR', 'CON'],
         'saves': [0, 1, 1, 0, 0, 1],
         'restrictions': ['You can use all weapons, shields, and armour.'],
         'special': [
-            '(Class) You have a bonus melee attack die at first level (total of two), and gain a new one at levels '
-            '3, 6, 9, 12, and 15. When attacking, declare target(s) and then roll all of the attack dice, but only '
-            'one damage die. Each hit applies the same amount of damage.',
+            '(Class) You have a bonus attack die at first level (total of two), and gain a new one at levels '
+            '3, 6, 9, 12, and 15.',
             '(Class) *Not Today!* At first level and each level after, you gain a single use of "Not Today!" When '
             'you would take damage (from any source) that would reduce your HP from positive to Zero or below, you '
-            'can spend a use and instead remain at 1 HP and negate the rest of the damage from that attack. These '
-            'uses accumulate with each level, but each use is permanently lost upon spending.',
-            '(Class) You have advantage on all Hit Dice rolls, and reroll all 1s on Hit Dice.',
-            '(Class) You can use a Shield Bash with any one of your successful attack dice, losing the shield AC '
+            'can spend a use and negate all of the damage from that attack. These uses accumulate with each level, '
+            'but each use is permanently lost when used.',
+            '(Class) When leveling up, you reroll your Hit Points twice, and keep the best result.',
+            '(Class) You can use a Shield Bash with any one of your successful attack dice, losing the shield DEF '
             'bonus until your next turn in combat.',
             '(Class) When using a two-handed weapon, roll an extra damage die with your attacks, applying the '
             'total result to all attacks that hit.',
         ],
     },
     'halfling': {
-        'short': 'halfling',  # STR: class name for references
+        'short': 'halfling',
         'long': 'Halfling Burglar',
         'race': 'halfling',
-        'flags': ['base', 'demi'],  # LIST of flags for different effects
+        'flags': ['base', 'demi'],
         'primAttr': ['DEX', 'CHA'],
         'saves': [1, 1, 1, 1, 1, 1],
         'weapons': 'hlf',
+        'armour': 'hlf',
+        'extragear': ['a set of Thieves\' tools (M)'],
         'extralangs': ['Halfling'],
         'restrictions': ['Can use all small weapons one-handed, or medium two-handed, and shields. Cannot use '
                          'two-handed human-sized weapons.'],
         'special': [
-            '(Class) You gain a bonus melee attack die at levels 4, 8, and 12. When attacking, declare your target(s) '
-            'and then roll all your attack dice, but only one damage die. Each hit applies the same amount of damage.',
-            '(Class) You have the following Thief Skills: Lockpicking, Perception, Stealth (with Advantage), '
-            'Thief-Climbing, and Trap-Finding (with Disadvantage).',
-            '(Class) Unless you have proven to be an obvious threat, or your opponents are otherwise specifically '
-            'predisposed against you, you are always attacked last.',
+            '(Class) You gain a bonus melee attack die at levels 4, 8, and 12.',
+            '(Class) You have the following Thief Skills: Break/Enter (DEX), Climb/Leap (STR with a Bane), '
+            'Find/Seek (WIS), Hide/Sneak (DEX with a Boon), and Snatch/Grab (DEX).',
+            '(Class) Unless you have proven to be an obvious threat, or your opponents  specifically hate you, '
+            'you are always attacked last.',
             '(Class) You can draw from inner strength for a sudden display of unexpected fierceness. By spending 1 '
             'Hit Point rolling your attacks, you increase the damage die for your attacks this round by one step.',
-            '(Class) You roll with advantage on Tactical Attacks.',
+            '(Class) You receive a Boon on Tactical Attacks.',
+            '(Class) All items are one size greater for Encumbrance limits.',
         ],
     },
     'halfogre': {
-        'short': 'halfogre',  # STR: class name for references
-        'long': 'Half-Ogre Berzerker',  # STR: class name for display
-        'race': 'halfogre',  # STR: race name of "RANDOM" to trigger the random race function
-        'flags': ['base', 'demi'],  # LIST of flags for different effects
+        'short': 'halfogre',
+        'long': 'Half-Ogre Berzerker',
+        'race': 'halfogre',
+        'flags': ['base', 'demi'],
         'attacksAs': 'best',
+        'numAttacks': 2,
         'alignAllowed': ['chaos', 'evil', 'good', 'neutral'],
         'hd': 10,
         'primAttr': ['STR', 'CON'],
+        'armour': 'brb',
         'extralangs': ['Ogre'],
         'restrictions': ['Can use all weapons and shields. Armour must be custom made. You cannot be Law aligned.'],
         'special': [
-            '(Class) You are built like an icehouses. All armour must be custom made at increased costs and time, '
-            'and only Halfling-sized creatures or smaller can move through your occupied space.',
+            '(Class) You are MASSIVE. All armour must be custom made at increased costs and time, and only '
+            'Halfling-sized creatures or smaller can move through your occupied space.',
+            '(Class) You can stow Huge size items for 3 Encumbrance slots.',
             '(Class) When you take damage, make a Mind save (target: 12) or go into an uncontrollable violent fury. '
-            'During this rage, take advantage on melee and thrown damage dice rolls, immunity to critical fumbles, '
-            'and disadvantage on all saves except Body and Death. Your actions must follow a specific course (ask '
-            'the \'Smith). You can voluntarily fail either save and willingly let the rage happen and/or knock '
-            'you unconscious afterward. You can also trigger it on your own by causing yourself 1 point of damage '
-            'with a weapon.',
-            '(Class) You get a bonus attack die at first level (total of two), and gain a new one at levels 5, 10, '
-            'and 15. When attacking, declare target(s) and then roll all your attack dice, but only one damage '
-            'die. Each hit applies the same amount of damage.',
+            'During this rage, gain an extra attack die (and another at levels 7 and 14), gain temporary extra HP = '
+            '1/2 your level (up), and suffer 2 Banes on all saves except Body and Death. Your actions must follow a '
+            'specific course (ask the \'Smith). You can also trigger it on your own by causing yourself 1 point of '
+            'damage with a weapon.',
+            '(Class) You get a bonus attack die at levels 5, 10, and 15.',
             '(Class) When using a two-handed weapon, roll d12 damage dice with your attacks (instead of d10), '
             'applying the result to all attacks that hit.',
         ],
     },
     'mu': {
-        'short': 'mu',  # STR: class name for references
-        'long': 'Magic-User',  # STR: class name for display
+        'short': 'mu',
+        'long': 'Magic-User',
         'flags': ['base', 'human', 'caster', 'mu-weapons'],
         'attacksAs': 'none',
         'hd': 4,
@@ -609,55 +607,51 @@ ham_profs = {
         'saves': [0, 0, 0, 0, 1, 0],
         'weapons': 'mag',
         'armour': 'mag',
-        'casterStat': 'INT',  # STRING: stat used for spells, if a caster
+        'casterStat': 'INT',
         'spellsPerLvl': 2,
-        'spellChooseAs': 'mu',  # STRING: if caster, usually = short
-        'extragear': ['a Spellbook'],
+        'spellChooseAs': 'mu',
+        'extragear': ['a Spellbook (M)'],
         'extraspells': ['At Will: Read Magic'],
         'restrictions': ['Can not use two-handed weapons except staves. Can not wear heavy armour or use shields. '
                          'Other armour can cause spell failure.'],
         'special': [
-            '(Class) You cannot wear Heavy armour, and suffer a chance of spell failure while wearing other armour. '
-            'In Light armour, the chance is 50%, and in Medium armour the chance is 75%. Failed spells are '
-            'forgotten per normal rules.',
-            '(Class) You cast spells from the Magic-User spell list. You begin the game with a spellbook containing '
-            'Read Magic and a potential for other randomly-determined bonus spells. At each new level you add 2 new '
-            'spells to your book from experimentation, and you can add more by transcribing scrolls and magical '
-            'texts found in dungeons. At level 1 you can safely cast level 1 spells. This maximum spell level '
-            'increases by +1 at every odd-numbered level of experience. Take note of the Highcast ability, below.',
-            '(Class) *Highcaster* You can prepare and attempt to cast spells of higher level than you normally would '
-            'be able to, provided you have a copy of the spell in your book. Casting the spell requires permanent '
-            'loss of INT score equal to the difference in allowed spell levels. Spells cast in this fashion are '
-            'always immediately forgotten.',
-            '(Class) *Bloodcaster* You can choose to take damage instead of forgetting spells. The amount of '
-            'damage taken is equal to the level of spell just cast. If below Zero HP, this burns CON instead.',
-            '(Class) You can cast the spell *Read Magic* freely and at will, without need to prepare or memorize.',
+            '(Class) Cannot wear Heavy armour, and suffer a chance of spell failure while wearing other. '
+            'Chance is 50%/75% in Light/Medium, respectively. Failed spells are forgotten.',
+            '(Class) Cast magic-user spells. Start with a spellbook containing Read Magic and possibly others. Add '
+            'new spells from leveling up, and from plundered scrolls and texts. Max "safe" spell level starts at 1, '
+            'and raises +1 at every odd-numbered level of experience.',
+            '(Class) You can also prepare and "High Cast" higher level spells, if you have a copy of the spell. '
+            'Doing so causes permanent loss of INT equal to the difference in allowed levels. Spells cast this way '
+            'are always immediately forgotten.',
+            '(Class) You can choose to take damage instead of forgetting spells. The amount is equal to the level of '
+            'spell just cast. If below Zero HP, this burns CON instead.',
+            '(Class) You can cast *Read Magic* freely and at will, no prep required.',
             '(Class) You can use special mage-only weapons: The Wand and The Staff.',
         ],
     },
     'thief': {
-        'short': 'thief',  # STR: class name for references
-        'long': 'Thief',  # STR: class name for display
+        'short': 'thief',
+        'long': 'Thief',
         'attacksAs': 'worst',
         'primAttr': ['DEX', 'INT'],
         'saves': [1, 0, 0, 1, 0, 0],
         'weapons': 'rog',
         'armour': 'rog',
-        'extragear': ['a Set of Thieves\' Tools'],
+        'extragear': ['a Set of Thieves\' Tools (M)', 'WEAPON: Dagger (1H, Size S, R: 10/30ft, Dmg: M+1, Thrown)'],
         'extralangs': ['Thieves\' Cant'],
         'restrictions': ['You can use any weapons and armour that the Hammersmith deems to be suitably sneaky.'],
         'special': [
-            '(Class) *Stabbity!* When using a melee weapon to attack a foe against which you either have attack '
-            'advantage or are hidden from perception, double your total damage against that foe on a successful hit. '
+            '(Class) *Stabbity!* When using a melee weapon to attack a foe against which you either have net Boons or '
+            'are hidden from perception, double your total damage against that foe on a successful hit. '
             'This multiple increases by +1 at levels 3, 6, 9, 12, and 15.',
-            '(Class) You have access to special Thief-Only skills: Deciphering (INT), Lockpicking (DEX), Perception '
-            '(WIS), Stealth (DEX), Thief-climbing (STR), Tracking (WIS), Trap-finding (INT), and Trap-breaking (DEX). '
-            'At first level you must randomly determine one Thief Skill to be your Bailiwick, and one to be your '
-            'Failing. You get advantage on checks related to your Bailiwick, and disadvantage on checks related to '
-            'your Failing,  Once per adventure per experience level, you can attempt to reroll a failed Thief Skill '
-            'check. This count resets upon Returning to Town.',
-            '(Class) You roll with advantage on Tactical Attacks.',
-            '(Class) You have advantage on all Saves against the effects of Traps.',
+            '(Class) You have Thiefskills: Appraise/Identify (INT), Break/Enter (DEX), Climb/Leap (STR), '
+            'Find & Seek (WIS), Forge/Decipher (INT), Hide/Sneak (DEX), Lie/Cheat (CHA), and Snatch/Grab (DEX). At '
+            'first level you must randomly determine one Thief Skill to be your Bailiwick (which receives a Boon), '
+            'and one to be your Failing (which receives a Bane). Once per adventure per XP level, you can attempt '
+            'to reroll a failed Thief Skill check. This count resets upon Returning to Town. At 9th level, your '
+            'Thiefskills magically evolve.',
+            '(Class) You receive a Boon on Tactical Attacks.',
+            '(Class) You receive a Boon on Saves against Trap effects. Add another total Boon at levels 4, 9, and 13.',
         ],
     },
 }
@@ -667,7 +661,7 @@ m81_profs = {
         'hd': 6,
         'alignAllowed': ['chaos', 'law', 'neutral'],
         'wps': 0,
-        'saves': [12, 13, 14, 15, 16],
+        'saves': [14],
         'skills': 'RANDOM',
     },
     'cleric': {
@@ -680,8 +674,8 @@ m81_profs = {
         'weapons': 'clr',
         'spellChooseAs': 'cleric',
         'spellsPerLvl': 1,
-        'casterStat': 'MIND',
-        'saves': [11, 12, 14, 16, 15],
+        'casterStat': 'MND',
+        'saves': [15],
         'extragear': ['a Holy Symbol'],
         'special': [
             '(Class) Spellcaster (Cleric List)',
@@ -695,7 +689,6 @@ m81_profs = {
         'primAttr': ['STR'],
         'restrictions': ['Dwarves can wear any weapon, armour, or shield. They cannot use weapons over 4 feet'
                          ' in length except axes and hammers.'],
-        'saves': [8, 9, 10, 13, 12],
         'flags': ['base', 'demi'],
         'nextXP': '2200',
         'hd': 8,
@@ -719,12 +712,12 @@ m81_profs = {
         'nextXP': '4000',
         'attacksAs': 'best',
         'wps': 1,
-        'primAttr': ['MIND'],
+        'primAttr': ['MND'],
         'restrictions': ['Elves can wear any armour or shield, and can use any weapon.'],
         'spellChooseAs': 'mu',
         'spellsPerLvl': 2,
-        'casterStat': 'MIND',
-        'saves': [12, 13, 13, 15, 15],
+        'casterStat': 'MND',
+        'saves': [17],
         'extragear': ['a Spellbook'],
         'extraspells': ['Read Magic'],
         'extralangs': ['Elf', 'Orc', 'Hobgoblin', 'Gnoll'],
@@ -760,7 +753,8 @@ m81_profs = {
                          'Due to your stature, you must wield medium weapons with two hands and '
                          'cannot use a long bow.'],
         'weapons': 'hlf',
-        'saves': [8, 9, 10, 13, 12],
+        'armour': 'hlf',
+        'saves': [15],
         'special': [
             '(Class) Fighter Bonus +1 to Attacks and Damage.',
             '(Class) Choose 1 Weapon for "Good" Mastery: +2 to hit, Change damage to 1d2+2 (for 1d4), 1d3+3 (for 1d6),'
@@ -776,15 +770,15 @@ m81_profs = {
         'flags': ['base', 'human', 'caster'],
         'nextXP': '2500',
         'hd': 4,
-        'primAttr': ['MIND'],
-        'saves': [13, 13, 13, 16, 14],
+        'primAttr': ['MND'],
+        'saves': [16],
         'attacksAs': 'worst',
         'restrictions': ['Magic-users may not wear armour and may only use daggers, staves, and slings as weapons.'],
         'weapons': 'mag',
         'armour': 'mag',
         'spellChooseAs': 'mu',
         'spellsPerLvl': 2,
-        'casterStat': 'MIND',
+        'casterStat': 'MND',
         'extragear': ['a Spellbook'],
         'extraspells': ['Read Magic'],
         'special': [
@@ -815,11 +809,14 @@ m81_profs = {
             '(Class) Thieves have special training in listening at doors and detecting traps and secret/hidden doors.',
         ],
         'extralangs': ['Thieves\' Cant'],
-        'saves': [14, 15, 13, 16, 14],
+        'saves': [14, 15, 13, 16, 14, 14],
     },
 }
 
-pla_profs = {}
+pla_profs = {
+    'default': {},
+    'fighter': {}
+}
 
 tnu_profs = {
     'default': {
@@ -1040,7 +1037,7 @@ tnu_profs = {
             'attributes that has been temporarily reduced. You may not treat the same person again until they '
             'are harmed again, but you may treat a total number of people each day equal to your level (if you '
             'spend an hour on each).',
-            'You always find hidden things when you spend a turn searching a dungeon of your level or lower, '
+            'You always find hidden things when you spend a Beat searching a dungeon of your level or lower, '
             'and you always roll against your full Dexterity score when you search a higher-level dungeon '
             '(instead of half your Dexterity).',
             'You can use any magic item and gain its full benefits, regardless of alignment, profession, '
@@ -1065,7 +1062,7 @@ tnu_profs = {
             'you must roll equal to or lower than your Dexterity score on a d20 to find hidden things. '
             'If the dungeon level is higher than your own, you must roll equal to or lower than half your '
             'Dexterity score, rounded down, on a d20 to find hidden things.',
-            'You always find hidden things when you spend a turn searching a dungeon of your level or lower, '
+            'You always find hidden things when you spend a Beat searching a dungeon of your level or lower, '
             'and you always roll against your full Dexterity score when you search a higher-level dungeon '
             '(instead of half your Dexterity).',
         ],
@@ -1112,10 +1109,8 @@ tnu racial_profs = [fey_knight, halfling]
 tnu optional_profs = [berserker, disciple]
 '''
 
-base_profs_tnu = [
-    'assassin', 'bard',
-    'champ_chaos', 'champ_evil', 'champ_good', 'champ_law',
-    'cultist', 'fighter', 'scholar', 'thief', 'wizard'
+base_profs_def = [
+    'fighter'
 ]
 
 base_profs_bnt = [
@@ -1131,8 +1126,22 @@ base_profs_ham = [
     'cleric', 'elf', 'dwarf', 'fighter', 'halfogre', 'halfling', 'mu', 'thief'
 ]
 
+base_profs_pla = [
+    'fighter'
+]
+
+base_profs_tnu = [
+    'assassin', 'bard',
+    'champ_chaos', 'champ_evil', 'champ_good', 'champ_law',
+    'cultist', 'fighter', 'scholar', 'thief', 'wizard'
+]
+
 # I don't do druids or monks, they're a pain in the ass
 proflists = {
+    'def': {
+        'choices': base_profs_def,
+        'dict': def_profs,
+    },
     'bnt': {
         'choices': base_profs_bnt,
         'dict': bnt_profs,
@@ -1153,6 +1162,18 @@ proflists = {
         'choices': base_profs_dnd,
         'dict': m81_profs,
     },
+    'pla': {
+        'choices': base_profs_pla,
+        'dict': pla_profs,
+    },
+    'rbh': {
+        'choices': base_profs_pla,
+        'dict': pla_profs,
+    },
+    'rpt': {
+        'choices': base_profs_pla,
+        'dict': pla_profs,
+    },
     'tnu': {
         'choices': base_profs_tnu,
         'dict': tnu_profs,
@@ -1163,32 +1184,45 @@ proflists = {
     },
 }
 
+supported_systems = [
+    'dd', 'bnt', 'bntx', 'ham', 'm81', 'pla', 'rbh', 'rpt', 'tnu'
+]
+
 
 # this returns a random character profession and all its base data
-def get_profession(system='tnu'):
-    my_list = proflists[system]['choices']
-    my_dict = proflists[system]['dict']
-    prof_data = baseline
-    syst_defs = my_dict['default']
-    prof_data.update(syst_defs)
-    prof_spec = my_dict[random.choice(my_list)]
-    prof_data.update(prof_spec)
-    return prof_data
+def get_profession(system='def'):
+    if system not in supported_systems:
+        system = 'def'
+    game_professions_choices = proflists[system]['choices']
+    game_professions_dict = proflists[system]['dict']
+    profession_data = baseline
+    system_defaults = game_professions_dict['default']
+    profession_data.update(system_defaults)
+    my_random_profession = game_professions_dict[random.choice(game_professions_choices)]
+    profession_data.update(my_random_profession)
+    return profession_data
 
 
-'''
-def get_system_prefs(system='tnu'):
-    sysprefs = dict(systems['default'])
-    specific = dict(systems[system.lower()])
-    sysprefs.update(specific)
-    return sysprefs
-'''
-
-
-'''
-for key, value in dict.items(get_profession()):
-    print(key, ":", value)
-'''
+# this returns a random character profession and all its base data
+def get_hammerclass(classroll, subroll):
+    if classroll >= 17:
+        hammercrawl_profession = 'halfogre'
+    elif classroll >= 14:
+        hammercrawl_profession = 'halfling'
+    elif classroll >= 8:
+        humans = ['cleric', 'fighter', 'mu', 'thief']
+        hammercrawl_profession = humans[subroll - 1]
+    elif classroll >= 5:
+        hammercrawl_profession = 'dwarf'
+    else:
+        hammercrawl_profession = 'elf'
+    game_professions_dict = proflists['ham']['dict']
+    profession_data = baseline
+    system_defaults = game_professions_dict['default']
+    profession_data.update(system_defaults)
+    my_random_profession = game_professions_dict[hammercrawl_profession]
+    profession_data.update(my_random_profession)
+    return profession_data
 
 
 if __name__ == "__main__":

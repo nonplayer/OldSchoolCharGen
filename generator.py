@@ -53,7 +53,7 @@ def gen_ac(prefs, armour):
             ac_mod += 5
         elif any('Light Armour' in x for x in armour):
             ac_mod += 3
-    elif prefs['system_assumptions'] == 'dnd':
+    elif prefs['acSystem'] == 'dnd':
         if any('Plate Armour' in x for x in armour):
             ac_mod += 8
         elif any('Plate Mail' in x for x in armour):
@@ -70,7 +70,7 @@ def gen_ac(prefs, armour):
             ac_mod += 2
         elif any('Padded Armour' in x for x in armour):
             ac_mod += 1
-    if prefs['system_name'] not in ['pla']:
+    if prefs['acSystem'] != ['pla']:
         if any('A Tower Shield' in x for x in armour):
             ac_mod += 2
         elif any('A Shield' in x for x in armour):
@@ -137,7 +137,7 @@ class Character(object):
         #
         # now for gear:
         self.init_emcumbrance()
-        if self.system_assumptions == 'tnu':
+        if self.system == 'tnu':
             self.my_gear_dump = self.get_gear_tnu(my_class)
         else:
             self.my_gear_dump = self.get_gear_dnd(soc_score, self.system)
@@ -160,7 +160,7 @@ class Character(object):
         self.gear = sorted(self.my_gear_dump)
         # now to generate the character's armour class
         self.ac = gen_ac(self.prefs, my_armourlist)
-        if self.system_assumptions == 'dnd':
+        if self.prefs['acSystem'] == 'dnd':
             if self.prefs['acType'] == 'descend':
                 self.ac -= self.stats['DEX']['mod']
             else:
@@ -364,7 +364,6 @@ class Character(object):
     def load_prefs_data(self):
         self.system = self.prefs['system_name']
         self.system_fullname = self.prefs['system_fullname']
-        self.system_assumptions = self.prefs['system_assumptions']
         self.setting = self.prefs['setting']
         self.affects = dict(self.prefs['affects'])
         self.hps_mod = self.prefs['HPsMod']

@@ -363,7 +363,6 @@ systems = {
     'default': {
         'system_name': 'def',           # shortname for the system, used in some lists and dicts
         'system_fullname': 'Default Display Name (DnD New)',
-        'system_assumptions': 'dnd',    # STR: used to determine armor types, equipment lists, and AC assumptions
         'setting': 'fantasy',           # STR: game setting, for use with random setting-specific elements
         'hasHPs': True,                 # BOO: changes the calculations if the system has hit points
         'stats': 6,                     # INT: how many stats in this system, usually 6
@@ -371,6 +370,7 @@ systems = {
         'affects': statAffects['dnd'],  # DICT: reference of what each stat in the system affects during play
         'acBase': 10,                   # INT: AC base 9 or 10, usually
         'acType': 'ascend',             # STR: 'ascend' or 'descend'
+        'acSystem': 'dnd',              # STR: "dnd" = basic D&D armour rules. "pla" = platinum armour rules
         'meleeMod': 'STR',              # STR: stat used to calc melee attack modifier
         'missileMod': 'DEX',            # STR: stat used to calc ranged attack modifier
         'modRange': 'classic',          # STR: style of stat mods generated. classic = +3 to -3, modern = (stat-10)/2,
@@ -448,11 +448,11 @@ systems = {
     'pla': {
         'system_name': 'pla',
         'system_fullname': 'Microlite Platinum (WIP)',
-        'system_assumptions': 'pla',
         'stats': 8,
         'spread': statArrays['pla'],
         'affects': statAffects['pla'],
         'acBase': 4,
+        'acSystem': 'pla',
         'meleeMod': 'PRW',
         'missileMod': 'PRW',
         'modRange': 'modern',
@@ -469,7 +469,6 @@ systems = {
     'tnu': {
         'system_name': 'tnu',
         'system_fullname': 'The Nightmares Underneath',
-        'system_assumptions': 'tnu',
         'hasHPs': False,
         'spread': statArrays['tnu'],
         'affects': statAffects['tnu'],

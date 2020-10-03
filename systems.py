@@ -357,8 +357,6 @@ race_data = {
 # Defaults are overridden by the system-specific alterations
 #
 systems = {
-    # a fallback blank system for when adding new systems
-    'def': {},
     # the default base assumptions for all new games is "new" DnD rules (3.x+) unless overwritten
     'default': {
         'system_name': 'def',           # shortname for the system, used in some lists and dicts
@@ -388,6 +386,10 @@ systems = {
         'skill_choices': skills_dnd,    # LIST of skills for the random skill assigner
         'skills_mod': 'INT',            # STR all caps of stat used to modify starting skills
         'encumbrance': False,           # Does this system use Encumbrance, and if so, what style
+    },
+    # a fallback blank system for when adding new systems
+    'def': {
+        'saves': False,                 # def saves is False to make adding new systems less error-prone
     },
     # actual systems and inherited baselines below, alphabetically
     'dnd_old': {

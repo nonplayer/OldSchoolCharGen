@@ -598,7 +598,7 @@ ham_profs = {
         'flags': ['base', 'human', 'caster', 'mu-weapons'],
         'attacksAs': 'none',
         'hd': 4,
-        'primAttr': ['INT', 'SOC'],
+        'primAttr': ['INT'],
         'saves': [0, 0, 0, 0, 1, 0],
         'weapons': 'mag',
         'armour': 'mag',

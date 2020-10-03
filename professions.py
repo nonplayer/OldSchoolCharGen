@@ -476,17 +476,15 @@ ham_profs = {
         'extragear': ['ARMOUR: a Small Shield (1H, Size M, DEF+2)'],
         'restrictions': ['Can use all weapons, shields, and armour except longbows.'],
         'special': [
-            '(Class) If wearing Medium or heavier armour you do not suffer AC penalties from low DEX. Heavy armour '
-            'never reduces your movement speed.',
+            '(Class) Heavy or plate armour affects neither your DEX nor your movement speed.',
             '(Class) You are never lost when underground with solid earth or stone beneath their feet. You know the '
             'local grades and depth, and can feel air flow naturally. You have a 50% chance of detecting '
-            'hidden stonework just by passing, and automatically find them if you spend a turn searching.',
-            '(Class) You have a bonus attack die at first level (total of two), and gain a new one at '
-            'levels 5, 10, and 15. When attacking, declare target(s) and then roll all of your attack dice, but only '
-            'one damage die. Each hit applies the same amount of damage.',
-            '(Class) You have advantage on all Body and Death Saves.',
-            '(Class) You can use a Shield Bash with any one of your successful attack dice. As a Dwarf You do not '
-            'lose the AC bonus of the shield when using the bash.',
+            'hidden stonework just by passing, and automatically find them if you spend a Beat searching.',
+            '(Class) You have a bonus MELEE attack die at first level (total of two), and gain a new one at '
+            'levels 5, 10, and 15.',
+            '(Class) You have a Boon on all Body and Death Saves.',
+            '(Class) You can Shield Bash with any one of your successful attack dice. You do not lose the DEF bonus'
+            ' of the shield when using the bash.',
         ],
     },
     'elf': {
@@ -514,10 +512,9 @@ ham_profs = {
             'chance in medium/heavy/plate, respectively. Failed spells are forgotten.',
             '(Class) You can fight with two weapons. Roll one extra attack die, but lower the damage die by one step '
             '(to a d6) for the action. At level 9, this increases to two extra attack dice.',
-            '(Class) 50% chance of noticing concealed non-stonework features simply by passing near them, and '
-            'automatically if you spend a turn searching.',
-            '(Class) Bonus attack die at first level, and gain a new one at levels 5, 10, and 15. When '
-            'attacking, declare target(s) and roll all of your dice, but only one damage die.',
+            '(Class) 50% chance of noticing concealed non-stonework features simply by passing near them, automatic '
+            'if you spend a Beat searching.',
+            '(Class) Bonus attack die at first level, and gain a new one at levels 5, 10, and 15.',
         ],
     },
     'fighter': {
@@ -531,12 +528,11 @@ ham_profs = {
         'restrictions': ['You can use all weapons, shields, and armour.'],
         'special': [
             '(Class) You have a bonus attack die at first level (total of two), and gain a new one at levels '
-            '3, 6, 9, 12, and 15. When attacking, declare target(s) and then roll all of the attack dice, but only '
-            'one damage die. Each hit applies the same amount of damage.',
+            '3, 6, 9, 12, and 15.',
             '(Class) *Not Today!* At first level and each level after, you gain a single use of "Not Today!" When '
             'you would take damage (from any source) that would reduce your HP from positive to Zero or below, you '
-            'can spend a use and instead remain at 1 HP and negate the rest of the damage from that attack. These '
-            'uses accumulate with each level, but each use is permanently lost upon spending.',
+            'can spend a use and negate all of the damage from that attack. These uses accumulate with each level, '
+            'but each use is permanently lost when used.',
             '(Class) You have advantage on all Hit Dice rolls, and reroll all 1s on Hit Dice.',
             '(Class) You can use a Shield Bash with any one of your successful attack dice, losing the shield AC '
             'bonus until your next turn in combat.',
@@ -1038,7 +1034,7 @@ tnu_profs = {
             'attributes that has been temporarily reduced. You may not treat the same person again until they '
             'are harmed again, but you may treat a total number of people each day equal to your level (if you '
             'spend an hour on each).',
-            'You always find hidden things when you spend a turn searching a dungeon of your level or lower, '
+            'You always find hidden things when you spend a Beat searching a dungeon of your level or lower, '
             'and you always roll against your full Dexterity score when you search a higher-level dungeon '
             '(instead of half your Dexterity).',
             'You can use any magic item and gain its full benefits, regardless of alignment, profession, '
@@ -1063,7 +1059,7 @@ tnu_profs = {
             'you must roll equal to or lower than your Dexterity score on a d20 to find hidden things. '
             'If the dungeon level is higher than your own, you must roll equal to or lower than half your '
             'Dexterity score, rounded down, on a d20 to find hidden things.',
-            'You always find hidden things when you spend a turn searching a dungeon of your level or lower, '
+            'You always find hidden things when you spend a Beat searching a dungeon of your level or lower, '
             'and you always roll against your full Dexterity score when you search a higher-level dungeon '
             '(instead of half your Dexterity).',
         ],

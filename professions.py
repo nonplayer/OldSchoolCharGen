@@ -70,6 +70,11 @@ baseline = {
     'extralangs': [],                       # LIST if any bonus languages come with the class
 }
 
+def_profs = {
+    'default': {},
+    'fighter': {}
+}
+
 bnt_profs = {
     'default': {
         'flags': ['base'],
@@ -1104,6 +1109,10 @@ tnu racial_profs = [fey_knight, halfling]
 tnu optional_profs = [berserker, disciple]
 '''
 
+base_profs_def = [
+    'fighter'
+]
+
 base_profs_bnt = [
     'assassin', 'barbarian', 'bard', 'cleric', 'duelist',
     'fighter', 'mu', 'paladin', 'ranger', 'sorc', 'thief',
@@ -1130,8 +1139,8 @@ base_profs_tnu = [
 # I don't do druids or monks, they're a pain in the ass
 proflists = {
     'def': {
-        'choices': base_profs_dnd,
-        'dict': dd_profs,
+        'choices': base_profs_def,
+        'dict': def_profs,
     },
     'bnt': {
         'choices': base_profs_bnt,

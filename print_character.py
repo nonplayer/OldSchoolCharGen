@@ -7,15 +7,16 @@ import argparse
 import generator
 
 parser = argparse.ArgumentParser(description='Get Game System')
-parser.add_argument('-g', '--game_system', type=str, required=True, choices=['bnt', 'bntx', 'dd', 'ham', 'm81', 'tnu'],
-                    help='The abbreviated Game System (bnt, bntx, dd, ham, m81, tnu)')
+parser.add_argument('-g', '--game_system', type=str, required=True,
+                    choices=['bnt', 'bntx', 'dd', 'def', 'ham', 'm81', 'pla', 'tnu'],
+                    help='The abbreviated Game System (bnt, bntx, def, dd, ham, m81, pla, tnu)')
 parser.add_argument('-n', '--number_of_characters', type=int, action='store', default=1,
                     help='How many character to generate.')
 parser.add_argument('-y', '--silly', action='store_true', help='Use the "silly" skill and item options.')
 args = parser.parse_args()
 
 supported_systems = [
-    'dd', 'bnt', 'bntx', 'ham', 'm81', 'tnu'
+    'bnt', 'bntx', 'dd', 'def', 'ham', 'm81', 'pla', 'tnu'
 ]
 
 

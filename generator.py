@@ -403,10 +403,10 @@ class Character(object):
         self.looks = random.choice(setting_data['looks'])
 
 
-def generate(game_system='tnu', silly=False):
+def generate(game_system='def', silly=False):
     #
     # first let's load those system prefs, to accommodate multiple game variants
-    prefs = dict(systems.get_system_prefs(game_system.upper()))
+    prefs = dict(systems.get_system_prefs(game_system.lower()))
     return Character(game_system, prefs, silly)
 
 

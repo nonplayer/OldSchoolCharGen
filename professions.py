@@ -814,7 +814,10 @@ m81_profs = {
     },
 }
 
-pla_profs = {}
+pla_profs = {
+    'default': {},
+    'fighter': {}
+}
 
 tnu_profs = {
     'default': {
@@ -1107,12 +1110,6 @@ tnu racial_profs = [fey_knight, halfling]
 tnu optional_profs = [berserker, disciple]
 '''
 
-base_profs_tnu = [
-    'assassin', 'bard',
-    'champ_chaos', 'champ_evil', 'champ_good', 'champ_law',
-    'cultist', 'fighter', 'scholar', 'thief', 'wizard'
-]
-
 base_profs_bnt = [
     'assassin', 'barbarian', 'bard', 'cleric', 'duelist',
     'fighter', 'mu', 'paladin', 'ranger', 'sorc', 'thief',
@@ -1126,8 +1123,22 @@ base_profs_ham = [
     'cleric', 'elf', 'dwarf', 'fighter', 'halfogre', 'halfling', 'mu', 'thief'
 ]
 
+base_profs_pla = [
+    'fighter'
+]
+
+base_profs_tnu = [
+    'assassin', 'bard',
+    'champ_chaos', 'champ_evil', 'champ_good', 'champ_law',
+    'cultist', 'fighter', 'scholar', 'thief', 'wizard'
+]
+
 # I don't do druids or monks, they're a pain in the ass
 proflists = {
+    'def': {
+        'choices': base_profs_dnd,
+        'dict': dd_profs,
+    },
     'bnt': {
         'choices': base_profs_bnt,
         'dict': bnt_profs,
@@ -1148,6 +1159,10 @@ proflists = {
         'choices': base_profs_dnd,
         'dict': m81_profs,
     },
+    'pla': {
+        'choices': base_profs_pla,
+        'dict': pla_profs,
+    },
     'tnu': {
         'choices': base_profs_tnu,
         'dict': tnu_profs,
@@ -1158,9 +1173,15 @@ proflists = {
     },
 }
 
+supported_systems = [
+    'dd', 'bnt', 'bntx', 'ham', 'm81', 'pla', 'tnu'
+]
+
 
 # this returns a random character profession and all its base data
-def get_profession(system='tnu'):
+def get_profession(system='def'):
+    if system not in supported_systems:
+        system = 'def'
     game_professions_choices = proflists[system]['choices']
     game_professions_dict = proflists[system]['dict']
     profession_data = baseline

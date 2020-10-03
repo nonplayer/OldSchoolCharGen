@@ -22,7 +22,7 @@ statArrays = {
     'ham': ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA', 'SOC'],
     'm81': ['STR', 'DEX', 'MND', 'CHA'],
     'tnu': ['CHA', 'DEX', 'FER', 'HEA', 'INT', 'WIL'],
-    'pla': ['ICQ', 'MEE', 'MAF', 'PST', 'PRW', 'PND', 'PBT', 'RUN'],
+    'pla': ['ICQ', 'MEE', 'MAF', 'PST', 'PRW', 'PND', 'PBT', 'MOV'],
 }
 
 statAffects = {
@@ -383,6 +383,8 @@ systems = {
         'skill_choices': skills_dnd,    # LIST of skills for the random skill assigner
         'skills_mod': 'INT',            # STR all caps of stat used to modify starting skills
     },
+    # a fallback blank system for when adding new systems
+    'def': {},
     'bnt': {
         'system_name': 'bnt',
         'system_fullname': 'Blood & Treasure',
@@ -417,7 +419,6 @@ systems = {
         'stats': 7,
         'spread': statArrays['ham'],
         'affects': statAffects['ham'],
-        #'saves': saves['ham'],
         'saves': dict(saves['ham']),
         'maxLvl': 15,
     },
@@ -447,7 +448,7 @@ systems = {
         'missileMod': 'PRW',
         'modRange': 'modern',
         'HPsMod': 'PND',
-        'saves': saves['pla'],
+        # 'saves': saves['pla'],
         'maxLvl': 15,
     },
     'rbh': {
@@ -476,7 +477,9 @@ systems = {
 }
 
 
-def get_system_prefs(system='tnu'):
+def get_system_prefs(system='def'):
+    if system not in list(dict.keys(systems)):
+        system = 'def'
     sysprefs = dict(systems['default'])
     specific = dict(systems[system.lower()])
     sysprefs.update(specific)

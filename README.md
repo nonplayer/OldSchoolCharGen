@@ -16,13 +16,15 @@ Currently this tool can create characters for the following old school games:
 Additionally, I've already begun laying the groundwork for extended compatibility with a number of other games, including:
 
 * [Microlite Platinum](https://archive.4plebs.org/dl/tg/image/1406/96/1406960963325.pdf)
-  - "Robot Hack" based on a popular anime in the USA...
-  - "Ruptures" based on a well-known gonzo post-apocalyptic RPG...
-* And further out...
-  - TNU 2nd Edition compatibility
-	- Beyond the Wall
-	- The Black Hack
-	- Kaigaku
+* "Robot Hack" based on a popular anime in the USA...
+* "Ruptures" based on a well-known gonzo post-apocalyptic RPG...
+
+And further out...
+
+* TNU 2nd Edition compatibility
+* Beyond the Wall
+* The Black Hack
+* Kaigaku
 
 My hope is that as I add more systems and automate more of the decisions, adding in further systems compatibility will eventually be as simple as adding a new set of system prefs and hitting go.
 

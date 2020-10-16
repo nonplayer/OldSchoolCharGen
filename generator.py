@@ -107,10 +107,18 @@ class Character(object):
         #
         # let's get that juicy character data and break it out!
         self.load_profession_data()
-        self.init_race_and_languages()
+        # self.init_race_and_languages()
+        self.racedata = self.init_race_and_languages()
+        self.race = self.racedata['label']
+        self.traits = self.traits + self.racedata['traits']
+        self.languages = self.racedata['core_languages']
+        self.racemods = self.racedata['mods']
         primes = list(self.profession['primAttr'])
         spread = list(self.prefs['spread'])
-        self.stats = dice.get_spread(spread, primes, self.prefs['modRange'], self.racemods)
+        method = self.prefs['stat_rolls']
+        array = self.prefs['roll_array']
+        print(method)
+        self.stats = dice.get_spread(method, array, spread, primes, self.prefs['modRange'], self.racemods)
         self.init_skills()
         #
         # get stats average, for reasons now deprecated:
@@ -356,13 +364,14 @@ class Character(object):
 
     def init_race_and_languages(self):
         if self.profession['race'] == 'RANDOM':
-            my_race = random.choice(list(self.prefs['race_choices']))
+            spec_race = random.choice(list(self.prefs['race_choices']))
         else:
-            my_race = self.profession['race']
-        self.race = self.prefs['race_data'][my_race]['label']
-        self.traits = self.traits + self.prefs['race_data'][my_race]['traits']
-        self.languages = self.prefs['race_data'][my_race]['core_languages']
-        self.racemods = self.prefs['race_data'][my_race]['mods']
+            spec_race = self.profession['race']
+        my_race = dict(self.prefs['race_data']['default'])
+        new_race = dict(self.prefs['race_data'][spec_race])
+        my_race.update(new_race)
+        print(my_race)
+        return my_race
 
     def load_prefs_data(self):
         self.system = self.prefs['system_name']

@@ -54,7 +54,7 @@ def get_mod(stat, modifier_range):
     return mod
 
 
-def get_spread(spread, primes, modifier_range, racemods):
+def get_spread(method, array, spread, primes, modifier_range, racemods):
     primes = list(primes)
     spread = list(spread)
     # create the base dictionary:

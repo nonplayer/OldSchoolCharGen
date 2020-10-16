@@ -168,50 +168,45 @@ race_choices = {
 
 race_data = {
     'base': {
-        'human': {
-            'label': "Human",
+        'default': {
+            'label': "default",
             'traits': [],
             'core_languages': [],
             'mods': {},
+            'stat_rolls': 3,
+            'stat_dice': 6,
+        },
+        'human': {
+            'label': "Human",
         },
         'clockwork': {
             'label': "Clockwork",
-            'traits': [],
-            'core_languages': [],
-            'mods': {},
         },
         'dwarf': {
             'label': "Dwarf",
-            'traits': [],
-            'core_languages': [],
-            'mods': {},
         },
         'elf': {
             'label': "Elf",
-            'traits': [],
-            'core_languages': [],
-            'mods': {},
         },
         'halfling': {
             'label': "Halfling",
-            'traits': [],
-            'core_languages': [],
-            'mods': {},
         },
         'halfogre': {
             'label': "Half-Ogre",
-            'traits': [],
-            'core_languages': [],
-            'mods': {},
         },
         'lupine': {
             'label': "Lupine",
-            'traits': [],
-            'core_languages': [],
-            'mods': {},
         },
     },
     'bnt': {
+        'default': {
+            'label': "default",
+            'traits': [],
+            'core_languages': [],
+            'mods': {},
+            'stat_rolls': 3,
+            'stat_dice': 6,
+        },
         'human': {
             'label': "Human",
             'traits': [
@@ -219,8 +214,6 @@ race_data = {
                 '(Racial) 10% bonus to all earned experience.',
                 '(Racial) +1 bonus to all saving throws.',
                 ],
-            'core_languages': [],
-            'mods': {},
         },
         'dwarf': {
             'label': "Dwarf",
@@ -234,7 +227,6 @@ race_data = {
                 '(Racial) +4 AC vs large humanoids like giants.'
             ],
             'core_languages': ['Dwarven'],
-            'mods': {},
         },
         'elf': {
             'label': "Elf",
@@ -247,7 +239,6 @@ race_data = {
                 '(Racial) Immunity to ghoul paralysis.',
             ],
             'core_languages': ['Elven'],
-            'mods': {},
         },
         'gnome': {
             'label': "Gnome",
@@ -260,7 +251,6 @@ race_data = {
                 '(Racial) +2 bonus on Will saving throws against illusions.',
             ],
             'core_languages': ['Gnome'],
-            'mods': {},
         },
         'halfelf': {
             'label': "Half-Elf",
@@ -271,7 +261,6 @@ race_data = {
                 '(Racial) Knack for trickery.',
             ],
             'core_languages': ['Elven'],
-            'mods': {},
         },
         'halforc': {
             'label': "Half-Orc",
@@ -280,7 +269,6 @@ race_data = {
                 '(Racial) Darkvision to 60 feet.',
             ],
             'core_languages': ['Orc'],
-            'mods': {},
         },
         'halfling': {
             'label': "Halfling",
@@ -291,7 +279,6 @@ race_data = {
                 '(Racial) Knack for hiding, moving silently and getting into trouble.',
             ],
             'core_languages': ['Halfling'],
-            'mods': {},
         },
     },
     'bntx': {
@@ -301,7 +288,6 @@ race_data = {
                 '(RACE) Darkvision 60 feet, can cast daylight 1/day, and has resistance to electricity.',
                 '(RACE) Can advance to 9th level in most classes, or unlimited in paladin.',
             ],
-            'core_languages': [],
             'mods': {'WIS': 1, 'CHA': 1},
         },
         'automaton': {
@@ -314,7 +300,6 @@ race_data = {
                 '(RACE) Can advance to 8th level in any class. Can multi-class as cleric/fighters, fighter/magic-users'
                 ' and fighter/thieves.',
             ],
-            'core_languages': [],
             'mods': {'STR': 1, 'CON': 1, 'WIS': -1, 'CHA': -1},
         },
         'azer': {
@@ -376,6 +361,10 @@ systems = {
         'setting': 'fantasy',           # STR: game setting, for use with random setting-specific elements
         'hasHPs': True,                 # BOO: changes the calculations if the system has hit points
         'stats': 6,                     # INT: how many stats in this system, usually 6
+        'method': 'standard',           # STR: how to get stats. standard = roll XdY, array = use roll_array values
+        'stat_rolls': 3,                # INT: how many dice to roll, if rolling
+        'stat_dice': 6,                 # INT: size of dice to roll for stats
+        'roll_array': [15, 14, 13, 12, 10, 8],  # LIST of numbers to use for auto stats if
         'spread': statArrays['dnd'],    # DICT: what spread of stats this system uses
         'affects': statAffects['dnd'],  # DICT: reference of what each stat in the system affects during play
         'acBase': 10,                   # INT: AC base 9 or 10, usually
@@ -439,6 +428,7 @@ systems = {
         'system_name': 'ddx',
         'system_fullname': 'Dark Dungeons X',
         'system_baseline': 'dnd_old',
+        'statRolls': 'ddx',
         'hasWPs': True,
         'maxLvl': 36,
     },

@@ -174,6 +174,12 @@ race_data = {
             'core_languages': [],
             'mods': {},
         },
+        'clockwork': {
+            'label': "Clockwork",
+            'traits': [],
+            'core_languages': [],
+            'mods': {},
+        },
         'dwarf': {
             'label': "Dwarf",
             'traits': [],
@@ -194,6 +200,12 @@ race_data = {
         },
         'halfogre': {
             'label': "Half-Ogre",
+            'traits': [],
+            'core_languages': [],
+            'mods': {},
+        },
+        'lupine': {
+            'label': "Lupine",
             'traits': [],
             'core_languages': [],
             'mods': {},
@@ -419,6 +431,13 @@ systems = {
     'dd': {
         'system_name': 'dd',
         'system_fullname': 'Dark Dungeons',
+        'system_baseline': 'dnd_old',
+        'hasWPs': True,
+        'maxLvl': 36,
+    },
+    'ddx': {
+        'system_name': 'ddx',
+        'system_fullname': 'Dark Dungeons X',
         'system_baseline': 'dnd_old',
         'hasWPs': True,
         'maxLvl': 36,

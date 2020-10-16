@@ -432,6 +432,82 @@ dd_profs = {
     },
 }
 
+ddx_profs = {
+    'default': {
+        'alignAllowed': ['chaos', 'law', 'neutral'],
+        'wps': 2,
+        'saves': [12, 13, 14, 15, 16, 16],
+        'skills': 'RANDOM',
+    },
+    'cleric': {
+        'short': 'cleric',
+        'long': 'Cleric',
+        'primAttr': ['WIS', 'CHA'],
+    },
+    'clock': {
+        'short': 'clock',
+        'long': 'Clockwork',
+        'race': 'clockwork',
+        'primAttr': ['STR', 'CON'],
+    },
+    'druid': {
+        'short': 'druid',
+        'long': 'Druid',
+        'primAttr': ['WIS', 'CHA'],
+    },
+    'dwarf': {
+        'short': 'dwarf',
+        'long': 'Dwarf',
+        'race': 'dwarf',
+        'primAttr': ['CON', 'STR'],
+    },
+    'elf': {
+        'short': 'elf',
+        'long': 'Elf',
+        'race': 'elf',
+        'primAttr': ['INT', 'DEX'],
+    },
+    'fighter': {
+        'short': 'fighter',
+        'long': 'Fighter',
+        'hd': 8,
+        'primAttr': ['STR', 'DEX'],
+        'attacksAs': 'best',
+        'restrictions': ['Fighters can wear any armour or shield, and can use any weapon.'],
+        'wps': 4,
+        'special': [
+            '(Class) Can use All Weapons and Armour without restriction',
+        ],
+    },
+    'halfling': {
+        'short': 'halfling',
+        'long': 'Halfling',
+        'race': 'halfling',
+        'primAttr': ['DEX', 'CON'],
+    },
+    'lup': {
+        'short': 'lup',
+        'long': 'Lupine',
+        'race': 'lupine',
+        'primAttr': ['DEX', 'WIS'],
+    },
+    'mounte': {
+        'short': 'mounte',
+        'long': 'Mountebank',
+        'primAttr': ['CHA', 'DEX'],
+    },
+    'mu': {
+        'short': 'mu',
+        'long': 'Magic-User',
+        'primAttr': ['INT', 'STR'],
+    },
+    'thief': {
+        'short': 'thief',
+        'long': 'Thief',
+        'primAttr': ['DEX', 'INT'],
+    },
+}
+
 ham_profs = {
     'default': {
         'flags': ['base', 'human'],
@@ -1118,6 +1194,10 @@ base_profs_bnt = [
     'fighter', 'mu', 'paladin', 'ranger', 'sorc', 'thief',
 ]
 
+base_profs_ddx = [
+    'cleric', 'clock', 'druid', 'elf', 'dwarf', 'fighter', 'halfling', 'lup', 'mu', 'mounte', 'thief'
+]
+
 base_profs_dnd = [
     'cleric', 'elf', 'dwarf', 'fighter', 'halfling', 'mu', 'thief'
 ]
@@ -1154,6 +1234,10 @@ proflists = {
         'choices': base_profs_dnd,
         'dict': dd_profs,
     },
+    'ddx': {
+        'choices': base_profs_ddx,
+        'dict': ddx_profs,
+    },
     'ham': {
         'choices': base_profs_ham,
         'dict': ham_profs,
@@ -1185,7 +1269,7 @@ proflists = {
 }
 
 supported_systems = [
-    'dd', 'bnt', 'bntx', 'ham', 'm81', 'pla', 'rbh', 'rpt', 'tnu'
+    'bnt', 'bntx', 'dd', 'ddx', 'ham', 'm81', 'pla', 'rbh', 'rpt', 'tnu'
 ]
 
 

@@ -173,8 +173,8 @@ race_data = {
             'traits': [],
             'core_languages': [],
             'mods': {},
-            'stat_rolls': 3,
-            'stat_dice': 6,
+            'stat_dice_numbs': 3,
+            'stat_dice_sides': 6,
         },
         'human': {
             'label': "Human",
@@ -362,9 +362,7 @@ systems = {
         'hasHPs': True,                 # BOO: changes the calculations if the system has hit points
         'stats': 6,                     # INT: how many stats in this system, usually 6
         'method': 'standard',           # STR: how to get stats. standard = roll XdY, array = use roll_array values
-        'stat_rolls': 3,                # INT: how many dice to roll, if rolling
-        'stat_dice': 6,                 # INT: size of dice to roll for stats
-        'roll_array': [15, 14, 13, 12, 10, 8],  # LIST of numbers to use for auto stats if
+        'roll_array': [8, 9, 10, 11, 12, 13],   # LIST of numbers to use for auto stats, in ascending order
         'spread': statArrays['dnd'],    # DICT: what spread of stats this system uses
         'affects': statAffects['dnd'],  # DICT: reference of what each stat in the system affects during play
         'acBase': 10,                   # INT: AC base 9 or 10, usually
@@ -393,6 +391,10 @@ systems = {
         'saves': False,                 # def saves is False to make adding new systems less error-prone
     },
     # actual systems and inherited baselines below, alphabetically
+    '5th': {
+        'saves': False,                 # def saves is False to make adding new systems less error-prone
+        'roll_array': [8, 10, 12, 13, 14, 15],
+    },
     'dnd_old': {
         'system_name': 'dnd',
         'system_fullname': '"Old School" Dungeons and Dragons',
@@ -429,6 +431,8 @@ systems = {
         'system_fullname': 'Dark Dungeons X',
         'system_baseline': 'dnd_old',
         'statRolls': 'ddx',
+        'method': 'array',
+        'roll_array': [9, 11, 12, 13, 14, 16],
         'hasWPs': True,
         'maxLvl': 36,
     },

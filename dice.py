@@ -20,10 +20,10 @@ def roll(num=1, size=6):
 #     return rolls
 
 
-def stats(rolls):
+def stats(rolls, numbs, sides):
     results = []
     while rolls > 0:
-        results.append(roll(3, 6))
+        results.append(roll(numbs, sides))
         rolls -= 1
     return sorted(results)
 
@@ -54,21 +54,17 @@ def get_mod(stat, modifier_range):
     return mod
 
 
-def get_spread(method, array, spread, primes, modifier_range, racemods):
-    primes = list(primes)
-    spread = list(spread)
+def get_standard_spread(array, spread, primes, modifier_range, racemods):
     # create the base dictionary:
     final = {}
-    rolls = 0
     for i in spread:
         final.update({i: {'val': 0, 'mod': 0}})
-        rolls += 1
     random.shuffle(primes)
     random.shuffle(spread)
     # separate the prime attributes from the mix first:
     for i in primes:
         spread.remove(i)
-    my_stats = stats(rolls)
+    my_stats = array
     for i in primes:
         num = int(my_stats.pop())
         if i in list(dict.keys(racemods)):
@@ -99,7 +95,7 @@ def main():
     primes = list(md['primAttr'])
     spread = list(sys_prefs['spread'])
     modrange = sys_prefs['modifier_range']
-    for key, value in dict.items(get_spread(spread, primes, modrange, {})):
+    for key, value in dict.items(get_standard_spread(spread, primes, modrange, {})):
         print(key, ":", value)
 
 

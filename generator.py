@@ -107,7 +107,6 @@ class Character(object):
         #
         # let's get that juicy character data and break it out!
         self.load_profession_data()
-        # self.init_race_and_languages()
         self.racedata = self.init_race_and_languages()
         self.race = self.racedata['label']
         self.traits = self.traits + self.racedata['traits']
@@ -115,10 +114,15 @@ class Character(object):
         self.racemods = self.racedata['mods']
         primes = list(self.profession['primAttr'])
         spread = list(self.prefs['spread'])
-        method = self.prefs['stat_rolls']
-        array = self.prefs['roll_array']
-        print(method)
-        self.stats = dice.get_spread(method, array, spread, primes, self.prefs['modRange'], self.racemods)
+        method = self.prefs['method']
+        if method == 'standard':
+            numbs = int(self.racedata['stat_dice_numbs'])
+            sides = int(self.racedata['stat_dice_sides'])
+            rolls = len(spread)
+            array = dice.stats(rolls, numbs, sides)
+        else:
+            array = self.prefs['roll_array']
+        self.stats = dice.get_standard_spread(array, spread, primes, self.prefs['modRange'], self.racemods)
         self.init_skills()
         #
         # get stats average, for reasons now deprecated:
@@ -370,7 +374,6 @@ class Character(object):
         my_race = dict(self.prefs['race_data']['default'])
         new_race = dict(self.prefs['race_data'][spec_race])
         my_race.update(new_race)
-        print(my_race)
         return my_race
 
     def load_prefs_data(self):

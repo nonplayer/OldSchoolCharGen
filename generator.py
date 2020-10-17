@@ -341,7 +341,10 @@ class Character(object):
         for val in list(self.prefs['saves']['mods']):
             prof_mod = int(prof_mods.pop(0))
             if val != 'None':
-                stat_mod = int(self.stats[val]['mod']) + prof_mod
+                if self.prefs['save_style'] == 'descend':
+                    stat_mod = prof_mod - int(self.stats[val]['mod'])
+                else:
+                    stat_mod = int(self.stats[val]['mod']) + prof_mod
             else:
                 stat_mod = prof_mod
             stat_mods_array.append(stat_mod)

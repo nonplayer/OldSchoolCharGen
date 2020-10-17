@@ -374,6 +374,7 @@ systems = {
                                         #      slim = (stat-10)/3
         'HPsMod': 'CON',                # STR: stat used to calc hit point mods
         'saves': dict(saves['six']),    # Pulls STR from Saves dict, above
+        'save_style': 'ascend',         # STR: do saves increase when leveling, or decrease? "ascend" or "descend"
         'hasWPs': False,                # BOO: notes if this system uses specific WPs a la Dark Dungeons
         'maxLvl': 20,                   # INT: maximum XP level in the game
         'race_choices': list(dict.keys(race_data['base'])),  # LIST: available choices for selectable races
@@ -401,6 +402,7 @@ systems = {
         'acBase': 9,
         'acType': 'descend',
         'saves': dict(saves['classic']),
+        'save_style': 'descend',
         'hasWPs': False,
         'maxLvl': 10,
     },
@@ -433,6 +435,7 @@ systems = {
         'statRolls': 'ddx',
         'method': 'array',
         'roll_array': [9, 11, 12, 13, 14, 16],
+        'save_style': 'ascend',
         'hasWPs': True,
         'maxLvl': 36,
     },

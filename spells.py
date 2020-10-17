@@ -28,6 +28,19 @@ spells_dd = {
     ],
 }
 
+spells_ham = {
+    'combined': [
+        'Level 1: Analyse', 'Level 1: Befoul Food and Water', 'Level 1: Charm Person',
+        'Level 1: Cause Fear', 'Level 1: Cause Light Wounds',
+        'Level 1: Cure Light Wounds', 'Level 1: Darkness', 'Level 1: Detect Evil', 'Level 1: Detect Magic',
+        'Level 1: Floating Disc', 'Level 1: Hold Portal',
+        'Level 1: Light', 'Level 1: Magic Missile',
+        'Level 1: Protection From Evil', 'Level 1: Purify Food And Water',
+        'Level 1: Remove Fear', 'Level 1: Resist Cold ',
+        'Level 1: Read Languages', 'Level 1: Shield', 'Level 1: Sleep', 'Level 1: Ventriloquism',
+    ],
+}
+
 spells_bnt = {
     'bard': [
         'Level 1: Alarm', 'Level 1: Animate Rope', 'Level 1: Cause Fear', 'Level 1: Change Self',

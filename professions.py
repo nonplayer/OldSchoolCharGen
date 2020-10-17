@@ -536,12 +536,10 @@ ham_profs = {
         'restrictions': ['Can use all weapons, shields, and armour that are not otherwise prohibited by your deity.',
                          'You cannot be of Neutral Alignment'],
         'special': [
-            '(Class) CAST SPELLS! from the Cleric list. You begin the game with a holy prayerbook and spells. Add new '
-            'prayers by leveling up, and also by sanctifying and converting discovered heretical prayers. Maximum '
-            'spell level starts at 1, and increases by +1 at odd-numbered levels of experience.',
-            '(Class) Once per Day per XP Level, you can hold aloft your holy symbol and turn back enemies of your '
-            'faith. Opponents make Mind saves based on difference in Level/HD Tiers. Failures must cower, flee, or '
-            'possibly even take damage or be destroyed.',
+            '>>(Class) CAST CLERIC SPELLS! Add more by leveling up, and by converting discovered prayers. Maximum '
+            'spell level is 1st Level.',
+            '>>(Class) Once per Day you can use your holy symbol and turn back enemies of your faith. Opponents make '
+            'Mind saves. Failures must cower, flee, or possibly even take damage or be destroyed.',
         ],
     },
     'dwarf': {
@@ -557,15 +555,13 @@ ham_profs = {
         'extragear': ['ARMOUR: a Small Shield (1H, Size M, DEF+2)'],
         'restrictions': ['Can use all weapons, shields, and armour except longbows.'],
         'special': [
-            '(Class) Heavy or plate armour affects neither your DEX nor your movement speed.',
-            '(Class) You are never lost when underground with solid earth or stone beneath their feet. You know the '
+            '>>(Class) Heavy/Plate armour affects neither your DEX nor your movement speed.',
+            '>>(Class) You are never lost when underground with solid earth or stone beneath their feet. You know the '
             'local grades and depth, and can feel air flow naturally. You have a 50% chance of detecting '
             'hidden stonework just by passing, and automatically find them if you spend a Beat searching.',
-            '(Class) You have a bonus MELEE attack die at first level (total of two), and gain a new one at '
-            'levels 5, 10, and 15.',
-            '(Class) You have a Boon on all Body and Death Saves.',
-            '(Class) You can Shield Bash with any one of your successful attack dice. You do not lose the DEF bonus'
-            ' of the shield when using the bash.',
+            '>>(Class) You have a bonus MELEE attack die at first level (total of two).',
+            '>>(Class) You have a Boon on all Body and Death Saves.',
+            '>>(Class) You can Shield Bash with any one of your successful attack dice, without losing shield DEF.',
         ],
     },
     'elf': {
@@ -585,17 +581,16 @@ ham_profs = {
         'extraspells': ['Level 1: Read Magic'],
         'restrictions': ['Can use all weapons, shields, and armour. Armour may limit spellcasting.'],
         'special': [
-            '(Class) Immune to sleep, charm, slow, haste, aging, and energy drain effects, except from another Elf.',
-            '(Class) Cast spells from the magic-user list. Starting spellbook contains Read Magic and possibly others.'
-            ' Gain new spells my leveling up, and from plundered scrolls and texts. Max spell level starts at 1, '
-            'and increases +1 at every odd-numbered level.',
-            '(Class) You can cast in armour. No chance of spell failure in Light armour, and only a 25%/50%/75% '
+            '>>(Class) Immune to sleep, charm, slow, haste, aging, and energy drain effects, except from another Elf.',
+            '>>(Class) Cast Magic-User spells. Gain new spells my leveling up, and from plundered scrolls and texts. '
+            'Max spell level starts is 1.',
+            '>>(Class) You can cast in armour. No chance of spell failure in Light armour, and only a 25%/50%/75% '
             'chance in medium/heavy/plate, respectively. Failed spells are forgotten.',
-            '(Class) You can fight with two weapons. Roll one extra attack die, but lower the damage die by one step '
-            '(to a d6) for the action. At level 9, this increases to two extra attack dice.',
-            '(Class) 50% chance of noticing concealed non-stonework features simply by passing near them, automatic '
+            '>>(Class) You can fight with two weapons. Roll one extra attack die, but lower the damage die by one step '
+            '(to a d6) for the action.',
+            '>>(Class) 50% chance of noticing concealed non-stonework features simply by passing near them, automatic '
             'if you spend a Beat searching.',
-            '(Class) Bonus attack die at first level, and gain a new one at levels 5, 10, and 15.',
+            '>>(Class) Bonus attack die at first level (for a total of two).',
         ],
     },
     'fighter': {
@@ -608,16 +603,12 @@ ham_profs = {
         'saves': [0, 1, 1, 0, 0, 1],
         'restrictions': ['You can use all weapons, shields, and armour.'],
         'special': [
-            '(Class) You have a bonus attack die at first level (total of two), and gain a new one at levels '
-            '3, 6, 9, 12, and 15.',
-            '(Class) *Not Today!* At first level and each level after, you gain a single use of "Not Today!" When '
-            'you would take damage (from any source) that would reduce your HP from positive to Zero or below, you '
-            'can spend a use and negate all of the damage from that attack. These uses accumulate with each level, '
-            'but each use is permanently lost when used.',
-            '(Class) When leveling up, you reroll your Hit Points twice, and keep the best result.',
-            '(Class) You can use a Shield Bash with any one of your successful attack dice, losing the shield DEF '
-            'bonus until your next turn in combat.',
-            '(Class) When using a two-handed weapon, roll an extra damage die with your attacks, applying the '
+            '>>(Class) You have a bonus attack die at first level (total of two).',
+            '>>(Class) *Not Today!* (one use) When you would take damage that would kill you, you can say "NOT TODAY!" '
+            'and negate all of the damage from that attack. Gain more uses as you gain levels',
+            '>>(Class) When leveling up, you reroll your Hit Points twice, and keep the best result.',
+            '>>(Class) You can Shield Bash with any one of your successful attack dice, losing the shield DEF bonus.',
+            '>>(Class) When using a two-handed weapon, roll an extra damage die with your attacks, applying the '
             'total result to all attacks that hit.',
         ],
     },
@@ -633,17 +624,15 @@ ham_profs = {
         'extragear': ['a set of Thieves\' tools (M)'],
         'extralangs': ['Halfling'],
         'restrictions': ['Can use all small weapons one-handed, or medium two-handed, and shields. Cannot use '
-                         'two-handed human-sized weapons.'],
+                         'two-handed human-sized weapons. All items are one size greater for Encumbrance limits.'],
         'special': [
-            '(Class) You gain a bonus melee attack die at levels 4, 8, and 12.',
-            '(Class) You have the following Thief Skills: Break/Enter (DEX), Climb/Leap (STR with a Bane), '
-            'Find/Seek (WIS), Hide/Sneak (DEX with a Boon), and Snatch/Grab (DEX).',
-            '(Class) Unless you have proven to be an obvious threat, or your opponents  specifically hate you, '
+            '>>(Class) Thief Skills: Break/Enter (DEX), Climb/Leap (STR with a Bane), Find/Seek (WIS), '
+            'Hide/Sneak (DEX with a Boon), and Snatch/Grab (DEX).',
+            '>>(Class) Unless you have proven to be an obvious threat, or your opponents specifically hate you, '
             'you are always attacked last.',
-            '(Class) You can draw from inner strength for a sudden display of unexpected fierceness. By spending 1 '
-            'Hit Point rolling your attacks, you increase the damage die for your attacks this round by one step.',
-            '(Class) You receive a Boon on Tactical Attacks.',
-            '(Class) All items are one size greater for Encumbrance limits.',
+            '>>(Class) By spending 1 Hit Point rolling your attacks, increase your damage die for your attacks this '
+            'round by one step.',
+            '>>(Class) You receive a Boon on Tactical Attacks.',
         ],
     },
     'halfogre': {
@@ -660,16 +649,15 @@ ham_profs = {
         'extralangs': ['Ogre'],
         'restrictions': ['Can use all weapons and shields. Armour must be custom made. You cannot be Law aligned.'],
         'special': [
-            '(Class) You are MASSIVE. All armour must be custom made at increased costs and time, and only '
-            'Halfling-sized creatures or smaller can move through your occupied space.',
-            '(Class) You can stow Huge size items for 3 Encumbrance slots.',
+            '>>(Class) You are MASSIVE. All armour must be custom made, and only small creatures can move through '
+            'your occupied space.',
+            '>>(Class) You can stow Huge size items for 3 Encumbrance slots.',
             '(Class) When you take damage, make a Mind save (target: 12) or go into an uncontrollable violent fury. '
-            'During this rage, gain an extra attack die (and another at levels 7 and 14), gain temporary extra HP = '
-            '1/2 your level (up), and suffer 2 Banes on all saves except Body and Death. Your actions must follow a '
+            'During this rage, gain an extra attack die, gain temporary extra HP = 1/2 your level (up), and suffer 2 '
+            'Banes on all saves except Body and Death. Your actions must follow a '
             'specific course (ask the \'Smith). You can also trigger it on your own by causing yourself 1 point of '
             'damage with a weapon.',
-            '(Class) You get a bonus attack die at levels 5, 10, and 15.',
-            '(Class) When using a two-handed weapon, roll d12 damage dice with your attacks (instead of d10), '
+            '>>(Class) When using a two-handed weapon, roll d12 damage dice with your attacks (instead of d10), '
             'applying the result to all attacks that hit.',
         ],
     },
@@ -689,20 +677,17 @@ ham_profs = {
         'extragear': ['a Spellbook (M)'],
         'extraspells': ['At Will: Read Magic'],
         'restrictions': ['Can not use two-handed weapons except staves. Can not wear heavy armour or use shields. '
-                         'Other armour can cause spell failure.'],
+                         'Other armour can cause spell failure (50%/75% in Light/Medium, respectively. Failed spells '
+                         'are forgotten).'],
         'special': [
-            '(Class) Cannot wear Heavy armour, and suffer a chance of spell failure while wearing other. '
-            'Chance is 50%/75% in Light/Medium, respectively. Failed spells are forgotten.',
-            '(Class) Cast magic-user spells. Start with a spellbook containing Read Magic and possibly others. Add '
-            'new spells from leveling up, and from plundered scrolls and texts. Max "safe" spell level starts at 1, '
-            'and raises +1 at every odd-numbered level of experience.',
-            '(Class) You can also prepare and "High Cast" higher level spells, if you have a copy of the spell. '
-            'Doing so causes permanent loss of INT equal to the difference in allowed levels. Spells cast this way '
-            'are always immediately forgotten.',
-            '(Class) You can choose to take damage instead of forgetting spells. The amount is equal to the level of '
+            '>>(Class) Cast magic-user spells. Add new spells from leveling up, and from plundered scrolls and texts. '
+            'Max "safe" spell level starts at 1. You alone can also prepare and "High Cast" higher level spells, if '
+            'you have a copy of the spell, by permanent loss of INT equal to the difference in allowed levels. '
+            'Spells cast this way are always immediately forgotten.',
+            '>>(Class) You can choose to take damage instead of forgetting spells. The amount is equal to the level of '
             'spell just cast. If below Zero HP, this burns CON instead.',
-            '(Class) You can cast *Read Magic* freely and at will, no prep required.',
-            '(Class) You can use special mage-only weapons: The Wand and The Staff.',
+            '>>(Class) You can cast *Read Magic* freely and at will, no prep required.',
+            '>>(Class) You can use special mage-only weapons: The Wand and The Staff.',
         ],
     },
     'thief': {
@@ -717,17 +702,15 @@ ham_profs = {
         'extralangs': ['Thieves\' Cant'],
         'restrictions': ['You can use any weapons and armour that the Hammersmith deems to be suitably sneaky.'],
         'special': [
-            '(Class) *Stabbity!* When using a melee weapon to attack a foe against which you either have net Boons or '
-            'are hidden from perception, double your total damage against that foe on a successful hit. '
-            'This multiple increases by +1 at levels 3, 6, 9, 12, and 15.',
-            '(Class) You have Thiefskills: Appraise/Identify (INT), Break/Enter (DEX), Climb/Leap (STR), '
+            '>>(Class) *Stabbity!* On melee attacks against a for with net Boons or you are hidden, double total '
+            'damage against that foe on a successful hit.',
+            '>>(Class) YThiefskills: Appraise/Identify (INT), Break/Enter (DEX), Climb/Leap (STR), '
             'Find & Seek (WIS), Forge/Decipher (INT), Hide/Sneak (DEX), Lie/Cheat (CHA), and Snatch/Grab (DEX). At '
             'first level you must randomly determine one Thief Skill to be your Bailiwick (which receives a Boon), '
             'and one to be your Failing (which receives a Bane). Once per adventure per XP level, you can attempt '
-            'to reroll a failed Thief Skill check. This count resets upon Returning to Town. At 9th level, your '
-            'Thiefskills magically evolve.',
-            '(Class) You receive a Boon on Tactical Attacks.',
-            '(Class) You receive a Boon on Saves against Trap effects. Add another total Boon at levels 4, 9, and 13.',
+            'to reroll a failed Thief Skill check. This count resets upon Returning to Town.',
+            '>>(Class) You receive a Boon on Tactical Attacks.',
+            '>>(Class) You receive a Boon on Saves against Trap effects.',
         ],
     },
 }

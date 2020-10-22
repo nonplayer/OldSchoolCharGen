@@ -578,7 +578,7 @@ ham_profs = {
         'race': 'elf',
         'flags': ['base', 'demi', 'caster'],
         'numAttacks': 2,
-        'hd': 8,
+        'hd': 6,
         'primAttr': ['DEX', 'INT'],
         'saves': [0, 0, 1, 0, 1, 0],
         'casterStat': 'INT',
@@ -586,13 +586,13 @@ ham_profs = {
         'spellChooseAs': 'mu',
         'extragear': ['a spellbook (M)'],
         'extralangs': ['Elf'],
-        'extraspells': ['Level 1: Read Magic'],
+        'extraspells': ['Level 1: Red Magic'],
         'restrictions': ['Can use all weapons, shields, and armour. Armour may limit spellcasting.'],
         'special': [
             '>>(Class) Immune to sleep, charm, slow, haste, aging, and energy drain effects, except from another Elf.',
             '>>(Class) Cast Magic-User spells. Gain new spells my leveling up, and from plundered scrolls and texts. '
             'Max spell level starts is 1.',
-            '>>(Class) You can cast in armour. No chance of spell failure in Light armour, and only a 50%/75% '
+            '>>(Class) You can cast in armour. No chance of spell failure in Light armour, and only a 25%/50% '
             'chance in heavy/plate, respectively. Failed spells are forgotten.',
             '>>(Class) You are adept at dual-wielding melee. Add the second weapon\'s Melee bonus to your DEF.',
             '>>(Class) 50% chance of noticing concealed non-stonework features simply by passing near them, automatic '

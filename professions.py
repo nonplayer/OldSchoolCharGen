@@ -600,6 +600,29 @@ ham_profs = {
             '>>(Class) Bonus attack die at first level (for a total of two).',
         ],
     },
+    'explorer': {
+        'short': 'explorer',
+        'long': 'Explorer',
+        'attacksAs': 'worst',
+        'primAttr': ['DEX', 'INT'],
+        'saves': [1, 0, 0, 1, 0, 0],
+        'weapons': 'rog',
+        'armour': 'rog',
+        'extragear': ['a Set of Dungeoneering Tools (M)', 'WEAPON: Dagger (1H, Size S, R: 10/30ft, Dmg: M+1, Thrown)'],
+        'extralangs': ['Underworld'],
+        'restrictions': ['All missile weapons, all 1-handed weapons, light armour, bucklers, and small shields.'],
+        'special': [
+            '>>(Class) *Opportunist!* On melee attacks against a foe with net Boons or you are hidden, double total '
+            'damage against that foe on a successful hit.',
+            '>>(Class) Dungeon skills: Appraise/Identify (INT), Break/Enter (DEX), Climb/Leap (STR), '
+            'Find & Seek (WIS), Forge/Decipher (INT), Hide/Sneak (DEX), Lie/Cheat (CHA), and Snatch/Grab (DEX). At '
+            'first level you must randomly determine one Dungeon Skill to be your Bailiwick (which receives a Boon), '
+            'and one to be your Failing (which receives a Bane). Once per adventure per XP level, you can attempt '
+            'to reroll a failed Dungeon Skill check. This count resets upon Returning to Town.',
+            '>>(Class) You receive a Boon on Tactical Attacks.',
+            '>>(Class) You receive a Boon on Saves against Trap effects.',
+        ],
+    },
     'fighter': {
         'short': 'fighter',
         'long': 'Fighter',
@@ -628,12 +651,12 @@ ham_profs = {
         'saves': [1, 1, 1, 1, 1, 1],
         'weapons': 'hlf',
         'armour': 'hlf',
-        'extragear': ['a set of Thieves\' tools (M)'],
+        'extragear': ['a set of Dungeoneering tools (M)'],
         'extralangs': ['Halfling'],
         'restrictions': ['Can use all small weapons one-handed, or medium two-handed, and shields. Cannot use '
                          'two-handed human-sized weapons. All items are one size greater for Encumbrance limits.'],
         'special': [
-            '>>(Class) Thief Skills: Break/Enter (DEX), Climb/Leap (STR with a Bane), Find/Seek (WIS), '
+            '>>(Class) Dungeon Skills: Break/Enter (DEX), Climb/Leap (STR with a Bane), Find/Seek (WIS), '
             'Hide/Sneak (DEX with a Boon), and Snatch/Grab (DEX).',
             '>>(Class) Unless you have proven to be an obvious threat, or your opponents specifically hate you, '
             'you are always attacked last.',
@@ -695,29 +718,6 @@ ham_profs = {
             'spell just cast. If below Zero HP, this burns CON instead.',
             '>>(Class) You can cast *Read Magic* freely and at will, no prep required.',
             '>>(Class) You can use special mage-only weapons: The Wand and The Staff.',
-        ],
-    },
-    'thief': {
-        'short': 'thief',
-        'long': 'Thief',
-        'attacksAs': 'worst',
-        'primAttr': ['DEX', 'INT'],
-        'saves': [1, 0, 0, 1, 0, 0],
-        'weapons': 'rog',
-        'armour': 'rog',
-        'extragear': ['a Set of Thieves\' Tools (M)', 'WEAPON: Dagger (1H, Size S, R: 10/30ft, Dmg: M+1, Thrown)'],
-        'extralangs': ['Thieves\' Cant'],
-        'restrictions': ['You can use any weapons and armour that the Hammersmith deems to be suitably sneaky.'],
-        'special': [
-            '>>(Class) *Stabbity!* On melee attacks against a for with net Boons or you are hidden, double total '
-            'damage against that foe on a successful hit.',
-            '>>(Class) YThiefskills: Appraise/Identify (INT), Break/Enter (DEX), Climb/Leap (STR), '
-            'Find & Seek (WIS), Forge/Decipher (INT), Hide/Sneak (DEX), Lie/Cheat (CHA), and Snatch/Grab (DEX). At '
-            'first level you must randomly determine one Thief Skill to be your Bailiwick (which receives a Boon), '
-            'and one to be your Failing (which receives a Bane). Once per adventure per XP level, you can attempt '
-            'to reroll a failed Thief Skill check. This count resets upon Returning to Town.',
-            '>>(Class) You receive a Boon on Tactical Attacks.',
-            '>>(Class) You receive a Boon on Saves against Trap effects.',
         ],
     },
 }
@@ -1193,7 +1193,7 @@ base_profs_dnd = [
 ]
 
 base_profs_ham = [
-    'cleric', 'elf', 'dwarf', 'fighter', 'halfogre', 'halfling', 'mu', 'thief'
+    'cleric', 'elf', 'dwarf', 'explorer', 'fighter', 'halfogre', 'halfling', 'mu',
 ]
 
 base_profs_pla = [
@@ -1287,7 +1287,7 @@ def get_hammerclass(classroll, subroll):
     elif classroll >= 14:
         hammercrawl_profession = 'halfling'
     elif classroll >= 8:
-        humans = ['cleric', 'fighter', 'mu', 'thief']
+        humans = ['cleric', 'explorer', 'fighter', 'mu',]
         hammercrawl_profession = humans[subroll - 1]
     elif classroll >= 4:
         hammercrawl_profession = 'dwarf'

@@ -592,10 +592,9 @@ ham_profs = {
             '>>(Class) Immune to sleep, charm, slow, haste, aging, and energy drain effects, except from another Elf.',
             '>>(Class) Cast Magic-User spells. Gain new spells my leveling up, and from plundered scrolls and texts. '
             'Max spell level starts is 1.',
-            '>>(Class) You can cast in armour. No chance of spell failure in Light armour, and only a 25%/50%/75% '
-            'chance in medium/heavy/plate, respectively. Failed spells are forgotten.',
-            '>>(Class) You can fight with two weapons. Roll one extra attack die, but lower the damage die by one step '
-            '(to a d6) for the action.',
+            '>>(Class) You can cast in armour. No chance of spell failure in Light armour, and only a 50%/75% '
+            'chance in heavy/plate, respectively. Failed spells are forgotten.',
+            '>>(Class) You are adept at dual-wielding melee. Add the second weapon\'s Melee bonus to your DEF.',
             '>>(Class) 50% chance of noticing concealed non-stonework features simply by passing near them, automatic '
             'if you spend a Beat searching.',
             '>>(Class) Bonus attack die at first level (for a total of two).',

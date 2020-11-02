@@ -56,7 +56,7 @@ baseline = {
     'skills': [],                           # LIST of skills for the class
     'restrictions': ['Placeholder for Restrictions'],               # Unsure, placeholder
     'special': ['Placeholder for Special Abilities'],               # Unsure, placeholder
-    'numAttacks': 1,                        # INT: number of attack dice at first level
+    'numAttacks': 1,                        # INT: number of attacks at first level
     'wps': False,                           # INT: How many starting Weapon Proficiencies
     'weapons': 'war',                       # STR: Category of weapons allowed as choices
     'armour': 'war',                        # STR: Category of armours allowed as choices
@@ -567,9 +567,9 @@ ham_profs = {
             '>>(Class) You are never lost when underground with solid earth or stone beneath their feet. You know the '
             'local grades and depth, and can feel air flow naturally. You have a 50% chance of detecting '
             'hidden stonework just by passing, and automatically find them if you spend a Beat searching.',
-            '>>(Class) You have a bonus MELEE attack die at first level (total of two).',
+            '>>(Class) You have a bonus MELEE Combat die at first level (total of two).',
             '>>(Class) You have a Boon on all Body and Death Saves.',
-            '>>(Class) You can Shield Bash with any one of your successful attack dice, without losing shield DEF.',
+            '>>(Class) You can Shield Bash with any one of your successful Combat dice, without losing shield DEF.',
         ],
     },
     'elf': {
@@ -597,7 +597,7 @@ ham_profs = {
             '>>(Class) You are adept at dual-wielding melee. Add the second weapon\'s Melee bonus to your DEF.',
             '>>(Class) 50% chance of noticing concealed non-stonework features simply by passing near them, automatic '
             'if you spend a Beat searching.',
-            '>>(Class) Bonus attack die at first level (for a total of two).',
+            '>>(Class) Bonus Combat die at first level (for a total of two).',
         ],
     },
     'explorer': {
@@ -633,11 +633,11 @@ ham_profs = {
         'saves': [0, 1, 1, 0, 0, 1],
         'restrictions': ['You can use all weapons, shields, and armour.'],
         'special': [
-            '>>(Class) You have a bonus attack die at first level (total of two).',
+            '>>(Class) You have a bonus Combat die at first level (total of two).',
             '>>(Class) *Not Today!* (one use) When you would take damage that would kill you, you can say "NOT TODAY!" '
             'and negate all of the damage from that attack. Gain more uses as you gain levels',
             '>>(Class) When leveling up, you reroll your Hit Points twice, and keep the best result.',
-            '>>(Class) You can Shield Bash with any one of your successful attack dice, losing the shield DEF bonus.',
+            '>>(Class) You can Shield Bash with any one of your successful Combat dice, losing the shield DEF bonus.',
             '>>(Class) When using a two-handed weapon, roll an extra damage die with your attacks, applying the '
             'total result to all attacks that hit.',
         ],
@@ -683,7 +683,7 @@ ham_profs = {
             'your occupied space.',
             '>>(Class) You can stow Huge size items for 3 Encumbrance slots.',
             '(Class) When you take damage, make a Mind save (target: 12) or go into an uncontrollable violent fury. '
-            'During this rage, gain an extra attack die, gain temporary extra HP = 1/2 your level (up), and suffer 2 '
+            'During this rage, gain an extra Combat die, gain temporary extra HP = 1/2 your level (up), and suffer 2 '
             'Banes on all saves except Body and Death. Your actions must follow a '
             'specific course (ask the \'Smith). You can also trigger it on your own by causing yourself 1 point of '
             'damage with a weapon.',
@@ -1287,7 +1287,7 @@ def get_hammerclass(classroll, subroll):
     elif classroll >= 14:
         hammercrawl_profession = 'halfling'
     elif classroll >= 8:
-        humans = ['cleric', 'explorer', 'fighter', 'mu',]
+        humans = ['cleric', 'explorer', 'fighter', 'mu', ]
         hammercrawl_profession = humans[subroll - 1]
     elif classroll >= 4:
         hammercrawl_profession = 'dwarf'

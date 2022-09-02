@@ -601,7 +601,7 @@ ddh_profs = {
         'extralangs': ['Lupine'],
         'special': [
             '>>(Class) Claws: 1d4 Damage, naturally proficient, leveled automatically, does not also Knockout.',
-            '>>(Class) Basemovement 40',
+            '>>(Class) Base movement 40',
             '>>(Class) Thiefskill: Find Traps: +1',
             '>>(Class) Thiefskill: Remove Traps: +1',
             '>>(Class) Thiefskill: Climb Walls: +17',

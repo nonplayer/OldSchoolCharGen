@@ -212,7 +212,6 @@ class Character(object):
         armour_cls = self.profession['armour']
         if self.profession['wps']:
             free_wps = self.profession['wps']
-            print(free_wps)
         else:
             free_wps = 2
         gear_bonus = []

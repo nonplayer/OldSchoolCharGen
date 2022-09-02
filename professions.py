@@ -432,6 +432,256 @@ dd_profs = {
     },
 }
 
+ddh_profs = {
+    'default': {
+        'alignAllowed': ['chaos', 'law', 'neutral', 'good', 'evil'],
+        'wps': 2,
+        'saves': [8, 7, 6, 5, 4, 4],
+        'nextXP': '2000',
+        'skills': 'RANDOM',
+    },
+    'cleric': {
+        'short': 'cleric',
+        'long': 'Cleric',
+        'flags': ['base', 'human', 'caster'],
+        'primAttr': ['WIS'],
+        'restrictions': ['Can use all weapons, shields, and armour that are not otherwise prohibited by your deity.',
+                         'You cannot be of Neutral Alignment'],
+        'weapons': 'clr',
+        'spellChooseAs': 'cleric',
+        'spellsPerLvl': 2,
+        'casterStat': 'WIS',
+        'saves': [9, 8, 6, 4, 5, 5],
+        'extragear': ['a Holy Symbol'],
+        'special': [
+            '>>(Class) Spellcaster (Cleric List)',
+            '>>(Class) Turn Undead (based on Level, see p. 25-27 DDX)',
+        ],
+    },
+    'clock': {
+        'short': 'clock',
+        'long': 'Clockwork',
+        'race': 'clockwork',
+        'flags': ['base', 'demi', 'construct'],
+        'primAttr': ['CON', 'STR'],
+        'hd': 8,
+        'wps': 4,
+        'attacksAs': 'best',
+        'saves': [12, 11, 10, 7, 8, 8],
+        'restrictions': ['Clockworks cannot wear any armour..'],
+        'special': [
+            '>>(Class) Artificial Body: Never sleeps; Immune to sleep, poison, fatigue, paralysis, nausea, and '
+            'exhaustion. Does not naturally heal, instead requiring repairs or magic.',
+            '>>(Class) Armoured: base natural AC of 7. Can be improved with time and money.',
+            '>>(Class) Metal Fists: considered Armed at all times. Can be improved with time and money.',
+        ],
+    },
+    'drawf': {
+        'short': 'drawf',
+        'long': 'Drawf',
+        'race': 'drawf',
+        'flags': ['base', 'demi'],
+        'hd': 8,
+        'primAttr': ['CON', 'STR'],
+        'attacksAs': 'best',
+        'restrictions': ['Can use all weapons, shields, and armour except longbows.'],
+        'wps': 4,
+        'saves': [12, 11, 10, 7, 8, 8],
+        'extralangs': ['Drawf'],
+        'special': [
+            '>>(Class) Darkvision (B&W)',
+            '>>(Class) Stonelore (special check to find details)',
+        ],
+    },
+    'druid': {
+        'short': 'druid',
+        'long': 'Druid',
+        'primAttr': ['WIS', 'CHA'],
+        'flags': ['base', 'human', 'caster'],
+        'restrictions': ['Druids may only wear leather armour, and only use weapons or shields made of wood '
+                         'or other natural materials.'],
+        'weapons': 'clr',
+        'spellChooseAs': 'cleric',
+        'spellsPerLvl': 2,
+        'casterStat': 'WIS',
+        'saves': [9, 8, 6, 4, 5, 5],
+        'extragear': ['a Symbol of Nature'],
+        'special': [
+            '>>(Class) Spellcaster (Druid List)',
+            '>>(Class) Control Animals (based on Level, see p. 32-33 DDX)',
+        ],
+    },
+    'elf': {
+        'short': 'elf',
+        'long': 'Elf',
+        'race': 'elf',
+        'flags': ['base', 'demi', 'caster'],
+        'primAttr': ['DEX', 'INT'],
+        'restrictions': ['Can use all weapons, shields, and armour. You suffer spell failure chances when armoured.'],
+        'spellChooseAs': 'mu',
+        'spellsPerLvl': 2,
+        'casterStat': 'INT',
+        'saves': [8, 7, 7, 5, 5, 5],
+        'extragear': ['a Spellbook'],
+        'extraspells': ['Red Magic'],
+        'extralangs': ['Elf'],
+        'special': [
+            '>>(Class) Spellcaster (Mage list)',
+            '>>(Class) Elfsight (find secret and hidden doors)',
+            '>>(Class) Ghoul/Ghast Paralysis Immunity',
+        ],
+    },
+    'fighter': {
+        'short': 'fighter',
+        'long': 'Fighter',
+        'hd': 8,
+        'primAttr': ['STR', 'CON'],
+        'attacksAs': 'best',
+        'restrictions': ['You can use all weapons, shields, and armour.'],
+        'wps': 4,
+        'special': [
+            '>>(Class) *Not Today!* (one use) When you would take damage that would kill you, you can say "NOT TODAY!" '
+            'and negate all of the damage from that attack. Gain more uses as you gain levels',
+            '>>(Class) When leveling up, you reroll your Hit Points twice, and keep the best result.',
+            '>>(Class) Bonus Proficiency: A Fighter begins play at "Skilled" mastery in two of their randomly '
+            'rolled starting weapons.',
+        ],
+    },
+    'halfogre': {
+        'short': 'halfogre',
+        'long': 'Half-Ogre Berzerker',
+        'race': 'halfogre',
+        'flags': ['base', 'demi'],
+        'attacksAs': 'best',
+        'alignAllowed': ['chaos', 'evil', 'good', 'neutral'],
+        'hd': 8,
+        'wps': 4,
+        'primAttr': ['STR', 'CON'],
+        'armour': 'brb',
+        'saves': [6, 5, 4, 3, 2, 2],
+        'extralangs': ['Ogre'],
+        'restrictions': ['Can use all weapons and shields. Armour cannot be higher than Scale mail, and must be '
+                         'custom made at 2x cost. You cannot be Law aligned.'],
+        'special': [
+            '>>(Class) Murderous Rage: Taking damage can activate Rage Mode (see house rules doc)',
+            '>>(Class) You have heatvision, but only when in Rage Mode.',
+            '>>(Class) Saves on the Fighter table at -2 (already calc\'d)',
+            '>>(Class) Hungry: Requires twice as much food/rations as a normal character for all related purposes.',
+            '>>(Class) Outcasts: Frequently socially ostracized in major civilised areas, often chased out of town.',
+        ],
+    },
+    'hobbert': {
+        'short': 'hobbert',
+        'long': 'Hobbert',
+        'race': 'hobbert',
+        'flags': ['base', 'demi'],
+        'primAttr': ['DEX', 'CON'],
+        'restrictions': ['Can use all small weapons one-handed, or medium two-handed, and shields. Cannot use '
+                         'two-handed human-sized weapons. All items are one size greater for Encumbrance limits. '
+                         'Can wear any armor.'],
+        'weapons': 'hlf',
+        'armour': 'hlf',
+        'saves': [12, 11, 10, 7, 8, 8],
+        'extralangs': ['Hobbert'],
+        'special': [
+            '>>(Class) Small: -2 AC bonus vs creatures larger than humans.',
+            '>>(Class) Nimble: +1 initiative to the team, and +1 attack with ranged weapons.',
+            '>>(Class) Thiefskill: Move Silently: +3 (and an add. +10 when outdoors)',
+            '>>(Class) Thiefskill: Hide in Shadows: +1 (and an add. +10 when outdoors)',
+            '>>(Class) Thiefskill: Hear Noise: +5',
+        ],
+    },
+    'lup': {
+        'short': 'lup',
+        'long': 'Lupine',
+        'race': 'lupine',
+        'flags': ['base', 'demi'],
+        'primAttr': ['DEX', 'WIS'],
+        'restrictions': ['Can use any weapon, but neither armour nor sheilds are allowed.'],
+        'extralangs': ['Lupine'],
+        'special': [
+            '>>(Class) Claws: 1d4 Damage, naturally proficient, leveled automatically, does not also Knockout.',
+            '>>(Class) Basemovement 40',
+            '>>(Class) Thiefskill: Find Traps: +1',
+            '>>(Class) Thiefskill: Remove Traps: +1',
+            '>>(Class) Thiefskill: Climb Walls: +17',
+            '>>(Class) Thiefskill: Move Silently: +3',
+            '>>(Class) Thiefskill: Hide in Shadows: +1',
+        ],
+    },
+    'mounte': {
+        'short': 'mounte',
+        'long': 'Mountebank',
+        'primAttr': ['DEX', 'INT'],
+        'flags': ['base', 'human', 'caster'],
+        'restrictions': ['Can use all missile weapons, all 1-handed weapons, leather armour, bucklers, '
+                         'and small shields. Wearing armour restricts spellcasting by adding a chance of failure. '
+                         'Leather starts at 10%. Magic armour can reduce this.'],
+        'weapons': 'rog',
+        'armour': 'rog',
+        'spellChooseAs': 'mu',
+        'spellsPerLvl': 1,
+        'casterStat': 'INT',
+        'extragear': ['a Spellbook'],
+        'extraspells': ['Read Magic'],
+        'special': [
+            '>>(Class) Spellcaster (ALL lists, but Cleric/Druid spells are considered 1 level higher in learning)',
+            '>>(Class) Weak Magic: caster level is considered 1/2 (up) for determining spell effects.',
+            '>>(Class) Item use: can make use of any magical item usable by any mortal, without class restriction.',
+            '>>(Class) Thiefskill: Bluff (NEW): +1',
+            '>>(Class) Thiefskills: divide 2 more points among the above.',
+        ],
+    },
+    'mu': {
+        'short': 'mu',
+        'long': 'Magic-User',
+        'flags': ['base', 'human', 'caster'],
+        'hd': 4,
+        'primAttr': ['INT', 'SOC'],
+        'attacksAs': 'worst',
+        'restrictions': ['Can not use two-handed weapons except staves. Can not wear armour or use shields.'],
+        'weapons': 'mag',
+        'armour': 'mag',
+        'spellChooseAs': 'mu',
+        'spellsPerLvl': 2,
+        'casterStat': 'INT',
+        'saves': [7, 6, 7, 4, 5, 5],
+        'extragear': ['a Spellbook'],
+        'extraspells': ['Read Magic'],
+        'special': [
+            '>>(Class) Spellcaster (Mage list)',
+        ],
+    },
+    'thief': {
+        'short': 'thief',
+        'long': 'Thief',
+        'flags': ['base', 'human'],
+        'hd': 6,
+        'primAttr': ['DEX'],
+        'restrictions': ['Can use all missile weapons, all 1-handed weapons, leather armour, bucklers, '
+                         'and small shields.'],
+        'weapons': 'rog',
+        'armour': 'rog',
+        'saves': [7, 6, 7, 4, 5, 5],
+        'extragear': ['a Set of Thieves\' Tools'],
+        'special': [
+            '>>(Class) Sneak Attack: +4 attack, x2 damage',
+            '>>(Class) Thiefskill: Open Locks: +2',
+            '>>(Class) Thiefskill: Find Traps: +1',
+            '>>(Class) Thiefskill: Remove Traps: +1',
+            '>>(Class) Thiefskill: Climb Walls: +17',
+            '>>(Class) Thiefskill: Move Silently: +3',
+            '>>(Class) Thiefskill: Hide in Shadows: +1',
+            '>>(Class) Thiefskill: Pick Pockets: +3',
+            '>>(Class) Thiefskill: Hear Noise: +5',
+            '>>(Class) Thiefskill: Bluff (NEW): +1',
+            '>>(Class) Thiefskills: divide 5 more points among the above, max of 3 more in any 1 thiefskill.',
+            '>>(Class) Lucky: roll with advantage on all saving throw checks.',
+        ],
+        'extralangs': ['Thieves\' Cant'],
+    },
+}
+
 ddx_profs = {
     'default': {
         'alignAllowed': ['chaos', 'law', 'neutral'],
@@ -1184,6 +1434,10 @@ base_profs_bnt = [
     'fighter', 'mu', 'paladin', 'ranger', 'sorc', 'thief',
 ]
 
+base_profs_ddh = [
+    'cleric', 'clock', 'druid', 'elf', 'drawf', 'fighter', 'halfogre', 'hobbert', 'lup', 'mu', 'mounte', 'thief'
+]
+
 base_profs_ddx = [
     'cleric', 'clock', 'druid', 'elf', 'dwarf', 'fighter', 'halfling', 'lup', 'mu', 'mounte', 'thief'
 ]
@@ -1224,6 +1478,10 @@ proflists = {
         'choices': base_profs_dnd,
         'dict': dd_profs,
     },
+    'ddh': {
+        'choices': base_profs_ddh,
+        'dict': ddh_profs,
+    },
     'ddx': {
         'choices': base_profs_ddx,
         'dict': ddx_profs,
@@ -1259,7 +1517,7 @@ proflists = {
 }
 
 supported_systems = [
-    'bnt', 'bntx', 'dd', 'ddx', 'ham', 'm81', 'pla', 'rbh', 'rpt', 'tnu'
+    'bnt', 'bntx', 'dd', 'ddh', 'ddx', 'ham', 'm81', 'pla', 'rbh', 'rpt', 'tnu'
 ]
 
 

@@ -128,6 +128,7 @@ spells_match = {
     'bntx': spells_bnt,
     'ham': spells_dd,
     'dd': spells_dd,
+    'ddh': spells_dd,
     'm81': spells_basic,
     'pla': spells_pla,
 }

@@ -14,6 +14,7 @@ import random
 import dice
 from dice import roll as die
 import equipment_tnu
+import gear_ddh
 import gear_dnd
 import gear_ham
 import professions
@@ -53,6 +54,23 @@ def gen_ac(prefs, armour):
             ac_mod += 5
         elif any('Light Armour' in x for x in armour):
             ac_mod += 3
+    elif prefs['acSystem'] == 'dd':
+        if any('Suit Armour' in x for x in armour):
+            ac_mod += 9
+        elif any('Plate Mail' in x for x in armour):
+            ac_mod += 7
+        elif any('Banded Mail' in x for x in armour):
+            ac_mod += 6
+        elif any('Chain Mail' in x for x in armour):
+            ac_mod += 5
+        elif any('Scale Mail' in x for x in armour):
+            ac_mod += 4
+        elif any('Studded Leather' in x for x in armour):
+            ac_mod += 3
+        elif any('Leather Armour' in x for x in armour):
+            ac_mod += 2
+        elif any('Padded Armour' in x for x in armour):
+            ac_mod += 1
     elif prefs['acSystem'] == 'dnd':
         if any('Plate Armour' in x for x in armour):
             ac_mod += 8
@@ -175,7 +193,8 @@ class Character(object):
         self.gear = sorted(self.my_gear_dump)
         # now to generate the character's armour class
         self.ac = gen_ac(self.prefs, my_armourlist)
-        if self.prefs['acSystem'] == 'dnd':
+        #if self.prefs['acSystem'] == 'dnd':
+        if self.prefs['acSystem'] in ['dnd', 'dd']:
             if self.prefs['acType'] == 'descend':
                 self.ac -= self.stats['DEX']['mod']
             else:
@@ -191,15 +210,12 @@ class Character(object):
     def get_gear_dnd(self, social, system):
         weapon_cls = self.profession['weapons']
         armour_cls = self.profession['armour']
-        gear_bonus = []
-        if self.short == 'fighter':
-            bonus_wps = 3
-        elif self.profession['weapons'] in ['war', 'hlf']:
-            bonus_wps = 2
-        elif self.profession['weapons'] in ['mag']:
-            bonus_wps = 0
+        if self.profession['wps']:
+            free_wps = self.profession['wps']
+            print(free_wps)
         else:
-            bonus_wps = 1
+            free_wps = 2
+        gear_bonus = []
         if social <= 4:
             wps_choices = basic_choices = advanced_choices = 1
             weapon_cls = armour_cls = 'fuckall'
@@ -208,7 +224,7 @@ class Character(object):
                                        'the bloody tooth of someone - or something - recently deprived of its '
                                        'favorite tooth']
         elif social <= 8:
-            wps_choices = 0 + bonus_wps
+            wps_choices = free_wps
             basic_choices = 4
             advanced_choices = 2
             if system == 'ham':
@@ -216,7 +232,7 @@ class Character(object):
             else:
                 money = [str(die(3, 6)) + ' silver coins']
         elif social <= 12:
-            wps_choices = 1 + bonus_wps
+            wps_choices = free_wps
             basic_choices = 5
             advanced_choices = 4
             if system == 'ham':
@@ -224,7 +240,7 @@ class Character(object):
             else:
                 money = [str(die(3, 6)) + ' gold coins']
         elif social <= 15:
-            wps_choices = 2 + bonus_wps
+            wps_choices = free_wps
             basic_choices = 8
             advanced_choices = 6
             if system == 'ham':
@@ -232,7 +248,7 @@ class Character(object):
             else:
                 money = [str(die(3, 6)) + ' platinum coins']
         elif social <= 17:
-            wps_choices = 3 + bonus_wps
+            wps_choices = free_wps
             basic_choices = 8
             advanced_choices = 8
             if system == 'ham':
@@ -246,6 +262,8 @@ class Character(object):
             money = [str(die(10, 6)) + ' assorted gems']
         if system == 'ham':
             gearlist = gear_ham.get_gearlist(weapon_cls, armour_cls)
+        elif system == 'ddh':
+            gearlist = gear_ddh.get_gearlist(weapon_cls, armour_cls)
         else:
             gearlist = gear_dnd.get_gearlist(weapon_cls, armour_cls)
         gear_wps = list(random.sample(gearlist['weapons'], wps_choices))
@@ -299,7 +317,7 @@ class Character(object):
                 my_spells = []
                 if self.system == 'tnu':
                     my_spells = spells_tnu.get_spells(self.profession['spellChooseAs'], self.align, self.num_spells)
-                elif self.system in ['bnt', 'dd', 'ham', 'm81']:
+                elif self.system in ['bnt', 'dd', 'ddh', 'ham', 'm81']:
                     my_spells = spells.get_spells(self.system, self.profession['spellChooseAs'], self.num_spells)
                 if self.profession['extraspells']:
                     my_extra_spells = [s for s in list(self.profession['extraspells'])]
@@ -314,7 +332,7 @@ class Character(object):
         # but I might update if I ever get around to multi-level generation
         # (but admittedly this is unlikely)
         #
-        if game_system in ['dd']:
+        if game_system in ['dd', 'ddh']:
             combat_mod = 1
         elif self.profession['attacksAs'] in ['best', 'mid-hi']:
             combat_mod = 1
@@ -358,7 +376,8 @@ class Character(object):
             self.skills = []
             my_list = list(self.prefs['skill_choices'])
             if self.silly:
-                my_list = my_list + self.silly_skills
+                #my_list = my_list + self.silly_skills
+                my_list = self.silly_skills
             my_num_skills = self.stats[self.prefs['skills_mod']]['mod'] + 4
             if my_num_skills < 1:
                 my_num_skills = 1
@@ -433,5 +452,5 @@ def generate(game_system='def', silly=False):
 
 
 if __name__ == "__main__":
-    character = generate('tnu')
+    character = generate('ddh')
     print(character.__dict__)

@@ -42,6 +42,15 @@ statAffects = {
         'CON': 'Hit Point rolls',
         'CHA': 'Leadership, Reaction rolls'
     },
+    'ddh': {
+        'STR': 'Melee Attack rolls, Damage with Melee and Thrown',
+        'INT': 'Bonus Skills/MU-Spells/Languages',
+        'WIS': 'Saves vs Spells, Initiative',
+        'DEX': 'Ranged Attacks, AC, Initiative',
+        'CON': 'Hit Point rolls',
+        'CHA': 'Leadership, Reaction rolls',
+        'SOC': 'Social Reactions, Starting Money'
+},
     'ham': {
         'STR': 'Melee Attack Rolls, Damage with Melee and Thrown',
         'DEX': 'Area Effect Saves, Missile Attack Rolls, AC, Initiative',
@@ -115,26 +124,26 @@ saves = {
 }
 
 languages_dnd = [
-    'Celestial (Law)', 'Dragon', 'Drow', 'Druidic', 'Dwarf', 'Elemental, Air', 'Elemental, Earth',
-    'Elemental, Fire', 'Elemental, Water', 'Elf', 'Giant', 'Gnoll ', 'Gnome', 'Goblin',
-    'Grimlock', 'Halfling', 'Infernal (Chaos)', 'Kobold', 'Manticore', 'Medusa', 'Naga',
+    'Celestial (Law)', 'Dragon', 'Drow', 'Druidic', 'Dwarf', 'Elemental, Air', 'Elemental, Earth',
+    'Elemental, Fire', 'Elemental, Water', 'Elf', 'Giant', 'Gnoll', 'Gnome', 'Goblin',
+    'Grimlock', 'Halfling', 'Infernal (Chaos)', 'Kobold', 'Manticore', 'Medusa', 'Naga',
     'Ogre', 'Ophidian', 'Orc', 'Sylvan',
 ]
 
 languages_ham = [
-    'Celestial (Law)', 'Dragon', 'Drow', 'Druidic', 'Dwarf', 'Elemental, Air', 'Elemental, Earth',
-    'Elemental, Fire', 'Elemental, Water', 'Elf', 'Giant', 'Gnoll ', 'Gnome', 'Goblin',
-    'Grimlock', 'Halfling', 'Infernal (Chaos)', 'Kobold', 'Manticore', 'Medusa', 'Naga',
+    'Celestial (Law)', 'Dragon', 'Drow', 'Druidic', 'Drawf', 'Elemental, Air', 'Elemental, Earth',
+    'Elemental, Fire', 'Elemental, Water', 'Elf', 'Giant', 'Gnoll', 'Gnome', 'Goblin',
+    'Grimlock', 'Hobbert', 'Infernal (Chaos)', 'Kobold', 'Lupine', 'Manticore', 'Medusa', 'Naga',
     'Ogre', 'Ophidian', 'Orc', 'Sylvan',
 ]
 
 languages_kaigaku = []
 
 skills_bnt = [
-    'Balance (DEX)', 'Bend bars (STR)', 'Break down doors (STR)', 'Climb sheer surfaces (STR)',
-    'Decipher codes (INT)', 'Escape bonds (DEX)', 'Find secret doors (INT)', 'Find traps (INT)',
-    'Hide in shadows (DEX)', 'Jump (STR)', 'Listen at doors (WIS)', 'Move silently (DEX)',
-    'Open locks (DEX)', 'Pick pockets (DEX)', 'Remove traps (DEX)', 'Riding (DEX)', 'Survival (WIS)',
+    'Balance (DEX)', 'Bend bars (STR)', 'Break down doors (STR)', 'Climb sheer surfaces (STR)',
+    'Decipher codes (INT)', 'Escape bonds (DEX)', 'Find secret doors (INT)', 'Find traps (INT)',
+    'Hide in shadows (DEX)', 'Jump (STR)', 'Listen at doors (WIS)', 'Move silently (DEX)',
+    'Open locks (DEX)', 'Pick pockets (DEX)', 'Remove traps (DEX)', 'Riding (DEX)', 'Survival (WIS)',
     'Swimming (STR)', 'Tracking (WIS)', 'Trickery (CHA)'
 ]
 
@@ -182,6 +191,9 @@ race_data = {
         'clockwork': {
             'label': "Clockwork",
         },
+        'drawf': {
+            'label': "Drawf",
+        },
         'dwarf': {
             'label': "Dwarf",
         },
@@ -193,6 +205,9 @@ race_data = {
         },
         'halfogre': {
             'label': "Half-Ogre",
+        },
+        'hobbert': {
+            'label': "Hobbert",
         },
         'lupine': {
             'label': "Lupine",
@@ -428,6 +443,20 @@ systems = {
         'hasWPs': True,
         'maxLvl': 36,
     },
+    'ddh': {
+        'system_name': 'ddh',
+        'system_fullname': 'Dark Dungeons HAMMERED',
+        'system_baseline': 'dnd_old',
+        'race_data': dict(race_data['base']),   # DICT keyed to the list above
+        'acSystem': 'dd',              # STR: "dnd" = basic D&D armour rules. "pla" = platinum armour rules
+        'stats': 7,
+        'spread': statArrays['ham'],
+        'affects': statAffects['ddh'],
+        'save_style': 'ascend',
+        'language_choices': languages_ham,      # LIST of base possible bonus languages
+        'hasWPs': True,
+        'maxLvl': 36,
+    },
     'ddx': {
         'system_name': 'ddx',
         'system_fullname': 'Dark Dungeons X',
@@ -516,5 +545,5 @@ def get_system_prefs(system='def'):
 
 
 if __name__ == "__main__":
-    my_data = get_system_prefs('bnt')
+    my_data = get_system_prefs('dd')
     print(my_data)

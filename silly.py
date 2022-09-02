@@ -29,7 +29,7 @@ silly = {
         'a strong craving for pot pies', 'a rock in a sock', 'a student loan disbursement check (requires Bank)',
     ],
     'langs': [
-        'Gibberish', 'Esperanto', 'Pidgin (Pick 2)', 'Pigeon', 'Teenager',
+        'Bad Common', 'Gibberish', 'Esperanto', 'Pidgin (Pick 2)', 'Pigeon', 'Teenager',
     ],
     'skills': [
         'Art Criticism (INT)', 'Being Drunk Before Noon (CON)', 'Being Forgotten (CHA)',
@@ -47,6 +47,42 @@ silly = {
         'Squaredancing (DEX)', 'Stone-Skipping (DEX)', 'Surfing (DEX)',
         'Sword-Swallowing (CON)', 'The Heimlich Maneuver (STR)', 'Tightrope-Walking (DEX)',
         'Ursine Husbandry (CON)', 'Useless Card Tricks (DEX)',
+    ],
+    'silly_skills': [
+        'Accounting (INT)', 'Agriculture (INT)', 'Anger management (WIS)', 'Animal Handling (INT)',
+        'Animal Training (INT)', 'Appraising (INT)', 'Arcane Lore (INT)', 'Armorer (STR)', 'Art Criticism (INT)',
+        'Artistic Ability (CHA)', 'Astrology (WIS)', 'Balance (DEX)', 'Ballet (DEX)', 'Base jumping (DEX)',
+        'Being Drunk Before Noon (CON)', 'Being Forgotten (CHA)', 'Being Mistaken for Someone Else (CHA)',
+        'Birdcalls (CHA)', 'Birding (INT)', 'Birdwatching (WIS)', 'Blacksmithing (STR)', 'Blathering (CHA)',
+        'Bluff (CHA)', 'Bobsledding (STR)', 'Bonsai (DEX)', 'Bovine Husbandry (INT)', 'Bowyer/Fletcher (DEX)',
+        'Brewing (INT)', 'Busking (CHA)', 'Butchery (DEX)', 'Caber Tossing (STR)', 'Calling Dibs (CHA)',
+        'Calling Shotgun (CHA)', 'Carpentry (STR)', 'Cat Facts (INT)', 'Charioteering (DEX)', 'Chess (INT)',
+        'Cobbling (DEX)', 'Cooking (WIS)', 'Cribbing (INT)', 'Curing hiccups (CON)', 'Dancing (DEX)',
+        'Diplomacy (CHA)', 'Direction Sense (WIS)', 'Disguise (WIS)', 'Dog Grooming (DEX)', 'Doomsaying (WIS)',
+        'Engineering (INT)', 'Equine Husbandry (INT)', 'Escape Artist (DEX)', 'Etiquette (Choice of Culture) (CHA)',
+        'Feline Husbandry (INT)', 'Finding your happy place (WIS)', 'Fire-building (DEX)', 'First Aid (WIS)',
+        'Fishing (WIS)', 'Fly fishing (DEX)', 'Food Cart Management (INT)', 'Food Tasting (CON)', 'Forgery (DEX)',
+        'Freestyle Beats (CHA)', 'Funny Walks (DEX)', 'Gambling (CHA)', 'Gaming (INT)', 'Gem-Cutting (DEX)',
+        'Geography (INT)', 'Getting Picked Last (CHA)', 'Gourmand (INT)', 'Healing (INT)', 'Heraldry (INT)',
+        'Herbalism (INT)', 'History, Ancient (INT)', 'History, Local (INT)', 'Hollerin\' (CON)',
+        'Horsehair Braiding (DEX)', 'Hullabaloo (CHA)', 'Hunting (WIS)', 'Ice fishing (CON)',
+        'Intimidation (STR or CHA)', 'Jackassery (CHA)', 'Juggling (DEX)', 'Jumping (STR)', 'Landscaping (STR)',
+        'Laws (Choice of Culture) (INT)', 'Leatherworking (DEX)', 'Limbo stick (DEX)', 'Limericks (CHA)',
+        'Lip Reading (WIS)', 'Looking awesome (CHA)', 'Looking Conspicuous (CHA)', 'Magical Engineering (INT)',
+        'Making an entrance (CHA)', 'Making an exit (CHA)', 'Mansplaining (INT)', 'Milk (WIS)', 'Mime (DEX)',
+        'Miniature Equine Aficionado (INT)', 'Mining (INT)', 'Mountaineering (WIS)', 'Multi-Level Marketing (INT)',
+        'Musical Instrument (DEX)', 'Nature Lore (INT)', 'Navigating (WIS)', 'Never getting the joke (INT)',
+        'Oh no you didn\'t (INT)', 'Painting (DEX)', 'Performance (Choice of Medium) (CHA)', 'Pivot Tables (INT)',
+        'Playing Spoons (DEX)', 'Poison-Making (INT)', 'Pottery (DEX)', 'Pouting (CHA)', 'Puppetry (DEX)',
+        'Religious Lore (INT)', 'Riding (Choose Animal) (DEX)', 'Rope Use (DEX)', 'Running (CON)',
+        'Seamanship (WIS)', 'Seamstress/Tailor (DEX)', 'Selfies (CHA)', 'Sense Motive (WIS)', 'SEO (INT)',
+        'Set Snares (DEX)', 'Singing (CHA)', 'Skiing (STR)', 'Skydiving (STR)', 'Social coordination (INT)',
+        'Spearfishing (DEX)', 'Spotlight Stealing (CHA)', 'Spreadsheets (INT)', 'Squaredancing (DEX)',
+        'Stonemasonry (STR)', 'Stone-Skipping (DEX)', 'Sunbathing (CON)', 'Surfing (DEX)', 'Survival (WIS)',
+        'Swimming (STR)', 'Sword-Swallowing (CON)', 'Tanning (CON)', 'Tightrope-Walking (DEX)',
+        'Totally Making out (CHA)', 'Tumbling (DEX)', 'Ursine Husbandry (CON)', 'Useless Card Tricks (DEX)',
+        'Ventriloquism (CHA)', 'Weaponsmithing (STR)', 'Weather Sense (WIS)', 'Weaving (DEX)',
+        'Xtreem luge (STR)', 'Yodeling (CON)',
     ]
 }
 
@@ -61,6 +97,11 @@ def get_silly_skills():
     return skills_list
 
 
+def replace_silly_skills():
+    skills_list = list(silly['silly_skills'])
+    return skills_list
+
+
 def get_silly_langs():
     langs_list = list(silly['langs'])
     return langs_list
@@ -69,7 +110,8 @@ def get_silly_langs():
 def get_silly():
     silly_data = {
         'gear': get_silly_gear(),
-        'skills': get_silly_skills(),
+        #'skills': get_silly_skills(),
+        'skills': replace_silly_skills(),
         'langs': get_silly_langs(),
     }
     return silly_data

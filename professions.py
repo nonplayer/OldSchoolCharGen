@@ -469,6 +469,7 @@ ddh_profs = {
         'attacksAs': 'best',
         'saves': [12, 11, 10, 7, 8, 8],
         'restrictions': ['Clockworks cannot wear any armour..'],
+        'armour': 'nil',
         'special': [
             '>>(Class) Artificial Body: Never sleeps; Immune to sleep, poison, fatigue, paralysis, nausea, and '
             'exhaustion. Does not naturally heal, instead requiring repairs or magic.',
@@ -500,7 +501,8 @@ ddh_profs = {
         'flags': ['base', 'human', 'caster'],
         'restrictions': ['Druids may only wear leather armour, and only use weapons or shields made of wood '
                          'or other natural materials.'],
-        'weapons': 'clr',
+        'weapons': 'drd',
+        'armour': 'rog',
         'spellChooseAs': 'cleric',
         'spellsPerLvl': 2,
         'casterStat': 'WIS',
@@ -598,6 +600,7 @@ ddh_profs = {
         'flags': ['base', 'demi'],
         'primAttr': ['DEX', 'WIS'],
         'restrictions': ['Can use any weapon, but neither armour nor sheilds are allowed.'],
+        'armour': 'nil',
         'extralangs': ['Lupine'],
         'special': [
             '>>(Class) Claws: 1d4 Damage, naturally proficient, leveled automatically, does not also Knockout.',
@@ -628,6 +631,10 @@ ddh_profs = {
             '>>(Class) Spellcaster (ALL lists, but Cleric/Druid spells are considered 1 level higher in learning)',
             '>>(Class) Weak Magic: caster level is considered 1/2 (up) for determining spell effects.',
             '>>(Class) Item use: can make use of any magical item usable by any mortal, without class restriction.',
+            '>>(Class) Thiefskill: Climb Walls: +17',
+            '>>(Class) Thiefskill: Move Silently: +3',
+            '>>(Class) Thiefskill: Hide in Shadows: +1',
+            '>>(Class) Thiefskill: Pick Pockets: +3',
             '>>(Class) Thiefskill: Bluff (NEW): +1',
             '>>(Class) Thiefskills: divide 2 more points among the above.',
         ],

@@ -10,6 +10,9 @@ these tags will be used to pull them from the gear dump and separate into their 
 # from dice import roll as die
 
 armour = {
+    'nil': [
+        '',
+    ],
     'mag': [
         'ARMOUR: Leather Armour (Light, AC 7, SpellFail 10%)',
         'ARMOUR: Padded Armour (Light, AC 8, SpellFail 5%)',
@@ -100,6 +103,22 @@ weapons = {
         'WEAPON: Sword, Short (1H, Dmg: 1d6)',
         'WEAPON: Sword, Two-Handed (2H, Dmg: 1d10)',
         'WEAPON: Trident (1H, R: 10/20/30ft, Dmg: 1d6)',
+        'WEAPON: Whip (1H, special)',
+    ],
+    'drd': [
+        'WEAPON: Blackjack (1H, special)',
+        'WEAPON: Blowgun (Large) w/ 5 Darts (R: 20/25/30ft, special)',
+        'WEAPON: Blowgun (Small) w/ 5 Darts (R: 10/20/30ft, special)',
+        'WEAPON: Bola (R: 20/40/60ft, special)',
+        'WEAPON: Bow, Long w/ 20 Arrows (R: 70/140/210ft, Dmg: 1d6)',
+        'WEAPON: Bow, Short w/ 20 Arrows (R: 50/100/150ft, Dmg: 1d6)',
+        'WEAPON: Club (1H, Dmg: 1d4)',
+        'WEAPON: Javelin (1H, R: 30/60/90ft, Dmg: 1d6)',
+        'WEAPON: Net (1H, R: 10/20/30ft, special)',
+        'WEAPON: Sling w/ 30 Pellets (R: 40/80/160ft, Dmg: 1d4)',
+        'WEAPON: Smoothbore w/ 15 Charges (R: 60/160/240ft, Dmg: 2d4)',
+        'WEAPON: Spear (1H, R: 20/40/60ft, Dmg: 1d6)',
+        'WEAPON: Staff (2H, Dmg: 1d6)',
         'WEAPON: Whip (1H, special)',
     ],
     'rog': [
